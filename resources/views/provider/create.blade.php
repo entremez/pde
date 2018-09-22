@@ -1,17 +1,12 @@
-@extends('layouts.app')
-@section('cases.create', 'active')
-@section('css')
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
-
-@endsection
+@extends('layouts.puente')
+@section('title', 'PDE | Dashboard')
 
 @section('content')
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('provider.dashboard') }}">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('cases.index') }}">Administrar casos</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Agregar Caso</li>
-</ol>
+
+@include('partials/menu')
+<div class="after-menu"></div>
+
+<div class="col-md-10 offset-md-1">
     <h2 class="text-center mt-0">Agregar un caso de éxito</h2>
             @if ($errors->any())
             <div class="alert alert-danger rounded">
@@ -26,7 +21,7 @@
             </div>
             @endif
 
-    @if($user->name()->instances()->count() < config('constants.max_cases'))
+    @if($user->instances()->count() < config('constants.max_cases'))
     <form class="contact-form" method="POST" action="{{ route('cases.store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
@@ -47,6 +42,21 @@
                 </div>
             </div>
         </div>
+            <div>Seleccione la actividad de la empresa</div>
+        <div class="row py-2">
+            @foreach($sectors as $sector)
+                <div class="col-md-4">
+                    <div data-id="{{ $sector->id }}" id="sector">{{ $sector->name }}</div>
+                </div>
+            @endforeach
+            @foreach($sectors as $sector)
+                <div class="col-md-12" id="classifications">
+                    @foreach($sector->classifications()->get() as $classification)
+                        <div class="d-inline" id="classification" data-id="{{ $sector->id }}">{{ $classification->classification }}</div>
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos en una frase de que se trata el caso</label>
             <input type="text" name="description" class="form-control" rows="4" id="exampleMessage" value="{{ old('description') }}">
@@ -55,7 +65,7 @@
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos con mas detalle el caso</label>
             <textarea type="textarea" name="long_description" class="form-control" rows="4" id="exampleMessage">{{ old('long_description') }}</textarea>
         </div>
-
+<!--
         <div class="row pt-5">
             <div class="col-md-4 ml-auto mr-auto text-center">
                 <label class="fileContainer">
@@ -63,10 +73,17 @@
                     <ul class="pl-0" id="file">Máximo 4</ul>
                 </label>
             </div>
-        </div>
-        <ul>
+        </div>-->
 
-        </ul>
+        <div class="row mb-4 mx-auto">
+            <div class="col-md-4 text-center mx-auto my-4">
+
+                    <div class="image-container" id="imgSalida" style="display: none"></div>
+                <label class="fileContainer">
+                    <button type="button" class="btn btn-success btn-file">Adjunta tu logo o una imagen que los represente (4 max)<input type="file" id="file" name="images[]" required multiple></button>
+                </label>
+            </div>
+        </div>
 
             <h4>Selecciona a que servicio de los que prestas pertenece este caso de éxito</h4>
         <div class="row">
@@ -96,4 +113,8 @@
     @else
     <h3>Has superado el máximo de casos para agregar, si deseas ingresar uno nuevo, elimina uno de los existentes.</h3>
     @endif
+</div>
+
+@include('partials/footer')
+
 @endsection

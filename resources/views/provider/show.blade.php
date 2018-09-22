@@ -1,20 +1,12 @@
-@extends('layouts.app')
-@section('cases', 'active')
-@section('css')
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
-
-@endsection
+@extends('layouts.puente')
+@section('title', 'PDE | Dashboard')
 
 @section('content')
 
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('provider.dashboard') }}">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('cases.index') }}">Administrar casos</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Detalle</li>
-</ol>
+@include('partials/menu')
+<div class="after-menu"></div>
 
-<div class="row">
+<div class="col-md-10 offset-md-1">
     <div class="col-md-5">
         <div class="card card-raised card-carousel" style="max-width: 600px">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -55,5 +47,7 @@
         @endforeach
     </div>
 </div>
+
+@include('partials/footer')
 
 @endsection

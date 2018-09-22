@@ -11,6 +11,7 @@ use App\Service;
 use App\Rules\LimitNumberImages;
 use App\Instance;
 use App\InstanceImage;
+use App\Sector;
 use File;
 
 class CaseController extends Controller
@@ -24,8 +25,11 @@ class CaseController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $cases = auth()->user()->name()->instances()->get();
-        return view('provider.index')->with(compact('user', 'cases', 'user'));
+        $cases = auth()->user()->instance()->instances()->get();
+        return view('provider.index',[
+            'user' => auth()->user()->instance(),
+            'cases' => auth()->user()->instance()->instances()->get()
+        ]);
     }
 
     /**
@@ -35,13 +39,17 @@ class CaseController extends Controller
      */
     public function create()
     {
-        $user = auth()->user();
-        $services = ProviderService::where('provider_id','=', $user->name()->id)->get();
+        $sector = Sector::find(1);
+        $user = auth()->user()->instance();
+        $services = ProviderService::where('provider_id','=', $user->id)->get();
         foreach ($services as $service) {
             $services_provider[] = Service::where('id','=',$service->service_id)->get()->first();
         }
-        $services = collect($services_provider);
-        return view('provider.create')->with(compact('services', 'user'));
+        return view('provider.create', [
+            'services' => collect($services_provider),
+            'user' => $user,
+            'sectors' => Sector::get()
+        ]);
     }
 
     /**
@@ -52,7 +60,64 @@ class CaseController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
+        $this->validate($request, $this->rules(), $this->messages());
+        $instanceId = $this->createInstance($request);
+
+        $this->saveServicesOfInstance($instanceId, $request->input('service'));
+
+
+        $images = $request->file('images');
+        foreach ($images as $key => $image) {
+            $path = public_path().'/providers/cases/'.$instanceId->id.'/';
+            $fileName = uniqid()."-".$image->getClientOriginalName();
+            $image->move($path, $fileName);
+            $instance_image = new InstanceImage;
+            $instance_image->image = $fileName;
+            $instance_image->instance_id = $instanceId->id;
+            if($key == 0)
+                $instance_image->featured = true;
+            $instance_image->save();
+        }
+        return redirect('providers/cases')->withSuccess( 'Caso agregado correctamente');
+    }
+
+    private function saveServicesIfInstance($instanceId, $services)
+    {
+        foreach ($services as $service) {
+            $instance_service = new InstanceService;
+            $instance_service->instance_id = $instanceId;
+            $instance_service->service_id = $service;
+            $instance_service->save();
+        }
+    }
+
+    private function createInstance(Request $request)
+    {
+        $instance = new Instance;
+        $instance->provider_id = auth()->user()->instance()->id;
+        $instance->name = $request->input('name');
+        $instance->company_name = $request->input('company_name');
+        $instance->description = $request->input('description');
+        $instance->long_description = $request->input('long_description');
+        $instance->save();
+        return $instance->id;
+    }
+
+    private function rules()
+    {
+        return [
+            'name' => 'required',
+            'description' => 'required|max:250',
+            'long_description' => 'required',
+            'images' => new LimitNumberImages,
+            'images.*' => 'required|image|max:1500',
+            'service' => 'required',
+        ];
+    }
+
+    private function messages()
+    {
+        return [
             'name.required' => 'Debe ingresar el nombre.',
             'images.required' => 'Debe adjuntar al menos una imagen',
             'images.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
@@ -62,44 +127,6 @@ class CaseController extends Controller
             'images.*.max' => 'Las imágenes no deben ser mayores a 1.5 Mb',
             'service.required' => 'Debe seleccionar al menos un servicio',
         ];
-        $rules = [
-            'name' => 'required',
-            'description' => 'required|max:250',
-            'long_description' => 'required',
-            'images' => new LimitNumberImages,
-            'images.*' => 'required|image|max:1500',
-            'service' => 'required',
-        ];
-        $this->validate($request, $rules, $messages);
-        $instance = new Instance;
-        $instance->provider_id = auth()->user()->name()->id;
-        $instance->name = $request->input('name');
-        $instance->company_name = $request->input('company_name');
-        $instance->description = $request->input('description');
-        $instance->long_description = $request->input('long_description');
-        $instance->save();
-
-        $services = $request->input('service');
-        foreach ($services as $key => $service) {
-            $instance_service = new InstanceService;
-            $instance_service->instance_id = $instance->id;
-            $instance_service->service_id = $service;
-            $instance_service->save();
-        }
-
-        $images = $request->file('images');
-        foreach ($images as $key => $image) {
-            $path = public_path().'/providers/cases/'.$instance->id.'/';
-            $fileName = uniqid()."-".$image->getClientOriginalName();
-            $image->move($path, $fileName);
-            $instance_image = new InstanceImage;
-            $instance_image->image = $fileName;
-            $instance_image->instance_id = $instance->id;
-            if($key == 0)
-                $instance_image->featured = true;
-            $instance_image->save();
-        }
-        return redirect('provider/cases')->withSuccess( 'Caso agregado correctamente');
     }
 
     /**
@@ -125,7 +152,7 @@ class CaseController extends Controller
     {
         $case = Instance::find($id);
         $user = auth()->user();
-        $services = ProviderService::where('provider_id','=', $user->name()->id)->get();
+        $services = ProviderService::where('provider_id','=', $user->instance()->id)->get();
         foreach ($services as $service) {
             $services_provider[] = Service::where('id','=',$service->service_id)->get()->first();
         }

@@ -1,12 +1,11 @@
-@extends('layouts.app')
-@section('cases.create', 'active')
-@section('css')
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
-
-@endsection
+@extends('layouts.puente')
+@section('title', 'PDE | Configurar')
 
 @section('content')
+
+@include('partials/menu')
+<div class="after-menu"></div>
+<div class="col-md-10 offset-md-1">
     <h2 class="text-center mt-0">Modificar datos de usuario {{ $user->mail }}</h2>
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -28,13 +27,13 @@
                 <div class="form-group">
                     <label class="bmd-label-floating">Nombre</label>
 
-                    <input type="text" name="name" class="form-control" value="{{ old('name', $user->name()->name) }}" required>
+                    <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Rut</label>
-                    <input type="text" name="rut" class="form-control" value="{{ old('company_name', Rut::parse($user->name()->rut.'-'.$user->name()->dv_rut)->format()) }}" required>
+                    <input type="text" name="rut" class="form-control" value="{{ old('company_name', Rut::parse($user->rut.'-'.$user->dv_rut)->format()) }}" required>
                 </div>
             </div>
         </div>
@@ -43,34 +42,34 @@
                 <div class="form-group">
                     <label class="bmd-label-floating">Teléfono</label>
 
-                    <input type="text" name="phone" class="form-control" value="{{ old('phone', $user->name()->phone) }}" required>
+                    <input type="text" name="phone" class="form-control" value="{{ old('phone', $user->phone) }}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Web</label>
-                    <input type="text" name="web" class="form-control" value="{{ old('web',$user->name()->web)}}" required>
+                    <input type="text" name="web" class="form-control" value="{{ old('web',$user->web)}}" required>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Dirección</label>
-            <input type="text" name="address" class="form-control" value="{{ old('address', $user->name()->address) }}">
+            <input type="text" name="address" class="form-control" value="{{ old('address', $user->address) }}">
         </div>
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos en una frase algo de tu empresa</label>
-            <input type="text" name="description" class="form-control" rows="4" id="exampleMessage" value="{{ old('description', $user->name()->description) }}">
+            <input type="text" name="description" class="form-control" rows="4" id="exampleMessage" value="{{ old('description', $user->description) }}">
         </div>
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos con mas detalle lo que haces</label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4" id="exampleMessage">{{ old('long_description', $user->name()->long_description) }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" id="exampleMessage">{{ old('long_description', $user->long_description) }}</textarea>
         </div>
 
         <div class="row pt-5 text-center">
 
             <div class="col-md-6 ml-auto mr-auto mx-auto">
             <output id="list">
-                <img src="{{ $user->name()->url }}" alt="{{ $user->name()->name }}" class="rounded img-fluid" style="width: 300px" >
+                <img src="{{ $user->url }}" alt="{{ $user->name }}" class="rounded img-fluid" style="width: 300px" >
             </output>
             <label class="fileContainer mx-auto">
                 <button type="button" class="btn btn-success"><i class="material-icons">add_a_photo</i> Cambia tu logo o imagen representativa <input type="file" name="files[]" id="files"  ></button>
@@ -89,7 +88,7 @@
             <div class="col-md-3 col-sm-4">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}"  {{ is_null($user->name()->services()->get()->where('service_id','=',$service->id)->first()) ? '' :'checked' }} >{{ $service->name }}
+                        <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}"  {{ is_null($user->services()->get()->where('service_id','=',$service->id)->first()) ? '' :'checked' }} >{{ $service->name }}
                         <span class="form-check-sign">
                             <span class="check"></span>
                         </span>
@@ -110,5 +109,6 @@
             </div>
         </div>
     </form>
-
+</div>
+@include('partials/footer')
 @endsection

@@ -1,11 +1,12 @@
-@extends('layouts.blank')
-@section('dashboard', 'active')
-@section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/blank.css') }}">
-@endsection
+@extends('layouts.puente')
+@section('title', 'PDE | Configurar')
 
 @section('content')
-<div class="espacio">
+
+@include('partials/menu')
+
+<div class="after-menu"></div>
+<div class="col-md-10 offset-md-1">
     <h2>Completa tu perfil</h2>
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -51,11 +52,12 @@
             </div>
         </div>
 
-        <div class="row pt-5">
-            <div class="col-md-4 ml-auto mr-auto text-center">
+        <div class="row mb-4">
+            <div class="col-md-4 text-center mx-auto my-4">
+
+                    <div class="image-container" id="imgSalida" style="display: none"></div>
                 <label class="fileContainer">
-                    <button type="button" class="btn btn-success"><i class="material-icons">add_a_photo</i> Selecciona tu logo o una imagen que los represente<input type="file" name="logo" required></button>
-                    <span id="file"></span>
+                    <button type="button" class="btn btn-success btn-file">Adjunta tu logo o una imagen que los represente<input type="file" id="file" name="logo" required></button>
                 </label>
             </div>
         </div>
@@ -98,5 +100,6 @@
 </div>
 
 
-@endsection
 
+@include('partials/footer')
+@endsection

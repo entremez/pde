@@ -25,7 +25,7 @@ class CaseImagesController extends Controller
             return redirect()->back()->withErrors(array('image' => 'El caso debe tener como mínimo '.config('constants.min_cases').' imágen'));
         $image = InstanceImage::find($request->input('image_id'));
         $featured = $image->featured;
-        $path = public_path().'/providers/cases/'.$instance->id.'/'.$image->image;
+        $path = public_path().'/providers/case-images/'.$instance->id.'/'.$image->image;
         File::delete($path);
         $image->delete();
         if($featured){
@@ -65,7 +65,7 @@ class CaseImagesController extends Controller
 
         $images = $request->file('images');
         foreach ($images as $key => $image) {
-            $path = public_path().'/providers/cases/'.$instance->id.'/';
+            $path = public_path().'/providers/case-images/'.$instance->id.'/';
             $fileName = uniqid()."-".$image->getClientOriginalName();
             $image->move($path, $fileName);
             $instance_image = new InstanceImage;

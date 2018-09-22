@@ -5,7 +5,7 @@
     <div class="col-md-6 offset-md-3">
         <br><br>
         <h2>Registro proveedores</h2>
-        <form method="POST" action="{{ url('provider/register') }}">
+        <form method="POST" action="{{ url('providers/register') }}">
             {{ csrf_field() }}
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

@@ -3,8 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 use App\User;
+use App\ProviderCounter;
 
 class Provider extends Model
 {
@@ -51,5 +53,22 @@ class Provider extends Model
             $services .= $service->service->name.', ';
         }
         return rtrim($services, ', ');
+    }
+
+    public function getAllServicesJsonAttribute(){
+        $services = $this->services()->get();
+        $service = new Collection();
+        foreach ($services as $s) {
+            $service->push($s->service()->first());
+        }
+        return $service;
+    }
+
+    public function counter($ip){
+        $counter = new ProviderCounter();
+        $counter->provider_id = $this->id;
+        $counter->ip = $ip;
+        $counter->save();
+        return $counter->id;
     }
 }

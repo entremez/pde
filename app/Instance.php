@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Classification;
+use App\InstanceCounter;
 
 class Instance extends Model
 {
@@ -44,5 +45,13 @@ class Instance extends Model
     public function getClassificationAttribute()
     {
         return Classification::find($this->classification_id)->classification;
+    }
+
+    public function counter($ip)
+    {
+        $counter = new InstanceCounter();
+        $counter->instance_id = $this->id;
+        $counter->ip = $ip;
+        $counter->save();
     }
 }

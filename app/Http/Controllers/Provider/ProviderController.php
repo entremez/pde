@@ -14,7 +14,7 @@ class ProviderController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $data = $user->name();
+        $data = $user->instance();
         $phone = $data->phone;
         $services = Service::get();
         if (empty($data->logo) OR empty($data->description))
@@ -48,7 +48,7 @@ class ProviderController extends Controller
         $this->validate($request, $rules, $messages);
         $file = $request->file('logo');
         $path = public_path().'/providers/logos';
-        $provider = auth()->user()->name();
+        $provider = auth()->user()->instance();
         $fileName = $provider->id."-".uniqid()."-".$file->getClientOriginalName();
         $file->move($path, $fileName);
 
@@ -68,14 +68,15 @@ class ProviderController extends Controller
             $provider_service->save();
         }
 
-        return redirect('provider/dashboard');
+        return redirect('providers/dashboard');
     }
 
     public function settings(Request $request)
     {
-        $user = auth()->user();
-        $services = Service::get();
-        return view('provider.settings')->with(compact('services', 'user'));
+        return view('provider.settings',[
+            'user' => auth()->user()->instance(),
+            'services' => Service::get()
+        ]);
     }
 
     public function update(Request $request){
@@ -99,7 +100,7 @@ class ProviderController extends Controller
             'service' => 'required',
         ];
         $this->validate($request, $rules, $messages);
-        $provider = auth()->user()->name();
+        $provider = auth()->user()->instance();
         if ($request->hasFile('files')) {
             File::delete(public_path().'/providers/logos/'.$provider->logo);
             $file = $request->file('files');
@@ -122,15 +123,15 @@ class ProviderController extends Controller
             $provider_service->service_id = $services[$i];
             $provider_service->save();
         }
-        return redirect('provider/dashboard')->withSuccess( 'Datos modificados correctamente');
+        return redirect('providers/dashboard')->withSuccess( 'Datos modificados correctamente');
     }
 
      public function request()
      {
-        $provider = auth()->user()->name();
+        $provider = auth()->user()->instance();
         $provider->status = 1;
         $provider->save();
-        return redirect('provider/dashboard')->withSuccess( 'Solicitud enviada a administradores');
+        return redirect('providers/dashboard')->withSuccess( 'Solicitud enviada a administradores');
      }
 }
 

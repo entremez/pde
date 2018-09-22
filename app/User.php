@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function getNameAttribute()
     {
-        return $this->instance()->name;
+        return "hola";
     }
 
     public function getDashboardAttribute()

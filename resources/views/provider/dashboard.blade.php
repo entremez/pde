@@ -1,11 +1,12 @@
-@extends('layouts.app')
-@section('dashboard', 'active')
+@extends('layouts.puente')
+@section('title', 'PDE | Dashboard')
 
 @section('content')
-<ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Inicio</li>
-</ol>
-<div class="container">
+
+@include('partials/menu')
+<div class="after-menu"></div>
+
+<div class="col-md-10 offset-md-1">
         <br>
         @if(Session::has( 'success' ))
             <div class="alert alert-success rounded">
@@ -19,28 +20,10 @@
         @endif
         <div class="row">
             <div class="col-md-4 ">
-                <img src="{{ $data->url }}" class="rounded mx-auto d-block img-fluid" style="width: 250px;" alt="...">
+                <img src="{{ $data->url }}" class="rounded mx-auto d-block img-fluid"  alt="...">
             </div>
             <div class="col-md-4 text-center">
                 <h1>{{ $data->name }}</h1>
-            </div>
-            <div class="col-md-4 text-left">
-                <div class="row">
-                    <div class="col-md-2"><i class="material-icons">mail_outline</i></div>
-                    <div class="col-md-10"><p>{{ $user->email }}</p></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2"><i class="material-icons">phone</i></div>
-                    <div class="col-md-10"><p>{{ $phone }}</p></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2"><i class="material-icons">fingerprint</i></div>
-                    <div class="col-md-10"><p>{{ Rut::parse($data->rut."-".$data->dv_rut)->format()}}</p></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2"><i class="material-icons">location_on</i></div>
-                    <div class="col-md-10"><p>{{ $data->address }}</p></div>
-                </div>
                 <div class="row">
                     <div class="col">
                         @foreach($services as $service)
@@ -49,6 +32,20 @@
                         </span>
                         @endforeach
                     </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-left">
+                <div class="row">
+                    <div class="col-md-10"><p>{{ $user->email }}</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10"><p>{{ $phone }}</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10"><p>{{ Rut::parse($data->rut."-".$data->dv_rut)->format()}}</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10"><p>{{ $data->address }}</p></div>
                 </div>
             </div>
     </div>
@@ -124,6 +121,6 @@
     </div>
 </div>
 
-
+@include('partials/footer')
 
 @endsection

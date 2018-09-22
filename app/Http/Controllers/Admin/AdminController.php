@@ -19,8 +19,9 @@ class AdminController extends Controller
 
     public function showProviders()
     {
-        $providers = Provider::all();
-        return view('admin/dashboard-providers')->with(compact('providers'));
+        return view('admin/dashboard-providers',[
+            'providers' => Provider::all()
+        ]);
     }
 
     public function request()

@@ -17,8 +17,8 @@
         <div class="{{ $class }}">
             <div class="service">
                 <a href="{{ route('case', $case->id) }}">
-                    <div class="image-container" style="background-image: url(https://picsum.photos/800/600?image={{ $case->id }})">
                         <div class="corner">{{ $case->classification }}</div>
+                    <div class="image-container op08" style="background-image: url(https://picsum.photos/800/600?image={{ $case->id }})">
                         <div class="middle-service">
                             <div class="{{ $textInstance }}">19</div>
                             <div class="{{ $percentageInstance }}">%</div>

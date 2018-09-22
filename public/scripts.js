@@ -21004,8 +21004,7 @@ $(document).ready(function () {
 
     $('.provider-btn').click(function(e){
         e.preventDefault();
-        $(this).fadeOut();
-        $('.provider-contact').fadeIn();
+        $('.provider-contact').toggle();
         var id = $(this).data('id')
         var url = $('#form-counter').attr('action').replace(':PROVIDER_ID', id);
         var data = $('#form-counter').serialize();
@@ -21061,10 +21060,10 @@ $(document).ready(function () {
 
     rangeSlider();
 
-    $('.counter-num').counterUp({
-        delay: 10,
-        time: 1000
-    });
+//    $('.counter-num').counterUp({
+//        delay: 10,
+//        time: 1000
+//    });
 
     $('.btn-view-more').click(function(e) {
         e.preventDefault();
@@ -21126,5 +21125,38 @@ $(document).ready(function () {
                }
        });
     });
+
+
+  $('#file').change(function(e) {
+      addImage(e); 
+     });
+
+     function addImage(e){
+      console.log(e.target.files);
+      var file = e.target.files[0],
+      imageType = /image.*/;
+    
+      if (!file.type.match(imageType))
+       return;
+  
+      var reader = new FileReader();
+      reader.onload = fileOnload;
+      reader.readAsDataURL(file);
+     }
+  
+     function fileOnload(e) {
+      var result=e.target.result;
+      //$('#imgSalida').attr("src",result);
+      $('#imgSalida').css('background-image', 'url("' + result + '")');
+      $('#imgSalida').show();
+     }
+
+     $('#sector*').click(function(e){
+        var id = $(this).data('id');
+        if(id == $('#classification*').data('id')){
+          console.log($(this));
+        }
+     });
+
 });
 

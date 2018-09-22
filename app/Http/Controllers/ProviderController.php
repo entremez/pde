@@ -7,9 +7,7 @@ use Illuminate\Support\Collection;
 use App\Provider;
 use App\Instance;
 use App\Service;
-use App\ProviderService;
 use App\Category;
-use App\ProviderCounter;
 
 class ProviderController extends Controller
 {
@@ -35,22 +33,13 @@ class ProviderController extends Controller
         }
     }
 
-    public function detail(Provider $provider)
+    public function detail(Provider $provider, Request $request)
     {
-        $providerCounter = new ProviderCounter();
-        $providerCounter->provider_id = $provider->id;
-        $providerCounter->ip = request()->ip();
-        $providerCounter->save();
-        $services = $provider->services()->get();
-        $service = new Collection();
-        foreach ($services as $s) {
-            $service->push($s->service()->first());
-        }
         return view('provider',[
             'provider' => $provider,
-            'cases' => Instance::where('provider_id','=', $provider->id)->get(),
-            'service' => $service,
-            'counterId' => $providerCounter->id
+            'cases' => Instance::inRandomOrder()->limit(3)->get(),
+            'service' => $provider->allServicesJson,
+            'counterId' => $provider->counter($request->ip())
             ]);
     }
 
@@ -62,6 +51,6 @@ class ProviderController extends Controller
             $counter->save();
         }
     }
-
-
 }
+
+

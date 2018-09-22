@@ -10,7 +10,9 @@ class ServiceController extends Controller
 {
     public function show(Service $service)
     {
-        $instances = $service->instances()->inRandomOrder()->get();
-        return view('services')->with(compact('instances', 'service'));
+        return view('services', [
+        	'instances' => $service->instances()->inRandomOrder()->get(), 
+        	'service' => $service
+        ]);
     }
 }

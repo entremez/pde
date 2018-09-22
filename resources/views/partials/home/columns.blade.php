@@ -18,7 +18,7 @@
                     <h6 class="provider-services">Servicios: {{ $provider->all_services }}</h6>
                 </div>
                 <div class="col-md-3">
-                    <div class="image-container" style="background-image: url(https://picsum.photos/223/166?random);"></div>
+                    <div class="image-container" style="background-image: url(https://picsum.photos/1000/400?image={{ rand(1,500)}});"></div>
                 </div>
                 <div class="col-md-3">
                     <h6>Autor y año de edición</h6>

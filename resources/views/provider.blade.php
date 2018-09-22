@@ -6,45 +6,48 @@
 
 @include('partials/menu')
 
-<section class="header-provider">
-    <div class="container">
+
+<div class="after-menu"></div>
+
+<section>
+    <div class="col-md-10 offset-md-1">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
+                
+                <div class="provider-name">
+                    <h3>{{ $provider->name }}</h3>
+                </div>
+
+
+
                 <div class="provider-subtitle">
                     @foreach($service as $s)
                     <span class="badge badge-info">{{ $s->name }}</span>
                     @endforeach
                 </div>
-                <div class="provider-name">
-                    <h3>{{ $provider->name }}</h3>
-                </div>
-                <div class="provider-description">
+
+
+                <div class="provider-description pt-3">
                     {{ $provider->long_description }}
                 </div>
-
+            </div>
+            <div class="col-md-3">
+                <img class="image-container w-100" src="{{ $provider->logo }}">
+                <a href="#" data-id="{{ $provider->id }}" class="btn btn-danger provider-btn">Contacto</a>
                 <div class="provider-contact">
-                    <h3>Contacto</h3>
                     <div class="row text-left">
-                        <div class="col-md-1"><i class="material-icons">mail_outline</i></div>
                         <div class="col-md-11"><p>{{ $provider->email }}</p></div>
                     </div>
                     <div class="row text-left">
-                        <div class="col-md-1"><i class="material-icons">phone</i></div>
                         <div class="col-md-11"><p>{{ $provider->phone }}</p></div>
                     </div>
                     <div class="row text-left">
-                        <div class="col-md-1"><i class="material-icons">fingerprint</i></div>
                         <div class="col-md-11"><p>{{ Rut::parse($provider->rut."-".$provider->dv_rut)->format()}}</p></div>
                     </div>
                     <div class="row text-left">
-                        <div class="col-md-1"><i class="material-icons">location_on</i></div>
                         <div class="col-md-11"><p>{{ $provider->address }}</p></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <img class="provider-image" src="{{ $provider->logo }}">
-                <a href="#" data-id="{{ $provider->id }}" class="btn btn-danger provider-btn">Contacto</a>
             </div>
         </div>
     </div>

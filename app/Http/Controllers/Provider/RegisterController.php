@@ -74,18 +74,24 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $rut = Rut::parse($data['rut'])->toArray();
+
+        $user = User::create([
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'type' => "Provider",
+        ]);
+
         $provider = Provider::create([
             'rut' => $rut[0],
             'dv_rut' => $rut[1],
             'name' => $data['name'],
             'address' => $data['address'],
+            'user_id' => $user->id,
         ]);
 
-        return User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'type' => "Provider",
-            'type_id' => $provider->id,
-        ]);
+        $user ->type_id = $provider->id;
+        $user->save();
+
+        return $user;
     }
 }
