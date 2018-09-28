@@ -17,6 +17,7 @@ mix.styles([
         ], 'public/styles.css')
         .scripts([
             'resources/assets/js/jquery.js',
+            'resources/assets/js/jquery.validate.js',
             'resources/assets/js/bootstrap-bundle.js',
             'resources/assets/js/bootstrap.js',
             'resources/assets/js/waypoints.js',

@@ -58,7 +58,7 @@
                     <label for="size" class="control-label">¿Cuántos trabajadores tiene su compañía?</label>
                     @foreach($employees as $range)
                         <div>
-                            <input type="radio" name="employees"> {{ $range->range }}
+                            <input type="radio" name="size" value="{{ $range->id }}"> {{ $range->range }}
                         </div>
                     @endforeach
 
@@ -75,7 +75,7 @@
                     <label for="range" class="control-label">¿Cuál es el rango de facturación aproximada de su empresa en el último año?</label>
                     @foreach($gains as $range)
                         <div>
-                            <input type="radio" name="gain"> {{ $range->range }} UF
+                            <input type="radio" name="gain" value="{{ $range->id }}"> {{ $range->range }} UF
                         </div>
                     @endforeach
                         @if ($errors->has('range'))

@@ -197,5 +197,159 @@ $(document).ready(function () {
         }
      });
 
+
+
+     //LOGIN
+
+     $('#submit-login').click(function(e){
+        e.preventDefault();
+        var form = $(this).parents('.form-horizontal');
+
+        form.validate({
+          rules: {
+            'email-login': { required : true, email: true},
+            'password-login' : {required:true}
+          },
+          messages: {
+             'email': {
+                required: "Ingrese su correo electrónico.",
+                email: "Su correo electrónico debe ser válido.",
+             },
+             'password-login': {
+                required: "Ingrese su clave."
+             }
+          }
+        });
+
+
+          form.submit();
+     });
+
+
+
+     //REGISTER
+
+     $('#submit-register').click(function(e){
+        e.preventDefault();
+        var form = $(this).parents('.form-horizontal');
+
+        form.validate({
+          rules: {
+            'email-register': { required : true, email: true},
+            'password-register' : {required:true},
+            'password-register_confirmation' : {required:true}
+          },
+          messages: {
+             'email-register': {
+                required: "Ingrese su correo electrónico.",
+                email: "Su correo electrónico debe ser válido.",
+             },
+             'password-register': {
+                required: "Ingrese su clave."
+             },
+             'password-register_confirmation': {
+                required: "Confirme su clave."
+             }
+          }
+        });
+
+        if($('#password-register').val() == $('#password-confirm').val() && $('#email-register').val().length > 4){
+          form.submit();
+        }
+     });
+
+
+
+
+     //COMPANY CONFIG
+
+    function validaRut(campo){
+      if ( campo.length == 0 ){ return false; }
+      if ( campo.length < 8 ){ return false; }
+
+      campo = campo.replace('-','')
+      campo = campo.replace(/\./g,'')
+
+      var suma = 0;
+      var caracteres = "1234567890kK";
+      var contador = 0;    
+      for (var i=0; i < campo.length; i++){
+        u = campo.substring(i, i + 1);
+        if (caracteres.indexOf(u) != -1)
+        contador ++;
+      }
+      if ( contador==0 ) { return false }
+      
+      var rut = campo.substring(0,campo.length-1)
+      var drut = campo.substring( campo.length-1 )
+      var dvr = '0';
+      var mul = 2;
+      
+      for (i= rut.length -1 ; i >= 0; i--) {
+        suma = suma + rut.charAt(i) * mul
+                    if (mul == 7)   mul = 2
+                else  mul++
+      }
+      res = suma % 11
+      if (res==1)   dvr = 'k'
+                    else if (res==0) dvr = '0'
+      else {
+        dvi = 11-res
+        dvr = dvi + ""
+      }
+      if ( dvr != drut.toLowerCase() ) { return false; }
+      else { return true; }
+    }
+    jQuery.validator.addMethod("rut", function(value, element) { 
+            return this.optional(element) || validaRut(value); 
+    }, "Revise el RUT");
+
+    $('#form-config-company').validate({
+      rules : { 
+                rut : { required:true, rut:true},
+                'cities[]' : { required:true},
+                classification : { required:true}
+              } ,
+      messages : { 
+                rut : { 
+                  required:'Este campo es obligatorio.', 
+                  rut:'Por favor revise que esté escrito correctamente'
+                  },
+                'cities[]' : 'Seleccione al menos una región.',
+                classification : 'Debe seleccionar el rubro de su empresa',
+                name : 'Este campo es obligatorio.',
+                address : 'Este campo es obligatorio.',
+                phone : 'Este campo es obligatorio.',
+                employees : 'Seleccione el rango.',
+                gain : 'Seleccione el rango.'
+                },
+      errorPlacement: function(error, element) {
+
+        if (element.attr("name") == "cities[]") {
+          error.insertBefore('.errorTxt');
+          element.parents('.col').find('.error').addClass('error-class');
+        } else if(element.attr('name') == 'employees') {
+          error.insertBefore('.employees');
+        } else if(element.attr('name') == 'gain') {
+          error.insertAfter('.gain');
+        } else if(element.attr('name') == 'classification') {
+          error.insertAfter('.classification');
+        } else {
+          error.insertBefore(element);
+        }
+    }
+    });
+
+    $(".form-check-input").click(function() {
+        var cities = $(this).parents('.row');
+        var todoChile = 17;
+        if($("#city-"+todoChile).prop('checked')){
+          for (var i = 1; i < todoChile; i++) {
+            $("#city-"+i).prop('checked', false);
+          }
+        }
+
+    });
+
 });
 

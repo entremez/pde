@@ -31,7 +31,7 @@
                     </li>
               @else
               <li class="nav-item"> <!-- active para negritas -->
-                <a class="nav-link btn btn-danger btn-register" href="{{ route('login') }}">Registrate o inicia sesión</a>
+                <a class="nav-link btn btn-danger btn-register" data-toggle="modal" data-target="#loginModal">Registrate o inicia sesión</a>
               </li>
               @endif
           </ul>
@@ -51,6 +51,35 @@
           </ul>
         </div>
       </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade login" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bigModal">
+      <div class="modal-body login">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="col-md-12">
+          <div class="row login">
+            <div class="col-md-6 l-margin">
+              <h3 class="text-center pb-4">Iniciar sesión</h3>
+
+              @include('auth/login')
+
+            </div>
+            <div class="col-md-6 r-margin">
+              <h3 class="text-center pb-4">Registrarse</h3>
+
+              @include('auth/register')
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

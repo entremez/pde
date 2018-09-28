@@ -7,9 +7,6 @@ use App\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Rules\RutCompanyUnique;
-use App\Rules\RutValidate;
-use Freshwork\ChileanBundle\Rut;
 use Illuminate\Http\File;
 use App\City;
 use App\Employees;
@@ -65,11 +62,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|min:6',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'rut' => ['required',new RutValidate(),new RutCompanyUnique()],
-            'size' => 'required|integer|not_in:0'
+            'email-register' => 'required|string|email|max:255',
+            'password-register' => 'required|string|min:6|confirmed'
         ]);
     }
 
@@ -81,29 +75,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $rut = $this->getRut($data['rut']);
+
 
         $user = User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'email' => $data['email-register'],
+            'password' => bcrypt($data['password-register']),
             'type' => "Company"
         ]);
-
-        $company = Company::create([
-            'rut' => $rut[0],
-            'dv_rut' => $rut[1],
-            'name' => $data['name'],
-            'address' => $data['address'],
-            'user_id' => $user->id,
-        ]);
-
-        $user ->type_id = $company->id;
-        $user->save();
 
         return $user;
     }
 
-    private function getRut($rut){
-         return Rut::parse($rut)->toArray();
-    }
 }

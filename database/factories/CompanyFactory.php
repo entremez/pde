@@ -9,6 +9,6 @@ $factory->define(Company::class, function (Faker $faker) {
         'dv_rut' => $faker->randomDigit,
         'name' => $faker->company.' '.$faker->companySuffix,
         'address' => $faker->address,
-        'web' => $faker->domainName
+        'phone' => $faker->e164PhoneNumber
     ];
 });

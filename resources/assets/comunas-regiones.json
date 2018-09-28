@@ -62,7 +62,15 @@
     {
         "region": "Región Metropolitana de Santiago",
         "comunas": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"]
-        }],
+    },
+    {
+        "region": "Todo Chile",
+        "comunas": []
+    },
+    {
+        "region": "Internacional",
+        "comunas": []
+    }],
 "constantes": [{
         "trabajadores": ["1 -4", "5 - 50", "51 - 200", "+200"],
         "facturacion": ["0 - 2.400", "2.401 - 25.000", "25.001 - 100.000", "100.000 o más"]

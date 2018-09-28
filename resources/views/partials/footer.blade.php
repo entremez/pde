@@ -11,8 +11,8 @@
             </div>
             <div class="col footer-item">
                 <p>Reportes</p>
-                <p>Links de interés</p>
-                <p>Acceso proveedores de diseño</p>
+                <p>aLinks de interés</p>
+                <p><a class="link" href="{{ route('provider-register') }}">Registrate como proveedor de diseño</a></p>
                 <p>Contáctanos</p>
             </div>
         </div>

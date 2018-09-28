@@ -9613,7 +9613,22 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-@import url('https://fonts.googleapis.com/css?family=Barlow');
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Barlow Regular'), local('Barlow-Regular'), url(https://fonts.gstatic.com/s/barlow/v1/7cHpv4kjgoGqM7E_Ass52Hs.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Barlow Regular'), local('Barlow-Regular'), url(https://fonts.gstatic.com/s/barlow/v1/7cHpv4kjgoGqM7E_DMs5.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 * {
   font-family: 'Barlow', sans-serif;
@@ -9632,6 +9647,7 @@ a.text-dark:hover, a.text-dark:focus {
     background-color: #e7004b;
     border-color: #e7004b;
 }
+
 .btn-danger:hover,
 .btn-danger:visited,
 .btn-danger:focus {
@@ -10164,11 +10180,13 @@ body {
   top: 0px;
   left: 15px;
   background-color: #e7004b;
-  padding: 10px;
-  padding-right: 50px;
+  padding: 10px 0 10px 10px;
+  padding-right: 20px;
+  margin-right: 60px;
   border-radius: 0 0 15px 0;
   text-decoration: none;
   color: white;
+  font-size: .8rem;
 }
 
 .corner:link, .corner:visited, .corner:hover, .corner:active  {
@@ -10625,3 +10643,111 @@ body {
 #classifications{
 display: none;
 }
+
+.link,
+.link:hover,
+.link:visited,
+.link:active
+{
+  text-decoration: none;
+  color: white;
+}
+
+@media (min-width: 1080px) {
+  .bigModal{
+    margin-top: 100px;
+    width:940px;
+    right:213px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .modal.login{
+    display: none;
+  }
+
+
+}
+
+
+
+.login .form-group {
+  margin-bottom: .7rem;
+}
+
+.login .control-label {
+  margin-bottom: 0;
+}
+
+ .modal-body.login{
+  padding: 0!important;
+}
+
+.bottom {
+  bottom: -30px;
+}
+
+
+.l-margin{
+      padding: 25px 0 10px 0;
+}
+
+
+.r-margin{
+    padding: 25px 0 10px 0;
+    background-color: #F0F0F0;
+    border-radius: 0 0.3rem 0.3rem 0;
+}
+
+.close{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1;
+}
+
+#name-error,
+#rut-error,
+#address-error,
+#phone-error,
+#classification-error,
+#employees-error,
+#gain-error,
+.error-class {
+  font-size: .8rem;
+  color: #e7004b;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+.form-control {
+  margin-top: .5rem;
+}
+
+
+.hola{
+  color: green;
+}
+
+.horizontal-line {
+  color: #d2d2d2;
+  height : 0;
+  background-color: #d2d2d2;
+  margin-top: 65px;
+}
+
+.survey-container{
+  height: 400px;
+  position:relative;
+  overflow: hidden;
+  background-size: cover;
+  overflow: hidden;
+  margin-bottom: 30px;
+  background-position: 50% 50%;
+}
+
+

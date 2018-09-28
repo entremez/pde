@@ -20,10 +20,19 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone')->nullable();
-            $table->string('web')->nullable();
+
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->integer('classification_id')->unsigned()->nullable();
+            $table->foreign('classification_id')->references('id')->on('classifications');
+
+            $table->integer('employees_id')->unsigned()->nullable();
+            $table->foreign('employees_id')->references('id')->on('employees');
+
+            $table->integer('gain_id')->unsigned()->nullable();
+            $table->foreign('gain_id')->references('id')->on('gains');
 
             $table->timestamps();
         });

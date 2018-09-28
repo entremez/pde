@@ -1,10 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.puente')
+@section('title', 'PDE | Regístrate como proveedor de servicios de diseño')
 
 @section('content')
+
+@include('partials/menu')
+
+@section('content')
+
+<div class="after-menu"></div>
 <div class="container">
+        <h2 class="text-center">Registro proveedores de servicios de diseño</h2>
     <div class="col-md-6 offset-md-3">
-        <br><br>
-        <h2>Registro proveedores</h2>
         <form method="POST" action="{{ url('providers/register') }}">
             {{ csrf_field() }}
 
@@ -72,4 +78,7 @@
         </form>
     </div>
 </div>
+@include('partials/footer')
+
 @endsection
+

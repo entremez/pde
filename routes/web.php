@@ -27,8 +27,8 @@ Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 //RUTAS ADMINISTRADORES
 Route::group([
             'prefix' => 'admin',
-            'middleware' => ['auth','admin'],
-            'namespace'  => '\Admin'],
+            'middleware' => ['admin'],
+            'namespace'  => 'Admin'],
             function()
 {
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
@@ -50,8 +50,8 @@ Route::group([
 
 Route::group([
         'prefix' => 'providers',
-        'middleware' => ['auth','provider'],
-        'namespace'  => '\Provider'],
+        'middleware' => ['provider'],
+        'namespace'  => 'Provider'],
         function()
 {
     Route::get('/dashboard', 'ProviderController@index')->name('provider.dashboard');
@@ -73,11 +73,12 @@ Route::post('/providers/register', 'Provider\RegisterController@register');
 // RUTAS EMPRESAS
 Route::group([
         'prefix' => 'company',
-        'middleware' => ['auth','company'],
-        'namespace'  => '\Company'],
+        'middleware' => ['company'],
+        'namespace'  => 'Company'],
         function()
 {
     Route::get('/dashboard', 'CompanyController@index')->name('company.dashboard');
+    Route::post('/dashboard', 'CompanyController@config')->name('company.config');
     Route::post('results', 'CompanyController@results')->name('company.result');
 
 
