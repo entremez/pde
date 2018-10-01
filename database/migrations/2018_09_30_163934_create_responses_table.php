@@ -16,11 +16,13 @@ class CreateResponsesTable extends Migration
         Schema::create('responses', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('survey_response_id')->unsigned();
-            $table->foreign('survey_response_id')->references('id')->on('survey_responses');
+            $table->integer('company_survey_id')->unsigned();
+            $table->foreign('company_survey_id')->references('id')->on('company_surveys');
 
-            $table->integer('response_choice_id')->unsigned();
-            $table->foreign('response_choice_id')->references('id')->on('response_choices');
+            $table->integer('option_id')->unsigned();
+            $table->foreign('option_id')->references('id')->on('options');
+
+            $table->integer('value')->nullable();
 
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResponseChoicesTable extends Migration
+class CreateStatementTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateResponseChoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('response_choices', function (Blueprint $table) {
+        Schema::create('statement_types', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions');
-            $table->string('response');
-            $table->integer('weight');
+            $table->string('type');
+            $table->string('description');
 
             $table->timestamps();
         });
@@ -32,6 +30,6 @@ class CreateResponseChoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('response_choices');
+        Schema::dropIfExists('statement_types');
     }
 }
