@@ -19,6 +19,9 @@ class CreateStatementsTable extends Migration
             $table->integer('statement_type_id')->unsigned();
             $table->foreign('statement_type_id')->references('id')->on('statement_types');
 
+            $table->integer('survey_id')->unsigned();
+            $table->foreign('survey_id')->references('id')->on('surveys');
+
             $table->string('statement');
 
             $table->timestamps();

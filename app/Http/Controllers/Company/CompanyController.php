@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SurveyResponse as Travels;
+use App\CompanySurvey as Travels;
 use App\Survey;
 use App\Traits\SurveyJsonTrait;
 use App\Company;
@@ -23,7 +23,6 @@ class CompanyController extends Controller
 
     public function index()
     {
-
         if(Company::where('user_id',auth()->user()->id)->count() == 0){
             return view('company.config',[
                 'cities' => City::get(),

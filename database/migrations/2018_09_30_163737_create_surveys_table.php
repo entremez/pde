@@ -18,6 +18,7 @@ class CreateSurveysTable extends Migration
 
             $table->string('name');
             $table->string('description');
+            $table->boolean('active')->defautl(false);
 
             $table->timestamps();
         });

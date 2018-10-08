@@ -8,11 +8,11 @@ trait SurveyJsonTrait {
     public function getJson(Survey $survey)
     {
         $responses = '{"qr":[';
-        foreach ($survey->survey_questions()->get() as $question) {
-            $type = $this->questionType($question->question->question_type()->get()->first()->type);
-            $responses .= '{"question_type":"'.$type.'","question_id":'.$question->question->id.',"question":"'.$question->question->question.'","responses" : [';
-            foreach ($question->question->response_choices()->get() as $response) {
-                $responses.= '{"response_id":'.$response->id.',"response":"'.$response->response.'"},';
+        foreach ($survey->statements()->get() as $statement) {
+            $type = $this->questionType($statement->statement_type_id);
+            $responses .= '{"statement_type":"'.$type.'","statement_id":'.$statement->id.',"statement":"'.$statement->statement.'","options" : [';
+            foreach ($statement->options()->get() as $option) {
+                $responses.= '{"option_id":'.$option->id.',"option":"'.$option->option.'","info":"'.$option->info.'"},';
             }
             $responses = substr($responses, 0, -1);
             $responses.= ']},';
@@ -23,10 +23,12 @@ trait SurveyJsonTrait {
     }
 
     private function questionType($type){
-        if ($type == "Selección múltiple") {
+        if ($type == 1) {
             return "checkbox";
-        }elseif ($type == "Selección única") {
+        }
+        if ($type == 2) {
             return "radio";
         }
+        return "affirmation";
     }
 }

@@ -1020,7 +1020,7 @@ body {
     top: 0;
 }
 
-.btn-file{  
+.btn-file{
     position: absolute;
     left: 0;
 }
@@ -1126,7 +1126,6 @@ label {
 }
 
 .survey-container{
-  height: 400px;
   position:relative;
   overflow: hidden;
   background-size: cover;
