@@ -20,6 +20,7 @@ class CreateOptionsTable extends Migration
             $table->foreign('statement_id')->references('id')->on('statements');
 
             $table->string('option');
+            $table->string('info')->nullable();
 
             $table->timestamps();
         });
