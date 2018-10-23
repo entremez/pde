@@ -1,6 +1,10 @@
 /node_modules
 /public/hot
 /public/storage
+/public/providers
+/public/images
+/public/*.zip
+/*.zip
 /public/*.mp4
 /storage/*.key
 /vendor
