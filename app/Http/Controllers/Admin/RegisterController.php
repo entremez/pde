@@ -91,7 +91,7 @@ class RegisterController extends Controller
         User::create([
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'type' => 'Admin',
+            'role_id' => 1,
             'type_id' => $admin->id,
         ]);
         return back()->withSuccess( 'Administrador agregado corretamente');

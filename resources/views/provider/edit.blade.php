@@ -1,17 +1,14 @@
-@extends('layouts.app')
-@section('cases', 'active')
-@section('css')
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
-
-@endsection
+@extends('layouts.puente')
+@section('title', 'PDE | ')
 
 @section('content')
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('provider.dashboard') }}">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('cases.index') }}">Administrar casos</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Editar Caso {{ $case->name }}</li>
-</ol>
+
+@include('partials/menu')
+
+
+<div class="after-menu"></div>
+
+<div class="col-md-10 offset-md-1">
     <h2 class="text-center mt-0">Editar caso</h2>
             @if ($errors->any())
             <div class="alert alert-danger rounded">
@@ -83,5 +80,8 @@
             </div>
         </div>
     </form>
+</div>
+
+@include('partials/footer')
 
 @endsection

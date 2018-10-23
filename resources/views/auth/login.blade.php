@@ -41,15 +41,15 @@
             </div>
         </div>
 
-        <div class="form-group pt-4">
+        <div class="form-group" style="    margin-top: 52px;">
             <div class="col-md-12 text-center bottom pb-4">
                 <div class="btn btn-danger btn-register d-block" id="submit-login">
                     Entrar
                 </div>
 
-                <button class="btn btn-link" href="{{ route('password.request') }}">
+                <div class="btn btn-link" href="{{ route('password.request') }}">
                     ¿Olvidaste tu contraseña?
-                </button>
+                </div>
             </div>
         </div>
 

@@ -20,7 +20,7 @@ class CompanyMiddleware
             return redirect()->route('welcome');
         }
 
-        if(Auth::user()->type == "Company")
+        if(Auth::user()->role_id == 3)
             return $next($request);
         return back();
     }

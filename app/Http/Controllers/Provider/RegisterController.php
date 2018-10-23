@@ -60,7 +60,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|min:6',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
             'rut' => ['required',new RutValidate(),new RutProviderUnique()]
         ]);
     }
@@ -78,7 +78,7 @@ class RegisterController extends Controller
         $user = User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'type' => "Provider",
+            'role_id' => 2
         ]);
 
         $provider = Provider::create([

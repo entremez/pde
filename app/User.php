@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'type', 'type_id'
+        'email', 'password', 'role_id', 'type_id'
     ];
 
     /**
@@ -29,35 +29,30 @@ class User extends Authenticatable
     ];
 
     public function instance(){
-        switch (Auth::user()->type) {
-            case 'Admin':
+        switch (Auth::user()->role_id) {
+            case 1:
                 $object = $this->hasOne('App\Admin', 'id', 'type_id');
                 break;
-            case 'Provider':
+            case 2:
                 $object = $this->hasOne('App\Provider', 'id', 'type_id');
                 break;
-            case 'Company':
+            case 3:
                 $object = $this->hasOne('App\Company', 'id', 'type_id');
                 break;
         }
         return $object->get()->first();
     }
 
-    public function getNameAttribute()
-    {
-        return "hola";
-    }
-
     public function getDashboardAttribute()
     {
-        switch(auth()->user()->type){
-                case "Admin":
+        switch(auth()->user()->role_id){
+                case 1:
                     return 'admin/dashboard';
                     break;
-                case "Provider":
-                    return 'provider/dashboard';
+                case 2:
+                    return 'providers/dashboard';
                     break;
-                case "Company":
+                case 3:
                     return 'company/dashboard';
                     break;
         }
@@ -65,14 +60,14 @@ class User extends Authenticatable
 
     public function getRouteNameAttribute()
     {
-        switch(auth()->user()->type){
-                case "Admin":
+        switch(auth()->user()->role_id){
+                case 1:
                     return 'admin.dashboard';
                     break;
-                case "Provider":
-                    return 'provider.dashboard';
+                case 2:
+                    return 'providers.dashboard';
                     break;
-                case "Company":
+                case 3:
                     return 'company.dashboard';
                     break;
         }

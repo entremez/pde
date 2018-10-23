@@ -52,15 +52,35 @@
             </div>
         </div>
 
-        <div class="row mb-4">
-            <div class="col-md-4 text-center mx-auto my-4">
+<div class="mb-3 dm-uploader" id="drag-and-drop-zone">
+  <div class="form-row">
+    <div class="col-md-9 col-sm-12 align-grid-r">
+      <div class="from-group mb-2">
+        <label>Agregar su logo o una imagen que los represente</label>
+        <input type="text" class="form-control" aria-describedby="fileHelp" placeholder="Selecciona una imagen..." readonly="readonly" id="image-data" />
 
-                    <div class="image-container" id="imgSalida" style="display: none"></div>
-                <label class="fileContainer">
-                    <button type="button" class="btn btn-success btn-file">Adjunta tu logo o una imagen que los represente<input type="file" id="file" name="logo" required></button>
-                </label>
-            </div>
+        <div class="progress mb-2 d-none">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+            role="progressbar"
+            style="width: 0%;" 
+            aria-valuenow="0" aria-valuemin="0" aria-valuemax="0">
+            0%
+          </div>
         </div>
+
+      </div>
+      <div class="form-group">
+        <div role="button" class="btn btn-primary mr-2">
+          Examinar archivos
+          <input type="file" id="file-input" name="logo" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3  d-md-block  d-sm-none align-grid">
+      <img src="https://danielmg.org/assets/image/noimage.jpg?v=v10" alt="..." class="img-thumbnail w-100" id="imgSalida">
+    </div>
+  </div>
+</div>
 
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos, en pocas palabras, algo de tu empresa</label>

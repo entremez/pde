@@ -5,48 +5,64 @@
 
 @include('partials/menu')
 
-<section class="banner-title">
+<div class="after-menu"></div>
+<section class="banner-title mb-5">
     <div class="title">
-        <h2>Casos de diseño en los negocios</h2>
+
     </div>
 </section>
 
-<section class="filters">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <form>
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button">P</button>
-                      </div>
-                      <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                    </div>
-                </form>
+<div class="col-md-10 offset-md-1">
 
+    <div class="row">
+            <div class="col-md-3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    
             </div>
             <div class="col-md-9">
                 <div class="row">
-                    @foreach( $cases as $case)
-                    <div class="col-md-4 ">
+                    @foreach($cases as $key =>$case)
+                    @php
+                        $class = "col-md-4 col-sm-6";
+                        $textInstance = "text-instance-small";
+                        $percentageInstance = "percentage-instance-small";
+                        $descriptionIntance = "description-instance-small";
+                        $small = "small";
+                    @endphp
+                    <div class="{{ $class }}">
                         <div class="service">
-                            <div class="image-container">
-                                  <img src="{{ $case->images->first()->image }}" alt="Avatar" class="image-service" style="height: 150px">
-                                  <div class="middle-service">
-                                    <div class="text-service">"{{ $case->description }}"</div>
-                                  </div>
-                            </div>
-                            <div class="footer-service">
-                                <p>{{ $case->name }}</p>
-                            </div>
+                            <a href="{{ route('case', $case->id) }}">
+                                    <div class="corner">{{ $case->classification }}</div>
+                                <div class="image-container op08" style="background-image: url(https://picsum.photos/800/600?image={{ $case->id }})">
+                                    <div class=" {{ $small }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="{{ $textInstance }}">{{ $case->percentage}}</div>
+                                            </div>
+                                            <div class="col-sm-8 box-instance">
+                                            <div class="row"> 
+                                                <div class="{{ $percentageInstance }}">%</div>
+                                                <div class="{{ $descriptionIntance }}">{{ $case->result }}</div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     @endforeach
                 </div>
             </div>
-        </div>
     </div>
-</section>
+
+</div>
+
 
 @include('partials/footer')
 

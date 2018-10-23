@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+
+
+    new WOW().init();
+
   $("#modal-setting").modal("show");
 
   $('#modal-send').click(function(){
@@ -15,7 +19,7 @@ $(document).ready(function () {
 
     $('.service-filter').click(function(event) {
         event.preventDefault();
-        var lis = $(this).parents('.container').children('.row').children('.col-md-3').find('a');
+        var lis = $(this).parents('.row').children('.col-md-3').find('a');
         $.each(lis, function(){
             $(this).removeClass();
         });
@@ -208,14 +212,14 @@ $(document).ready(function () {
         form.validate({
           rules: {
             'email-login': { required : true, email: true},
-            'password-login' : {required:true}
+            'password-login': {required:true}
           },
           messages: {
              'email': {
                 required: "Ingrese su correo electrónico.",
                 email: "Su correo electrónico debe ser válido.",
              },
-             'password-login': {
+             'password': {
                 required: "Ingrese su clave."
              }
           }
@@ -256,7 +260,43 @@ $(document).ready(function () {
         if($('#password-register').val() == $('#password-confirm').val() && $('#email-register').val().length > 4){
           form.submit();
         }
-     });
+
+
+     });//REGISTER PROVIDER
+
+     $('#submit-register-provider').validate({
+          rules: {
+            'name': { required : true},
+            'rut' : { required:true, rut:true},
+            'address' : {required: true},
+            'email' : {required:true, email:true},
+            'password' : {required:true, minlength: 6},
+            'password-confirm' : { equalTo: "#password"}
+          },
+          messages: {
+           'name': {
+              required: "*Ingrese su nombre o el de su empresa."
+           },
+           'rut' : { 
+                required:'*Este campo es obligatorio.', 
+                rut:'*Por favor revise que esté escrito correctamente'
+            },
+           'address' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'email' : { 
+                required:'*Este campo es obligatorio.', 
+                email:'*Por favor revise que esté escrito correctamente'
+            },
+           'password' : { 
+                required:'*Este campo es obligatorio.',
+                minlength: '*La contraseña debe tener al menos 6 caracteres'
+            },
+           'password-confirm' : { 
+                equalTo: '*Las contraseñas deben coinsidir'
+            }
+          }
+        });
 
 
 
@@ -359,6 +399,75 @@ $(document).ready(function () {
       $("video").prop('muted', true);
     }
     });
+
+
+//preview
+var file = '';
+var sector = '';
+var percentage = '';
+var result = '';
+
+    $('#file-input').change(function(e) {
+      addImage(e); 
+      isPreviewReady();
+     });
+
+     function addImage(e){
+      file = e.target.files[0],
+      imageType = /image.*/;
+    
+      if (!file.type.match(imageType))
+       return;
+      $('#image-data').attr('placeholder', file.name);
+      var reader = new FileReader();
+      reader.onload = fileOnload;
+      reader.readAsDataURL(file);
+     }
+  
+     function fileOnload(e) {
+      var result=e.target.result;
+      $('#imgSalida').attr("src",result);
+    }  
+
+    $('#preview').click(function(e){
+      e.preventDefault();
+      var img = $('#imgSalida').attr('src');
+      $('.image-container').css("background-image", 'url('+img+')');
+      $('.corner').html(sector);
+      $('.percentage').html(percentage);
+      $('.result').html(result);
+      $('.text-case').html(percentage+'% '+result);
+    });
+
+    function isPreviewReady(){
+      if(file == '')
+        return
+      if(sector == '')
+        return
+      if(percentage == '')
+        return
+      if(result == '')
+        return
+      console.log('holi');
+      $('#preview').prop('disabled', false);
+    }
+
+    $( ".sectors" ).on( "click", function() {
+      sector = $( "input:checked" ).prop('id');
+      isPreviewReady();
+    }); 
+
+    $("#percentage").change(function(event) {
+        percentage = $(this).val();
+        isPreviewReady();
+    });
+
+    $("#result").change(function(event) {
+        result = $(this).val();
+        isPreviewReady();
+    });
+
+
 
 });
 

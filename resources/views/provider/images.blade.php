@@ -1,17 +1,11 @@
-@extends('layouts.app')
-@section('cases', 'active')
-@section('css')
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/blank.css') }}">
-
-@endsection
+@extends('layouts.puente')
+@section('title', 'PDE | Dashboard')
 
 @section('content')
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('provider.dashboard') }}">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('cases.index') }}">Administrar casos</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Imágenes caso {{ $case->name }}</li>
-</ol>
+
+@include('partials/menu')
+<div class="after-menu"></div>
+<div class="col-md-10 offset-md-1">
     <h2 class="text-center mt-0">Imágenes del caso {{ $case->name }}</h2>
             @if ($errors->any())
             <div class="alert alert-danger rounded">
@@ -39,11 +33,11 @@
                                     <input type="hidden" name="image_id" value="{{ $image->id }}">
                                     {{ csrf_field() }}
                                     <button type="sumbit" class="btn btn-link btn-sm mx-auto px-0 mt-2 my-auto">
-                                        <i class="material-icons" style="font-size: 24px">favorite</i>
+                                        <i class="fas fa-heart"></i>
                                     </button>
                                 </form>
                                 @else
-                                    <i class="material-icons" style="color: red">favorite</i>
+                                    <i class="fas fa-heart" style="color: red"></i>
                                 @endif
                             </div>
                             <div class="col float-right">
@@ -69,7 +63,7 @@
             <div class="row pt-5 ">
                 <div class="col-md-6 ml-auto mr-auto text-center">
                     <label class="fileContainer">
-                        <button type="button" class="btn btn-success"><i class="material-icons">add_a_photo</i> Agrega imágenes al caso <input type="file" name="images[]" required multiple></button>
+                        <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Agrega imágenes al caso <input type="file" name="images[]" required multiple></button>
                         <ul class="pl-0" id="file">Máximo {{ config('constants.case_images')-$case->images()->count() }}</ul>
                     </label>
                 </div>
@@ -88,4 +82,9 @@
         @else
         <h3>Para subir nuevas imágenes debes eliminar alguna de las existentes.</h3>
         @endif
+</div>
+
+
+@include('partials/footer')
+
 @endsection

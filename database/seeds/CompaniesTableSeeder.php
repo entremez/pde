@@ -15,7 +15,7 @@ class CompaniesTableSeeder extends Seeder
         $users = factory(App\User::class, 10)->create();
 
         $users->each(function($user){
-                $user->type = "Company";
+                $user->role_id = 3;
                 $user->save();
                 $company = factory(App\Company::Class)->create();
                 $company->user_id = $user->id;

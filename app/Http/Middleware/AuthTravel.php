@@ -16,7 +16,6 @@ class AuthTravel
     public function handle($request, Closure $next)
     {
         if(!auth()->check())
-            return redirect()->route('travel.login');
         return $next($request);
     }
 }

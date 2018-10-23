@@ -66,22 +66,20 @@ class CaseController extends Controller
         $this->saveServicesOfInstance($instanceId, $request->input('service'));
 
 
-        $images = $request->file('images');
-        foreach ($images as $key => $image) {
-            $path = public_path().'/providers/cases/'.$instanceId->id.'/';
-            $fileName = uniqid()."-".$image->getClientOriginalName();
-            $image->move($path, $fileName);
-            $instance_image = new InstanceImage;
-            $instance_image->image = $fileName;
-            $instance_image->instance_id = $instanceId->id;
-            if($key == 0)
-                $instance_image->featured = true;
-            $instance_image->save();
-        }
+        $image = $request->file('image');
+        $path = public_path().'/providers/case-images/'.$instanceId.'/';
+        $fileName = uniqid()."-".$image->getClientOriginalName();
+        $image->move($path, $fileName);
+        $instance_image = new InstanceImage;
+        $instance_image->image = $fileName;
+        $instance_image->instance_id = $instanceId;
+        $instance_image->featured = true;
+        $instance_image->save();
+
         return redirect('providers/cases')->withSuccess( 'Caso agregado correctamente');
     }
 
-    private function saveServicesIfInstance($instanceId, $services)
+    private function saveServicesOfInstance($instanceId, $services)
     {
         foreach ($services as $service) {
             $instance_service = new InstanceService;
@@ -95,6 +93,10 @@ class CaseController extends Controller
     {
         $instance = new Instance;
         $instance->provider_id = auth()->user()->instance()->id;
+        $instance->classification_id = $request->input('sector');
+        $instance->percentage = $request->input('percentage');
+        $instance->result = $request->input('result');
+        $instance->city_id = 1;
         $instance->name = $request->input('name');
         $instance->company_name = $request->input('company_name');
         $instance->description = $request->input('description');
@@ -107,10 +109,11 @@ class CaseController extends Controller
     {
         return [
             'name' => 'required',
+            'company_name'=> 'required',
+            'percentage'=> 'required',
+            'result'=> 'required',
             'description' => 'required|max:250',
             'long_description' => 'required',
-            'images' => new LimitNumberImages,
-            'images.*' => 'required|image|max:1500',
             'service' => 'required',
         ];
     }
@@ -124,7 +127,6 @@ class CaseController extends Controller
             'description.required' => 'Describe el caso en una frase',
             'description.max' => 'La descripción no debe superar los 250 caracteres',
             'long_description.required' => 'Debes ingresar una descripción detallada del caso',
-            'images.*.max' => 'Las imágenes no deben ser mayores a 1.5 Mb',
             'service.required' => 'Debe seleccionar al menos un servicio',
         ];
     }

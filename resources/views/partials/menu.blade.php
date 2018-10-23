@@ -1,5 +1,5 @@
 <div class="menu w-100">
-  <div class="container">
+  <div class="menu-container">
     <div class="row">
       <div class="w-100">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -31,7 +31,7 @@
                     </li>
               @else
               <li class="nav-item"> <!-- active para negritas -->
-                <a class="nav-link btn btn-danger btn-register" data-toggle="modal" data-target="#loginModal">Registrate o inicia sesión</a>
+                <a class="nav-link btn btn-danger btn-register" data-toggle="modal" data-target="#loginModal">Registrase o iniciar sesión</a>
               </li>
               @endif
           </ul>

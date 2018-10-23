@@ -6,20 +6,16 @@
 
 @include('partials/menu')
 
-
+<div class="after-menu"></div>
 <section class="banner-title">
     <div class="title">
-        <h2>Proveedores de servicios de diseño</h2>
     </div>
 </section>
 
-<section class="filters">
-    <div class="container">
-        <div class="row">
-            <h4>¿Qué servicio de diseño necesitas?</h4>
-        </div>
-        <div class="row">
-            @foreach($categories as $category)
+<div class="col-md-10 offset-md-1 mt-5">
+    <h4>¿Qué servicio de diseño necesitas?</h4>
+    <div class="row">
+        @foreach($categories as $category)
                 <div class="col-md-3">
                     <div class="service">
                         <h3>{{ $category->name }}</h3>
@@ -32,10 +28,11 @@
                         </ul>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            @endforeach       
     </div>
-</section>
+    <hr class="horizontal-line">
+
+
 
 <form method="post" action="{{ route('providers-list-filtered', ':SERVICE_ID') }}" id="form-filter">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -58,7 +55,7 @@
     </div>
 </section>
 
-
+</div>
 
 @include('partials/footer')
 

@@ -16,7 +16,7 @@
                 <div class="col-md-9">
                     <img class="image-container image-case" src="https://picsum.photos/1000/400?image={{ $instance->id }}">
                     <div class="middle-case">
-                            <div class="text-case">{{ rand(50,100)}}% {{$instance->description }}</div>
+                            <div class="text-case">{{ $instance->percentage}}% {{$instance->result }}</div>
                     </div>
                 </div>
                 <div class="col-md-3">

@@ -29,7 +29,7 @@ class ProvidersTableSeeder extends Seeder
                         $provider->save();
                         $providers->push($provider);
                         $user->type_id = $provider->id;
-                        $user->type = "Provider";
+                        $user->role_id = 2;
                         $user->save();
                     });
 

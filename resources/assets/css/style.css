@@ -265,10 +265,21 @@ body {
     background: white;
 }
 
-/*.menu .container {
-  margin-right: 0px;
-  margin-left: 0px;
-}*/
+.menu-container {
+  width: 100%;
+  padding-right: 60px;
+  padding-left: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-link{
+  color: #000033!important;
+}
+
+.nav-link:hover{
+  color: #e7004b!important;
+}
 
 
 .slider-home {
@@ -297,10 +308,20 @@ body {
     margin:0 auto;
 }
 
+.section-title{
+  font-size: 1.5rem;
+}
+
 .section-title p {
     font-size: 24px;
     text-align: left;
-    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.section {
+    margin-top:90px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .footer-service, .footer-provider {
@@ -383,33 +404,34 @@ body {
 }
 
 .footer {
-  margin-top: 50px;
+  width: 100%;
   bottom: 0;
   flex-shrink: 0;
   background-color: #000033;
   color: white;
 }
 
-.container-footer {
-  margin-top: 50px;
-  font-size: 15px;
-}
 
 .footer-item{
-  display: inline-flex;
-  justify-content: space-between;
+  text-align: center;
 }
-/*.container-footer p{
-  margin-right: 60px;
-}*/
 
-.container-footer ul {
+
+
+.footer-container ul {
     list-style: none;
     padding-left: 0;
     font-size: 13px;
     height: auto;
     line-height: 20px;
     margin-top: -10px;
+}
+
+
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
 }
 
 
@@ -441,25 +463,28 @@ body {
     text-align: center;
 }
 .averigua {
-  font-family: Arial;
+  font-family: inherit;
   color: white;
 }
 
 .btn-averigua {
   position: relative;
-  width: 70%;
+  width: 80%;
   height: 50px;
-  text-transform: uppercase;
+}
+.txt-center{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .rentabilidad {
   display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     text-align: left;
     padding-right: 0;
-    padding-left: 44px;
+    padding-left: 30px;
     font-size: 13px;
     color: black;
 }
@@ -468,13 +493,17 @@ body {
   color: #d2d2d2;
   height : 10px;
   border: solid;
+  border-left: 0;
+  border-right: 0;
   background-color: #d2d2d2;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+    padding-left: 0!important;
+    padding-right: 0!important;
 }
 
 .columns {
-  margin-top: 130px;
+  margin-top: 80px;
 }
 
 
@@ -487,7 +516,8 @@ body {
 }
 
 .provider-title {
-  font-weight: bold;
+  font-size: 19px;
+  color: initial;
 }
 
 .provider-services {
@@ -507,16 +537,14 @@ body {
 
 
 .banner-title {
-  padding-top: 117px;
   width: 100%;
-  height: 300px;
+  height: 200px;
   background-color:#FF9D9D;
 }
 
 .banner-title .title{
   color: #FFF;
   text-align: center;
-  padding-top: 70px;
 }
 
 
@@ -548,6 +576,10 @@ body {
     overflow: hidden;
     margin-bottom: 30px;
     background-position: 50% 50%;
+}
+
+.image-column {
+  max-height: 100px;
 }
 
 .image-case {
@@ -587,76 +619,70 @@ body {
   max-height: 200px;
 }
 
-.middle-service {
-  left: 10px;
-  right: 8%;
-  bottom: 10px;
-  text-align: left;
+.small {
+    position: absolute;
+    bottom: 0;
 }
 
 .text-instance {
-    position: absolute;
     font-size: 171px;
     font-family: 'Barlow', sans-serif;
     color: white;
-    letter-spacing: -15px;
     font-weight: bold;
+    text-align: right;
+  letter-spacing: -11px;
 }
 
 .percentage-instance {
-    position: absolute;
     font-size: 52px;
     font-family: 'Barlow', sans-serif;
     font-weight: bold;
     font-style: italic;
     color: white;
-    bottom: 35%;
-    left: 36%;
 }
 
 .description-instance {
-    position: absolute;
-    top: 60%;
-    left: 37%;
     text-decoration: none;
     font-size: 24px;
     color: white;
     font-style: italic;
      line-height: 25px;
+    padding-right: 30px;
+}
+
+.box-instance {
+    display: flex;
+    align-items: center;
 }
 
 .text-instance-small {
-  position: absolute;
   font-size: 90px;
   font-family: 'Barlow', sans-serif;
   font-weight: 400;
   color: white;
-  bottom: -24px;
   letter-spacing: -11px;
   font-style: italic;
+    text-align: right;
 }
 
 .percentage-instance-small {
-    position: absolute;
     font-size: 30px;
     font-family: 'Barlow', sans-serif;
     font-weight: 400;
     color: white;
-    bottom: 43px;
     font-style: italic;
-    left: 40%;
+    margin-left: 10px;
 
 }
 
 .description-instance-small {
-    position: absolute;
     text-decoration: none;
     font-size: 16px;
     color: white;
-    left: 43%;
-     bottom: 10px;
     line-height: 18px;
     font-style: italic;
+    margin-left: 10px;
+    padding-right: 20px;
 }
 
 .cicle {
@@ -977,6 +1003,19 @@ body {
   overflow: hidden;
 }
 
+.video-container{
+  display: none;
+}
+
+@media (min-width: 700px) { 
+  .video-container{
+    display: initial;
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  }
+}
+
 #bgvid {
     position: relative;
     right: 0;
@@ -1098,6 +1137,9 @@ display: none;
 #classification-error,
 #employees-error,
 #gain-error,
+#email-error,
+#password-error,
+#password-confirm-error,
 .error-class {
   font-size: .8rem;
   color: #e7004b;
@@ -1111,11 +1153,6 @@ label {
 
 .form-control {
   margin-top: .5rem;
-}
-
-
-.hola{
-  color: green;
 }
 
 .horizontal-line {
@@ -1134,4 +1171,62 @@ label {
   background-position: 50% 50%;
 }
 
+.provider-logo{
+    max-height: 160px!important;
+}
 
+.pills-sectors {
+    border: 1px solid #d2d2d2;
+}
+
+.pills-sectors .nav-active {
+    border: 0;
+}
+
+/* 
+  Uploader: 
+  - These styles are the ones used on the examples. No needed to use it by any means.
+  - It disables user selection to avoid some weird visuals in some browsers
+  - It masks/hides the the file input behind a button
+ */
+
+.dm-uploader {
+  cursor: default;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dm-uploader .btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.dm-uploader .btn input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  border: solid transparent;
+  width: 100%;
+  opacity: .0;
+  filter: alpha(opacity= 0);
+  cursor: pointer;
+}
+
+
+.img-thumbnail {
+  max-height: 200px;
+}
+
+.align-grid{
+  padding-left: 20px!important;
+}
+
+.align-grid-r{
+  padding-right: 10px!important;
+}

@@ -23,7 +23,7 @@ class Provider extends Model
     {
         if(substr($this->logo, 0, 4) === "http")
             return $this->logo;
-        return '/providers/logos/'.$this->logo;
+        return asset('/providers/logos/'.$this->logo);
     }
 
     public function user()
@@ -33,7 +33,7 @@ class Provider extends Model
 
     public function getEmailAttribute()
     {
-        $users = User::where('type_id',$this->id)->where('type', 'Provider')->get()->first();
+        $users = User::where('type_id',$this->id)->where('role_id', 2)->get()->first();
         return $users->email;
     }
 

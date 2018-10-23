@@ -39,15 +39,7 @@ class LoginController extends Controller
     }
 
     public function redirectTo(){
-        if($this->redirectTo == '/travel')
-            return 'travel';
         return auth()->user()->dashboard;
-    }
-
-    public function showLoginFormTrip()
-    {
-
-        return view('auth.login-trip');
     }
 
     public function login(Request $request)

@@ -22,8 +22,13 @@ class CreateInstancesTable extends Migration
             $table->integer('classification_id')->unsigned();
             $table->foreign('classification_id')->references('id')->on('classifications');
 
+            $table->integer('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')->on('cities');
+
             $table->string('name');
             $table->string('company_name');
+            $table->integer('percentage');
+            $table->string('result');
             $table->string('description');
             $table->string('long_description');
 

@@ -15,6 +15,6 @@ class InstanceImage extends Model
     {
         if(substr($this->image, 0, 4) === "http")
             return $this->image;
-        return '/providers/cases/'.$this->instance_id.'/'.$this->image;
+        return '/providers/case-images/'.$this->instance_id.'/'.$this->image;
     }
 }

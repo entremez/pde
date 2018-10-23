@@ -20,7 +20,7 @@ class AdminMiddleware
             return redirect()->route('welcome');
         }
 
-        if(Auth::user()->type == "Admin")
+        if(Auth::user()->role_id == 1)
             return $next($request);
         return back();
     }

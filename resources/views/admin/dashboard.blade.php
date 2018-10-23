@@ -5,7 +5,7 @@
 @section('content')
 
 @include('partials/menu')
-
+<div class="after-menu"></div>
 <div class="container">
     <div class="row">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -28,3 +28,5 @@
 </div>
 
 @include('partials/footer')
+
+@endsection

@@ -5,29 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Instance;
-use App\provider;
+use App\Provider;
 use App\Service;
 use App\Classification as EconomicActivity;
 
 class HomeController extends Controller
 {
-
     public function index()
     {
         if(auth()->check()){
-            switch(auth()->user()->type){
-                case "Admin":
+            switch(auth()->user()->role_id){
+                case 1:
                     return redirect()->route('admin.dashboard');
                     break;
-                case "Provider":
+                case 2:
                     return redirect()->route('provider.dashboard');
                     break;
-                case "Company":
+                case 3:
                     return redirect()->route('company.dashboard');
                     break;
             }
         }
-        return view('auth.login');
+        return redirect()->route('welcome');
     }
 
 

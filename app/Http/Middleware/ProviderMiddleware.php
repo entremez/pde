@@ -20,7 +20,7 @@ class ProviderMiddleware
             return redirect()->route('welcome');
         }
 
-        if(Auth::user()->type == "Provider")
+        if(Auth::user()->role_id == 2)
             return $next($request);
         return back();
     }
