@@ -23328,6 +23328,33 @@ $(document).ready(function () {
      });
 
 
+     //LOGIN PROIDER
+
+     $('#submit-login-providers').click(function(e){
+        e.preventDefault();
+        var form = $(this).parents('.form-horizontal');
+
+        form.validate({
+          rules: {
+            'email-login': { required : true, email: true},
+            'password-login': {required:true}
+          },
+          messages: {
+             'email': {
+                required: "Ingrese su correo electrónico.",
+                email: "Su correo electrónico debe ser válido.",
+             },
+             'password': {
+                required: "Ingrese su clave."
+             }
+          }
+        });
+
+
+          form.submit();
+     });
+
+
 
      //REGISTER
 
@@ -23365,11 +23392,42 @@ $(document).ready(function () {
      $('#submit-register-provider').validate({
           rules: {
             'name': { required : true},
-            'rut' : { required:true, rut:true},
-            'address' : {required: true},
             'email' : {required:true, email:true},
             'password' : {required:true, minlength: 6},
             'password-confirm' : { equalTo: "#password"}
+          },
+          messages: {
+           'name': {
+              required: "*Ingrese su nombre o el de su empresa."
+           },
+           'email' : { 
+                required:'*Este campo es obligatorio.', 
+                email:'*Por favor revise que esté escrito correctamente'
+            },
+           'password' : { 
+                required:'*Este campo es obligatorio.',
+                minlength: '*La contraseña debe tener al menos 6 caracteres'
+            },
+           'password-confirm' : { 
+                equalTo: '*Las contraseñas deben coincidir'
+            }
+          }
+        });
+
+     $('#submit-config-provider').validate({
+
+        ignore: [],
+          rules: {
+            'name': { required : true},
+            'rut' : { required:true, rut:true},
+            'address' : {required:true},
+            'web' : {required:true},
+            'phone' : {required:true},
+            'long_description' : {required:true},
+            'service[]' : {required:true},
+            'teamMembers' : {required:true},
+            'region' : {required:true},
+            'logo' : {required:true}
           },
           messages: {
            'name': {
@@ -23382,19 +23440,41 @@ $(document).ready(function () {
            'address' : { 
                 required:'*Este campo es obligatorio.'
             },
-           'email' : { 
-                required:'*Este campo es obligatorio.', 
-                email:'*Por favor revise que esté escrito correctamente'
+           'web' : { 
+                required:'*Este campo es obligatorio.'
             },
-           'password' : { 
-                required:'*Este campo es obligatorio.',
-                minlength: '*La contraseña debe tener al menos 6 caracteres'
+           'region' : { 
+                required:'*Este campo es obligatorio.'
             },
-           'password-confirm' : { 
-                equalTo: '*Las contraseñas deben coinsidir'
+           'phone' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'teamMembers' : { 
+                required:'*Agrega al menos a un miebro del equipo.'
+            },
+           'long_description' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'service[]' : { 
+                required:'*Selecciona al menos un servicio.'
+            },
+           'logo' : { 
+                required:'*Selecciona una imagen.'
+            }
+          },
+          errorPlacement: function(error, element) {
+            if (element.attr("name") == "service[]") {
+              error.insertBefore('.errorTxt');
+              element.parents('.servicios').find('.error').addClass('error-class');
+            } else if(element.attr("name") == "teamMembers") {
+              error.insertBefore('.errorTeam');
+            } else if(element.attr("name") == "logo") {
+              error.insertBefore('.errorLogo');
+            } else {
+              error.insertBefore(element);
             }
           }
-        });
+      });
 
 
 
@@ -23564,6 +23644,61 @@ var result = '';
         result = $(this).val();
         isPreviewReady();
     });
+
+
+//CONFIG PROVIDERS
+
+ var id=0;
+ var count=0;
+
+  $('#addMember').click(function(){
+
+      var name = $('#nameLastName').val();
+      var profession = $('#profession').val();
+      id = id+1;
+
+      if( name != '' && profession != ''){
+
+      var add = '<div id="input-'+id+'"></div><div class="team" id="'+id+'"><div class="member">'+name+' - '+ profession +'</div><div class="remove-member" id="removeMember">&nbsp;<i class="fas fa-minus-circle"></i></div></div>';
+
+      $('#team-member').append(add);
+
+        $('#nameLastName').val('');
+        $('#profession').val('');
+        count = count+1;
+        $('#teamMembers').attr('value', count);
+
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'team[]',
+            value: name,
+            id: 'name-'+id
+        }).appendTo('#input-'+id);
+
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'professions[]',
+            value: profession,
+            id: 'profession-'+id
+        }).appendTo('#input-'+id);
+
+      }
+  }); 
+
+  $(this).on('click','#removeMember' ,function(event) {
+    count = count-1;
+    if(count == 0){
+      $('#teamMembers').attr('value', '');
+    }else{
+      $('#teamMembers').attr('value', count);
+    }
+    var member = $(this).parents('.team');
+    var id = member.attr('id');
+    $('#input-'+id).remove();
+    member.fadeOut('slow');
+
+
+  });
 
 
 

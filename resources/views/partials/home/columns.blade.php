@@ -24,8 +24,8 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <h6 class="provider-title">Título del documento</h6>
-                    <h6>Autor y año de edición</h6>
-                    <h6>Ciudad</h6>
+                    <h6 class="provider-services">Autor y año de edición</h6>
+                    <h6 class="provider-services">Ciudad</h6>
                 </div>
             @endforeach
             </div>

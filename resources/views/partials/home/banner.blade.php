@@ -9,7 +9,7 @@ el diseño en tu empresa hoy</pre></div>
         <div class="col-md-6 rentabilidad">
             <div class="txt-center">
             <p class="h5">El diseño mejora significativamente la rentabilidad de los negocios. </p>
-            <p>El viaje Puente Diseño Empresa es una herramienta que te ayudará a descubrir qué nivel de diseño tiene tu empresa, te guiará en cómo puedes integrar diseño y qué tipo de diseño es el indicado para tus desafíos.</p>
+            <p class="text-justify">El viaje Puente Diseño Empresa es una herramienta que te ayudará a descubrir qué nivel de diseño tiene tu empresa, te guiará en cómo puedes integrar diseño y qué tipo de diseño es el indicado para tus desafíos.</p>
             </div>
         </div>
     </div>

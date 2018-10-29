@@ -15,10 +15,11 @@ class CreateProvidersTable extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('rut');
-            $table->string('dv_rut');
+
+            $table->string('rut')->nullable();
+            $table->string('dv_rut')->nullable();
             $table->string('name');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('web')->nullable();
             $table->string('logo')->nullable();
@@ -26,6 +27,9 @@ class CreateProvidersTable extends Migration
             $table->text('long_description')->nullable();
             $table->boolean('approved')->default(false);
             $table->integer('status')->default(0);
+
+            $table->integer('city_id')->unsigned()->nullable();
+            $table->foreign('city_id')->references('id')->on('cities');
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');

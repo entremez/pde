@@ -44,6 +44,10 @@
                 <div class="btn btn-danger btn-register d-block" id="submit-register">
                     Completar registro
                 </div>
+
+                <a class="btn btn-link" href="{{ route('provider-register') }}">
+                    Si eres proveedor de diseño has click aquí
+                </a>
             </div>
         </div>
     </form>

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Rules\RutValidate;
 use App\Rules\RutProviderUnique;
 use Freshwork\ChileanBundle\Rut;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -60,11 +62,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|min:6',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'rut' => ['required',new RutValidate(),new RutProviderUnique()]
+            'password' => 'required|string|min:6'
         ]);
     }
-
+// 
     /**
      * Create a new user instance after a valid registration.
      *
@@ -73,7 +74,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $rut = Rut::parse($data['rut'])->toArray();
 
         $user = User::create([
             'email' => $data['email'],
@@ -82,10 +82,7 @@ class RegisterController extends Controller
         ]);
 
         $provider = Provider::create([
-            'rut' => $rut[0],
-            'dv_rut' => $rut[1],
             'name' => $data['name'],
-            'address' => $data['address'],
             'user_id' => $user->id,
         ]);
 
@@ -93,5 +90,19 @@ class RegisterController extends Controller
         $user->save();
 
         return $user;
+    }
+
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 }

@@ -19,6 +19,11 @@ class Provider extends Model
         return $this->hasMany('App\Instance');
     }
 
+    public function team()
+    {
+        return $this->hasMany('App\ProvidersTeam');
+    }
+
     public function getUrlAttribute()
     {
         if(substr($this->logo, 0, 4) === "http")

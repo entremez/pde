@@ -31,7 +31,7 @@
                     </li>
               @else
               <li class="nav-item"> <!-- active para negritas -->
-                <a class="nav-link btn btn-danger btn-register" data-toggle="modal" data-target="#loginModal">Registrase o iniciar sesión</a>
+                <a class="nav-link btn btn-danger btn-register" data-toggle="modal" data-target="#loginModal">Registrarse o iniciar sesión</a>
               </li>
               @endif
           </ul>

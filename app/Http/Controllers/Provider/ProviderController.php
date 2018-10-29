@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Service;
 use App\ProviderService;
 use File;
+use App\City;
+use App\ProvidersTeam;
+use Freshwork\ChileanBundle\Rut;
 
 class ProviderController extends Controller
 {
@@ -17,22 +20,22 @@ class ProviderController extends Controller
         $data = $user->instance();
         $phone = $data->phone;
         $services = Service::get();
-        if (empty($data->logo) OR empty($data->description))
-            return view('provider.config-dashboard')->with(compact('data','user', 'services'));
+        $cities = City::get();
+        if (empty($data->logo) OR empty($data->long_description))
+            return view('provider.config-dashboard')->with(compact('data','user', 'services', 'cities'));
         $services = ProviderService::where('provider_id', '=',$data->id)->get();
         return view('provider.dashboard')->with(compact('user', 'data','services', 'phone'));
     }
 
     public function edit(Request $request)
     {
+
         $messages = [
             'name.required' => 'Debe ingresar el nombre.',
             'address.required' => 'Debe ingresar la dirección',
             'logo.required' => 'Debe adjuntar una imagen',
             'logo.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
             'phone.required' => 'Debe ingresar número de teléfono',
-            'description.required' => 'Debe ingresar una descripción de tu empresa',
-            'description.max' => 'La descripción de tu empresa no debe superar los 250 caracteres',
             'long_description.required' => 'Debe ingresar una descripción de tus servicios',
             'service.required' => 'Debe seleccionar al menos un servicio',
         ];
@@ -41,7 +44,6 @@ class ProviderController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'logo' => 'required|image',
-            'description' => 'required|max:250',
             'long_description' => 'required',
             'service' => 'required',
         ];
@@ -56,8 +58,14 @@ class ProviderController extends Controller
         $provider->name = $request->input('name');
         $provider->address = $request->input('address');
         $provider->phone = $request->input('phone');
-        $provider->description = $request->input('description');
         $provider->long_description = $request->input('long_description');
+        $provider->city_id = $request->input('region');
+        $provider->web = $request->input('web');
+        $rut = Rut::parse($request->input('rut'))->toArray();
+        $provider->rut = $rut[0];
+        $provider->dv_rut = $rut[1];
+        $provider->user_id = auth()->user()->id;
+
         $provider->save();
 
         $services = $request->input('service');
@@ -66,6 +74,16 @@ class ProviderController extends Controller
             $provider_service->provider_id = $provider->id;
             $provider_service->service_id = $services[$i];
             $provider_service->save();
+        }
+
+        $team = $request->input('team');
+        $professions = $request->input('professions');
+        foreach ($team as $key => $member) {
+            $providerTeam = new ProvidersTeam();
+            $providerTeam->name = $member;
+            $providerTeam->provider_id = $provider->id;
+            $providerTeam->profession = $professions[$key];
+            $providerTeam->save();
         }
 
         return redirect('providers/dashboard');

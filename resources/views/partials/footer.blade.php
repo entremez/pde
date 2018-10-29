@@ -1,26 +1,26 @@
 <footer class="footer section">  
-        <div class="row w-100 section">
-            <div class="menu-container footer-container">
-            <div class="col footer-item">
-                <p>El proyecto Bién Público</p>
+    <div class="section">
+        <div class="menu-container footer-container">
+            <div>
+                <p>El proyecto Bien Público</p>
                 <ul>
                     <li>Ecosistema del proyecto</li>
                     <li>El equipo</li>
                     <li>Formulación</li>
                 </ul>
             </div>
-            <div class="col footer-item">
+            <div>
                 <p>Reportes</p>
             </div>
-            <div class="col footer-item">
-                <p>aLinks de interés</p>
+            <div>
+                <p>Links de interés</p>
             </div>
-            <div class="col footer-item">
-                <p><a class="link" href="{{ route('provider-register') }}">Registrate como proveedor de diseño</a></p>
+            <div>
+                <p><a class="link" href="{{ route('provider-register') }}">Registrarse o iniciar sesión como proveedor de diseño</a></p>
             </div>
-            <div class="col footer-item">
+            <div>
                 <p>Contáctanos</p>
             </div>
-            </div>
         </div>
+    </div>
 </footer>
