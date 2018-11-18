@@ -12,6 +12,7 @@
         <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto flex-row">  <!--ml-auto alinea a derecha-->
               @if(Auth::check())
+              
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->email }}
@@ -36,17 +37,20 @@
               @endif
           </ul>
           <ul class="navbar-nav ml-auto">  <!--ml-auto alinea a derecha-->
-            <li class="nav-item"> <!-- active para negritas -->
-              <a class="nav-link" href="{{ route('cases') }}">Casos de diseño en los negocios</a>
+            <li class="nav-item">
+              <a class="nav-link @yield('title-active')" href="{{ route('welcome') }}">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('evaluate') }}">Evalúa tu empresa</a>
+              <a class="nav-link @yield('title-cases')" href="{{ route('cases') }}">Casos de diseño en los negocios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('providers-list') }}">Proveedores de diseño</a>
+              <a class="nav-link @yield('title-evaluate')" href="{{ route('evaluate') }}">Evalúa tu empresa</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Recursos</a>
+              <a class="nav-link @yield('title-providers')" href="{{ route('providers-list') }}">Proveedores de diseño</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @yield('title-resources')" href="{{ route('resources') }}">Recursos</a>
             </li>
           </ul>
         </div>

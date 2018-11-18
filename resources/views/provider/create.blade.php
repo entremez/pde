@@ -1,5 +1,5 @@
 @extends('layouts.puente')
-@section('title', 'PDE | Dashboard')
+@section('title', 'PDE | Agregar caso de éxito')
 
 @section('content')
 
@@ -48,14 +48,22 @@
                 <div class="form-group">
                     <label class="bmd-label-floating">Menciona en que porcentaje...</label>
 
-                    <input type="number" name="percentage" class="form-control" id="percentage" value="{{ old('percentage') }}" required>
+                    <input type="number" name="percentage" class="form-control" id="percentage" value="{{ old('percentage') }}" min="1" required>
                     
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">En que ayudo el dise;o.....</label>
+                    <label class="bmd-label-floating">En que ayudo el diseño.....</label>
                     <input type="text" name="result" id="result" class="form-control" value="{{ old('result') }}" required>
+                    
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="bmd-label-floating">Año de realización</label>
+
+                    <input type="number" name="year" class="form-control" id="year" value="{{ old('year') }}" min="1906" max="{{ date('Y') }}" required>
                     
                 </div>
             </div>
@@ -89,11 +97,6 @@
             </div>
 
 
-
-        <div class="form-group mt-3">
-            <label for="exampleMessage" class="bmd-label-floating">Cuéntanos en una frase de que se trata el caso</label>
-            <input type="text" name="description" class="form-control" rows="4" value="{{ old('description') }}">
-        </div>
         <div class="form-group">
             <label for="exampleMessage" class="bmd-label-floating">Cuéntanos con mas detalle el caso</label>
             <textarea type="textarea" name="long_description" class="form-control" rows="4">{{ old('long_description') }}</textarea>
@@ -170,42 +173,36 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="service">
+
                     <div class="corner"></div>
-                        <div class="image-container op08">
-                            <div class="small">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="text-instance-small percentage"></div>
-                                    </div>
-                                    <div class="col-sm-8 box-instance">
-                                    <div class="row"> 
-                                        <div class="percentage-instance-small">%</div>
-                                        <div class="description-instance-small result"></div>
-                                    </div>
-                                    </div>
-                                </div>
+                        <div class="image-container">
+
+                        <div class="container"> 
+                            <div class="row-c">
+                                <div class="div2"></div>
+                                <div class="div1"></div>
                             </div>
+                        </div>
+                            
                     </div>
+
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="service">
+
                     <div class="corner"></div>
-                        <div class="image-container op08">
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="text-instance percentage"></div>
-                                    </div>
-                                    <div class="col-sm-8 box-instance">
-                                    <div class="row"> 
-                                        <div class="percentage-instance">%</div>
-                                        <div class="description-instance result"></div>
-                                    </div>
-                                    </div>
-                                </div>
+                        <div class="image-container">
+
+                        <div class="container"> 
+                            <div class="row-c">
+                                <div class="div2-grande"></div>
+                                <div class="div1-grande"></div>
                             </div>
+                        </div>
+                            
                     </div>
+
                 </div>
             </div>
         </div>

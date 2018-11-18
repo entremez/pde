@@ -99,8 +99,8 @@ class CaseController extends Controller
         $instance->city_id = 1;
         $instance->name = $request->input('name');
         $instance->company_name = $request->input('company_name');
-        $instance->description = $request->input('description');
         $instance->long_description = $request->input('long_description');
+        $instance->year = $request->input('year');
         $instance->save();
         return $instance->id;
     }
@@ -112,7 +112,6 @@ class CaseController extends Controller
             'company_name'=> 'required',
             'percentage'=> 'required',
             'result'=> 'required',
-            'description' => 'required|max:250',
             'long_description' => 'required',
             'service' => 'required',
         ];
@@ -124,8 +123,6 @@ class CaseController extends Controller
             'name.required' => 'Debe ingresar el nombre.',
             'images.required' => 'Debe adjuntar al menos una imagen',
             'images.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
-            'description.required' => 'Describe el caso en una frase',
-            'description.max' => 'La descripción no debe superar los 250 caracteres',
             'long_description.required' => 'Debes ingresar una descripción detallada del caso',
             'service.required' => 'Debe seleccionar al menos un servicio',
         ];
@@ -175,15 +172,12 @@ class CaseController extends Controller
         $messages = [
             'name.required' => 'Debe ingresar el nombre.',
 /*            'images.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',*/
-            'description.required' => 'Describe el caso en una frase',
-            'description.max' => 'La descripción no debe superar los 250 caracteres',
             'long_description.required' => 'Debes ingresar una descripción detallada del caso',
 /*            'images.*.max' => 'Las imágenes no deben ser mayores a 1.5 Mb',*/
             'service.required' => 'Debe seleccionar al menos un servicio',
         ];
         $rules = [
             'name' => 'required',
-            'description' => 'required|max:250',
             'long_description' => 'required',
 /*            'images' => new LimitNumberImages($instance->images()->count()),
             'images.*' => 'required|image|max:1500',*/
@@ -192,8 +186,8 @@ class CaseController extends Controller
         $this->validate($request, $rules, $messages);
         $instance->name = $request->input('name');
         $instance->company_name = $request->input('company_name');
-        $instance->description = $request->input('description');
         $instance->long_description = $request->input('long_description');
+        $instance->year = $request->input('year');
         $instance->save();
 
         InstanceService::where('instance_id','=',$instance->id)->delete();

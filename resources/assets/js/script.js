@@ -327,7 +327,6 @@ $(document).ready(function () {
             'phone' : {required:true},
             'long_description' : {required:true},
             'service[]' : {required:true},
-            'teamMembers' : {required:true},
             'region' : {required:true},
             'logo' : {required:true}
           },
@@ -351,9 +350,6 @@ $(document).ready(function () {
            'phone' : { 
                 required:'*Este campo es obligatorio.'
             },
-           'teamMembers' : { 
-                required:'*Agrega al menos a un miebro del equipo.'
-            },
            'long_description' : { 
                 required:'*Este campo es obligatorio.'
             },
@@ -368,8 +364,6 @@ $(document).ready(function () {
             if (element.attr("name") == "service[]") {
               error.insertBefore('.errorTxt');
               element.parents('.servicios').find('.error').addClass('error-class');
-            } else if(element.attr("name") == "teamMembers") {
-              error.insertBefore('.errorTeam');
             } else if(element.attr("name") == "logo") {
               error.insertBefore('.errorLogo');
             } else {
@@ -514,8 +508,10 @@ var result = '';
       var img = $('#imgSalida').attr('src');
       $('.image-container').css("background-image", 'url('+img+')');
       $('.corner').html(sector);
-      $('.percentage').html(percentage);
-      $('.result').html(result);
+      $('.div2').html(percentage);
+      $('.div1').html('<div class="porcentaje">%</div><br>'+result+'</div>');
+      $('.div2-grande').html(percentage);
+      $('.div1-grande').html('<div class="porcentaje-grande">%</div><br>'+result+'</div>');
       $('.text-case').html(percentage+'% '+result);
     });
 
@@ -528,7 +524,6 @@ var result = '';
         return
       if(result == '')
         return
-      console.log('holi');
       $('#preview').prop('disabled', false);
     }
 
@@ -550,59 +545,38 @@ var result = '';
 
 //CONFIG PROVIDERS
 
- var id=0;
- var count=0;
 
-  $('#addMember').click(function(){
+var $dropdowns = $('.dropdown');
+$dropdowns.hover(function()
+{
+    $('.dropdown-toggle', this).trigger('show.bs.dropdown');
+}, function()
+{
+    $('.dropdown-toggle', this).trigger('hide.bs.dropdown');
+});
 
-      var name = $('#nameLastName').val();
-      var profession = $('#profession').val();
-      id = id+1;
+$dropdowns.on('show.bs.dropdown', function(e)
+{
+    e.preventDefault();
+    $(this).addClass('active');
+    $(this).find('.dropdown-menu').first().stop(true, true).delay(200).slideDown(400, function()
+    {
+        $(this).parent().addClass('open');
+        $(this).parent().find('.dropdown-toggle').attr('aria-expanded', 'true');
+    });
+});
 
-      if( name != '' && profession != ''){
-
-      var add = '<div id="input-'+id+'"></div><div class="team" id="'+id+'"><div class="member">'+name+' - '+ profession +'</div><div class="remove-member" id="removeMember">&nbsp;<i class="fas fa-minus-circle"></i></div></div>';
-
-      $('#team-member').append(add);
-
-        $('#nameLastName').val('');
-        $('#profession').val('');
-        count = count+1;
-        $('#teamMembers').attr('value', count);
-
-        $('<input>').attr({
-            type: 'hidden',
-            name: 'team[]',
-            value: name,
-            id: 'name-'+id
-        }).appendTo('#input-'+id);
-
-        $('<input>').attr({
-            type: 'hidden',
-            name: 'professions[]',
-            value: profession,
-            id: 'profession-'+id
-        }).appendTo('#input-'+id);
-
-      }
-  }); 
-
-  $(this).on('click','#removeMember' ,function(event) {
-    count = count-1;
-    if(count == 0){
-      $('#teamMembers').attr('value', '');
-    }else{
-      $('#teamMembers').attr('value', count);
-    }
-    var member = $(this).parents('.team');
-    var id = member.attr('id');
-    $('#input-'+id).remove();
-    member.fadeOut('slow');
-
-
-  });
-
-
+$dropdowns.on('hide.bs.dropdown', function(e)
+{
+    e.preventDefault();
+    if ($(this).find('li.active').length <= 0)
+        $(this).removeClass('active');
+    $(this).find('.dropdown-menu').first().stop(true, true).delay(200).slideUp(400, function()
+    {
+        $(this).parent().removeClass('open');
+        $(this).parent().find('.dropdown-toggle').attr('aria-expanded', 'false');
+    });
+});
 
 });
 

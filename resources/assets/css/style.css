@@ -56,6 +56,10 @@
 .badge-info {
     background-color: #000033;
 }
+
+.badge-success {
+    background-color: #e7004b!important;
+}
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -275,6 +279,10 @@ body {
 
 .nav-link{
   color: #000033!important;
+}
+
+.nav-link.active-menu{
+  color:#e7004b!important;
 }
 
 .nav-link:hover{
@@ -498,8 +506,8 @@ body {
   background-color: #d2d2d2;
   margin-top: 0;
   margin-bottom: 0;
-    padding-left: 0!important;
-    padding-right: 0!important;
+  padding-left: 0!important;
+  padding-right: 0!important;
 }
 
 .columns {
@@ -544,11 +552,16 @@ body {
   top: 0;
 }
 
-
 .banner-title {
-  width: 100%;
-  height: 200px;
-  background-color:#FF9D9D;
+    width:100%!important;
+}
+
+.title-banner {
+  font-size: 4.5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .banner-title .title{
@@ -1056,6 +1069,7 @@ body {
 
 //DASHBOARD PROVIDERS
 
+
 .fileContainer {
     overflow: hidden;
     position: relative;
@@ -1199,8 +1213,16 @@ label {
     border: 1px solid #d2d2d2;
 }
 
+.nav-item .pills-sectors:hover {
+    color: inherit!important;
+}
+
 .pills-sectors .nav-active {
     border: 0;
+}
+
+.nav-pills .nav-link.active{
+    color: white!important;
 }
 
 /* 
@@ -1266,4 +1288,146 @@ label {
 
 .remove-member {
   padding-top: 2px;
+}
+
+
+
+.arrow-dashboard {
+    position: relative;
+    left: -50%;
+    top: 50%;
+}
+
+a .row-c{
+  color: white;
+}
+
+.row-c {
+  display:flex;
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+}
+
+.porcentaje-grande{
+  font-size: 3rem;
+  position: absolute;
+  top: 45%;
+  color: white;
+}
+.div1-grande {
+  line-height: 1;
+  flex: 1 1 auto;
+  font-size: 1.8rem;
+  margin-top: 6rem;
+  margin-bottom: 2.7rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-style: italic;
+}
+
+.div2-grande {
+  font-weight: bold;
+    letter-spacing: -.8rem;
+    flex: 0 0 auto;
+    font-size: 9.5rem;
+    padding-top: 0;
+    margin-right: .7rem;
+}
+
+.div1 {
+  line-height: 1;
+  flex: 1 1 auto;
+  font-size: 1rem;
+  margin-top: 7rem;
+  margin-bottom: 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical; 
+    font-style: italic;
+}
+
+.div2 {
+letter-spacing: -0.5rem;
+    flex: 0 0 auto;
+    font-size: 5rem;
+    padding-top: 4.5rem;
+    margin-right: 1rem;  
+    font-style: italic;
+}
+
+.porcentaje{
+  font-size: 2rem;
+  position: absolute;
+  top: 55%;
+}
+
+.contenedor{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+ 
+
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 4.5rem;
+}
+
+
+.members.form-group.form-control{
+  margin-top: 0;
+}
+
+
+/*provider-dashboard*/
+
+.middle {
+    width: 80%;
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.service:hover .image-container.dashboard {
+    opacity: 0.5;
+}
+
+.service:hover .corner.dashboard {
+    opacity: 0.5;
+}
+
+.service:hover .middle {
+    opacity: 1;
+}
+
+.service.add {
+  opacity: 1;
+}
+
+.service.add:hover .image-container {
+    opacity: 1!important;
+}
+
+.edit {
+    display: flex;
+    justify-content: space-around;
+    background-color: #000033;
+    color: white;
+    font-size: 16px;
+    padding: 16px 16px;
+    opacity: 1;
+    z-index: 1001;
 }

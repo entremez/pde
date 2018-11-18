@@ -20,6 +20,7 @@ class CreateClassificationsTable extends Migration
             $table->foreign('sector_id')->references('id')->on('sectors');
 
             $table->string('classification');
+            $table->string('default_image')->nullable();
 
             $table->timestamps();
         });

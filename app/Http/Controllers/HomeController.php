@@ -38,4 +38,16 @@ class HomeController extends Controller
         ]);
     }
 
+
+    public function resources()
+    {
+        return view('resources');
+    }
+
+
+    public function evaluate()
+    {
+        return view('evaluate');
+    }
+
 }

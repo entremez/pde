@@ -1,5 +1,5 @@
 @extends('layouts.puente')
-@section('title', 'PDE | ')
+@section('title', 'PDE | Editar '.$case->name)
 
 @section('content')
 

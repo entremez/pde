@@ -10,6 +10,7 @@ use App\Service;
 use App\ProviderService;
 use App\Category;
 use Illuminate\Support\Collection as Collection;
+use App\ProviderMember;
 
 class ProvidersTableSeeder extends Seeder
 {
@@ -35,7 +36,15 @@ class ProvidersTableSeeder extends Seeder
 
 
         $providers->each(function($provider){
-                $cases = factory(Instance::class, 3)->make();
+                $providerMembers = new  ProviderMember();
+                $providerMembers->provider_id = $provider->id;
+                $providerMembers->tecnics = rand(0,4);
+                $providerMembers->professionals = rand(0,4);
+                $providerMembers->masters = rand(0,4);
+                $providerMembers->doctors = rand(0,4);
+                $providerMembers->save();
+
+                $cases = factory(Instance::class, rand(1,3))->make();
                 $provider->cases()->saveMany($cases);
                 $services = Service::inRandomOrder()->get();
                 for ($i=0; $i < rand(3,6); $i++) {
@@ -48,10 +57,13 @@ class ProvidersTableSeeder extends Seeder
                 }
 
                 $cases->each(function($case) use ($servicios){
-                        $images = factory(InstanceImage::class, 3)->make();
-                        $case->images()->saveMany($images);
-                        $images[0]->featured = true;
-                        $images[0]->save();
+                        if(rand(0,0)){
+                            $images = factory(InstanceImage::class, 1)->make();
+                            $case->images()->saveMany($images);
+                            $images[0]->featured = true;
+                            $images[0]->save();      
+                        }
+
                         for ($i=0; $i < rand(1,3); $i++) {
                             $instance_service = new InstanceService();
                             $instance_service->instance_id = $case->id;

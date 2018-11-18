@@ -8,9 +8,6 @@
 <div class="after-menu"></div>
 <div class="col-md-10 offset-md-1">
     <h2 class="text-center pt-5 pb-3">Completa tu perfil</h2>
-        @if($errors)
-            {{ $errors }}
-        @endif
             @if ($errors->any())
             <div class="alert alert-danger">
                 <button type="button" class="close" aria-label="Close" data-dismiss="alert">
@@ -35,7 +32,7 @@
             </div>
             <div class="col-md-6">
                 <label class="bmd-label-floating">Rut de su empresa</label>
-                <input type="text" class="form-control" name="rut" id="rut" required>
+                <input type="text" class="form-control" name="rut" id="rut" value="{{ old('rut', $data->rut) }}" required>
             </div>
         </div>
 
@@ -132,21 +129,39 @@
         </div>
 </div>
         <br>
-<div><h4>Profesionales del equipo</h4></div>
-<div class="errorTeam"></div>
-        <input type="hidden" name="teamMembers" id="teamMembers">
-        <div class="row">
-            <div class="col-md-6">
-              <input type="text" class="form-control" placeholder="Nombre y apellido" id="nameLastName">
-            </div>
-            <div class="col-md-5">
-              <input type="text" class="form-control" placeholder="Profesión" id="profession">
-            </div>
-            <div class="col mt-3" id="addMember">
-                <i class="fas fa-plus-circle"></i>
-            </div>
+<h4>Caracterización de profesionales de diseño en su empresa</h4>
+
+<div class="members pb-5">
+
+    <div class="form-group row">
+        <label for="team-tecnics" class="col-md-4 col-sm-6 col-form-label">Colaboradores con formación técnica en diseño</label>
+        <div class="col-md-2 col-sm-6">
+            <input type="number" name="team-tecnics" min="0" value="0" class="form-control">
         </div>
-        <div id="team-member"></div>
+    </div>
+
+    <div class="form-group row">
+        <label for="team-professionals" class="col-md-4 col-sm-6 col-form-label">Colaboradores con formación profesional</label>
+        <div class="col-md-2 col-sm-6">
+            <input type="number" name="team-professionals" min="0" value="0" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="team-masters" class="col-md-4 col-sm-6 col-form-label">Colaboradores con grado magister en diseño</label>
+        <div class="col-md-2 col-sm-6">
+            <input type="number" name="team-masters" min="0" value="0" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="team-doctors" class="col-md-4 col-sm-6 col-form-label">Colaboradores con formación doctorado en diseño</label>
+        <div class="col-md-2 col-sm-6">
+            <input type="number" name="team-doctors" min="0" value="0" class="form-control">
+        </div>
+    </div>
+</div>
+
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
                 <button type="submit" class="btn btn-danger btn-raised">

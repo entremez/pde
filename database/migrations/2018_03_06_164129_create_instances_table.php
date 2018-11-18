@@ -29,8 +29,8 @@ class CreateInstancesTable extends Migration
             $table->string('company_name');
             $table->integer('percentage');
             $table->string('result');
-            $table->string('description');
             $table->string('long_description');
+            $table->integer('year');
 
 
             $table->timestamps();

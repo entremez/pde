@@ -3,6 +3,7 @@
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 
 Route::get('/cases', 'InstanceController@index')->name('cases');
+Route::get('/resources', 'HomeController@resources')->name('resources');
 
 Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
 

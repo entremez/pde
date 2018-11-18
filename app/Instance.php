@@ -26,25 +26,20 @@ class Instance extends Model
         return $this->hasMany('App\InstanceService');
     }
 
-    public function getFeaturedImageAttribute()
+    public function getImageAttribute()
     {
-        $image = $this->images()->where('featured','=', '1')->get()->first()->image;
-        if(substr($image, 0, 4) === "http")
-            return $image;
-        return 'providers/cases/'.$this->id.'/'.$this->images()->where('featured','=', '1')->get()->first()->image;
+        if($this->images()->first()!= null){
+            if(substr($this->images()->first()->image, 0, 4) === "http")
+                return $this->images()->first()->image;
+                return asset('providers/case-images/').'/'.$this->id.'/'.$this->images()->first()->image;
+        }
+        return "/classifications/".$this->classification()->first()->default_image.".jpg";
     }
 
-    public function getFeaturedImageProvidersAttribute()
-    {
-        $image = $this->images()->where('featured','=', '1')->get()->first()->image;
-        if(substr($image, 0, 4) === "http")
-            return $image;
-        return 'cases/'.$this->id.'/'.$this->images()->where('featured','=', '1')->get()->first()->image;
-    }
 
-    public function getClassificationAttribute()
+    public function classification()
     {
-        return Classification::find($this->classification_id)->classification;
+        return $this->belongsTo('App\Classification');
     }
 
     public function counter($ip)

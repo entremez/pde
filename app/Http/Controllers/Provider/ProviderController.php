@@ -9,22 +9,27 @@ use App\Service;
 use App\ProviderService;
 use File;
 use App\City;
-use App\ProvidersTeam;
+use App\ProviderMember;
 use Freshwork\ChileanBundle\Rut;
 
 class ProviderController extends Controller
 {
     public function index()
     {
+
         $user = auth()->user();
         $data = $user->instance();
-        $phone = $data->phone;
         $services = Service::get();
         $cities = City::get();
         if (empty($data->logo) OR empty($data->long_description))
             return view('provider.config-dashboard')->with(compact('data','user', 'services', 'cities'));
         $services = ProviderService::where('provider_id', '=',$data->id)->get();
-        return view('provider.dashboard')->with(compact('user', 'data','services', 'phone'));
+        return view('provider.dashboard',[
+            'user' => $user,
+            'data'=> $data,
+            'services' => $services,
+            'instances' => $data->instances
+        ]);
     }
 
     public function edit(Request $request)
@@ -76,15 +81,14 @@ class ProviderController extends Controller
             $provider_service->save();
         }
 
-        $team = $request->input('team');
-        $professions = $request->input('professions');
-        foreach ($team as $key => $member) {
-            $providerTeam = new ProvidersTeam();
-            $providerTeam->name = $member;
-            $providerTeam->provider_id = $provider->id;
-            $providerTeam->profession = $professions[$key];
-            $providerTeam->save();
-        }
+        $providerMember = new ProviderMember();
+        $providerMember->provider_id = $provider->id;
+        $providerMember->tecnics = $request->input('team-tecnics');
+        $providerMember->professionals = $request->input('team-professionals');
+        $providerMember->masters = $request->input('team-masters');
+        $providerMember->doctors = $request->input('team-doctors');
+        $providerMember->save();
+
 
         return redirect('providers/dashboard');
     }

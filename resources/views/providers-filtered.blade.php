@@ -1,6 +1,7 @@
 
 @extends('layouts.puente')
 @section('title', 'Proveedores de diseño')
+@section('title-providers', 'active-menu')
 
 @section('content')
 

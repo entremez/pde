@@ -21,7 +21,7 @@ class Provider extends Model
 
     public function team()
     {
-        return $this->hasMany('App\ProvidersTeam');
+        return $this->hasOne('App\ProviderMember');
     }
 
     public function getUrlAttribute()

@@ -1,43 +1,17 @@
 @extends('layouts.puente')
 @section('title', 'Evalúa tu empresa')
+@section('title-evaluate', 'active-menu')
 
 @section('content')
 
 @include('partials/menu')
 
-<section class="banner-title">
-    <div class="title">
-        <h2>Evalua y mejora el diseño de tu empresa</h2>
-    </div>
-</section>
+<div class="after-menu"></div>
+<div class="contenedor mb-5">
+<img src="{{url('/banners/5.jpg')}}" class="w-100">
+  <div class="centrado">Evalua y mejora el diseño en tu empresa</div>
+</div> 
 
-<section class="cicle">
-    <div class="container">
-        <div class="row">
-                <img src="images/cicle.png" alt="Ciclo" class="image-cicle">
-        </div>
-        <div class="row">
-            <div class="cicle-container">
-                <div class="cicle-text">
-                    <h3>Registrate</h3>
-                    <p>Registra tu empresa para poder evaluarla. En tu perfil quedarán los registros de tus evaluaciones.</p>
-                </div>
-                <div class="cicle-text">
-                    <h3>Cuestionario</h3>
-                    <p>Responde el cuestionario para evaluar tu empresa. No te tomará más de 5 minutos.</p>
-                </div>
-                <div class="cicle-text">
-                    <h3>Diagnóstico</h3>
-                    <p>Después de contestar el cuestionario, se te entregará el diagnóstico de tu empresa.</p>
-                </div>
-                <div class="cicle-text">
-                    <h3>Proveedores</h3>
-                    <p>En la sección de proveedores podrás buscar quien te puede ayudar con tu empresa según lo diagnosticado.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="columns-evaluate">
     <div class="row">
@@ -51,7 +25,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/99JdbGWVL1M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://player.vimeo.com/video/33373857" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
                 </div>
             </div>
         </div>

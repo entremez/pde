@@ -1,16 +1,17 @@
 
 @extends('layouts.puente')
 @section('title', 'Proveedores de diseño')
+@section('title-providers', 'active-menu')
 
 @section('content')
 
 @include('partials/menu')
 
 <div class="after-menu"></div>
-<section class="banner-title">
-    <div class="title">
-    </div>
-</section>
+<div class="contenedor mb-5">
+<img src="{{url('/banners/3.jpg')}}" class="w-100">
+  <div class="centrado">Proveedores de servicios de diseño</div>
+</div> 
 
 <div class="col-md-10 offset-md-1 mt-5">
     <h4>¿Qué servicio de diseño necesitas?</h4>
