@@ -570,21 +570,7 @@ body {
 }
 
 
-#imaginary_container{
-    margin-top:20%; /* Don't copy this */
-}
-.stylish-input-group .input-group-addon{
-    background: white !important;
-}
-.stylish-input-group .form-control{
-  border-right:0;
-  box-shadow:0 0 0;
-  border-color:#ccc;
-}
-.stylish-input-group button{
-    border:0;
-    background:transparent;
-}
+
 
 .filters {
   margin-top: 40px;
@@ -760,10 +746,14 @@ body {
   padding: 3px !important;
 }
 
+.mb-providers{
+  margin-bottom: 2rem!important;
+}
+
 .service h3{
-  background: #000033;
+  background: lightgray;
   min-height: 60px;
-  color: white;
+  color: #000033;
   text-align: center;
   font-size: 15px;
   text-align: center;
@@ -772,6 +762,15 @@ body {
    display: flex;
    justify-content: center;
    align-items: center;
+    padding: 15px;
+}
+
+.service-filter{
+  color: #000033!important;
+}
+
+.service-filter:hover{
+  color: #e7004b!important;
 }
 
 .service ul{
@@ -1026,9 +1025,12 @@ body {
 }
 
 .video-container{
-  width: 100%;
-  max-height: 400px;
-  overflow: hidden;
+
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 400px;
+    object-fit: cover;
 }
 
 .video-container{
@@ -1038,10 +1040,24 @@ body {
 @media (min-width: 700px) { 
   .video-container{
     display: initial;
-  width: 100%;
-  max-height: 400px;
-  overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 400px;
+    object-fit: cover;
   }
+}
+
+video{
+  object-fit: fill;
+}
+
+.video-title {
+  z-index: 500;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #bgvid {
@@ -1174,6 +1190,11 @@ display: none;
 #long_description-error,
 #file-input-error,
 #teamMembers-error,
+#company_name-error,
+#year-error,
+#quantity-error,
+#sentence-error,
+#sector-error,
 .error-class {
   font-size: .8rem;
   color: #e7004b;
@@ -1330,7 +1351,7 @@ a .row-c{
 
 .div2-grande {
   font-weight: bold;
-    letter-spacing: -.8rem;
+    letter-spacing: -.3rem;
     flex: 0 0 auto;
     font-size: 9.5rem;
     padding-top: 0;
@@ -1351,7 +1372,7 @@ a .row-c{
 }
 
 .div2 {
-letter-spacing: -0.5rem;
+letter-spacing: -0.2rem;
     flex: 0 0 auto;
     font-size: 5rem;
     padding-top: 4.5rem;
@@ -1379,6 +1400,8 @@ letter-spacing: -0.5rem;
     transform: translate(-50%, -50%);
     color: white;
     font-size: 4.5rem;
+    line-height: 4rem;
+    width: 80%;
 }
 
 
@@ -1430,4 +1453,44 @@ letter-spacing: -0.5rem;
     padding: 16px 16px;
     opacity: 1;
     z-index: 1001;
+}
+
+
+.search-place {
+  margin-top: 0;
+}
+
+
+.docepx{
+
+    color: #2F2E2E;
+    list-style: none;
+    font-size: 12px;
+    vertical-align: super;
+}
+
+.caracterizacion{
+  font-size: .9rem;
+}
+
+.plus-img {
+      font-size: 11rem;
+    color: #000033;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text-top{
+  vertical-align: text-top;
+}
+
+.menu-name{
+  font-size: .85rem;
+}
+
+.buttons-preview {
+  display: flex;
+  justify-content: space-around;
 }

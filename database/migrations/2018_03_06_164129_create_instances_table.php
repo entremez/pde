@@ -25,12 +25,17 @@ class CreateInstancesTable extends Migration
             $table->integer('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
 
+            $table->integer('employees_range')->unsigned();
+            $table->foreign('employees_range')->references('id')->on('employees');
+
             $table->string('name');
             $table->string('company_name');
-            $table->integer('percentage');
-            $table->string('result');
+            $table->integer('quantity');
+            $table->string('unit');
+            $table->string('sentence');
             $table->string('long_description');
             $table->integer('year');
+            $table->boolean('approved');
 
 
             $table->timestamps();

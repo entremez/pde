@@ -39,15 +39,21 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="provider" {{ old('remember') ? 'checked' : '' }}> ¿Eres proveedor de diseño?
+                    </label>
+                </div>
+            </div>
+        </div>        
+
         <div class="form-group pt-4">
             <div class="col-md-12 text-center">
                 <div class="btn btn-danger btn-register d-block" id="submit-register">
                     Completar registro
                 </div>
-
-                <a class="btn btn-link" href="{{ route('provider-register') }}">
-                    Si eres proveedor de diseño has click aquí
-                </a>
             </div>
         </div>
     </form>

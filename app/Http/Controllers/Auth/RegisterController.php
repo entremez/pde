@@ -11,6 +11,9 @@ use Illuminate\Http\File;
 use App\City;
 use App\Employees;
 use App\Gain;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -65,6 +68,22 @@ class RegisterController extends Controller
             'email-register' => 'required|string|email|max:255',
             'password-register' => 'required|string|min:6|confirmed'
         ]);
+    }
+
+
+    public function register(Request $request)
+    {
+        if($request->input('provider'))
+            return redirect(route('provider-register-from-home', $request));
+
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 
     /**

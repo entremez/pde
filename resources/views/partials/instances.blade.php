@@ -21,8 +21,8 @@
 
                 <div class="container"> 
                         <div class="row-c">
-                        <div class="{{$izquierda}}">{{ $case->percentage}}</div>
-                        <div class="{{$derecha}}"><div class="{{$porcentaje}}">%</div><br>{{ $case->result }}</div>
+                        <div class="{{$izquierda}}">{{ $case->quantity}}</div>
+                        <div class="{{$derecha}}"><div class="{{$porcentaje}}">{{  $case->unit }}</div><br>{{ $case->sentence }}</div>
                         </div>
                 </div>
                         

@@ -12,6 +12,8 @@ use App\Rules\LimitNumberImages;
 use App\Instance;
 use App\InstanceImage;
 use App\Sector;
+use App\City;
+use App\Employees;
 use File;
 
 class CaseController extends Controller
@@ -48,7 +50,9 @@ class CaseController extends Controller
         return view('provider.create', [
             'services' => collect($services_provider),
             'user' => $user,
-            'sectors' => Sector::get()
+            'sectors' => Sector::get(),
+            'cities' => City::get(),
+            'employees' => Employees::get()
         ]);
     }
 
@@ -94,13 +98,16 @@ class CaseController extends Controller
         $instance = new Instance;
         $instance->provider_id = auth()->user()->instance()->id;
         $instance->classification_id = $request->input('sector');
-        $instance->percentage = $request->input('percentage');
-        $instance->result = $request->input('result');
-        $instance->city_id = 1;
+        $instance->city_id = $request->input('region');
+        $instance->employees_range = $request->input('employees');
         $instance->name = $request->input('name');
         $instance->company_name = $request->input('company_name');
+        $instance->quantity = $request->input('quantity');
+        $instance->unit = $request->input('unit');
+        $instance->sentence = $request->input('sentence');
         $instance->long_description = $request->input('long_description');
         $instance->year = $request->input('year');
+        $instance->approved = false;
         $instance->save();
         return $instance->id;
     }
@@ -110,8 +117,8 @@ class CaseController extends Controller
         return [
             'name' => 'required',
             'company_name'=> 'required',
-            'percentage'=> 'required',
-            'result'=> 'required',
+            'quantity'=> 'required',
+            'sentence'=> 'required',
             'long_description' => 'required',
             'service' => 'required',
         ];

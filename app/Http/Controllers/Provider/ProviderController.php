@@ -9,6 +9,7 @@ use App\Service;
 use App\ProviderService;
 use File;
 use App\City;
+use App\Category;
 use App\ProviderMember;
 use Freshwork\ChileanBundle\Rut;
 
@@ -21,8 +22,9 @@ class ProviderController extends Controller
         $data = $user->instance();
         $services = Service::get();
         $cities = City::get();
+        $categories = Category::get();
         if (empty($data->logo) OR empty($data->long_description))
-            return view('provider.config-dashboard')->with(compact('data','user', 'services', 'cities'));
+            return view('provider.config-dashboard')->with(compact('data','user', 'services', 'cities', 'categories'));
         $services = ProviderService::where('provider_id', '=',$data->id)->get();
         return view('provider.dashboard',[
             'user' => $user,

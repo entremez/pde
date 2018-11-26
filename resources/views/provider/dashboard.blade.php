@@ -15,7 +15,7 @@
 
 
                     @foreach($instances as $instance)
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-4 col-sm-6 instance-dashboard">
                         <div class="service">
                             <a href="{{ route('case', $instance->id) }}">
                                     <div class="corner dashboard">{{ $instance->classification->classification }}</div>
@@ -23,8 +23,8 @@
 
                                 <div class="container"> 
                                         <div class="row-c">
-                                        <div class="div2">{{ $instance->percentage}}</div>
-                                        <div class="div1"><div class="porcentaje">%</div><br>{{ $instance->result }}</div>
+                                        <div class="div2">{{ $instance->quantity}}</div>
+                                        <div class="div1"><div class="porcentaje">{{ $instance->unit}}</div><br>{{ $instance->sentence }}</div>
                                         </div>
                                 </div>
                                         
@@ -35,7 +35,7 @@
                                     <div class="edit">
                                         <a href="{{route('case', $instance)}}"><i class="fas fa-search-plus link"></i></a>
                                         <a href="{{route('cases.edit', $instance)}}"><i class="fas fa-edit link"></i></a>
-                                        <a href="#!"><i class="far fa-trash-alt link"></i></a>
+                                        <a href="#" data-id="{{ $instance->id}}" ><i class="far fa-trash-alt link delete"></i></a>
                                     </div>
                                 </div>
                         </div>
@@ -47,7 +47,7 @@
                     <div class="col-md-4 col-sm-6">
                         <a href="{{route('cases.create')}}" class="link">
                             <div class="service add">
-                            <div class="image-container" style="background-image:url(http://pngimg.com/uploads/plus/plus_PNG110.png)">
+                            <div class="image-container"><span class="plus-img">+</span>
                             </div>
                         </div>
                             </a>
@@ -61,7 +61,7 @@
 
         <div class="col-md-3 provider-data">
             <div class="arrow-dashboard"><i class="fas fa-arrow-left"></i></div>
-                <img src="{{ $data->url }}" class="rounded mx-auto d-block img-fluid provider-logo"  alt="provider logo">
+                <img src="{{ $data->imagen_logo }}" class="rounded mx-auto d-block img-fluid provider-logo"  alt="provider logo">
 
             
                 <h1>{{ $data->name }}</h1>

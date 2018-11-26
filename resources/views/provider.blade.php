@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <img class="image-container w-100" src="{{ $provider->logo }}">
+                <img class="image-container w-100" src="{{ $provider->imagen_logo }}">
                 <a href="#" data-id="{{ $provider->id }}" class="btn btn-danger provider-btn">Contacto</a>
                 <div class="provider-contact">
                     <div class="row text-left">

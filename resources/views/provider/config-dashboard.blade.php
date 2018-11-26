@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">Nombre</label>
+                    <label class="bmd-label-floating">Nombre de empresa</label>
                     <input type="text" name="name" class="form-control" value="{{ old('name', $data->name) }}" required>
                 </div>
             </div>
@@ -77,7 +77,7 @@
   <div class="form-row">
     <div class="col-md-9 col-sm-12 align-grid-r">
       <div class="from-group mb-2">
-        <div>Agregar su logo o una imagen que los represente</div>
+        <div>Agregar su logo o una imagen que los represente&nbsp;&nbsp;&nbsp;<small>(Formatos permitidos: jpeg, png, bmp, gif o svg)</small></div>
         <div class="errorLogo"></div>
         <input type="text" class="form-control" aria-describedby="fileHelp" placeholder="Selecciona una imagen..." readonly="readonly" id="image-data" />
 
@@ -99,7 +99,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="https://danielmg.org/assets/image/noimage.jpg?v=v10" alt="..." class="img-thumbnail w-100" id="imgSalida">
+      <img src="{{ asset('/images/not-found.jpg') }}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
     </div>
   </div>
 </div>
@@ -109,55 +109,84 @@
             <label for="long_description" class="bmd-label-floating">Cuéntanos de tu empresa</label>
             <textarea type="textarea" name="long_description" class="form-control" rows="4" id="long_description">{{ old('long_description', $data->long_description) }}</textarea>
         </div>
-<div class="servicios">
-        <h4>Selecciona los servicios que prestas</h4>
-        <div class="errorTxt"></div>
-        <div class="row">
+        <div class="servicios">            
+            <label class="bmd-label-floating pt-4">Selecciona los servicios que prestas</label>
+            <div class="errorTxt"></div>
+            <div class="row pt-3">
 
-            @foreach($services as $service)
-            <div class="col-md-3 col-sm-4">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif >{{ $service->name }}
-                        <span class="form-check-sign">
-                            <span class="check"></span>
-                        </span>
-                    </label>
+                @foreach($categories as $key=>$category)
+                    @if($key!=7 && $key!=8)
+                        <div class="col-md-3 mb-providers">
+                            <div class="service">
+                                <h3>{{ $category->name }}</h3>
+                                <ul>
+                                    @foreach($services as $service)
+                                        @if($service->category_id == $category->id)
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif ><span class="docepx">{{ $service->name }}</span>
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+
+                <div class="col-md-3">
+                    <div class="service">
+                        <h3>{{ $categories[7]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
+                        <ul>
+                            
+                        </ul>
+                    </div>
+                    <div class="service">
+                        <h3>{{ $categories[8]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
+                        <ul>
+
+                        </ul>
+                    </div>            
                 </div>
+
+
             </div>
-            @endforeach
         </div>
-</div>
         <br>
-<h4>Caracterización de profesionales de diseño en su empresa</h4>
+
+    <label class="bmd-label-floating mb-3">Caracterización de profesionales de diseño en su empresa</label>
 
 <div class="members pb-5">
 
     <div class="form-group row">
-        <label for="team-tecnics" class="col-md-4 col-sm-6 col-form-label">Colaboradores con formación técnica en diseño</label>
+        <label for="team-tecnics" class="col-md-4 col-sm-6 col-form-label caracterizacion">Colaboradores con formación técnica en diseño</label>
         <div class="col-md-2 col-sm-6">
-            <input type="number" name="team-tecnics" min="0" value="0" class="form-control">
+            <input type="number" name="team-tecnics" min="0" value="{{ old('team-tecnics', 0) }}" class="form-control mt-0">
         </div>
     </div>
 
     <div class="form-group row">
-        <label for="team-professionals" class="col-md-4 col-sm-6 col-form-label">Colaboradores con formación profesional</label>
+        <label for="team-professionals" class="col-md-4 col-sm-6 col-form-label caracterizacion">Colaboradores con formación profesional</label>
         <div class="col-md-2 col-sm-6">
-            <input type="number" name="team-professionals" min="0" value="0" class="form-control">
+            <input type="number" name="team-professionals" min="0" value="{{ old('team-professionals', 0) }}" class="form-control mt-0">
         </div>
     </div>
 
     <div class="form-group row">
-        <label for="team-masters" class="col-md-4 col-sm-6 col-form-label">Colaboradores con grado magister en diseño</label>
+        <div for="team-masters" class="col-md-4 col-sm-6 col-form-label caracterizacion">Colaboradores con grado magister en diseño</div>
         <div class="col-md-2 col-sm-6">
-            <input type="number" name="team-masters" min="0" value="0" class="form-control">
+            <input type="number" name="team-masters" min="0" value="{{ old('team-masters', 0) }}" class="form-control mt-0">
         </div>
     </div>
 
     <div class="form-group row">
-        <label for="team-doctors" class="col-md-4 col-sm-6 col-form-label">Colaboradores con formación doctorado en diseño</label>
+        <label for="team-doctors" class="col-md-4 col-sm-6 col-form-label caracterizacion">Colaboradores con formación doctorado en diseño</label>
         <div class="col-md-2 col-sm-6">
-            <input type="number" name="team-doctors" min="0" value="0" class="form-control">
+            <input type="number" name="team-doctors" min="0" value="{{ old('team-doctors', 0) }}" class="form-control mt-0">
         </div>
     </div>
 </div>

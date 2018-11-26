@@ -15,12 +15,62 @@
 
     <div class="row">
             <div class="col-md-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.    
+ 
+                    <div class="input-group">
+                        <input type="text" class="form-control search-place"  placeholder="Busca un caso" >
+                    </div>
+
+                    <p class="mb-2 mt-3">Tamaño de la empresa</p>
+                    @foreach($employees_range as $range)
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="employee">
+                            {{ $range->range }} empleados
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    @endforeach
+
+                    <p class="mb-2 mt-3">Rubro</p>
+                    @foreach($sectors as $sector)
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="sector">
+                            <div data-toggle="tooltip" data-placement="right" title="{{ $sector->tooltip }}">{{ $sector->name }}</div>
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    @endforeach
+
+                    <p class="mb-2 mt-3">Regiones</p>
+                    @foreach($cities as $city)
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="sector">
+                            {{ $city->region }}
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    @endforeach
+
+                    <p class="mb-2 mt-3">Categorías de diseño</p>
+                    @foreach($categories as $category)
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="sector">
+                            {{ $category->name }}
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    @endforeach
             </div>
             <div class="col-md-9">
                 <div class="row">
@@ -39,8 +89,8 @@
 
                                 <div class="container"> 
                                         <div class="row-c">
-                                        <div class="{{$izquierda}}">{{ $case->percentage}}</div>
-                                        <div class="{{$derecha}}"><div class="{{$porcentaje}}">%</div><br>{{ $case->result }}</div>
+                                        <div class="{{$izquierda}}">{{ $case->quantity}}</div>
+                                        <div class="{{$derecha}}"><div class="{{$porcentaje}}">{{ $case->unit}}</div><br>{{ $case->sentence }}</div>
                                         </div>
                                 </div>
                                         

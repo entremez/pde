@@ -9,12 +9,11 @@
 <div class="after-menu"></div>
 <div class="contenedor mb-5">
 <img src="{{url('/banners/5.jpg')}}" class="w-100">
-  <div class="centrado">Evalua y mejora el diseño en tu empresa</div>
+  <div class="centrado">Evalúa y mejora el diseño en tu empresa</div>
 </div> 
 
 
 <section class="columns-evaluate">
-    <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="row">
                 <div class="col-md-6 left-column">
@@ -25,12 +24,11 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                <iframe src="https://player.vimeo.com/video/33373857" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe src="https://player.vimeo.com/video/33373857" width="600" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 

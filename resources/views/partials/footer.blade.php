@@ -16,9 +16,6 @@
                 <p>Links de interés</p>
             </div>
             <div>
-                <p><a class="link" href="{{ route('provider-register') }}">Registrarse o iniciar sesión como proveedor de diseño</a></p>
-            </div>
-            <div>
                 <p>Contáctanos</p>
             </div>
         </div>

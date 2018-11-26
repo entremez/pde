@@ -18,7 +18,7 @@ class CreateProvidersTable extends Migration
 
             $table->string('rut')->nullable();
             $table->string('dv_rut')->nullable();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('web')->nullable();

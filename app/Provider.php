@@ -24,7 +24,7 @@ class Provider extends Model
         return $this->hasOne('App\ProviderMember');
     }
 
-    public function getUrlAttribute()
+    public function getImagenLogoAttribute()
     {
         if(substr($this->logo, 0, 4) === "http")
             return $this->logo;

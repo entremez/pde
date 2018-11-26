@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
 
+  $('[data-toggle="tooltip"]').tooltip();
+
 
     new WOW().init();
 
@@ -22,6 +24,8 @@ $(document).ready(function () {
         var lis = $(this).parents('.row').children('.col-md-3').find('a');
         $.each(lis, function(){
             $(this).removeClass();
+            $(this).addClass('link');
+            $(this).addClass('service-filter');
         });
         $(this).addClass('selected');
         //var title = $(this).parents('.service').find('h3').text();
@@ -373,6 +377,74 @@ $(document).ready(function () {
       });
 
 
+     //crear caso de éxito
+
+     $('#create-form').validate({
+
+        ignore: [],
+          rules: {
+            'name': { required : true},
+            'company_name' : { required:true},
+            'year' : {required:true},
+            'region' : {required:true},
+            'quantity' : {required:true},
+            'sentence' : {required:true},
+            'sector' : {required:true},
+            'long_description' : {required:true},
+            'image' : {required:true},
+            'service[]' : {required:true},
+            'ragion' : {required:true}
+          },
+          messages: {
+           'name': {
+              required: "*Ingrese el nombre del caso."
+           },
+           'company_name' : { 
+                required:'*Este campo es obligatorio.',
+            },
+           'region' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'year' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'quantity' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'sentence' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'sector' : { 
+                required:'*Seleccione un sector y luego una actividad.'
+            },
+           'long_description' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'service[]' : { 
+                required:'*Selecciona al menos un servicio.'
+            },
+           'image' : { 
+                required:'*Selecciona una imagen.'
+            },
+           'employees' : { 
+                required:'*Este campo es obligatorio.'
+            }
+          },
+          errorPlacement: function(error, element) {
+            if (element.attr("name") == "service[]") {
+              error.insertBefore('.errorTxt');
+              element.parents('.servicios').find('.error').addClass('error-class');
+            } else if(element.attr("name") == "sector") {
+              error.insertBefore('.errorSector');
+            } else if(element.attr("name") == "image") {
+              error.insertBefore('.errorLogo');
+            } else {
+              error.insertBefore(element);
+            }
+          }
+      });
+
+
 
 
      //COMPANY CONFIG
@@ -478,8 +550,9 @@ $(document).ready(function () {
 //preview
 var file = '';
 var sector = '';
-var percentage = '';
-var result = '';
+var quantity = '';
+var sentence = '';
+var unit = '';
 
     $('#file-input').change(function(e) {
       addImage(e); 
@@ -508,11 +581,11 @@ var result = '';
       var img = $('#imgSalida').attr('src');
       $('.image-container').css("background-image", 'url('+img+')');
       $('.corner').html(sector);
-      $('.div2').html(percentage);
-      $('.div1').html('<div class="porcentaje">%</div><br>'+result+'</div>');
-      $('.div2-grande').html(percentage);
-      $('.div1-grande').html('<div class="porcentaje-grande">%</div><br>'+result+'</div>');
-      $('.text-case').html(percentage+'% '+result);
+      $('.div2').html(quantity);
+      $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
+      $('.div2-grande').html(quantity);
+      $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><br>'+sentence+'</div>');
+      $('.text-case').html(quantity+' '+unit+' '+sentence);
     });
 
     function isPreviewReady(){
@@ -520,9 +593,9 @@ var result = '';
         return
       if(sector == '')
         return
-      if(percentage == '')
+      if(quantity == '')
         return
-      if(result == '')
+      if(sentence == '')
         return
       $('#preview').prop('disabled', false);
     }
@@ -532,16 +605,26 @@ var result = '';
       isPreviewReady();
     }); 
 
-    $("#percentage").change(function(event) {
-        percentage = $(this).val();
+    $("#quantity").change(function(event) {
+        quantity = $(this).val();
         isPreviewReady();
     });
 
-    $("#result").change(function(event) {
-        result = $(this).val();
+    $("#sentence").change(function(event) {
+        sentence = $(this).val();
         isPreviewReady();
     });
 
+
+    $("#unit").change(function(event) {
+        unit = $(this).val();
+        isPreviewReady();
+    });
+
+
+    $("#submit-create-case").on( "click", function() {
+      $("#create-form").submit();
+    });
 
 //CONFIG PROVIDERS
 
@@ -577,6 +660,12 @@ $dropdowns.on('hide.bs.dropdown', function(e)
         $(this).parent().find('.dropdown-toggle').attr('aria-expanded', 'false');
     });
 });
+
+
+  $('.delete').on('click', function(event) {
+    event.preventDefault();
+    $(this).parents('.instance-dashboard').fadeOut();
+  }); 
 
 });
 

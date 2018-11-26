@@ -14,22 +14,38 @@
 </div> 
 
 <div class="col-md-10 offset-md-1 mt-5">
-    <h4>¿Qué servicio de diseño necesitas?</h4>
-    <div class="row">
-        @foreach($categories as $category)
-                <div class="col-md-3">
+    <h4 class="mb-5">¿Qué servicio de diseño necesitas?</h4>
+    <div class="row">    
+        @foreach($categories as $key=>$category)
+            @if($key!=7 && $key!=8)
+                <div class="col-md-3 mb-providers">
                     <div class="service">
                         <h3>{{ $category->name }}</h3>
                         <ul>
                             @foreach($services as $service)
                                 @if($service->category_id == $category->id)
-                                    <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="service-filter">{{ $service->name }}</a></li>
+                                    <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="link service-filter">{{ $service->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
                     </div>
                 </div>
-            @endforeach       
+            @endif
+        @endforeach
+        <div class="col-md-3">
+            <div class="service">
+                <h3>{{ $categories[7]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
+                <ul>
+                    
+                </ul>
+            </div>
+            <div class="service">
+                <h3>{{ $categories[8]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
+                <ul>
+
+                </ul>
+            </div>            
+        </div>       
     </div>
     <hr class="horizontal-line">
 
@@ -45,7 +61,7 @@
             @foreach($providers as $provider)
                 <div class="col-md-3">
                     <a href="{{ route('provider', $provider->id) }}">
-                        <img class="img-fluid w-100-h-200 image-provider" src="{{ $provider->getUrlAttribute() }}" alt="{{ $provider->id }}">
+                        <img class="img-fluid w-100-h-200 image-provider" src="{{ $provider->imagen_logo }}" alt="{{ $provider->id }}">
                         <div class="middle-provider">
                                 <div class="text-provider">{{ $provider->name }}</div>
                         </div>

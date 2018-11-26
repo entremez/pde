@@ -17,20 +17,26 @@
 <section class="filters">
     <div class="container">
         <div class="row">
-            @foreach($categories as $category)
+            @foreach($categories as $key => $category)
+                @if($key!=8 && $key!=7)
                 <div class="col-md-3">
                     <div class="service">
                         <h3>{{ $category->name }}</h3>
                         <ul>
                             @foreach($services as $service)
                                 @if($service->category_id == $category->id)
-                                    <li class="{{ $service->id == $selected->id?'selected':'' }}"><a href="{{ route('providers-list-filtered', $service->id) }}">{{ $service->name }}</a></li>
+                                    <li class="{{ $service->id == $selected->id?'selected':'' }} link"><a href="{{ route('providers-list-filtered', $service->id) }}">{{ $service->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
                     </div>
                 </div>
+                @endif
             @endforeach
+
+
+
+
         </div>
     </div>
 </section>
@@ -41,7 +47,7 @@
         <div class="row">
             @foreach($providers as $provider)
                 <div class="col-md-3">
-                    <img src="{{ $provider->provider()->first()->getUrlAttribute() }}" alt="{{ $provider->id }}">
+                    <img src="{{ $provider->provider()->first()->image }}" alt="{{ $provider->id }}">
                 </div>
             @endforeach
         </div>

@@ -20,8 +20,8 @@ mix.styles([
             'resources/assets/js/jquery.js',
             'resources/assets/js/jquery.validate.js',
             'resources/assets/js/wow.js',
-            'resources/assets/js/bootstrap-bundle.js',
             'resources/assets/js/bootstrap.js',
+            'resources/assets/js/bootstrap-bundle.js',
             'resources/assets/js/waypoints.js',
             'resources/assets/js/script.js'
         ], 'public/scripts.js');

@@ -67,8 +67,8 @@ Route::group([
     Route::put('/case/{id}/images','CaseImagesController@update')->name('images.update');
 
 });
-Route::get('/providers/register', 'Provider\RegisterController@showRegistrationForm')->name('provider-register');
-Route::post('/providers/register', 'Provider\RegisterController@register');
+//Route::get('/providers/register', 'Provider\RegisterController@showRegistrationForm')->name('provider-register');
+Route::get('/providers/register', 'Provider\RegisterController@register')->name('provider-register-from-home');
 
 
 // RUTAS EMPRESAS

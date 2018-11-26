@@ -10,6 +10,8 @@
 <div class="after-menu"></div>
 
 <div class="col-md-10 offset-md-1">
+
+{{ $errors }}
     <div class="row">
         <div class="col-md-6 vertical-line">
             <h2 class="text-center mb-4 mt-5">Iniciar sesión</h2>
