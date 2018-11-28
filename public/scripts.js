@@ -23368,25 +23368,25 @@ $(document).ready(function () {
 
         form.validate({
           rules: {
-            'email-register': { required : true, email: true},
-            'password-register' : {required:true},
-            'password-register_confirmation' : {required:true}
+            'email': { required : true, email: true},
+            'password' : {required:true},
+            'password_confirmation' : {required:true}
           },
           messages: {
-             'email-register': {
+             'email': {
                 required: "Ingrese su correo electrónico.",
                 email: "Su correo electrónico debe ser válido.",
              },
-             'password-register': {
+             'password': {
                 required: "Ingrese su clave."
              },
-             'password-register_confirmation': {
+             'password_confirmation': {
                 required: "Confirme su clave."
              }
           }
         });
 
-        if($('#password-register').val() == $('#password-confirm').val() && $('#email-register').val().length > 4){
+        if($('#password').val() == $('#password-confirm').val() && $('#email').val().length > 4){
           form.submit();
         }
 

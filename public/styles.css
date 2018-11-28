@@ -14262,27 +14262,14 @@ body {
   top:0;
 }
 
-.video-container{
-
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 400px;
-    object-fit: cover;
-}
 
 .video-container{
   display: none;
 }
 
-@media (min-width: 700px) { 
+@media (min-width: 990px) { 
   .video-container{
     display: initial;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 400px;
-    object-fit: cover;
   }
 }
 
@@ -14296,6 +14283,12 @@ video{
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: inline-table;
+}
+
+.section-title.video-title p{
+
+    font-size: 4.5rem!important;
 }
 
 #bgvid {

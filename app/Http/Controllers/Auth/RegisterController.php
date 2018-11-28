@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Company;
+use App\Provider;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -65,26 +66,28 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'email-register' => 'required|string|email|max:255',
-            'password-register' => 'required|string|min:6|confirmed'
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed'
         ]);
     }
 
 
     public function register(Request $request)
     {
-        if($request->input('provider'))
-            return redirect(route('provider-register-from-home', $request));
 
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+
+            event(new Registered($user = $this->create($request->all())));
+
 
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
+        
     }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -95,14 +98,40 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
+        $role = 3;
+        if(isset($data['provider']))
+            $role = 2;
 
         $user = User::create([
-            'email' => $data['email-register'],
-            'password' => bcrypt($data['password-register']),
-            'role_id' => 3
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'role_id' => $role
         ]);
+
+        isset($data['provider']) ? $this->createProvider($user) : $this->createProvider($user);
 
         return $user;
     }
+
+
+    private function createCompany(User $user)
+    {
+        $company = Company::create([
+            'user_id' => $user->id,
+        ]);
+
+        $user ->type_id = $company->id;
+        $user->save();        
+    }
+
+    private function createProvider(User $user){
+        $provider = Provider::create([
+            'user_id' => $user->id,
+        ]);
+
+        $user ->type_id = $provider->id;
+        $user->save();
+    }
+
 
 }

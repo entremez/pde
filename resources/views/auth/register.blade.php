@@ -3,13 +3,13 @@
     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('email-register   ') ? ' has-error' : '' }}">
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <label for="email" class="col-md-12 control-label">Correo electrónico</label>
 
             <div class="col-md-12">
-                <input id="email-register" type="email" class="form-control" name="email-register" value="{{ old('email-register') }}" required>
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
-                @if ($errors->has('email-register'))
+                @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
@@ -21,7 +21,7 @@
             <label for="password" class="col-md-12 control-label">Contraseña</label>
 
             <div class="col-md-12">
-                <input id="password-register" type="password" class="form-control" name="password-register" required>
+                <input id="password" type="password" class="form-control" name="password" required>
 
                 @if ($errors->has('password'))
                     <span class="help-block">
@@ -35,7 +35,7 @@
             <label for="password-confirm" class="col-md-12 control-label">Confirmar contraseña</label>
 
             <div class="col-md-12">
-                <input id="password-confirm" type="password" class="form-control" name="password-register_confirmation" required>
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
             </div>
         </div>
 
