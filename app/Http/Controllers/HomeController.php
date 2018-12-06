@@ -33,8 +33,8 @@ class HomeController extends Controller
     public function welcome()
     {
         return view('welcome',[
-            'cases' => Instance::inRandomOrder()->limit(6)->get(),
-            'providers' => Provider::inRandomOrder()->limit(3)->get(),
+            'cases' => Instance::where('approved',true)->inRandomOrder()->limit(6)->get(),
+            'providers' => Provider::where('approved',true)->inRandomOrder()->limit(3)->get(),
         ]);
     }
 

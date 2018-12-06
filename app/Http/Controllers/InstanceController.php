@@ -30,7 +30,7 @@ class InstanceController extends Controller
         return view('cases',[
             'instance' => $instance,
             'provider' => $instance->provider()->first(),
-            'cases' => Instance::where('provider_id',$instance->id)->inRandomOrder()->limit(3)->get()
+            'cases' => Instance::where('id', '!=', $instance->id)->where('classification_id',$instance->classification_id)->inRandomOrder()->limit(3)->get()
             ]);
     }
 }

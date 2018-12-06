@@ -28,15 +28,31 @@
 }
 
 
-.btn-danger {
+.btn-danger,
+.btn-primary,
+.nav-pills .nav-link.active,
+.btn-primary.disabled, .btn-primary:disabled{
+    background-color: #e7004b;
+    border-color: #e7004b;
+}
+
+
+ {
     background-color: #e7004b;
     border-color: #e7004b;
 }
 
 .btn-danger:hover,
 .btn-danger:visited,
-.btn-danger:focus {
-    background-color: #e7004b;
+.btn-danger:focus,
+.btn-danger:link,
+.btn-danger:active,
+.btn-primary:hover,
+.btn-primary:visited,
+.btn-primary:focus,
+.btn-primary:link,
+.btn-primary:active,.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    background: #e7004b;
     border-color: #e7004b;
     box-shadow: none;
 }
@@ -783,9 +799,13 @@ body {
   font-size: 12px;
 }
 .selected{
-  background-color: yellow;
+    background-color: #e7004b;
+    color: white!important;
 }
 
+.selected:hover{
+    color: white!important;
+}
 .service ul li a{
   text-decoration: none;
   text-decoration-color:
@@ -1188,6 +1208,8 @@ display: none;
 #quantity-error,
 #sentence-error,
 #sector-error,
+#quote-error,
+#file-input-company-error,
 .error-class {
   font-size: .8rem;
   color: #e7004b;
@@ -1486,4 +1508,12 @@ letter-spacing: -0.2rem;
 .buttons-preview {
   display: flex;
   justify-content: space-around;
+}
+
+.company-logo-container {
+  height: 9rem;
+}
+
+.company-logo {
+  margin: 2rem;
 }

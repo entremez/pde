@@ -80,7 +80,16 @@ class CaseController extends Controller
         $instance_image->featured = true;
         $instance_image->save();
 
-        return redirect('providers/cases')->withSuccess( 'Caso agregado correctamente');
+        $instance = Instance::find($instanceId);
+
+        $image = $request->file('company-logo');
+        $path = public_path().'/providers/case-images/'.$instanceId.'/';
+        $fileName = uniqid()."-".$image->getClientOriginalName();
+        $image->move($path, $fileName);
+        $instance->company_logo = $fileName;
+        $instance->save();
+
+        return redirect('providers/dashboard')->withSuccess( 'Caso agregado correctamente');
     }
 
     private function saveServicesOfInstance($instanceId, $services)
@@ -108,6 +117,7 @@ class CaseController extends Controller
         $instance->long_description = $request->input('long_description');
         $instance->year = $request->input('year');
         $instance->approved = false;
+        $instance->quote = $request->input('quote');
         $instance->save();
         return $instance->id;
     }

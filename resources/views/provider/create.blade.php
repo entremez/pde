@@ -82,7 +82,7 @@
                 
         </div>
 
-        <label class="bmd-label-floating mb-2">Construye la frase principal del impacto de tu caso</label>
+        <label class="bmd-label-floating mb-2 mt-4">Construye la frase principal del impacto de tu caso</label>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
@@ -94,7 +94,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <small>Unidad</small>
+                    <small>Unidad (%, $, X, +)</small>
 
                     <input type="text" name="unit" class="form-control" id="unit" value="{{ old('unit') }}">
                     
@@ -108,9 +108,40 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6 docepx">
+                    Ejemplos:
+                <div class="row">
+                    <div class="col-2">
+                        <p>Cantidad</p>
+                        3000 <br>
+                        200 <br>
+                        2 <br>
+                        50 <br>
+                        10 <br>
+                    </div>
+                    <div class="col-2">
+                        <p>Unidad</p>
+                        MM CLP <br>
+                        % <br>
+                        x <br>
+                        + <br>
+                        <br>
+                    </div>
+                    <div class="col-8">
+                        <p>Frase</p>
+                        de ahorro anual <br>
+                        de aumento de ventas en 10 meses <br>
+                        aumentó las visitas al museo <br>
+                        personas usaron los servicios de caridad <br>
+                        nuevas creaciones colaborativas <br>   
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-            <div class="mb-2">Seleccione sector y actividad de la empresa</div>
+            <div class="mb-2 mt-4">Seleccione sector y actividad de la empresa</div>
             <div class="errorSector"></div>
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -139,12 +170,17 @@
 
 
         <div class="form-group mt-4">
-            <label for="exampleMessage" class="bmd-label-floating">Cuéntanos el caso con mas detalle</label>
+            <label for="" class="bmd-label-floating">Cuéntanos el caso con mas detalle</label>
             <textarea type="textarea" name="long_description" class="form-control" rows="4">{{ old('long_description') }}</textarea>
         </div>
 
+        <div class="form-group mt-4">
+            <label for="quote" class="bmd-label-floating">Cita del cliente que muestre los efectos del caso</label>
+            <input type="text" name="quote" id="quote" class="form-control" value="{{ old('quote') }}" />
+        </div>
 
-<div class="mb-3 dm-uploader" id="drag-and-drop-zone">
+
+<div class="mb-3 dm-uploader" >
   <div class="form-row">
     <div class="col-md-9 col-sm-12 align-grid-r">
       <div class="from-group mb-2">
@@ -176,6 +212,31 @@
   </div>
 </div>
 
+
+<div class="mb-3 dm-uploader">
+  <div class="form-row">
+    <div class="col-md-9 col-sm-12 align-grid-r">
+      <div class="from-group mb-2">
+        <label>Agrega el logo de la empresa donde se llevó a cabo el caso&nbsp;&nbsp;&nbsp;<small>(Formatos permitidos: jpeg, png, bmp, gif o svg)</small></label>
+        <div class="errorLogoCompany"></div>
+        <input type="text" class="form-control" aria-describedby="fileHelp" placeholder="Selecciona una imagen..." readonly="readonly" id="image-data-company" />
+
+
+      </div>
+      <div class="form-group">
+        <div role="button" class="btn btn-primary mr-2">
+          Examinar archivos
+          <input type="file" id="file-input-company" name="company-logo" />
+        </div>
+        <small class="status text-muted">Busca la imagen en tus archivos</small>
+      </div>
+    </div>
+    <div class="col-md-3  d-md-block  d-sm-none align-grid">
+      <img src="{{asset('/images/not-found.jpg')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgCompany">
+    </div>
+  </div>
+</div>
+
     <div class="servicios">          
         <span>Selecciona a que servicio de los que prestas pertenece este caso de éxito</span>
             <div class="errorTxt"></div>
@@ -183,7 +244,7 @@
                 @foreach($services as $service)
                 <div class="col-md-3 col-sm-4">
                     <div class="form-check">
-                        <label class="form-check-label">
+                        <label class="form-check-label docepx">
                             <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif >{{ $service->name }}
                             <span class="form-check-sign">
                                 <span class="check"></span>
@@ -214,7 +275,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       <div class="modal-body">
-            <span>Visualiación del caso en los catalogos de casos</span>
+            <span>Visualización del caso en los catalogos de casos</span>
         <div class="row">
             <div class="col-md-4">
                 <div class="service">
@@ -254,7 +315,7 @@
 
         <section>
 
-            <span>Visualiación del caso en la página particular del caso</span>
+            <span>Visualización del caso en la página particular del caso</span>
             <div class="row">
                 <div class="col-md-12">
                     <img class="image-container image-case" >

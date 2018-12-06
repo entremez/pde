@@ -178,6 +178,7 @@ $(document).ready(function () {
       addImage(e); 
      });
 
+
      function addImage(e){
       console.log(e.target.files);
       var file = e.target.files[0],
@@ -190,6 +191,7 @@ $(document).ready(function () {
       reader.onload = fileOnload;
       reader.readAsDataURL(file);
      }
+
   
      function fileOnload(e) {
       var result=e.target.result;
@@ -392,6 +394,8 @@ $(document).ready(function () {
             'sector' : {required:true},
             'long_description' : {required:true},
             'image' : {required:true},
+            'quote' : {required:true},
+            'company-logo' : {required:true},
             'service[]' : {required:true},
             'ragion' : {required:true}
           },
@@ -428,6 +432,12 @@ $(document).ready(function () {
             },
            'employees' : { 
                 required:'*Este campo es obligatorio.'
+            },
+           'company-logo' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'quote' : { 
+                required:'*Este campo es obligatorio.'
             }
           },
           errorPlacement: function(error, element) {
@@ -438,6 +448,8 @@ $(document).ready(function () {
               error.insertBefore('.errorSector');
             } else if(element.attr("name") == "image") {
               error.insertBefore('.errorLogo');
+            } else if(element.attr("name") == "company-logo") {
+              error.insertBefore('.errorLogoCompany');
             } else {
               error.insertBefore(element);
             }
@@ -549,6 +561,8 @@ $(document).ready(function () {
 
 //preview
 var file = '';
+var quote = '';
+var companyLogo = '';
 var sector = '';
 var quantity = '';
 var sentence = '';
@@ -574,7 +588,28 @@ var unit = '';
      function fileOnload(e) {
       var result=e.target.result;
       $('#imgSalida').attr("src",result);
-    }  
+    } 
+
+  $('#file-input-company').change(function(e) {
+      addImageCompany(e); 
+     });
+
+     function addImageCompany(e){
+        companyLogo = e.target.files[0],
+        imageType = /image.*/;
+      
+        if (!companyLogo.type.match(imageType))
+          return;
+        $('#image-data-company').attr('placeholder', companyLogo.name);  
+        var reader = new FileReader();
+        reader.onload = fileOnloadCompany;
+        reader.readAsDataURL(companyLogo);
+     }
+  
+     function fileOnloadCompany(e) {
+        var result=e.target.result;
+        $('#imgCompany').attr("src",result);
+     }
 
     $('#preview').click(function(e){
       e.preventDefault();
@@ -597,6 +632,8 @@ var unit = '';
         return
       if(sentence == '')
         return
+      if(companyLogo == '')
+        return
       $('#preview').prop('disabled', false);
     }
 
@@ -618,6 +655,12 @@ var unit = '';
 
     $("#unit").change(function(event) {
         unit = $(this).val();
+        isPreviewReady();
+    });
+
+
+    $("#quote").change(function(event) {
+        quote = $(this).val();
         isPreviewReady();
     });
 
@@ -666,6 +709,7 @@ $dropdowns.on('hide.bs.dropdown', function(e)
     event.preventDefault();
     $(this).parents('.instance-dashboard').fadeOut();
   }); 
+  
 
 });
 

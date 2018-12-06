@@ -68,11 +68,11 @@
         "comunas": []
     },
     {
-        "region": "Internacional",
+        "region": "En el extranjero",
         "comunas": []
     }],
 "constantes": [{
-        "trabajadores": ["1 -4", "5 - 15", "16 - 25", "+25"],
+        "trabajadores": ["1 -4 trabajadores", "5 - 15 trabajadores", "16 - 25 trabajadores", "+25 trabajadores"],
         "facturacion": ["0 - 2.400", "2.401 - 25.000", "25.001 - 100.000", "100.000 o más"]
     }]
 }

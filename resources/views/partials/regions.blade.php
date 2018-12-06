@@ -5,7 +5,7 @@
                 <div class="row">             
                 @foreach($cities as $city)
                 <div class="col-md-4">
-                    <div class="form-check">
+                    <div class="form-check docepx">
                         <input class="form-check-input" type="checkbox" value="{{ $city->id }}" name="cities[]" id="city-{{ $city->id }}">
                         <label class="form-check-label" for="city-{{ $city->id }}">
                             {{ $city->region }}

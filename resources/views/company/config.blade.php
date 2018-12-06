@@ -65,7 +65,7 @@
                     @foreach($employees as $employee)
                     <div class="form-check">
                       <input class="form-check-input required" type="radio" name="employees" value="{{ $employee->id }}">
-                      <label class="form-check-label" for="employees">
+                      <label class="form-check-label docepx" for="employees">
                         {{ $employee->range }}
                       </label>
                     </div>
@@ -77,7 +77,7 @@
                     @foreach($gains as $gain)
                     <div class="form-check">
                       <input class="form-check-input required" type="radio" name="gain" value="{{ $gain->id }}">
-                      <label class="form-check-label" for="gain">
+                      <label class="form-check-label docepx" for="gain">
                         {{ $gain->range }} UF
                       </label>
                     </div>
@@ -87,7 +87,7 @@
 
             <hr class="horizontal-line">
         <div class="py-5 text-center">
-            <button class="btn btn-danger">Comenzar el viaje</button>
+            <button class="btn btn-danger">Enviar registro</button>
         </div>
     </form>
 </div>
