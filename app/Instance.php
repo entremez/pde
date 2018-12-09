@@ -39,7 +39,7 @@ class Instance extends Model
     {
         if($this->images()->first()!= null){
             if(substr($this->images()->first()->image, 0, 4) === "http")
-                return $this->images()->first()->image;
+                return trim($this->images()->first()->image);
                 return asset('providers/case-images/').'/'.$this->id.'/'.$this->images()->first()->image;
         }
         return "/classifications/".$this->classification()->first()->default_image.".jpg";
@@ -80,4 +80,5 @@ class Instance extends Model
 
         return $tags;
     }
+
 }

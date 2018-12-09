@@ -23672,7 +23672,7 @@ var unit = '';
      });
 
      function addImage(e){
-      file = e.target.files[0],
+      file = e.target.files[0];
       imageType = /image.*/;
     
       if (!file.type.match(imageType))
@@ -23690,11 +23690,13 @@ var unit = '';
 
   $('#file-input-company').change(function(e) {
       addImageCompany(e); 
+      isPreviewReady();
      });
 
      function addImageCompany(e){
         companyLogo = e.target.files[0],
         imageType = /image.*/;
+
       
         if (!companyLogo.type.match(imageType))
           return;
@@ -23807,6 +23809,117 @@ $dropdowns.on('hide.bs.dropdown', function(e)
     event.preventDefault();
     $(this).parents('.instance-dashboard').fadeOut();
   }); 
+
+
+
+  $('.filter').change(function(event) {
+      filters();
+  });
+
+function filters() {
+  var employees = [];
+    $("input[name=employee]").each(function (index) {  
+       if($(this).is(':checked')){
+          employees.push($(this).val());
+       }
+    });
+    var sectors = [];
+    $("input[name=sector]").each(function (index) {  
+       if($(this).is(':checked')){
+          sectors.push($(this).val());
+       }
+    });
+    var cities = [];
+    $("input[name=city]").each(function (index) {  
+       if($(this).is(':checked')){
+          cities.push($(this).val());
+       }
+    });
+    var categories = [];
+    $("input[name=category]").each(function (index) {  
+       if($(this).is(':checked')){
+          categories.push($(this).val());
+       }
+    });
+
+    var form = $('#form-filter');
+    var url = form.attr('action');
+    var classifications;
+    classifications = $.ajax({
+      type: 'POST',
+      async: false,
+      url: "/classifications-data-json",
+      data: {"_token": $('#token').val()}, 
+      dataType: 'json',    
+      done: function(results) {
+        return results;
+      }
+    });
+
+
+    $.ajax({
+      url : url,
+      method : "GET",
+      data : {employees:employees,
+              sectors:sectors,
+              cities:cities,
+              categories:categories},
+      success : function (data)
+      {
+
+        var output = '';
+          for (var i = 0; i < data.length; i++) {
+            output += '<div class="col-md-4">';
+            output += '<div class="service">';
+            output += '<a href="/case/'+data[i].id+'">';
+            output += '<div class="corner">'+ classifications.responseJSON[data[i].classification_id].classification+'</div>';
+            imageUrl = image(data[i].id);
+            output += '<div class="image-container" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url(\''+imageUrl+'\')">';
+            output += '<div class="container">';
+            output += '<div class="row-c">';
+            output += '<div class="div2">'+ data[i].quantity+'</div>';
+            output += '<div class="div1"><div class="porcentaje">'+ data[i].unit+'</div><br>'+ data[i].sentence+'</div>';
+            output += '</div>';
+            output += '</div>';               
+            output += '</div>';
+            output += '</a>';
+            output += '</div>';
+        output += '</div>';
+          }
+        $('.filtered').hide();
+        $('.filtered').html(output);
+        $('.filtered').show();
+
+
+
+
+      }
+    });
+
+    function image($id) {
+    var images;
+    images = $.ajax({
+      type: 'POST',
+      async: false,
+      url: "/images-data-json",
+      data: {"_token": $('#token').val()}, 
+      dataType: 'json',    
+      done: function(results) {
+        return results;
+      }
+    });
+
+
+
+    for (var i = 0; i < images.responseJSON.length; i++) {
+        if(images.responseJSON[i].id == $id)
+          return images.responseJSON[i].image;
+    }
+    }
+
+}
+
+
   
 
 });

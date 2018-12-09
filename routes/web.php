@@ -2,6 +2,9 @@
 
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 
+Route::post('/classifications-data-json', 'InstanceController@classifications');
+Route::post('/images-data-json', 'InstanceController@images');
+
 Route::get('/cases', 'InstanceController@index')->name('cases');
 Route::get('/resources', 'HomeController@resources')->name('resources');
 
