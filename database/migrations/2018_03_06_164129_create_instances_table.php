@@ -39,7 +39,7 @@ class CreateInstancesTable extends Migration
             $table->integer('year');
             $table->boolean('approved');
 
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

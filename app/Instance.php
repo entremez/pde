@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Classification;
 use App\InstanceCounter;
 use Illuminate\Support\Collection;
 
 class Instance extends Model
 {
+    use SoftDeletes;
 
     protected $fillable = [
         'name', 'company_name', 'description', 'long_description'

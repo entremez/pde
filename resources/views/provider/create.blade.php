@@ -74,7 +74,7 @@
                     <select class="form-control" id="employees" name="employees" required>
                       <option value="">Seleccionar...</option>
                         @foreach($employees as $employee)
-                            <option value="{{ $employee->id }}" >{{ $employee->range }}  trabajadores</option>
+                            <option value="{{ $employee->id }}" >{{ $employee->range }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -456,7 +456,68 @@ $(document).ready(function () {
           }
       });
 
+$('#edit-form').validate({
 
+        ignore: [],
+          rules: {
+            'name': { required : true},
+            'company_name' : { required:true},
+            'year' : {required:true},
+            'region' : {required:true},
+            'quantity' : {required:true},
+            'sentence' : {required:true},
+            'sector' : {required:true},
+            'long_description' : {required:true},
+            'quote' : {required:true},
+            'service[]' : {required:true},
+            'ragion' : {required:true}
+          },
+          messages: {
+           'name': {
+              required: "*Ingrese el nombre del caso."
+           },
+           'company_name' : { 
+                required:'*Este campo es obligatorio.',
+            },
+           'region' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'year' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'quantity' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'sentence' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'sector' : { 
+                required:'*Seleccione un sector y luego una actividad.'
+            },
+           'long_description' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'service[]' : { 
+                required:'*Selecciona al menos un servicio.'
+            },
+           'employees' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'quote' : { 
+                required:'*Este campo es obligatorio.'
+            }
+          },
+          errorPlacement: function(error, element) {
+            if (element.attr("name") == "service[]") {
+              error.insertBefore('.errorTxt');
+              element.parents('.servicios').find('.error').addClass('error-class');
+            } else if(element.attr("name") == "sector") {
+              error.insertBefore('.errorSector');
+            } else {
+              error.insertBefore(element);
+            }
+          }
+      });
 
 
      //COMPANY CONFIG
@@ -625,6 +686,18 @@ var unit = '';
       $('.text-case').html(quantity+' '+unit+' '+sentence);
     });
 
+    $('#preview-edit').click(function(e){
+      e.preventDefault();
+      var img = encodeURI($('#imgSalida').attr('src'));
+      $('.image-container').css("background-image", 'url('+img+')');
+      $('.corner').html($('.classification').data('classification'));
+      $('.div2').html(quantity);
+      $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
+      $('.div2-grande').html(quantity);
+      $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><br>'+sentence+'</div>');
+      $('.text-case').html(quantity+' '+unit+' '+sentence);
+    });
+
     function isPreviewReady(){
       if(file == '')
         return
@@ -706,11 +779,40 @@ $dropdowns.on('hide.bs.dropdown', function(e)
     });
 });
 
+//DELETE CASE IN DASHBOARD PROVIDER
 
   $('.delete').on('click', function(event) {
     event.preventDefault();
-    $(this).parents('.instance-dashboard').fadeOut();
+    var id = $(this).data('id');
+    var instance = $(this);
+    $.confirm({
+        title: 'Borrar caso',
+        content: '¿Realmente desea borrar el caso?',
+        buttons: {
+            confirmar: {
+                btnClass: 'btn-primary',
+                action: function () {
+                    instance.parents('.instance-dashboard').fadeOut();
+                  
+                      $.ajax({
+                            type: 'DELETE',
+                            url: "/providers/cases/"+id,
+                            data: {"_token": $('#token').val(), "_method" : $('#method').val()}
+                      });
+                    }
+                  },
+            volver: function () {
+
+            }
+        }
+    });
+
+
+
+
+
   }); 
+
 
 
 

@@ -9,7 +9,7 @@
 
 <div class="after-menu"></div>
 
-<section>
+<section class="mt-5">
     <div class="col-md-10 offset-md-1">
         <div class="row">
             <div class="col-md-9">
@@ -58,11 +58,13 @@
     <input type="hidden" name="counter_id" value="{{ $counterId }}">
 </form>
 
-<section class="provider-cases mt-4">
-    <div class="container">
-        <h3>Más casos de {{ $provider->name }}</h3>
-        @include('partials/instances')
+<div class="col-md-10 offset-md-1 section">
+    <div class="section-title">
+        <p class="mt-0"><span class="first-color">Más Casos de diseño de</span> <span class="secondary-color">{{ $provider->name }}</span></p>
     </div>
-</section>
+
+    @include('partials/instances')
+
+</div>
 
 @include('partials/footer')

@@ -14,6 +14,7 @@ let mix = require('laravel-mix');
 mix.styles([
         'resources/assets/css/bootstrap.css',
         'resources/assets/css/animate.css',
+        'resources/assets/css/jconfirm.css',
         'resources/assets/css/style.css'
         ], 'public/styles.css')
         .scripts([
@@ -23,5 +24,6 @@ mix.styles([
             'resources/assets/js/bootstrap.js',
             'resources/assets/js/bootstrap-bundle.js',
             'resources/assets/js/waypoints.js',
+            'resources/assets/js/jconfirm.js',
             'resources/assets/js/script.js'
         ], 'public/scripts.js');

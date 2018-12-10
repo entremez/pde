@@ -12,7 +12,8 @@
             <h3 class="pb-4">Tus casos de éxito</h3>
                 <div class="row">
 
-
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+<input type="hidden" name="_method" id="method "value="DELETE">
 
                     @foreach($instances as $instance)
                     <div class="col-md-4 col-sm-6 instance-dashboard">
@@ -35,7 +36,8 @@
                                     <div class="edit">
                                         <a href="{{route('case', $instance)}}"><i class="fas fa-search-plus link"></i></a>
                                         <a href="{{route('cases.edit', $instance)}}"><i class="fas fa-edit link"></i></a>
-                                        <a href="#" data-id="{{ $instance->id}}" ><i class="far fa-trash-alt link delete"></i></a>
+                                        <a href="#" ><i class="far fa-trash-alt link delete"  data-id="{{ $instance->id}}"></i></a>
+
                                     </div>
                                 </div>
                         </div>

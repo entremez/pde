@@ -26,12 +26,7 @@ class CaseController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $cases = auth()->user()->instance()->instances()->get();
-        return view('provider.index',[
-            'user' => auth()->user()->instance(),
-            'cases' => auth()->user()->instance()->instances()->get()
-        ]);
+        return redirect('providers/dashboard');
     }
 
     /**
@@ -166,14 +161,20 @@ class CaseController extends Controller
      */
     public function edit($id)
     {
-        $case = Instance::find($id);
-        $user = auth()->user();
-        $services = ProviderService::where('provider_id','=', $user->instance()->id)->get();
+        $sector = Sector::find(1);
+        $user = auth()->user()->instance();
+        $services = ProviderService::where('provider_id','=', $user->id)->get();
         foreach ($services as $service) {
             $services_provider[] = Service::where('id','=',$service->service_id)->get()->first();
         }
-        $services = collect($services_provider);
-        return view('provider.edit')->with(compact('case', 'services', 'user'));
+        return view('provider.edit', [
+            'case' => Instance::find($id),
+            'services' => collect($services_provider),
+            'user' => $user,
+            'sectors' => Sector::get(),
+            'cities' => City::get(),
+            'employees' => Employees::get()
+        ]);
     }
 
     /**
@@ -240,13 +241,7 @@ class CaseController extends Controller
     public function destroy($id)
     {
         $instance = Instance::find($id);
-        InstanceService::where('instance_id','=',$instance->id)->delete();
-        $instance_images = InstanceImage::where('instance_id','=',$instance->id)->get();
-        $path = public_path().'/providers/cases/'.$instance->id.'/';
-        File::deleteDirectory($path);
-        InstanceImage::where('instance_id','=',$instance->id)->delete();
         $instance->delete();
-        return redirect()->route('cases.index');
     }
 
 }
