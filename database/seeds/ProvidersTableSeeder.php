@@ -48,7 +48,7 @@ class ProvidersTableSeeder extends Seeder
                 $provider->cases()->saveMany($cases);
                 $services = Service::inRandomOrder()->get();
                 for ($i=0; $i < rand(3,6); $i++) {
-                    $randa = rand(0,45);
+                    $randa = rand(1,58);
                     $provider_service = new ProviderService();
                     $provider_service->service_id = $services[$randa]->id;
                     $provider_service->provider_id = $provider->id;

@@ -65,18 +65,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed'
+            'email-register' => 'required|string|email|max:255|unique:users,email',
+            'password-register' => 'required|string|min:6'
         ],[
-            'email.unique' => 'Correo electrónico ya registrado.',
+            'email-register.unique' => '*Correo electrónico ya registrado.',
         ]);
     }
 
 
     public function register(Request $request)
     {
-
         $this->validator($request->all())->validate();
 
 
@@ -105,8 +105,8 @@ class RegisterController extends Controller
             $role = 2;
 
         $user = User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'email' => $data['email-register'],
+            'password' => bcrypt($data['password-register']),
             'role_id' => $role
         ]);
 

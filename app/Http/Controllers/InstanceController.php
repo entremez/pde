@@ -30,7 +30,8 @@ class InstanceController extends Controller
             'sectors' => Sector::all(),
             'cities' => City::all(),
             'sectors' => Sector::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'classifications' => Classification::all()
             ]);
     }
 
@@ -86,9 +87,10 @@ class InstanceController extends Controller
         return view('cases',[
             'instance' => $instance,
             'provider' => $instance->provider()->first(),
-            'cases' => Instance::where('id', '!=', $instance->id)->where('classification_id',$instance->classification_id)->inRandomOrder()->limit(3)->get()
+            'cases' => $instance->related(3)
             ]);
     }
+
 }
 
 

@@ -138,20 +138,49 @@
                     @endif
                 @endforeach
 
-                <div class="col-md-3">
-                    <div class="service">
-                        <h3>{{ $categories[7]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
-                        <ul>
-                            
-                        </ul>
-                    </div>
-                    <div class="service">
-                        <h3>{{ $categories[8]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
-                        <ul>
-
-                        </ul>
-                    </div>            
+        <div class="col-md-3">
+            <div class="service" id="formacion">
+                    <h3 style="cursor: pointer;">{{ $categories[7]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
+                <div class="formacion categorias">
+                    <ul>
+                        @foreach($services as $key => $service)
+                            @if($service->category_id == $categories[7]->id)
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif ><span class="docepx">{{ $service->name }}</span>
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                            @endif
+                        @endforeach  
+                    </ul>
                 </div>
+            </div>
+            <br>
+            <div class="service">
+                <div class="service" id="proveedores">
+                <h3 style="cursor: pointer;">{{ $categories[8]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
+                <div class="proveedores categorias">
+                <ul>
+                    @foreach($services as $key => $service)
+                        @if($service->category_id == $categories[8]->id)
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif ><span class="docepx">{{ $service->name }}</span>
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                        @endif
+                    @endforeach  
+                </ul>
+            </div>
+            </div>  
+            </div>          
+        </div>
 
 
             </div>

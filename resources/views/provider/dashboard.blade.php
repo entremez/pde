@@ -13,7 +13,7 @@
                 <div class="row">
 
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-<input type="hidden" name="_method" id="method "value="DELETE">
+<input type="hidden" id="delete" value="{{ route('delete.case')}}">
 
                     @foreach($instances as $instance)
                     <div class="col-md-4 col-sm-6 instance-dashboard">
@@ -62,7 +62,7 @@
 
 
         <div class="col-md-3 provider-data">
-            <div class="arrow-dashboard"><i class="fas fa-arrow-left"></i></div>
+            <div class="arrow-dashboard"><a href="{{route('provider.settings')}}"><i class="fas fa-arrow-left"></i></a></div>
                 <img src="{{ $data->imagen_logo }}" class="rounded mx-auto d-block img-fluid provider-logo"  alt="provider logo">
 
             
@@ -99,6 +99,7 @@
 
 </div>
 </div>
+
 
 @include('partials/footer')
 

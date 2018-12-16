@@ -25,6 +25,7 @@
 
     <form class="contact-form" method="POST" action="{{ route('cases.update', $case->id ) }}" enctype="multipart/form-data" id="edit-form">
         {{ csrf_field() }}
+        {{ method_field('PUT') }}
 
         <div class="row">
             <div class="col-md-6">
@@ -160,7 +161,7 @@
                                 <div class="col-md-3 col-sm-4">
                                     <div class="form-radio">
                                         <label class="form-radio-label" id="classification" >
-                                            <input class="form-radio-input" type="radio" name="sector" id="{{$classification->classification}}" value="{{ $classification->id }}" {{ $case->classification_id == $classification->id ? 'checked':'' }}/><span class="docepx text-top">&nbsp;{{ $classification->classification }}</span></label>
+                                            <input class="form-radio-input {{ $case->classification_id == $classification->id ? 'seleccionado':'' }}" type="radio" name="sector" id="{{$classification->classification}}" value="{{ $classification->id }}" {{ $case->classification_id == $classification->id ? 'checked':'' }} /><span class="docepx text-top">&nbsp;{{ $classification->classification }}</span></label>
                                     </div>
                                 </div>
                                 @endforeach
@@ -263,7 +264,7 @@
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
                 <button type="submit" class="btn btn-primary btn-raised d-inline">
-                    Enviar
+                    Guardar cambios
                 </button>
                 <button class="btn btn-primary btn-raised d-inline" id="preview-edit" data-toggle="modal" data-target="#previewModal" >
                     Vista previa
@@ -332,7 +333,7 @@
 
         <div class="row buttons-preview">
             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Editar</button>
-            <button id="submit-create-case" class="btn btn-danger">Enviar caso</button>
+            <button id="submit-create-case" class="btn btn-danger">Guardar cambios</button>
         </div>
       </div>
     </div>

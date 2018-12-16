@@ -768,7 +768,7 @@ body {
 
 .service h3{
   background: lightgray;
-  min-height: 60px;
+  height: 60px;
   color: #000033;
   text-align: center;
   font-size: 15px;
@@ -861,9 +861,6 @@ body {
   font-weight: bold;
 }
 
-.results .col-md-3 {
-  padding: 5px;
-}
 
 .header-provider{
   margin-top: 130px;
@@ -1210,7 +1207,13 @@ display: none;
 #sector-error,
 #quote-error,
 #file-input-company-error,
-.error-class {
+#email-register-error,
+#password-register-error,
+#email-login-error,
+#password-login-error,
+#password-confirm-register-error,
+.error-class,
+.help-block {
   font-size: .8rem;
   color: #e7004b;
   display: block;
@@ -1516,5 +1519,10 @@ letter-spacing: -0.2rem;
 
 .company-logo {
   margin: 2rem;
+}
+
+.formacion,
+.proveedores {
+  display: none;
 }
 

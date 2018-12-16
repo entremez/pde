@@ -8,6 +8,7 @@ use App\Instance;
 use App\Provider;
 use App\Service;
 use App\Classification as EconomicActivity;
+use Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
@@ -33,7 +34,7 @@ class HomeController extends Controller
     public function welcome()
     {
         return view('welcome',[
-            'cases' => Instance::where('approved',true)->inRandomOrder()->limit(6)->get(),
+            'cases' => $this->notSoRandom(5,1),
             'providers' => Provider::where('approved',true)->inRandomOrder()->limit(3)->get(),
         ]);
     }
@@ -50,4 +51,15 @@ class HomeController extends Controller
         return view('evaluate');
     }
 
+    public function notSoRandom($freatured, $normal)
+    {
+        $instances = collect();
+        foreach(Instance::where('approved',true)->where('freatured',true)->inRandomOrder()->limit($freatured)->get() as $instance){
+            $instances->push($instance);
+        }
+        foreach(Instance::where('approved',true)->where('freatured',false)->inRandomOrder()->limit($normal)->get() as $instance){
+            $instances->push($instance);
+        }
+        return $instances;
+    }
 }

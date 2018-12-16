@@ -7,6 +7,8 @@ use Illuminate\Support\Collection;
 
 use App\User;
 use App\ProviderCounter;
+use App\ProviderService;
+use App\ProviderMember;
 
 class Provider extends Model
 {
@@ -75,5 +77,29 @@ class Provider extends Model
         $counter->ip = $ip;
         $counter->save();
         return $counter->id;
+    }
+
+    public function isMyService($service)
+    {
+        return !is_null(ProviderService::where('provider_id',$this->id)->where('service_id', $service)->first());
+    }
+
+    public function teamMember($index) // 0: tecnicos, 1: profesionales, 2: masters, 3: doctores
+    {
+        switch ($index) {
+            case 0:
+                return ProviderMember::where('provider_id', $this->id)->first()->tecnics;
+                break;
+            case 1:
+                return ProviderMember::where('provider_id', $this->id)->first()->professionals;
+                break;
+            case 2:
+                return ProviderMember::where('provider_id', $this->id)->first()->masters;
+                break;
+            case 3:
+                return ProviderMember::where('provider_id', $this->id)->first()->doctors;
+                break;
+        }
+        
     }
 }

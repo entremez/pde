@@ -83,4 +83,31 @@ class Instance extends Model
         return $tags;
     }
 
+    public function related($max)
+    {
+        $instances = collect();
+        foreach (Instance::where('approved', true)->where('id', '!=', $this->id)->get() as $instance) {
+            if($instance->classification()->first()->sector()->first() == $this->classification()->first()->sector()->first()){
+                $instances->push($instance);   
+            }
+        }
+        if($instances->count() >= $max)
+            return $instances;
+        foreach (Instance::where('approved', true)->where('id', '!=', $this->id)->get() as $instance) {
+            if($instance->employees_range == $this->employees_range){
+                $instances->push($instance);   
+            }
+        }
+        if($instances->count() >= $max)
+            return $instances->unique();
+        foreach (Instance::where('approved', true)->where('id', '!=', $this->id)->get() as $instance) {
+            if($instance->city_id == $this->city_id){
+                $instances->push($instance);   
+            }
+        }
+        if($instances->count() >= $max)
+            return $instances->unique();
+        return $instances->unique();
+    }
+
 }

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     @yield('headers')
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('pdefavicon.ico') }}" type="image/x-icon">
     <title>@yield('title', 'PuenteDE')</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('styles.css') }}">

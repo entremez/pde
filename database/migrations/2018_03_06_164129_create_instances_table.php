@@ -38,6 +38,7 @@ class CreateInstancesTable extends Migration
             $table->string('quote');
             $table->integer('year');
             $table->boolean('approved');
+            $table->boolean('freatured')->default(false);
 
             $table->softDeletes();
             $table->timestamps();

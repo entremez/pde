@@ -28,6 +28,7 @@ $(document).ready(function () {
             $(this).addClass('service-filter');
         });
         $(this).addClass('selected');
+        $(this).parents('.categorias').toggle();
         //var title = $(this).parents('.service').find('h3').text();
         var title = $(this).text();
         var serviceId = $(this).parents('li').data('id');
@@ -37,9 +38,9 @@ $(document).ready(function () {
         $.post(url, data, function (result){
             $('.results').children('container').remove();
             var text ='';
-            text = '<div class="container"><h3>'+title+'</h3><div class="row">';
+            text = '<div class="container"><h3 class="mb-5">'+title+'</h3><div class="row">';
             $.each(result, function () {
-                  text += '<div class="col-md-3"><a href="/provider/'+this.id+'"><img class="img-fluid w-100-h-200 image-provider" src="'+this.logo +'" alt="'+this.name +'"><div class="middle-provider"><div class="text-provider">'+this.name +'</div></div></a></div>';
+                  text += '<div class="col-md-3 col-sm-6"><div class="service"><a href="/provider/'+this.id+'"><div class="image-container" title="'+this.name+'" style="background-image: url('+this.logo +')"></div></a></div></div>';
               });
             text+= '</div></div>';
             $('.results').html(text);
@@ -211,116 +212,52 @@ $(document).ready(function () {
 
      //LOGIN
 
-     $('#submit-login').click(function(e){
-        e.preventDefault();
-        var form = $(this).parents('.form-horizontal');
-
-        form.validate({
+     $('#submit-login').validate({
           rules: {
             'email-login': { required : true, email: true},
             'password-login': {required:true}
           },
           messages: {
              'email': {
-                required: "Ingrese su correo electrónico.",
-                email: "Su correo electrónico debe ser válido.",
+                required: "*Este campo es obligatorio.",
+                email: "*El correo electrónico debe ser válido.",
              },
              'password': {
-                required: "Ingrese su clave."
+                required: "*Este campo es obligatorio."
              }
           }
         });
-
-
-          form.submit();
-     });
-
-
-     //LOGIN PROIDER
-
-     $('#submit-login-providers').click(function(e){
-        e.preventDefault();
-        var form = $(this).parents('.form-horizontal');
-
-        form.validate({
-          rules: {
-            'email-login': { required : true, email: true},
-            'password-login': {required:true}
-          },
-          messages: {
-             'email': {
-                required: "Ingrese su correo electrónico.",
-                email: "Su correo electrónico debe ser válido.",
-             },
-             'password': {
-                required: "Ingrese su clave."
-             }
-          }
-        });
-
-
-          form.submit();
-     });
 
 
 
      //REGISTER
 
-     $('#submit-register').click(function(e){
-        e.preventDefault();
-        var form = $(this).parents('.form-horizontal');
+     $('#form-register').validate({
 
-        form.validate({
           rules: {
-            'email': { required : true, email: true},
-            'password' : {required:true},
-            'password_confirmation' : {required:true}
+            'email-register': { required : true, email: true},
+            'password-register' : { required : true, minlength: 6},
+            'password-confirm-register' : { required : true, equalTo : "#password-register"}
           },
           messages: {
-             'email': {
-                required: "Ingrese su correo electrónico.",
-                email: "Su correo electrónico debe ser válido.",
-             },
-             'password': {
-                required: "Ingrese su clave."
-             },
-             'password_confirmation': {
-                required: "Confirme su clave."
-             }
-          }
-        });
-
-        if($('#password').val() == $('#password-confirm').val() && $('#email').val().length > 4){
-          form.submit();
-        }
-
-
-     });//REGISTER PROVIDER
-
-     $('#submit-register-provider').validate({
-          rules: {
-            'name': { required : true},
-            'email' : {required:true, email:true},
-            'password' : {required:true, minlength: 6},
-            'password-confirm' : { equalTo: "#password"}
-          },
-          messages: {
-           'name': {
-              required: "*Ingrese su nombre o el de su empresa."
+           'email-register': {
+              required: "*Este campo es obligatorio.",
+              email: "*El correo electrónico debe ser válido."
            },
-           'email' : { 
-                required:'*Este campo es obligatorio.', 
-                email:'*Por favor revise que esté escrito correctamente'
-            },
-           'password' : { 
-                required:'*Este campo es obligatorio.',
-                minlength: '*La contraseña debe tener al menos 6 caracteres'
-            },
-           'password-confirm' : { 
-                equalTo: '*Las contraseñas deben coincidir'
-            }
+           'password-register': {
+              required: "*Este campo es obligatorio.",
+              minlength: "*La contraseña debe tener al menos 6 caracteres."
+           },
+           'password-confirm-register': {
+              required: "*Este campo es obligatorio.",
+              equalTo: "*Las contraseñas deben coincidir."
+           }
           }
-        });
+     });
+
+     //REGISTER PROVIDER
+
+
 
      $('#submit-config-provider').validate({
 
@@ -364,6 +301,60 @@ $(document).ready(function () {
             },
            'logo' : { 
                 required:'*Selecciona una imagen.'
+            }
+          },
+          errorPlacement: function(error, element) {
+            if (element.attr("name") == "service[]") {
+              error.insertBefore('.errorTxt');
+              element.parents('.servicios').find('.error').addClass('error-class');
+            } else if(element.attr("name") == "logo") {
+              error.insertBefore('.errorLogo');
+            } else {
+              error.insertBefore(element);
+            }
+          }
+      });
+
+//EDIT PROVIDER
+
+     $('#submit-edit-provider').validate({
+
+        ignore: [],
+          rules: {
+            'name': { required : true},
+            'rut' : { required:true, rut:true},
+            'address' : {required:true},
+            'web' : {required:true},
+            'phone' : {required:true},
+            'long_description' : {required:true},
+            'service[]' : {required:true},
+            'region' : {required:true}
+          },
+          messages: {
+           'name': {
+              required: "*Ingrese su nombre o el de su empresa."
+           },
+           'rut' : { 
+                required:'*Este campo es obligatorio.', 
+                rut:'*Por favor revise que esté escrito correctamente'
+            },
+           'address' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'web' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'region' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'phone' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'long_description' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'service[]' : { 
+                required:'*Selecciona al menos un servicio.'
             }
           },
           errorPlacement: function(error, element) {
@@ -686,11 +677,16 @@ var unit = '';
       $('.text-case').html(quantity+' '+unit+' '+sentence);
     });
 
+
+
     $('#preview-edit').click(function(e){
       e.preventDefault();
       var img = encodeURI($('#imgSalida').attr('src'));
+      var quantity = $('#quantity').val();
+      var unit = $('#unit').val();
+      var sentence = $('#sentence').val();
       $('.image-container').css("background-image", 'url('+img+')');
-      $('.corner').html($('.classification').data('classification'));
+      $('.corner').html($('.seleccionado').attr('id'));
       $('.div2').html(quantity);
       $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
       $('.div2-grande').html(quantity);
@@ -781,10 +777,11 @@ $dropdowns.on('hide.bs.dropdown', function(e)
 
 //DELETE CASE IN DASHBOARD PROVIDER
 
-  $('.delete').on('click', function(event) {
+  $(document).on('click', '.delete', function(event) {
     event.preventDefault();
     var id = $(this).data('id');
     var instance = $(this);
+    var url = $('#delete').val();
     $.confirm({
         title: 'Borrar caso',
         content: '¿Realmente desea borrar el caso?',
@@ -795,9 +792,9 @@ $dropdowns.on('hide.bs.dropdown', function(e)
                     instance.parents('.instance-dashboard').fadeOut();
                   
                       $.ajax({
-                            type: 'DELETE',
-                            url: "/providers/cases/"+id,
-                            data: {"_token": $('#token').val(), "_method" : $('#method').val()}
+                            type: 'get',
+                            url: url,
+                            data: {"_token": $('#token').val(), "id" : id}
                       });
                     }
                   },
@@ -806,15 +803,7 @@ $dropdowns.on('hide.bs.dropdown', function(e)
             }
         }
     });
-
-
-
-
-
   }); 
-
-
-
 
   $('.filter').change(function(event) {
       filters();
@@ -848,17 +837,7 @@ function filters() {
 
     var form = $('#form-filter');
     var url = form.attr('action');
-    var classifications;
-    classifications = $.ajax({
-      type: 'POST',
-      async: false,
-      url: "/classifications-data-json",
-      data: {"_token": $('#token').val()}, 
-      dataType: 'json',    
-      done: function(results) {
-        return results;
-      }
-    });
+
 
 
     $.ajax({
@@ -876,8 +855,8 @@ function filters() {
             output += '<div class="col-md-4">';
             output += '<div class="service">';
             output += '<a href="/case/'+data[i].id+'">';
-            output += '<div class="corner">'+ classifications.responseJSON[data[i].classification_id].classification+'</div>';
-            imageUrl = image(data[i].id);
+            output += '<div class="corner">'+ $('#classification-'+data[i].classification_id).val()+'</div>';
+            imageUrl = $('#image-'+data[i].id).val();
             output += '<div class="image-container" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url(\''+imageUrl+'\')">';
             output += '<div class="container">';
             output += '<div class="row-c">';
@@ -900,31 +879,20 @@ function filters() {
       }
     });
 
-    function image($id) {
-    var images;
-    images = $.ajax({
-      type: 'POST',
-      async: false,
-      url: "/images-data-json",
-      data: {"_token": $('#token').val()}, 
-      dataType: 'json',    
-      done: function(results) {
-        return results;
-      }
-    });
-
-
-
-    for (var i = 0; i < images.responseJSON.length; i++) {
-        if(images.responseJSON[i].id == $id)
-          return images.responseJSON[i].image;
-    }
-    }
 
 }
 
+$('#formacion').on('click', function(argument) {
+      $('.formacion').toggle();
+});
 
+$('#proveedores').on('click', function(argument) {
+      $('.proveedores').toggle();
+});
   
+if($('#errors-popup').attr('value') == 1){
+    $('.modal').modal('show');
+}
 
 });
 

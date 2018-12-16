@@ -81,7 +81,7 @@
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <div class="col-9">
         <div class="row filtered">
-            @foreach($cases as $key =>$case)
+            @foreach($cases as $case)
             <div class="col-md-4 col-sm-6">
                 <div class="service">
                     <a href="{{ route('case', $case->id) }}">
@@ -106,6 +106,16 @@
 
 </div>
 
+
+@foreach($classifications as $classification)
+    
+    <input type="hidden" id="classification-{{$classification->id}}" value="{{$classification->classification}}">
+
+@endforeach
+
+@foreach($cases as $case)
+    <input type="hidden" id="image-{{$case->id}}" value="{{url($case->image)}}">
+@endforeach
 
 @include('partials/footer')
 

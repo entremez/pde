@@ -6,6 +6,7 @@ Route::post('/classifications-data-json', 'InstanceController@classifications');
 Route::post('/images-data-json', 'InstanceController@images');
 
 Route::get('/cases', 'InstanceController@index')->name('cases');
+Route::post('/cases', 'InstanceController@index');
 Route::get('/resources', 'HomeController@resources')->name('resources');
 
 Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
@@ -63,6 +64,7 @@ Route::group([
     Route::put('/dashboard','ProviderController@request')->name('provider.request');
     Route::get('/settings','ProviderController@settings')->name('provider.settings');
     Route::post('/settings','ProviderController@update')->name('provider.update');
+    Route::get('/cases/delete/', 'CaseController@destroy')->name('delete.case');
     Route::resource('cases', 'CaseController');
     Route::get('/case/{id}/images','CaseImagesController@index')->name('images.case');
     Route::delete('/case/{id}/images','CaseImagesController@destroy')->name('images.destroy');

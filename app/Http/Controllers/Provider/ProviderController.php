@@ -98,8 +98,10 @@ class ProviderController extends Controller
     public function settings(Request $request)
     {
         return view('provider.settings',[
-            'user' => auth()->user()->instance(),
-            'services' => Service::get()
+            'data' => auth()->user()->instance(),
+            'services' => Service::get(),
+            'cities' => City::get(),
+            'categories' => Category::get()
         ]);
     }
 
@@ -109,8 +111,6 @@ class ProviderController extends Controller
             'address.required' => 'Debe ingresar la dirección',
             'logo.image' => 'Solo se admiten imágenes en formato jpeg, png, bmp, gif, o svg',
             'phone.required' => 'Debe ingresar número de teléfono',
-            'description.required' => 'Debe ingresar una descripción de tu empresa',
-            'description.max' => 'La descripción de tu empresa no debe superar los 250 caracteres',
             'long_description.required' => 'Debe ingresar una descripción de tus servicios',
             'service.required' => 'Debe seleccionar al menos un servicio',
         ];
@@ -119,26 +119,30 @@ class ProviderController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'logo' => 'image|max:1500',
-            'description' => 'required|max:250',
             'long_description' => 'required',
             'service' => 'required',
         ];
         $this->validate($request, $rules, $messages);
         $provider = auth()->user()->instance();
-        if ($request->hasFile('files')) {
-            File::delete(public_path().'/providers/logos/'.$provider->logo);
-            $file = $request->file('files');
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
             $path = public_path().'/providers/logos';
-            $fileName = $provider->id."-".uniqid()."-".$file[0]->getClientOriginalName();
-            $file[0]->move($path, $fileName);
+            $fileName = $provider->id."-".uniqid()."-".$file->getClientOriginalName();
+            $file->move($path, $fileName);
             $provider->logo = $fileName;
         }
         $provider->name = $request->input('name');
         $provider->address = $request->input('address');
         $provider->phone = $request->input('phone');
-        $provider->description = $request->input('description');
         $provider->long_description = $request->input('long_description');
+        $provider->city_id = $request->input('region');
+        $provider->web = $request->input('web');
+        $rut = Rut::parse($request->input('rut'))->toArray();
+        $provider->rut = $rut[0];
+        $provider->dv_rut = $rut[1];
+        $provider->approved = false;
         $provider->save();
+
         $services = $request->input('service');
         ProviderService::where('provider_id','=',$provider->id)->delete();
         for ($i=0; $i < count($services); $i++) {
@@ -147,6 +151,13 @@ class ProviderController extends Controller
             $provider_service->service_id = $services[$i];
             $provider_service->save();
         }
+
+        $providerMember = ProviderMember::where('provider_id', $provider->id)->first();
+        $providerMember->tecnics = $request->input('team-tecnics');
+        $providerMember->professionals = $request->input('team-professionals');
+        $providerMember->masters = $request->input('team-masters');
+        $providerMember->doctors = $request->input('team-doctors');
+        $providerMember->save();
         return redirect('providers/dashboard')->withSuccess( 'Datos modificados correctamente');
     }
 

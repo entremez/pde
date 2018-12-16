@@ -6,6 +6,7 @@ $factory->define(App\Provider::class, function (Faker $faker) {
     return [
         'rut' => $faker->numberBetween($min = 20000000, $max = 30000000),
         'dv_rut' => $faker->randomDigit,
+        'city_id' => rand(1,18),
         'name' => $faker->company,
         'address' => $faker->address,
         'web' => $faker->domainName,

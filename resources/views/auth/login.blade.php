@@ -1,6 +1,6 @@
 
 <div class="col-md-10 offset-md-1 my-3">
-    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+    <form class="form-horizontal" method="POST" action="{{ route('login') }}" id="submit-login">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -41,11 +41,11 @@
             </div>
         </div>
 
-        <div class="form-group" style="    margin-top: 52px;">
+        <div class="form-group" style="    margin-top: 87px;">
             <div class="col-md-12 text-center bottom pb-4">
-                <div class="btn btn-danger btn-register d-block" id="submit-login">
+                <button class="btn btn-danger btn-register d-block w-100">
                     Entrar
-                </div>
+                </button>
 
                 <div class="btn btn-link" href="{{ route('password.request') }}">
                     ¿Olvidaste tu contraseña?

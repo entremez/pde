@@ -202,10 +202,25 @@ class CaseController extends Controller
             'service' => 'required',
         ];
         $this->validate($request, $rules, $messages);
+        $instance->classification_id = $request->input('sector');
+        $instance->city_id = $request->input('region');
+        $instance->employees_range = $request->input('employees');
         $instance->name = $request->input('name');
         $instance->company_name = $request->input('company_name');
+        $instance->quantity = $request->input('quantity');
+        $instance->unit = is_null($request->input('unit'))?'':$request->input('unit');
+        $instance->sentence = $request->input('sentence');
         $instance->long_description = $request->input('long_description');
         $instance->year = $request->input('year');
+        $instance->approved = false;
+        $instance->quote = $request->input('quote');
+        if(!is_null($request->file('company-logo'))){
+            $image = $request->file('company-logo');
+            $path = public_path().'/providers/case-images/'.$id.'/';
+            $fileName = uniqid()."-".$image->getClientOriginalName();
+            $image->move($path, $fileName);
+            $instance->company_logo = $fileName;
+        }
         $instance->save();
 
         InstanceService::where('instance_id','=',$instance->id)->delete();
@@ -216,6 +231,20 @@ class CaseController extends Controller
             $instance_service->service_id = $service;
             $instance_service->save();
         }
+
+        if(!is_null($request->file('image'))){
+            $instance_image = InstanceImage::where('instance_id', $id)->delete();
+            $images = $request->file('image');$image = $request->file('image');
+            $path = public_path().'/providers/case-images/'.$id.'/';
+            $fileName = uniqid()."-".$image->getClientOriginalName();
+            $image->move($path, $fileName);
+            $instance_image = new InstanceImage;
+            $instance_image->image = $fileName;
+            $instance_image->instance_id = $id;
+            $instance_image->featured = true;
+            $instance_image->save();
+        }
+
 
 /*        $images = $request->file('images');
         foreach ($images as $key => $image) {
@@ -229,7 +258,7 @@ class CaseController extends Controller
                 $instance_image->featured = true;
             $instance_image->save();
         }*/
-        return redirect('provider/cases')->withSuccess( 'Caso modificado correctamente');
+        return redirect()->route('provider.dashboard');
     }
 
     /**
@@ -238,10 +267,11 @@ class CaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $instance = Instance::find($id);
+        $instance = Instance::find($request->input('id'));
         $instance->delete();
+
     }
 
 }

@@ -1,41 +1,41 @@
 
 <div class="col-md-10 offset-md-1 my-3">
-    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+    <form class="form-horizontal" method="POST" action="{{ route('register') }}" id="form-register">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-            <label for="email" class="col-md-12 control-label">Correo electrónico</label>
+        <div class="form-group{{ $errors->has('email-register') ? ' has-error' : '' }}">
+            <label for="email-register" class="col-md-12 control-label">Correo electrónico</label>
 
             <div class="col-md-12">
-                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                <input id="email-register" type="email" class="form-control" name="email-register" value="{{ old('email-register') }}" required>
 
-                @if ($errors->has('email'))
+                @if ($errors->has('email-register'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
+                        {{ $errors->first('email-register') }}
                     </span>
                 @endif
             </div>
         </div>
 
-        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-            <label for="password" class="col-md-12 control-label">Contraseña</label>
+        <div class="form-group{{ $errors->has('password-register') ? ' has-error' : '' }}">
+            <label for="password-register" class="col-md-12 control-label">Contraseña</label>
 
             <div class="col-md-12">
-                <input id="password" type="password" class="form-control" name="password" required>
+                <input id="password-register" type="password" class="form-control" name="password-register" required>
 
-                @if ($errors->has('password'))
+                @if ($errors->has('password-register'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
+                        {{ $errors->first('password-register') }}
                     </span>
                 @endif
             </div>
         </div>
 
         <div class="form-group">
-            <label for="password-confirm" class="col-md-12 control-label">Confirmar contraseña</label>
+            <label for="password-confirm-register" class="col-md-12 control-label">Confirmar contraseña</label>
 
             <div class="col-md-12">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                <input id="password-confirm-register" type="password" class="form-control" name="password-confirm-register" required>
             </div>
         </div>
 
@@ -51,9 +51,9 @@
 
         <div class="form-group pt-4">
             <div class="col-md-12 text-center">
-                <div class="btn btn-danger btn-register d-block" id="submit-register">
+                <button class="btn btn-danger btn-register d-block w-100" id="submit-register" >
                     Completar registro
-                </div>
+                </button>
             </div>
         </div>
     </form>

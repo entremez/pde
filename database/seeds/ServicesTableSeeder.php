@@ -332,15 +332,95 @@ class ServicesTableSeeder extends Seeder
         $service->save();
 
 
+
         $category = new Category();
         $category->name = "Formación para el diseño";
         $category->description = "Formación para el diseño";
         $category->save();
+
+        $service = new Service();
+        $service->name="Diseño de instrucciones";
+        $service->description="Diseño de instrucciones";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Formación de diseño";
+        $service->description="Formación de diseño";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Workshop de diseño";
+        $service->description="Workshop de diseño";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Charlas de diseño";
+        $service->description="Charlas de diseño";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Clases de programas de diseño";
+        $service->description="Clases de programas de diseño";
+        $service->category_id=$category->id;
+        $service->save();
 
 
         $category = new Category();
         $category->name = "Proveedores relacionados con diseño";
         $category->description = "Proveedores relacionados con diseño";
         $category->save();
+
+        $service = new Service();
+        $service->name="Fabricación digital";
+        $service->description="Fabricación digital";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Desarrollo de render";
+        $service->description="Desarrollo de render";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Metodología";
+        $service->description="Metodología";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Historia del diseño";
+        $service->description="Historia del diseño";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Teoría del diseño";
+        $service->description="Teoría del diseño";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Patentamiento";
+        $service->description="Patentamiento";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Propiedad intelectual";
+        $service->description="Propiedad intelectual";
+        $service->category_id=$category->id;
+        $service->save();
+
+        $service = new Service();
+        $service->name="Fotografía";
+        $service->description="Fotografía";
+        $service->category_id=$category->id;
+        $service->save();
+
     }
 }

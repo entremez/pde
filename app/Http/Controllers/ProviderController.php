@@ -16,7 +16,7 @@ class ProviderController extends Controller
         return view('providers',[
             'categories' => Category::get(),
             'services' => Service::get(),
-            'providers' => Provider::where('approved','1')->inRandomOrder()->get()
+            'providers' => Provider::where('approved',true)->inRandomOrder()->get()
             ]);
     }
 
