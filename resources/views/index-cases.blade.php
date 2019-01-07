@@ -26,7 +26,7 @@
                     @foreach($employees_range as $range)
                     <div class="form-check">
                         <label class="form-check-label docepx">
-                            <input class="form-check-input filter" type="checkbox" name="employee" value="{{ $range->id }}">
+                            <input class="form-check-input filter" type="checkbox" name="employee" value="{{ $range->id }}" {{ ($key == 3 && $id == $range->id) ? 'checked' : ''  }}>
                             {{ $range->range }} empleados
                             <span class="form-check-sign">
                                 <span class="check"></span>
@@ -39,7 +39,7 @@
                     @foreach($sectors as $sector)
                     <div class="form-check">
                         <label class="form-check-label docepx">
-                            <input class="form-check-input filter" type="checkbox" name="sector" value="{{ $sector->id }}">
+                            <input class="form-check-input filter" type="checkbox" name="sector" value="{{ $sector->id }}" {{ ($key == 1 && $id == $sector->id) ? 'checked' : ''  }}>
                             <div data-toggle="tooltip" data-placement="right" title="{{ $sector->tooltip }}">{{ $sector->name }}</div>
                             <span class="form-check-sign">
                                 <span class="check"></span>
@@ -52,7 +52,7 @@
                     @foreach($cities as $city)
                     <div class="form-check">
                         <label class="form-check-label docepx">
-                            <input class="form-check-input filter" type="checkbox" name="city" value="{{ $city->id }}">
+                            <input class="form-check-input filter" type="checkbox" name="city" value="{{ $city->id }}" {{ ($key == 4 && $id == $city->id) ? 'checked' : ''  }}>
                             {{ $city->region }}
                             <span class="form-check-sign">
                                 <span class="check"></span>
@@ -65,20 +65,34 @@
                     @foreach($categories as $category)
                     <div class="form-check">
                         <label class="form-check-label docepx">
-                            <input class="form-check-input filter" type="checkbox" name="category" value="{{ $category->id }}">
-                            {{ $category->name }}
+                            <input class="form-check-input filter" type="checkbox" name="category" value="{{ $category->id }}"><div class="category">{{ $category->name }}&nbsp;&nbsp;<i class="fas fa-angle-down"></i></div>
                             <span class="form-check-sign">
                                 <span class="check"></span>
                             </span>
                         </label>
+                            <div class="service-toggle">
+                                @foreach($category->services()->get() as $service)
+                                    <div class="form-check">    
+                                        <label class="form-check-label docepx">
+                                            <input class="form-check-input filter" type="checkbox" name="service" value="{{ $service->id }}" {{ ($key == 0 && $id == $service->id) ? 'checked' : ''  }}>{{ $service->name }}<span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
                     </div>
                     @endforeach
+
+                    @if($key == 2 OR $key == 5)
+                        <input type="hidden" name="{{ $key == 2 ? 'classification':'year' }}" value="{{ $id }}">
+                    @endif
 
     </div>
         <form method="post" action="{{ route('cases') }}" id="form-filter">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         </form>
-<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <div class="col-9">
         <div class="row filtered">
             @foreach($cases as $case)
@@ -117,6 +131,9 @@
     <input type="hidden" id="image-{{$case->id}}" value="{{url($case->image)}}">
 @endforeach
 
+
+
 @include('partials/footer')
+
 
 @endsection

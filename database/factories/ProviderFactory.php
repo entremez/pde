@@ -3,10 +3,13 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Provider::class, function (Faker $faker) {
+    $commune = App\Commune::find(rand(1, 347));
+    $region = App\City::find($commune->city_id);
     return [
         'rut' => $faker->numberBetween($min = 20000000, $max = 30000000),
         'dv_rut' => $faker->randomDigit,
-        'city_id' => rand(1,18),
+        'commune_id' => $commune,
+        'city_id' => $region,
         'name' => $faker->company,
         'address' => $faker->address,
         'web' => $faker->domainName,

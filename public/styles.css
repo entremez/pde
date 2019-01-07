@@ -13679,7 +13679,7 @@ body {
   bottom: 0;
   flex-shrink: 0;
   background-color: #000033;
-  color: white;
+  color: #bbbbbb;
   padding-bottom: 80px;
 }
 
@@ -13691,13 +13691,23 @@ body {
 
 .footer-container ul {
     list-style: none;
-    padding-left: 0;
-    font-size: 13px;
+    padding-left: 10px;
+    font-size: 14px;
     height: auto;
     line-height: 20px;
     margin-top: -10px;
 }
 
+ul.dashed {
+  list-style-type: none;
+}
+ul.dashed > li {
+  text-indent: 10px;
+}
+ul.dashed > li:before {
+  content: "-";
+  text-indent: 10px;
+}
 
 
 .footer-container {
@@ -13802,7 +13812,7 @@ body {
 }
 
 .provider-data{
-  text-align: center;
+  text-align: left;
 }
 
 .image-column-provider{
@@ -13997,6 +14007,11 @@ body {
   position: relative;
 }
 
+.dffdcjcsb{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .button-bottom {
   position: absolute;
   bottom: 0;
@@ -14121,7 +14136,7 @@ body {
 }
 
 .provider-btn {
-  display: block;
+margin-top: 1.4rem;
 }
 
 .provider-contact{
@@ -14310,12 +14325,10 @@ video{
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-table;
+    text-align: center;
+    font-size: 4.3rem;
 }
 
-.section-title.video-title p{
-
-    font-size: 4.5rem!important;
-}
 
 #bgvid {
     position: relative;
@@ -14332,11 +14345,15 @@ video{
     color: #000033;
 }
 
- .tags div {
+.tags{
+  display: flex;
+  flex-flow: wrap;
+}
+
+.tags div {
     font-size: 14px;
-    display: inline;
     font-style: italic;
-    padding-right: 50px;
+    padding-right: 20px;
 }
 
 
@@ -14458,6 +14475,7 @@ display: none;
 #password-register-error,
 #email-login-error,
 #password-login-error,
+#commune-error,
 #password-confirm-register-error,
 .error-class,
 .help-block {
@@ -14547,10 +14565,6 @@ label {
 }
 
 
-.img-thumbnail {
-  max-height: 200px;
-}
-
 .align-grid{
   padding-left: 20px!important;
 }
@@ -14574,14 +14588,6 @@ label {
 
 .remove-member {
   padding-top: 2px;
-}
-
-
-
-.arrow-dashboard {
-    position: relative;
-    left: -50%;
-    top: 50%;
 }
 
 a .row-c{
@@ -14772,4 +14778,31 @@ letter-spacing: -0.2rem;
 .proveedores {
   display: none;
 }
+ 
+.arrowToCases { 
+text-align: center;
+width: 100%;
+position: absolute;
+height: 100vh;
+z-index: 100;
+bottom: 0!important;
+padding-top: 90vh;
+color: white;
+}
 
+.angle-d{
+  font-size: 2rem;
+  width: 20%;
+}
+
+.service-toggle{
+  display: none;
+}
+
+.tooltip-inner{
+  background-color: #000033;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
+    border-right-color: #000033;
+}

@@ -70,15 +70,33 @@ class Instance extends Model
 
     public function tags()
     {
-        $tags = collect();
-        foreach ($this->services()->get() as $service) {
-            $tags->push($service->service()->first()->name);
+
+        foreach ($this->services()->get() as $service) { //0 = services , 1 = sector , 2 = classification, 3 = employees, 4 = city , 5 = year 
+            $aux['key'] = 0;
+            $aux['name'] = $service->service()->first()->name;
+            $aux['id'] = $service->service()->first()->id;
+            $tags[] = $aux;
         }
-        $tags->push($this->classification()->first()->sector()->first()->name);
-        $tags->push($this->classification()->first()->classification);
-        $tags->push($this->employees()->first()->range);
-        $tags->push($this->city()->first()->region);
-        $tags->push($this->year);
+        $aux['key'] = 1;
+        $aux['name'] = $this->classification()->first()->sector()->first()->name;
+        $aux['id'] = $this->classification()->first()->sector()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 2;
+        $aux['name'] = $this->classification()->first()->classification;
+        $aux['id'] = $this->classification()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 3;
+        $aux['name'] = $this->employees()->first()->range;
+        $aux['id'] = $this->employees()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 4;
+        $aux['name'] = $this->city()->first()->region;
+        $aux['id'] = $this->city()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 5;
+        $aux['name'] = $this->year;
+        $aux['id'] = $this->year;
+        $tags[] = $aux;
 
         return $tags;
     }
@@ -109,5 +127,24 @@ class Instance extends Model
             return $instances->unique();
         return $instances->unique();
     }
+
+    public function isCategory($category)
+    {
+        $services = $this->services()->get();
+        foreach ($services as $service) 
+            if($service->service()->first()->category_id == $category)
+                return true;
+        return false;
+    }
+
+    public function isService($service)
+    {
+        $services = $this->services()->get();
+        foreach ($services as $serviceid) 
+            if($serviceid->service()->first()->id == $service)
+                return true;
+        return false;
+    }
+
 
 }

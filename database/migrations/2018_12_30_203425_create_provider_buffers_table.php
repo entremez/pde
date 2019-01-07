@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProvidersTable extends Migration
+class CreateProviderBuffersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateProvidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('providers', function (Blueprint $table) {
+        Schema::create('provider_buffers', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('provider_id')->unsigned()->nullable();
+            $table->foreign('provider_id')->references('id')->on('providers');
 
             $table->string('rut')->nullable();
             $table->string('dv_rut')->nullable();
@@ -25,8 +28,7 @@ class CreateProvidersTable extends Migration
             $table->string('logo')->nullable();
             $table->string('description')->nullable();
             $table->text('long_description')->nullable();
-            $table->boolean('approved')->default(false);
-            $table->integer('status')->default(0);
+
 
             $table->integer('city_id')->unsigned()->nullable();
             $table->foreign('city_id')->references('id')->on('cities');
@@ -34,10 +36,8 @@ class CreateProvidersTable extends Migration
             $table->integer('commune_id')->unsigned()->nullable();
             $table->foreign('commune_id')->references('id')->on('communes');
 
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-
             $table->timestamps();
+        });
         });
     }
 
@@ -48,6 +48,6 @@ class CreateProvidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('providers');
+        Schema::dropIfExists('provider_buffers');
     }
 }

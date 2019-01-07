@@ -334,8 +334,8 @@ class ServicesTableSeeder extends Seeder
 
 
         $category = new Category();
-        $category->name = "Formación para el diseño";
-        $category->description = "Formación para el diseño";
+        $category->name = "Formación en diseño";
+        $category->description = "Formación en diseño";
         $category->save();
 
         $service = new Service();

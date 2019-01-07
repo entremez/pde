@@ -1,6 +1,8 @@
-
+<div class="arrowToCases">
+	<a href="#cases" class="link"><div class="btn btn-outline-light angle-d"><i class="fas fa-angle-down"></i></div></a>
+</div>
 <div class="video-container">
-	<div class="section-title video-title">
+	<div class="video-title">
 		<p class="mt-0"><span class="first-color">EL DISEÑO </span> <span class="secondary-color">MEJORA TU NEGOCIO</span></p>
 	</div>
 
@@ -9,3 +11,4 @@
 		<source src="{{ url('images/test.mp4') }}" type="video/mp4">
 	</video>
 </div>
+<div id="cases" class="mb-3"></div>

@@ -8,12 +8,48 @@
 
 <div class="col-md-10 offset-md-1">
     <div class="row mt-5">
+
+        <div class="col-md-3 provider-data">
+                <img src="{{ $data->imagen_logo }}" class="rounded mx-auto d-block img-fluid provider-logo"  alt="provider logo">
+
+            
+                <p>{{ $data->name }}</p>
+            
+                        @foreach($services as $service)
+                        <span class="badge badge-success">
+                            {{ $service->service()->get()->first()->name }}
+                        </span>
+                        @endforeach
+
+                <hr>
+                <p>{{ $user->email }}</p>
+                <hr>
+                <p>{{ $data->phone }}</p>
+                <hr>
+                <p>{{ Rut::parse($data->rut."-".$data->dv_rut)->format()}}</p>
+                <hr>
+                <p>{{ $data->address }}</p>
+                <hr>
+                <p>{{ $data->web }}</p>
+                <hr>
+                <p>{{ str_limit($data->long_description, 100, ' (...)')}}</p>
+                <hr>
+                <p>Caracterización de profesionales de diseño</p>
+                    <ul>
+                    <li>Técnicos: {{ $data->team->tecnics }} </li>
+                    <li>Profesionales: {{ $data->team->professionals }} </li>
+                    <li>Masters: {{ $data->team->masters }} </li>
+                    <li>Doctores: {{ $data->team->doctors }} </li>
+                    </ul>
+                <br>
+                <a class="btn btn-danger" href="{{route('provider.settings')}}">Editar</a>
+        </div>
         <div class="col-md-9 hidden">
             <h3 class="pb-4">Tus casos de éxito</h3>
                 <div class="row">
 
-<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-<input type="hidden" id="delete" value="{{ route('delete.case')}}">
+                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                <input type="hidden" id="delete" value="{{ route('delete.case')}}">
 
                     @foreach($instances as $instance)
                     <div class="col-md-4 col-sm-6 instance-dashboard">
@@ -60,41 +96,6 @@
 
         
 
-
-        <div class="col-md-3 provider-data">
-            <div class="arrow-dashboard"><a href="{{route('provider.settings')}}"><i class="fas fa-arrow-left"></i></a></div>
-                <img src="{{ $data->imagen_logo }}" class="rounded mx-auto d-block img-fluid provider-logo"  alt="provider logo">
-
-            
-                <h1>{{ $data->name }}</h1>
-            
-                        @foreach($services as $service)
-                        <span class="badge badge-success">
-                            {{ $service->service()->get()->first()->name }}
-                        </span>
-                        @endforeach
-
-                <hr>
-                <p>{{ $user->email }}</p>
-                <hr>
-                <p>{{ $data->phone }}</p>
-                <hr>
-                <p>{{ Rut::parse($data->rut."-".$data->dv_rut)->format()}}</p>
-                <hr>
-                <p>{{ $data->address }}</p>
-                <hr>
-                <p>{{ $data->web }}</p>
-                <hr>
-                <p>{{ $data->long_description }}</p>
-                <hr>
-                <p>Caracterización de profesionales de diseño</p>
-                    <p>Técnicos: {{ $data->team->tecnics }} </p>
-                    <p>Profesionales: {{ $data->team->professionals }} </p>
-                    <p>Masters: {{ $data->team->masters }} </p>
-                    <p>Doctores: {{ $data->team->doctors }} </p>
-
-            
-        </div>
 
 
 </div>

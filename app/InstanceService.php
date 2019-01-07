@@ -10,9 +10,6 @@ class InstanceService extends Model
         return $this->hasMany('App\Instance', 'id', 'instance_id');
     }
 
-    public function services(){
-        return $this->hasMany('App\Service', 'id', 'service_id');
-    }
     public function instance(){
         return $this->belongsTo('App\Instance', 'instance_id');
     }

@@ -40,35 +40,48 @@
         <div class="row pt-4">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">Dirección</label>
-                    <input type="text" name="address" class="form-control" value="{{ old('address', $data->address) }}">
+                <label for="region">Región</label>
+                    <select class="form-control" id="region" name="region" required>
+                      <option value="">Seleccionar...</option>
+                        @foreach($cities as $city)
+                            <option {{$data->city_id == $city->id ? 'selected':'' }} value="{{ $city->id }}" >{{ $city->region }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                <label for="region">Región</label>
-                    <select class="form-control" id="region" name="region">
-                      <option value="">Seleccionar...</option>
-                        @foreach($cities as $city)
-                            <option value="{{ $city->id }}" {{ $data->city_id == $city->id ? 'selected':'' }}>{{ $city->region }}</option>
+                    <label class="bmd-label-floating">Comuna</label>
+                    <select class="form-control" id="commune" name="commune">
+                      <option value="">Seleccione comuna...</option>                        @foreach($communes as $commune)
+                            <option {{$data->commune_id == $commune->id ? 'selected':'' }} value="{{ $commune->id }}" >{{ $commune->commune }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
         </div>
 
-
         <div class="row pt-4">
+
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">Sitio Web</label>
-                    <input type="text" name="web" class="form-control" value="{{ old('web', $data->web) }}">
+                    <label class="bmd-label-floating">Dirección</label>
+                    <input type="text" name="address" class="form-control" value="{{ old('address', $data->address) }}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Teléfono</label>
                     <input type="text" name="phone" class="form-control" value="{{ old('phone', $data->phone) }}" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row py-4">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="bmd-label-floating">Sitio Web</label>
+                    <input type="text" name="web" class="form-control" value="{{ old('web', $data->web) }}">
                 </div>
             </div>
         </div>
@@ -115,7 +128,6 @@
             <div class="row pt-3">
 
                 @foreach($categories as $key=>$category)
-                    @if($key!=7 && $key!=8)
                         <div class="col-md-3 mb-providers">
                             <div class="service">
                                 <h3>{{ $category->name }}</h3>
@@ -135,52 +147,7 @@
                                 </ul>
                             </div>
                         </div>
-                    @endif
                 @endforeach
-
-        <div class="col-md-3">
-            <div class="service" id="formacion">
-                    <h3 style="cursor: pointer;">{{ $categories[7]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
-                <div class="formacion categorias">
-                    <ul>
-                        @foreach($services as $key => $service)
-                            @if($service->category_id == $categories[7]->id)
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" {{ $data->isMyService($service->id) ? 'checked':'' }} @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif ><span class="docepx">{{ $service->name }}</span>
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                            @endif
-                        @endforeach  
-                    </ul>
-                </div>
-            </div>
-            <br>
-            <div class="service">
-                <div class="service" id="proveedores">
-                <h3 style="cursor: pointer;">{{ $categories[8]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
-                <div class="proveedores categorias">
-                <ul>
-                    @foreach($services as $key => $service)
-                        @if($service->category_id == $categories[8]->id)
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" {{ $data->isMyService($service->id) ? 'checked':'' }} @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif ><span class="docepx">{{ $service->name }}</span>
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                        @endif
-                    @endforeach  
-                </ul>
-            </div>
-            </div>  
-            </div>          
-        </div>
 
 
             </div>
@@ -234,5 +201,9 @@
         </div>
     </form>
 </div>
+
+        <form method="post" action="{{ route('cities') }}" id="form-cities">
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+        </form>
 @include('partials/footer')
 @endsection

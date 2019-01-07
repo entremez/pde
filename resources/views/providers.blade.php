@@ -17,7 +17,7 @@
     <h4 class="mb-5">¿Qué servicio de diseño necesitas?</h4>
     <div class="row">    
         @foreach($categories as $key=>$category)
-            @if($key!=7 && $key!=8)
+
                 <div class="col-md-3 mb-providers">
                     <div class="service">
                         <h3>{{ $category->name }}</h3>
@@ -30,37 +30,7 @@
                         </ul>
                     </div>
                 </div>
-            @endif
-        @endforeach
-        <div class="col-md-3">
-            <div class="service" id="formacion">
-                    <h3 style="cursor: pointer;">{{ $categories[7]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
-                <div class="formacion categorias">
-                    <ul>
-                        @foreach($services as $key => $service)
-                            @if($service->category_id == $categories[7]->id)
-                                <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="link service-filter">{{ $service->name }}</a></li>
-                            @endif
-                        @endforeach  
-                    </ul>
-                </div>
-            </div>
-            <br>
-            <div class="service">
-                <div class="service" id="proveedores">
-                <h3 style="cursor: pointer;">{{ $categories[8]->name }}&nbsp;<i class="fas fa-angle-down"></i></h3>
-                <div class="proveedores categorias">
-                <ul>
-                    @foreach($services as $key => $service)
-                        @if($service->category_id == $categories[8]->id)
-                            <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="link service-filter">{{ $service->name }}</a></li>
-                        @endif
-                    @endforeach  
-                </ul>
-            </div>
-            </div>  
-            </div>          
-        </div>       
+        @endforeach    
     </div>
     <hr class="horizontal-line">
 

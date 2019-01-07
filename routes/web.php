@@ -2,11 +2,10 @@
 
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 
-Route::post('/classifications-data-json', 'InstanceController@classifications');
-Route::post('/images-data-json', 'InstanceController@images');
-
 Route::get('/cases', 'InstanceController@index')->name('cases');
+Route::get('/cases/{key}/{id}', 'InstanceController@indexWithParameters')->name('casesWithParameters');
 Route::post('/cases', 'InstanceController@index');
+
 Route::get('/resources', 'HomeController@resources')->name('resources');
 
 Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
@@ -60,6 +59,7 @@ Route::group([
         function()
 {
     Route::get('/dashboard', 'ProviderController@index')->name('provider.dashboard');
+    Route::get('/c/dashboard', 'ProviderController@index')->name('cities');
     Route::post('/dashboard','ProviderController@edit')->name('provider.config');
     Route::put('/dashboard','ProviderController@request')->name('provider.request');
     Route::get('/settings','ProviderController@settings')->name('provider.settings');

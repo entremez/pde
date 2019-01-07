@@ -44,7 +44,7 @@ class ProvidersTableSeeder extends Seeder
                 $providerMembers->doctors = rand(0,4);
                 $providerMembers->save();
 
-                $cases = factory(Instance::class, rand(1,3))->make();
+                $cases = factory(Instance::class, rand(1,6))->make();
                 $provider->cases()->saveMany($cases);
                 $services = Service::inRandomOrder()->get();
                 for ($i=0; $i < rand(3,6); $i++) {

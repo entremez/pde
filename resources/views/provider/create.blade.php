@@ -170,7 +170,7 @@
 
 
         <div class="form-group mt-4">
-            <label for="" class="bmd-label-floating">Cuéntanos el caso con mas detalle</label>
+            <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
             <textarea type="textarea" name="long_description" class="form-control" rows="4">{{ old('long_description') }}</textarea>
         </div>
 
@@ -237,26 +237,36 @@
   </div>
 </div>
 
-    <div class="servicios">          
-        <span>Selecciona a que servicio de los que prestas pertenece este caso de éxito</span>
-            <div class="errorTxt"></div>
-            <div class="row mt-3">
-                @foreach($services as $service)
-                <div class="col-md-3 col-sm-4">
-                    <div class="form-check">
-                        <label class="form-check-label docepx">
-                            <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif >{{ $service->name }}
-                            <span class="form-check-sign">
-                                <span class="check"></span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                @endforeach
+<div class="servicios">          
+<span>Selecciona a qué servicio de los que prestas pertenece este caso de éxito</span>
+    <div class="errorTxt"></div>
+    <div class="row mt-3">
+        @foreach($services as $service)
+        <div class="col-md-3 col-sm-4">
+            <div class="form-check">
+                <label class="form-check-label docepx">
+                    <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif >{{ $service->name }}
+                    <span class="form-check-sign">
+                        <span class="check"></span>
+                    </span>
+                </label>
             </div>
-        </div> 
+        </div>
+        @endforeach
+    </div>
+</div> 
+<div class="row my-5">
+    <div class="col">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="terms">
+          <label class="form-check-label" for="terms">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </label>
+        </div>
+    </div>
+</div>
         <br>
-        <div class="row">
+        <div class="row" id="submit-block">
             <div class="col-md-4 ml-auto mr-auto text-center">
                 <button type="submit" class="btn btn-primary btn-raised d-inline">
                     Enviar

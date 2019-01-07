@@ -23242,6 +23242,7 @@ $(document).ready(function () {
             $.ajax({
                url : url,
                method : "POST",
+               cache: false,
                data : data,
                success : function (data)
                {
@@ -23266,6 +23267,7 @@ $(document).ready(function () {
             $.ajax({
                url : url,
                method : "POST",
+                cache: false,
                data : data,
                success : function (data)
                {
@@ -23379,6 +23381,7 @@ $(document).ready(function () {
             'long_description' : {required:true},
             'service[]' : {required:true},
             'region' : {required:true},
+            'commune' : {required:true},
             'logo' : {required:true}
           },
           messages: {
@@ -23396,6 +23399,9 @@ $(document).ready(function () {
                 required:'*Este campo es obligatorio.'
             },
            'region' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'commune' : { 
                 required:'*Este campo es obligatorio.'
             },
            'phone' : { 
@@ -23436,6 +23442,7 @@ $(document).ready(function () {
             'phone' : {required:true},
             'long_description' : {required:true},
             'service[]' : {required:true},
+            'commune' : {required:true},
             'region' : {required:true}
           },
           messages: {
@@ -23459,6 +23466,9 @@ $(document).ready(function () {
                 required:'*Este campo es obligatorio.'
             },
            'long_description' : { 
+                required:'*Este campo es obligatorio.'
+            },
+           'commune' : { 
                 required:'*Este campo es obligatorio.'
             },
            'service[]' : { 
@@ -23917,6 +23927,8 @@ $dropdowns.on('hide.bs.dropdown', function(e)
       filters();
   });
 
+  filters();
+
 function filters() {
   var employees = [];
     $("input[name=employee]").each(function (index) {  
@@ -23939,8 +23951,26 @@ function filters() {
     var categories = [];
     $("input[name=category]").each(function (index) {  
        if($(this).is(':checked')){
+          $(this).parents('.form-check').find('.service-toggle').find("input[name=service]").each(function (index) {
+              $(this).prop('checked', true);
+          });
           categories.push($(this).val());
        }
+    });
+    var services = [];
+    $("input[name=service]").each(function (index) {  
+       if($(this).is(':checked')){
+          $(this).parents('.service-toggle').toggle();
+          services.push($(this).val());
+       }
+    });
+    var classification = [];
+    $("input[name=classification]").each(function (index) {  
+          classification.push($(this).val());
+    });
+    var year = [];
+    $("input[name=year]").each(function (index) {  
+          year.push($(this).val());
     });
 
     var form = $('#form-filter');
@@ -23951,10 +23981,14 @@ function filters() {
     $.ajax({
       url : url,
       method : "GET",
+    cache: false,
       data : {employees:employees,
               sectors:sectors,
               cities:cities,
-              categories:categories},
+              categories:categories,
+              services:services,
+              classification:classification,
+              year:year},
       success : function (data)
       {
 
@@ -23980,7 +24014,7 @@ function filters() {
         $('.filtered').hide();
         $('.filtered').html(output);
         $('.filtered').show();
-
+        $("input[name=classification]").attr('name', '');
 
 
 
@@ -24001,6 +24035,46 @@ $('#proveedores').on('click', function(argument) {
 if($('#errors-popup').attr('value') == 1){
     $('.modal').modal('show');
 }
+
+
+$('.category').on('click', function(event) {
+  event.preventDefault();
+    $(this).prop('checked', false);
+    $(this).parent().parent().find('.service-toggle').toggle();
+});
+
+
+$('#region').change(function (e) {
+    
+    var form = $('#form-cities');
+    var url = form.attr('action');
+
+    $.ajax({
+      url : url,
+      method : "GET",
+      cache: false,
+      data : {id: $(this).val()},
+      success : function (data)
+      {
+
+        $('#commune').empty();
+        if(data.length == 1){
+          $('#commune').append($('<option>', {value:data[0].id, text:data[0].commune}));
+        }else{
+          $('#commune').append($('<option>', {value:'', text:'Seleccione comuna...'}));
+          for (var i = 0; i < data.length; i++) {
+             $('#commune').append($('<option>', {value:data[i].id, text:data[i].commune}));
+           } 
+        }
+        
+      }
+    });
+})
+
+$('#submit-block').toggle();
+$('#terms').on('click', function(event) {
+  $('#submit-block').toggle();
+});
 
 });
 

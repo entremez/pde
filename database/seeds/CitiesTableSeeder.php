@@ -14,9 +14,16 @@ class CitiesTableSeeder extends Seeder
         $json = File::get('resources/assets/comunas-regiones.json');
         $data = json_decode($json, true);
         foreach ($data['regiones'] as $obj) {
-          App\City::create([
+          $city = App\City::create([
             'region' => $obj['region']
           ]);
+          foreach ($obj['comunas'] as $value) {
+            App\Commune::create([
+              'commune' => $value,
+              'city_id' => $city->id
+            ]);
+          }
+
         }
         foreach ($data['constantes'] as $obj) {
             foreach ($obj['trabajadores'] as $emp) {

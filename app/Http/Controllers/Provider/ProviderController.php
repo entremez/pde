@@ -12,11 +12,15 @@ use App\City;
 use App\Category;
 use App\ProviderMember;
 use Freshwork\ChileanBundle\Rut;
+use App\Commune;
 
 class ProviderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
+        if($request->ajax())
+            return response()->json($this->getCommunes($request->input('id')));
 
         $user = auth()->user();
         $data = $user->instance();
@@ -67,6 +71,7 @@ class ProviderController extends Controller
         $provider->phone = $request->input('phone');
         $provider->long_description = $request->input('long_description');
         $provider->city_id = $request->input('region');
+        $provider->commune_id = $request->input('commune');
         $provider->web = $request->input('web');
         $rut = Rut::parse($request->input('rut'))->toArray();
         $provider->rut = $rut[0];
@@ -101,7 +106,8 @@ class ProviderController extends Controller
             'data' => auth()->user()->instance(),
             'services' => Service::get(),
             'cities' => City::get(),
-            'categories' => Category::get()
+            'categories' => Category::get(),
+            'communes' => Commune::where('city_id', auth()->user()->instance()->city_id)->get()
         ]);
     }
 
@@ -136,6 +142,7 @@ class ProviderController extends Controller
         $provider->phone = $request->input('phone');
         $provider->long_description = $request->input('long_description');
         $provider->city_id = $request->input('region');
+        $provider->commune_id = $request->input('commune');
         $provider->web = $request->input('web');
         $rut = Rut::parse($request->input('rut'))->toArray();
         $provider->rut = $rut[0];
@@ -167,6 +174,14 @@ class ProviderController extends Controller
         $provider->status = 1;
         $provider->save();
         return redirect('providers/dashboard')->withSuccess( 'Solicitud enviada a administradores');
+     }
+
+
+     public function getCommunes($id)
+     {
+
+        return Commune::where('city_id', $id)->get();
+         
      }
 }
 
