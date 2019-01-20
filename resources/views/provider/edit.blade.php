@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">Nombre&nbsp;&nbsp;<small>(Nombre de fantasía para el caso)</small></label>
+                    <label class="bmd-label-floating">Título del caso</label>
 
                     <input type="text" name="name" id="name" class="form-control" value="{{ $case->name, old('name') }}" required>
                     
@@ -173,7 +173,7 @@
 
         <div class="form-group mt-4">
             <label for="" class="bmd-label-floating">Cuéntanos el caso con mas detalle</label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4">{{ $case->long_description, old('long_description') }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución">{{ $case->long_description, old('long_description') }}</textarea>
         </div>
 
         <div class="form-group mt-4">

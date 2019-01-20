@@ -14806,3 +14806,13 @@ color: white;
 .tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
     border-right-color: #000033;
 }
+
+
+.footer-logos{
+  margin-top: -15px;
+  justify-content: space-between;
+}
+
+.logof img {
+  width: 70%;
+}

@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">Nombre&nbsp;&nbsp;<small>(Nombre de fantasía para el caso)</small></label>
+                    <label class="bmd-label-floating">Título del caso</label>
 
                     <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
                     
@@ -171,7 +171,7 @@
 
         <div class="form-group mt-4">
             <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4">{{ old('long_description') }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución">{{ old('long_description') }}</textarea>
         </div>
 
         <div class="form-group mt-4">
@@ -207,7 +207,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{asset('/images/not-found.jpg')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
+      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
     </div>
   </div>
 </div>
@@ -232,7 +232,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{asset('/images/not-found.jpg')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgCompany">
+      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgCompany">
     </div>
   </div>
 </div>

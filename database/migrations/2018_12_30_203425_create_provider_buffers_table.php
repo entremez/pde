@@ -38,7 +38,6 @@ class CreateProviderBuffersTable extends Migration
 
             $table->timestamps();
         });
-        });
     }
 
     /**
