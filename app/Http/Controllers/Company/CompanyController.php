@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\CompanySurvey as Travels;
 use App\Survey;
-use App\Traits\SurveyJsonTrait;
 use App\Company;
 use App\City;
 use App\Employees;
@@ -18,8 +17,6 @@ use App\CompanyCity;
 
 class CompanyController extends Controller
 {
-
-    use SurveyJsonTrait;
 
     public function index()
     {
@@ -34,7 +31,7 @@ class CompanyController extends Controller
 
         return view('company.dashboard',[
                 'travels' => Travels::where('company_id',auth()->user()->id)->get(),
-                'responses' => $this->getJson(Survey::where('active',1)->get()->first())
+                'data' => auth()->user()->instance()
             ]);
     }
 

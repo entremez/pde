@@ -246,7 +246,7 @@ class SurveysSeeder extends Seeder
 
         $question = new App\Statement();
         $question->statement = 'Indica el o los tipos de diseño que emplea tu compañía';
-        $question->statement_type_id = 1;
+        $question->statement_type_id = 2;
         $question->survey_id = 1;
         $question->save();
 

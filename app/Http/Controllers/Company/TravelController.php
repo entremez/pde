@@ -10,12 +10,15 @@ use App\SurveyResponse as SurveyResponse;
 use App\Company as Company;
 use App\ResponseChoice as ResponseChoice;
 use App\Question as Question;
+use App\Traits\SurveyJsonTrait;
 
 class TravelController extends Controller
 {
+    use SurveyJsonTrait;
+
     public function travel()
     {
-        $survey = Survey::where('active',1)->get()->first();
+        dd($this->getJson(Survey::where('active',1)->get()->first()));
         return view('company.travel')->with(compact('survey'));
     }
 

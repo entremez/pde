@@ -7,28 +7,21 @@ trait SurveyJsonTrait {
 
     public function getJson(Survey $survey)
     {
-        $responses = '{"qr":[';
         foreach ($survey->statements()->get() as $statement) {
-            $type = $this->questionType($statement->statement_type_id);
-            $responses .= '{"statement_type":"'.$type.'","statement_id":'.$statement->id.',"statement":"'.$statement->statement.'","options" : [';
-            foreach ($statement->options()->get() as $option) {
-                $responses.= '{"option_id":'.$option->id.',"option":"'.$option->option.'","info":"'.$option->info.'"},';
+            $responses['type'] = $statement->statement_type_id;
+            $responses['statement_id'] = $statement->id;
+            $responses['statement'] = $statement->statement;
+            foreach ($statement->options as $option) {
+                $opt['option_id'] = $option->id;
+                $opt['option'] = $option->option;
+                $opt['option_info'] = $option->info;
+                $options[] = $opt;
             }
-            $responses = substr($responses, 0, -1);
-            $responses.= ']},';
+            $responses['options']=$options;
+            $qr[] = $responses;
+            $options=array();
         }
-        $responses = substr($responses, 0, -1);
-        $responses .= ']}';
-        return json_decode($responses, true);
+        return json_encode($qr);
     }
 
-    private function questionType($type){
-        if ($type == 1) {
-            return "checkbox";
-        }
-        if ($type == 2) {
-            return "radio";
-        }
-        return "affirmation";
-    }
 }
