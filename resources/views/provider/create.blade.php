@@ -21,7 +21,7 @@
             </div>
             @endif
 
-    @if($user->instances()->count() < config('constants.max_cases'))
+    @if($user->instances()->count() < config('app.max_cases'))
     <form class="contact-form" method="POST" action="{{ route('cases.store') }}" enctype="multipart/form-data" id="create-form">
         {{ csrf_field() }}
 
@@ -171,12 +171,12 @@
 
         <div class="form-group mt-4">
             <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución">{{ old('long_description') }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" maxlength="500">{{ old('long_description') }}</textarea>
         </div>
 
         <div class="form-group mt-4">
             <label for="quote" class="bmd-label-floating">Cita del cliente que muestre los efectos del caso</label>
-            <input type="text" name="quote" id="quote" class="form-control" value="{{ old('quote') }}" />
+            <input type="text" name="quote" id="quote" class="form-control" value="{{ old('quote') }}" maxlength="300" />
         </div>
 
 
@@ -266,9 +266,9 @@
     </div>
 </div>
         <br>
-        <div class="row" id="submit-block">
+        <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
-                <button type="submit" class="btn btn-primary btn-raised d-inline">
+                <button type="submit" class="btn btn-primary btn-raised d-inline" disabled="true" id="submit">
                     Enviar
                 </button>
                 <button class="btn btn-primary btn-raised d-inline" id="preview" data-toggle="modal" data-target="#previewModal" disabled="true">

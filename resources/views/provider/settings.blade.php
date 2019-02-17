@@ -191,7 +191,7 @@
         <br>
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
-                <a href="{{ route('provider.dashboard') }}" class="btn btn-default btn-raised">
+                <a href="{{ route('provider.dashboard') }}" class="btn btn-default btn-raised link-default">
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-primary btn-raised">

@@ -11,13 +11,14 @@ Route::get('/resources', 'HomeController@resources')->name('resources');
 Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
 
 Route::get('/provider', 'ProviderController@show')->name('providers-list');
-Route::post('/provider/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
+Route::post('/provider/service/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
+Route::get('/provider/service/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
 
 Route::get('/provider/{provider}', 'ProviderController@detail')->name('provider');
 
 Route::post('/provider/c/{providerId}', 'ProviderController@counterClick')->name('provider-counter');
 
-Route::get('/case/{instance}', 'InstanceController@show')->name('case');
+Route::get('/case/{instance}', 'InstanceController@show')->middleware('verified.approval')->name('case');
 
 Route::post('/case/{provider}', 'CounterController@provider')->name('provider.counter');
 

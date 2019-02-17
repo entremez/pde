@@ -1,9 +1,10 @@
-<div class="arrowToCases">
-	<a href="#cases" class="link"><div class="btn btn-outline-light angle-d"><i class="fas fa-angle-down"></i></div></a>
-</div>
+
 <div class="video-container">
+	<div class="arrowToCases">
+	<a href="#cases" class="link"><div class="btn  angle-d"><i class="fas fa-angle-down"></i></div></a>
+</div>
 	<div class="video-title">
-		<p class="mt-0"><span class="first-color">EL DISEÑO </span> <span class="secondary-color">MEJORA TU NEGOCIO</span></p>
+		<p class="mt-0"><span class="first-color">EL DISEÑO </span> <span class="white">MEJORA TU NEGOCIO</span></p>
 	</div>
 
 	<video poster="{{ url('images/poster.png') }}" playsinline autoplay muted loop preload width="100%" height="600">

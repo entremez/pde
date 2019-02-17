@@ -159,12 +159,12 @@ class SurveysSeeder extends Seeder
 
         $response = new App\Option();
         $response->statement_id= $question->id;
-        $response->option = 'Nuestros productos tienen un sistema de despacho significativamente mejor que el de nuestros competidores.';
+        $response->option = 'Nuestros productos tienen un sistema de despacho significativamente mejor que el de nuestros competidores.<br>Nuestros servicios se prestan a través de canales significativamente mejores que los de nuestros competidores.';
         $response->save();
 
         $response = new App\Option();
         $response->statement_id= $question->id;
-        $response->option = 'Nuestros servicios se prestan a través de canales significativamente mejores que los de nuestros competidores.';
+        $response->option = '';
         $response->save();
 
 

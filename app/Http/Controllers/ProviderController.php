@@ -8,6 +8,7 @@ use App\Provider;
 use App\Instance;
 use App\Service;
 use App\Category;
+use App\ProviderCounter;
 
 class ProviderController extends Controller
 {
@@ -16,7 +17,18 @@ class ProviderController extends Controller
         return view('providers',[
             'categories' => Category::get(),
             'services' => Service::get(),
-            'providers' => Provider::where('approved',true)->inRandomOrder()->get()
+            'providers' => Provider::where('approved',true)->inRandomOrder()->get(),
+            'serviceFromBadge' => 0
+            ]);
+    }
+
+    public function showFromBadge($service)
+    {
+        return view('providers',[
+            'categories' => Category::get(),
+            'services' => Service::get(),
+            'providers' => Provider::where('approved',true)->inRandomOrder()->get(),
+            'serviceFromBadge' => $service
             ]);
     }
 
@@ -31,6 +43,13 @@ class ProviderController extends Controller
             }
             return $providersFiltered;
         }
+
+        return view('providers',[
+            'categories' => Category::get(),
+            'services' => Service::get(),
+            'providers' => Provider::where('approved',true)->inRandomOrder()->get(),
+            'serviceFromBadge' => $serviceId
+            ]);
     }
 
     public function detail(Provider $provider, Request $request)

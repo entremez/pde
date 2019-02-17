@@ -34,8 +34,8 @@ class CreateInstancesTable extends Migration
             $table->integer('quantity');
             $table->string('unit');
             $table->string('sentence');
-            $table->string('long_description');
-            $table->string('quote');
+            $table->text('long_description');
+            $table->text('quote');
             $table->integer('year');
             $table->boolean('approved');
             $table->boolean('freatured')->default(false);

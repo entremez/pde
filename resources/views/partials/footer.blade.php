@@ -37,7 +37,9 @@
                         <img src="{{ asset('images/footer/chilecreativo.png') }}">
                     </div>
                     <div class="logof">
+                        <div class="mma">
                         <img src="{{ asset('images/footer/chilediseno.png') }}">
+                        </div>
                     </div>
                     <div class="logof">
                         <img src="{{ asset('images/footer/sofofa.png') }}">

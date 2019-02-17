@@ -179,9 +179,7 @@ class ProviderController extends Controller
 
      public function getCommunes($id)
      {
-
         return Commune::where('city_id', $id)->get();
-         
      }
 }
 

@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-9">
                 
-                <div class="provider-name">
+                <div class="provider-name text-left">
                     <h3>{{ $provider->name }}</h3>
                 </div>
 
@@ -22,7 +22,7 @@
 
                 <div class="provider-subtitle">
                     @foreach($service as $s)
-                    <span class="badge badge-info">{{ $s->name }}</span>
+                    <a class="badge badge-success" href="{{ route('providers-list-filtered', $s->id)}}">{{ $s->name }}</a>
                     @endforeach
                 </div>
 
@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-3">
                 <img class="image-container w-100" src="{{ $provider->imagen_logo }}">
-                <a href="#" data-id="{{ $provider->id }}" class="btn btn-danger provider-btn">Contacto</a>
+                <button id="provider-btn" data-id="{{ $provider->id }}" class="btn btn-danger w-100"> Contacto</button>
                 <div class="provider-contact">
                     <div class="row text-left">
                         <div class="col-md-11"><p>{{ $provider->email }}</p></div>
@@ -68,3 +68,5 @@
 </div>
 
 @include('partials/footer')
+
+@endsection

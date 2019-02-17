@@ -10,8 +10,8 @@
                 <input id="email-login" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                 @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
+                    <span id="name-error">
+                        {{ $errors->first('email') }}
                     </span>
                 @endif
             </div>
@@ -47,7 +47,7 @@
                     Entrar
                 </button>
 
-                <div class="btn btn-link" href="{{ route('password.request') }}">
+                <div class="btn btn-link link-default" href="{{ route('password.request') }}">
                     ¿Olvidaste tu contraseña?
                 </div>
             </div>

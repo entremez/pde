@@ -60,7 +60,9 @@
   </div>
 </div>
 
-<input type="hidden" id="errors-popup" value="{{count($errors->get('email-register')) == 0 ? '':'1'}}">
+<input type="hidden" id="errors-register" value="{{count($errors->get('email-register')) == 0 ? '':'1'}}">
+<input type="hidden" id="errors-login" value="{{$errors->has('email') ? '1':''}}">
+
 <div class="modal fade login" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content bigModal">

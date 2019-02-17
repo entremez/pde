@@ -24,7 +24,7 @@
                         <ul>
                             @foreach($services as $service)
                                 @if($service->category_id == $category->id)
-                                    <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="link service-filter">{{ $service->name }}</a></li>
+                                    <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="link service-filter " id="{{ $service->id }}">{{ $service->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -32,9 +32,9 @@
                 </div>
         @endforeach    
     </div>
-    <hr class="horizontal-line">
+    <hr class="horizontal-line" id="horizontal-line">
 
-
+    <input type="hidden" id="serviceFromBadge" value="{{ $serviceFromBadge }}">
 
 <form method="post" action="{{ route('providers-list-filtered', ':SERVICE_ID') }}" id="form-filter">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -58,7 +58,6 @@
     </div>
     </div>
 </div>
-
 
 
 

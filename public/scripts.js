@@ -23116,9 +23116,6 @@ $(document).ready(function () {
 
   $("#modal-setting").modal("show");
 
-  $('#modal-send').click(function(){
-    console.log($("select#foo option:checked").val());
-  });
 
     $('#send-survey').click(function(event){
       event.preventDefault();
@@ -23126,46 +23123,23 @@ $(document).ready(function () {
       $('#survey-form').submit();
     });
 
-
-    $('.service-filter').click(function(event) {
-        event.preventDefault();
-        var lis = $(this).parents('.row').children('.col-md-3').find('a');
-        $.each(lis, function(){
-            $(this).removeClass();
-            $(this).addClass('link');
-            $(this).addClass('service-filter');
-        });
-        $(this).addClass('selected');
-        $(this).parents('.categorias').toggle();
-        //var title = $(this).parents('.service').find('h3').text();
-        var title = $(this).text();
-        var serviceId = $(this).parents('li').data('id');
-        var url = $('#form-filter').attr('action').replace(':SERVICE_ID', serviceId);
-        var data = $('#form-filter').serialize();
-
-        $.post(url, data, function (result){
-            $('.results').children('container').remove();
-            var text ='';
-            text = '<div class="container"><h3 class="mb-5">'+title+'</h3><div class="row">';
-            $.each(result, function () {
-                  text += '<div class="col-md-3 col-sm-6"><div class="service"><a href="/provider/'+this.id+'"><div class="image-container" title="'+this.name+'" style="background-image: url('+this.logo +')"></div></a></div></div>';
-              });
-            text+= '</div></div>';
-            $('.results').html(text);
-             var new_position = $('#results').offset();
-             window.scrollTo(new_position.left,new_position.top);
-        });
-    });
-
-
-    $('.provider-btn').click(function(e){
-        e.preventDefault();
+    $('#provider-btn').click(function(e){
         $('.provider-contact').toggle();
         var id = $(this).data('id')
         var url = $('#form-counter').attr('action').replace(':PROVIDER_ID', id);
         var data = $('#form-counter').serialize();
         $.post(url, data);
+    });
 
+    if($('#serviceFromBadge').val() != null && $('#serviceFromBadge').val() != 0){
+        var id = $('#serviceFromBadge').val();
+        getProvidersByService($('#'+id));
+    }
+
+
+    $('.service-filter').click(function(event) {
+        event.preventDefault();
+        getProvidersByService($(this));
     });
 
     $('.btn-destroy').click(function (e){
@@ -23261,7 +23235,6 @@ $(document).ready(function () {
             var id = $(this).data('id');
             var form = $('#form-providers');
             var data = form.serialize();
-            console.log(data);
             var url = form.attr('action');
             $("#view-more-providers").html("Cargando....");
             $.ajax({
@@ -23291,7 +23264,6 @@ $(document).ready(function () {
 
 
      function addImage(e){
-      console.log(e.target.files);
       var file = e.target.files[0],
       imageType = /image.*/;
     
@@ -23314,7 +23286,7 @@ $(document).ready(function () {
      $('#sector*').click(function(e){
         var id = $(this).data('id');
         if(id == $('#classification*').data('id')){
-          console.log($(this));
+
         }
      });
 
@@ -23824,6 +23796,7 @@ var unit = '';
       if(companyLogo == '')
         return
       $('#preview').prop('disabled', false);
+      return true;
     }
 
     $( ".sectors" ).on( "click", function() {
@@ -24032,7 +24005,11 @@ $('#proveedores').on('click', function(argument) {
       $('.proveedores').toggle();
 });
   
-if($('#errors-popup').attr('value') == 1){
+if($('#errors-register').attr('value') == 1){
+    $('.modal').modal('show');
+}
+  
+if($('#errors-login').attr('value') == 1){
     $('.modal').modal('show');
 }
 
@@ -24071,10 +24048,44 @@ $('#region').change(function (e) {
     });
 })
 
-$('#submit-block').toggle();
+
+
+
 $('#terms').on('click', function(event) {
-  $('#submit-block').toggle();
+    if($('#submit').prop('disabled') == true){
+        $('#submit').prop('disabled',false);
+    }else{
+        $('#submit').prop('disabled',true);
+    }
 });
+
+function getProvidersByService(service){
+    var lis = service.parents('.row').children('.col-md-3').find('a');
+        $.each(lis, function(){
+            $(this).removeClass();
+            $(this).addClass('link');
+            $(this).addClass('service-filter');
+        });
+        service.addClass('selected');
+        service.parents('.categorias').toggle();
+        var title = service.text();
+        var serviceId = service.parents('li').data('id');
+        var url = $('#form-filter').attr('action').replace(':SERVICE_ID', serviceId);
+        var data = $('#form-filter').serialize();
+
+        $.post(url, data, function (result){
+            $('.results').children('container').remove();
+            var text ='';
+            text = '<div class="container"><h3 class="mb-5">'+title+'</h3><div class="row">';
+            $.each(result, function () {
+                  text += '<div class="col-md-3 col-sm-6"><div class="service"><a href="/provider/'+this.id+'"><div class="image-container" title="'+this.name+'" style="background-image: url('+this.logo +')"></div></a></div></div>';
+              });
+            text+= '</div></div>';
+            $('.results').html(text);
+             var new_position = $('#horizontal-line').offset();
+             window.scrollTo(new_position.left,new_position.top);
+        });
+}
 
 });
 

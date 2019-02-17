@@ -13274,6 +13274,21 @@ a.text-dark:hover, a.text-dark:focus {
   color: #000033;
 }
 
+.white{
+  color: white;
+}
+
+.dropdown-item.active, .dropdown-item:active{
+background-color: #e7004b;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, 
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus
+{
+  box-shadow: none;
+}
+
 
 .btn-danger,
 .btn-primary,
@@ -14315,7 +14330,7 @@ margin-top: 1.4rem;
 }
 
 video{
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .video-title {
@@ -14327,6 +14342,7 @@ video{
     display: inline-table;
     text-align: center;
     font-size: 4.3rem;
+    font-weight: bold;
 }
 
 
@@ -14396,6 +14412,15 @@ display: none;
   color: white;
 }
 
+.link-default,
+.link-default:hover,
+.link-default:visited,
+.link-default:active
+{
+  text-decoration: none;
+  color: inherit;
+}
+
 @media (min-width: 1080px) {
   .bigModal{
     margin-top: 100px;
@@ -14405,6 +14430,11 @@ display: none;
 }
 
 @media (max-width: 1080px) {
+
+  *{
+    display: none;
+  }
+  
   .modal.login{
     display: none;
   }
@@ -14498,6 +14528,7 @@ label {
   height : 0;
   background-color: #d2d2d2;
   margin-top: 65px;
+  margin-bottom: 50px;
 }
 
 .survey-container{
@@ -14791,8 +14822,19 @@ color: white;
 }
 
 .angle-d{
-  font-size: 2rem;
-  width: 20%;
+  font-size: 3rem;
+  width: 30%;
+  border: none;
+}
+
+.angle-d:hover{
+  background-color: inherit;
+  color:#e7004b; 
+}
+
+.angle-d:target{
+  background-color: inherit;
+  color:#e7004b; 
 }
 
 .service-toggle{
@@ -14809,10 +14851,18 @@ color: white;
 
 
 .footer-logos{
-  margin-top: -15px;
+  margin-top: -30px;
   justify-content: space-between;
 }
 
 .logof img {
   width: 70%;
+}
+
+.provider-name {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
 }
