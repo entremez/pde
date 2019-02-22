@@ -363,6 +363,12 @@ body {
     padding-right: 0;
 }
 
+.section-after-video {
+    margin-top:135px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .footer-service, .footer-provider {
     height: 50px;
     background-color: rgba(0, 0, 51, 1);

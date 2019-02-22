@@ -19,7 +19,7 @@
     <div class="col-md-10 offset-md-1 mt-5 section">
             <div class="row">
                 <div class="col-md-9">
-                    <img class="image-container image-case" style="background-image: url('{{ url($instance->image) }}')">
+                    <img class="image-container image-case" style="background-image: url('{{ url($instance->imagen_logo) }}')">
                     <div class="middle-case">
                             <div class="text-case">{{ $instance->quantity}} {{ $instance->unit}} {{$instance->sentence }}</div>
                     </div>
