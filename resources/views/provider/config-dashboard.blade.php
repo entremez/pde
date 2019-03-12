@@ -152,6 +152,45 @@
 
             </div>
         </div>
+        <div class="servicios">            
+            <label class="bmd-label-floating pt-4">Selecciona regiones donde la empresa presta sus servicios</label>
+            <div class="errorRegions"></div>
+            <div class="row pt-3">
+
+                @foreach($cities as $city)
+                    @if($city->id < 17 )
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="regions[]" value="{{ $city->id }}" {{ $data->isMyRegion($city->id) ? 'checked':'' }} ><span class="docepx">{{ $city->region }}</span>
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    @endif
+                @endforeach
+
+                @foreach($cities as $city)
+                    @if($city->id >= 17 )
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="regions[]" value="{{ $city->id }}" {{ $data->isMyRegion($city->id) ? 'checked':'' }} ><span class="docepx">{{ $city->region }}</span>
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    @endif
+                @endforeach
+
+
+
+            </div>
+        </div>
         <br>
 
     <label class="bmd-label-floating mb-3">Caracterización de profesionales de diseño en su empresa</label>

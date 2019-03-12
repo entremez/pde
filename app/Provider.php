@@ -9,6 +9,7 @@ use App\User;
 use App\ProviderCounter;
 use App\ProviderService;
 use App\ProviderMember;
+use App\ProviderRegion;
 
 class Provider extends Model
 {
@@ -82,6 +83,11 @@ class Provider extends Model
     public function isMyService($service)
     {
         return !is_null(ProviderService::where('provider_id',$this->id)->where('service_id', $service)->first());
+    }
+
+    public function isMyRegion($city)
+    {
+        return !is_null(ProviderRegion::where('provider_id',$this->id)->where('city_id', $city)->first());
     }
 
     public function teamMember($index) // 0: tecnicos, 1: profesionales, 2: masters, 3: doctores

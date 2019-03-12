@@ -14,7 +14,7 @@
 
             
                 <div class="provider-name">{{ $data->name }}</div>
-            
+                    <p>Servicios de diseño:</p>
                         @foreach($services as $service)
                         <a href="{{ route('providers-list-filtered', $service->service_id)}}" class="badge badge-success">
                             {{ $service->service()->get()->first()->name }}

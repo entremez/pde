@@ -19,13 +19,15 @@
     <div class="col-md-10 offset-md-1 mt-5 section">
             <div class="row">
                 <div class="col-md-9">
-                    <img class="image-container image-case" style="background-image: url('{{ url($instance->imagen_logo) }}')">
+                    <img class="image-container image-case" style="background-image: linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(0,0,0,0.4995040252429097) 33%, rgba(0,0,0,0.502305145691089) 50%, rgba(0,0,0,0.4995040252429097) 67%, rgba(255,255,255,0) 85%), url('{{ url($instance->image) }}')">
                     <div class="middle-case">
                             <div class="text-case">{{ $instance->quantity}} {{ $instance->unit}} {{$instance->sentence }}</div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <img class="image-container w-100" src="{{ url($provider->logo) }}">
+                    <div class="image-container center-img">
+                        <img class="w-100" src="{{ url($provider->imagen_logo) }}">
+                    </div>
                     <a href="{{ route('provider', $provider->id) }}" class="btn btn-danger w-100 provider-btn">Ver proveedor de diseño</a>
                 </div>
             </div>
@@ -39,12 +41,12 @@
                     <p>{{ $instance->long_description }}</p>
 
                     
-                    <div class="text-muted mt-5 mb-2 font-weight-bold">Tags</div>
-                    <div class="tags"> 
+                    <div class="text-muted mt-5 mb-2 font-weight-bold">Etiquetas</div>
+
                         @foreach($instance->tags() as $tag)
-                        <a href="{{ route('casesWithParameters', [$tag['key'], $tag['id']]) }}" class="link"><div class="text-muted">{{ $tag['name'] }}</div></a>
+                        <a href="{{ route('casesWithParameters', [$tag['key'], $tag['id']]) }}" class="badge badge-success">{{ $tag['name'] }}</a> 
                         @endforeach
-                    </div>
+
                 </div>
                 <div class="col-md-3">
                     <div class="company-logo-container">

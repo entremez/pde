@@ -43,7 +43,7 @@
             <div class="col-md-12">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="provider" {{ old('remember') ? 'checked' : '' }}> ¿Eres proveedor de diseño?
+                        <input type="checkbox" name="provider" {{ old('remember') ? 'checked' : '' }}> Soy proveedor de diseño
                     </label>
                 </div>
             </div>

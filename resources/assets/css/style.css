@@ -89,7 +89,10 @@ background-color: #e7004b;
 }
 
 .badge-success {
-    background-color: #e7004b!important;
+    background-color: #999!important;
+    padding: 0.5em;
+    margin-bottom: .2em;
+    font-weight: normal;
 }
 /* The switch - the box around the slider */
 .switch {
@@ -1527,7 +1530,7 @@ letter-spacing: -0.2rem;
     color: #2F2E2E;
     list-style: none;
     font-size: 12px;
-    vertical-align: super;
+    vertical-align: text-top;
 }
 
 .caracterizacion{
@@ -1624,4 +1627,19 @@ color: white;
   margin-bottom: 1rem;
   text-align: center;
   font-weight: bold;
+}
+
+.jconfirm.jconfirm-white 
+.jconfirm-box .jconfirm-buttons button, 
+.jconfirm.jconfirm-light 
+.jconfirm-box 
+.jconfirm-buttons button{
+  text-transform: none;
+  font-weight: normal;
+}
+
+.center-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

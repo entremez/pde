@@ -23877,7 +23877,7 @@ $dropdowns.on('hide.bs.dropdown', function(e)
         title: 'Borrar caso',
         content: '¿Realmente desea borrar el caso?',
         buttons: {
-            confirmar: {
+            Confirmar: {
                 btnClass: 'btn-primary',
                 action: function () {
                     instance.parents('.instance-dashboard').fadeOut();
@@ -23889,7 +23889,7 @@ $dropdowns.on('hide.bs.dropdown', function(e)
                       });
                     }
                   },
-            volver: function () {
+            Volver: function () {
 
             }
         }

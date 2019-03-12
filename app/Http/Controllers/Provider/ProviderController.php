@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Service;
 use App\ProviderService;
+use App\ProviderRegion;
 use File;
 use App\City;
 use App\Category;
@@ -157,6 +158,15 @@ class ProviderController extends Controller
             $provider_service->provider_id = $provider->id;
             $provider_service->service_id = $services[$i];
             $provider_service->save();
+        }
+
+        $regions = $request->input('regions');
+        ProviderRegion::where('provider_id','=',$provider->id)->delete();
+        for ($i=0; $i < count($regions); $i++) {
+            $provider_region = new ProviderRegion();
+            $provider_region->provider_id = $provider->id;
+            $provider_region->city_id = $regions[$i];
+            $provider_region->save();
         }
 
         $providerMember = ProviderMember::where('provider_id', $provider->id)->first();

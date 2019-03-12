@@ -11,6 +11,7 @@ use App\ProviderService;
 use App\Category;
 use Illuminate\Support\Collection as Collection;
 use App\ProviderMember;
+use App\ProviderRegion;
 
 class ProvidersTableSeeder extends Seeder
 {
@@ -48,6 +49,11 @@ class ProvidersTableSeeder extends Seeder
                 $provider->cases()->saveMany($cases);
                 $services = Service::inRandomOrder()->get();
                 for ($i=0; $i < rand(3,6); $i++) {
+                    $randa = rand(1,18);
+                    $provider_region = new ProviderRegion();
+                    $provider_region->provider_id = $provider->id;
+                    $provider_region->city_id = $randa;
+                    $provider_region->save();
                     $randa = rand(1,58);
                     $provider_service = new ProviderService();
                     $provider_service->service_id = $services[$randa]->id;
