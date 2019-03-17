@@ -7,13 +7,16 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\ProviderService;
 use App\InstanceService;
+use App\InstanceServiceBuffer;
 use App\Service;
 use App\Rules\LimitNumberImages;
 use App\Instance;
+use App\InstanceBuffer;
 use App\InstanceImage;
 use App\Sector;
 use App\City;
 use App\Employees;
+use App\BusinessType;
 use File;
 
 class CaseController extends Controller
@@ -47,7 +50,8 @@ class CaseController extends Controller
             'user' => $user,
             'sectors' => Sector::get(),
             'cities' => City::get(),
-            'employees' => Employees::get()
+            'employees' => Employees::get(),
+            'businesses' => BusinessType::get()
         ]);
     }
 
@@ -106,6 +110,7 @@ class CaseController extends Controller
         $instance->employees_range = $request->input('employees');
         $instance->name = $request->input('name');
         $instance->company_name = $request->input('company_name');
+        $instance->business_type = $request->input('business');
         $instance->quantity = $request->input('quantity');
         $instance->unit = $request->input('unit');
         $instance->sentence = $request->input('sentence');
@@ -167,13 +172,17 @@ class CaseController extends Controller
         foreach ($services as $service) {
             $services_provider[] = Service::where('id','=',$service->service_id)->get()->first();
         }
+
+
         return view('provider.edit', [
-            'case' => Instance::find($id),
+            'case' => Instance::find($id)->status == 0 ? Instance::find($id):InstanceBuffer::where('instance_id',$id)->first(),
             'services' => collect($services_provider),
             'user' => $user,
             'sectors' => Sector::get(),
             'cities' => City::get(),
-            'employees' => Employees::get()
+            'employees' => Employees::get(),
+            'businesses' => BusinessType::get(),
+            'identifier' => $id
         ]);
     }
 
@@ -202,62 +211,57 @@ class CaseController extends Controller
             'service' => 'required',
         ];
         $this->validate($request, $rules, $messages);
-        $instance->classification_id = $request->input('sector');
-        $instance->city_id = $request->input('region');
-        $instance->employees_range = $request->input('employees');
-        $instance->name = $request->input('name');
-        $instance->company_name = $request->input('company_name');
-        $instance->quantity = $request->input('quantity');
-        $instance->unit = is_null($request->input('unit'))?'':$request->input('unit');
-        $instance->sentence = $request->input('sentence');
-        $instance->long_description = $request->input('long_description');
-        $instance->year = $request->input('year');
-        $instance->approved = false;
-        $instance->quote = $request->input('quote');
+
+        if(InstanceBuffer::where('instance_id',$instance->id)->count() > 0){
+            $buffer = InstanceBuffer::where('instance_id',$id)->first();
+        }else{
+            $buffer = new InstanceBuffer();
+        }
+        $buffer->instance_id = $id;
+        $buffer->classification_id = $request->input('sector');
+        $buffer->city_id = $request->input('region');
+        $buffer->employees_range = $request->input('employees');
+        $buffer->name = $request->input('name');
+        $buffer->company_name = $request->input('company_name');
+        $buffer->quantity = $request->input('quantity');
+        $buffer->unit = is_null($request->input('unit'))?'':$request->input('unit');
+        $buffer->sentence = $request->input('sentence');
+        $buffer->Business_type = $request->input('business');
+        $buffer->long_description = $request->input('long_description');
+        $buffer->year = $request->input('year');
+        $buffer->quote = $request->input('quote');
+
+        $buffer->company_logo = $instance->company_logo;
         if(!is_null($request->file('company-logo'))){
             $image = $request->file('company-logo');
             $path = public_path().'/providers/case-images/'.$id.'/';
             $fileName = uniqid()."-".$image->getClientOriginalName();
             $image->move($path, $fileName);
-            $instance->company_logo = $fileName;
+            $buffer->company_logo = $fileName;
         }
-        $instance->save();
 
-        InstanceService::where('instance_id','=',$instance->id)->delete();
+        if(InstanceServiceBuffer::where('instance_id','=',$instance->id)->count() > 0)
+            $servicesBuffer = InstanceServiceBuffer::where('instance_id','=',$instance->id)->delete();
         $services = $request->input('service');
         foreach ($services as $service) {
-            $instance_service = new InstanceService;
+            $instance_service = new InstanceServiceBuffer();
             $instance_service->instance_id = $instance->id;
             $instance_service->service_id = $service;
             $instance_service->save();
         }
 
+        $buffer->image = $instance->image;
         if(!is_null($request->file('image'))){
-            $instance_image = InstanceImage::where('instance_id', $id)->delete();
+//            $instance_image = InstanceImage::where('instance_id', $id)->delete();
             $images = $request->file('image');$image = $request->file('image');
             $path = public_path().'/providers/case-images/'.$id.'/';
             $fileName = uniqid()."-".$image->getClientOriginalName();
             $image->move($path, $fileName);
-            $instance_image = new InstanceImage;
-            $instance_image->image = $fileName;
-            $instance_image->instance_id = $id;
-            $instance_image->featured = true;
-            $instance_image->save();
+            $buffer->image = $fileName;
         }
-
-
-/*        $images = $request->file('images');
-        foreach ($images as $key => $image) {
-            $path = public_path().'/providers/cases/'.$instance->id.'/';
-            $fileName = uniqid()."-".$image->getClientOriginalName();
-            $image->move($path, $fileName);
-            $instance_image = new InstanceImage;
-            $instance_image->image = $fileName;
-            $instance_image->instance_id = $instance->id;
-            if($key == 0)
-                $instance_image->featured = true;
-            $instance_image->save();
-        }*/
+        $buffer->save();
+        $instance->status = 1;
+        $instance->save();
         return redirect()->route('provider.dashboard');
     }
 

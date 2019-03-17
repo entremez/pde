@@ -17,6 +17,7 @@ $factory->define(App\Instance::class, function (Faker $faker) {
         'long_description' => $faker->text,
         'year' => rand(2001,2018),
         'approved' => rand(0,1),
+        'business_type' => rand(1,2),
         'freatured' => rand(0,1),
         'employees_range' => rand(1,4),
         'quote' => $faker->realText($faker->numberBetween(10,20)),

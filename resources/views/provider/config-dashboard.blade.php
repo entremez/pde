@@ -193,7 +193,7 @@
         </div>
         <br>
 
-    <label class="bmd-label-floating mb-3">Caracterización de profesionales de diseño en su empresa</label>
+    <label class="bmd-label-floating mb-3">Caracterización de profesionales de diseño en su empresa (indicar sólo el nivel más alto por profesional)</label>
 
 <div class="members pb-5">
 

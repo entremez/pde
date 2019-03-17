@@ -25,10 +25,10 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="image-container center-img">
-                        <img class="w-100" src="{{ url($provider->imagen_logo) }}">
-                    </div>
-                    <a href="{{ route('provider', $provider->id) }}" class="btn btn-danger w-100 provider-btn">Ver proveedor de diseño</a>
+
+                            <img class="w-100" src="{{ $instance->image_company }}">
+                    <br>
+                    <p class="text-center mt-3">"{{ $instance->quote }}"</p>
                 </div>
             </div>
             <div class="row mt-4">
@@ -49,13 +49,13 @@
 
                 </div>
                 <div class="col-md-3">
-                    <div class="company-logo-container">
-                        <div class="company-logo">
-                            <img class="w-100" src="{{ $instance->image_company }}">
-                        </div>
-                    </div><br>
-                    <p class="text-center">"{{ $instance->quote }}"</p>
+                    <p>Proveedor de diseño</p>
+                    <div class="image-container center-img">
+                        <img class="w-100" src="{{ url($provider->imagen_logo) }}" alt="{{ $provider->name }}">
+                    </div>
+                    <a href="{{ route('provider', $provider->id) }}" class="btn btn-danger w-100 provider-btn">Ver proveedor de diseño</a>
                 </div>
+
             </div>
             <div class="row"> 
                 <div class="col">                   

@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row  mt-4">
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Nombre empresa &nbsp;<small>(Donde se llevó a cabo el caso)</small></label>
@@ -82,13 +82,27 @@
                 
         </div>
 
+        <div class="row  mt-4">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="bmd-label-floating">Tipo de negocio</label>
+                    <select class="form-control" id="business" name="business" required>
+                      <option value="">Seleccionar...</option>
+                        @foreach($businesses as $business)
+                            <option value="{{ $business->id }}" >{{ $business->type }} - {{ $business->name }}</option>
+                        @endforeach
+                    </select>   
+                </div>
+            </div>                
+        </div>
+
         <label class="bmd-label-floating mb-2 mt-4">Construye la frase principal del impacto de tu caso</label>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <small>Cantidad</small>
+                    <small>Cantidad (separar decimal con comas)</small>
 
-                    <input type="number" name="quantity" class="form-control" id="quantity" value="{{ old('quantity') }}" min="1" required>
+                    <input type="number" name="quantity" class="form-control" id="quantity" value="{{ old('quantity') }}" min="1" required placeholder="200">
                     
                 </div>
             </div>
@@ -96,14 +110,14 @@
                 <div class="form-group">
                     <small>Unidad (%, $, X, +)</small>
 
-                    <input type="text" name="unit" class="form-control" id="unit" value="{{ old('unit') }}">
+                    <input type="text" name="unit" class="form-control" id="unit" value="{{ old('unit') }}" placeholder="%">
                     
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <small>Frase</small>
-                    <input type="text" name="sentence" id="sentence" class="form-control" value="{{ old('sentence') }}" required>
+                    <input type="text" name="sentence" id="sentence" class="form-control" value="{{ old('sentence') }}" required placeholder="de aumento de ventas en 10 meses ">
                     
                 </div>
             </div>
@@ -159,7 +173,7 @@
                                 <div class="col-md-3 col-sm-4">
                                     <div class="form-radio">
                                         <label class="form-radio-label">
-                                            <input class="form-radio-input" type="radio" name="sector" id="{{$classification->classification}}" value="{{ $classification->id }}" /><span class="docepx text-top">&nbsp;{{ $classification->classification }}</span></label>
+                                            <input class="form-radio-input" type="radio" name="sector" id="{{$classification->classification}}" value="{{ $classification->id }}" /><span class="docepx text-top">&nbsp;&nbsp;{{ $classification->classification }}</span></label>
                                     </div>
                                 </div>
                                 @endforeach
@@ -169,18 +183,18 @@
             </div>
 
 
-        <div class="form-group mt-4">
+        <div class="form-group mt-4 mb-3">
             <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
             <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" maxlength="500">{{ old('long_description') }}</textarea>
         </div>
 
-        <div class="form-group mt-4">
+        <div class="form-group mt-5 mb-3">
             <label for="quote" class="bmd-label-floating">Cita del cliente que muestre los efectos del caso</label>
             <input type="text" name="quote" id="quote" class="form-control" value="{{ old('quote') }}" maxlength="300" />
         </div>
 
 
-<div class="mb-3 dm-uploader" >
+<div class="mb-3 dm-uploader mt-5 mb-3" >
   <div class="form-row">
     <div class="col-md-9 col-sm-12 align-grid-r">
       <div class="from-group mb-2">
@@ -260,7 +274,7 @@
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="terms">
           <label class="form-check-label" for="terms">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Cuento con autorización del cliente de este caso para publicar la información.
           </label>
         </div>
     </div>

@@ -63,5 +63,18 @@ class ClassificationsTableSeeder extends Seeder
             $classification->save();
         }
 
+
+        $business_type = new App\BusinessType();
+        $business_type->type = 'B2B';
+        $business_type->name = 'business to business';
+        $business_type->description = 'si sus clientes son otras empresas';
+        $business_type->save();
+
+        $business_type = new App\BusinessType();
+        $business_type->type = 'B2C';
+        $business_type->name = 'business to customer';
+        $business_type->description = 'si sus clientes son personas';
+        $business_type->save();
+
     }
 }

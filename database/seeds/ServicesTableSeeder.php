@@ -339,8 +339,8 @@ class ServicesTableSeeder extends Seeder
         $category->save();
 
         $service = new Service();
-        $service->name="Diseño de instrucciones";
-        $service->description="Diseño de instrucciones";
+        $service->name="Diseño instruccional";
+        $service->description="Diseño instruccional";
         $service->category_id=$category->id;
         $service->save();
 

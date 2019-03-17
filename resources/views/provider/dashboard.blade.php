@@ -7,13 +7,13 @@
 <div class="after-menu"></div>
 
 <div class="col-md-10 offset-md-1">
+    <h3 class="pt-5">Hola <span>{{ $data->name }}</span>, bienvenido a tu escritorio</h3>
     <div class="row mt-5">
-
         <div class="col-md-3 provider-data">
                 <img src="{{ $data->imagen_logo }}" class="mx-auto d-block img-fluid provider-logo"  alt="provider logo">
 
             
-                <div class="provider-name">{{ $data->name }}</div>
+                <div class="provider-name"></div>
                     <p>Servicios de diseño:</p>
                         @foreach($services as $service)
                         <a href="{{ route('providers-list-filtered', $service->service_id)}}" class="badge badge-success">
@@ -45,7 +45,7 @@
                 <a class="btn btn-danger" href="{{route('provider.settings')}}">Editar</a>
         </div>
         <div class="col-md-9 hidden">
-            <h4 class="pb-4">Casos en espera de publicación</h4>
+            <h4 class="pb-4">Casos en espera de aprobación para su publicación</h4>
                 <div class="row">
 
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -87,14 +87,14 @@
                     <div class="col-md-4 col-sm-6">
                         <a href="{{route('cases.create')}}" class="link">
                             <div class="service add">
-                            <div class="image-container"><span class="plus-img">+</span>
+                                    <img src="{{ asset('images/agregar_caso.png')}}" alt="Agregar caso" height="210px">
                             </div>
-                        </div>
-                            </a>
+                        </a>
                     </div>
                     @endif
                 </div>
-            <h4 class="pb-4">Tus casos publicados</h4> 
+            <hr>
+            <h4 class="pb-4">Casos publicados</h4> 
                 <div class="row">
 
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">

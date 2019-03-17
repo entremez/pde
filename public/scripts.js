@@ -23468,6 +23468,7 @@ $(document).ready(function () {
           rules: {
             'name': { required : true},
             'company_name' : { required:true},
+            'business' : { required:true},
             'year' : {required:true},
             'region' : {required:true},
             'quantity' : {required:true},
@@ -23485,6 +23486,9 @@ $(document).ready(function () {
               required: "*Ingrese el nombre del caso."
            },
            'company_name' : { 
+                required:'*Este campo es obligatorio.',
+            },
+           'business' : { 
                 required:'*Este campo es obligatorio.',
             },
            'region' : { 
@@ -23758,7 +23762,7 @@ var unit = '';
     $('#preview').click(function(e){
       e.preventDefault();
       var img = $('#imgSalida').attr('src');
-      $('.image-container').css("background-image", 'url('+img+')');
+      $('.image-container').css("background-image", 'linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url('+img+')');
       $('.corner').html(sector);
       $('.div2').html(quantity);
       $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
@@ -23775,7 +23779,7 @@ var unit = '';
       var quantity = $('#quantity').val();
       var unit = $('#unit').val();
       var sentence = $('#sentence').val();
-      $('.image-container').css("background-image", 'url('+img+')');
+      $('.image-container').css("background-image", 'linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url('+img+')');
       $('.corner').html($('.seleccionado').attr('id'));
       $('.div2').html(quantity);
       $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
@@ -24086,6 +24090,16 @@ function getProvidersByService(service){
              window.scrollTo(new_position.left,new_position.top);
         });
 }
+
+
+$(document).on('click', '#travelOrRegister', function(event) {
+    event.preventDefault();
+    if($(this).data('type') == 'register'){
+        $('#registerTravel').modal('show');
+    }else{
+        window.location.pathname = '/new'
+    }
+}); 
 
 });
 

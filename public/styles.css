@@ -13766,6 +13766,7 @@ ul.dashed > li:before {
     flex-direction: column;
     height: 232px;
     text-align: center;
+    background-color: #000033;
 }
 .averigua {
   font-family: inherit;
@@ -14418,7 +14419,7 @@ display: none;
 .link:active
 {
   text-decoration: none;
-  color: white;
+  color: white!important;
 }
 
 .link-default,
@@ -14516,6 +14517,7 @@ display: none;
 #password-login-error,
 #commune-error,
 #password-confirm-register-error,
+#business-error,
 .error-class,
 .help-block {
   font-size: .8rem;
@@ -14870,7 +14872,6 @@ color: white;
 
 .provider-name {
   font-size: 1.2rem;
-  margin-top: 1rem;
   margin-bottom: 1rem;
   text-align: center;
   font-weight: bold;
@@ -14889,4 +14890,9 @@ color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.error404 {
+  max-width: 50%;
+  margin: 0 auto;
 }

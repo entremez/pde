@@ -1,7 +1,7 @@
 <div class="col-md-12  section">
     <hr class="divider">
     <div class="row w-100">
-        <div class="col-md-6 banner-left" style="background-image: url(https://picsum.photos/800/600?image=120);">
+        <div class="col-md-6 banner-left">
             <div class="section-title"><pre class="averigua" >Averigua cuanto aporta
 el diseño en tu empresa hoy</pre></div>
             <button class="btn btn-danger btn-averigua">Evalúa tu empresa hoy</button>

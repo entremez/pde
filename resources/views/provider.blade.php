@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-3">
                 <img class="image-container w-100" src="{{ $provider->imagen_logo }}">
-                <button id="provider-btn" data-id="{{ $provider->id }}" class="btn btn-danger w-100"> Contacto</button>
+                <button id="provider-btn" data-id="{{ $provider->id }}" class="btn btn-danger w-100">Ver contacto</button>
                 <div class="provider-contact">
                     <div class="row text-left">
                         <div class="col-md-11"><p>{{ $provider->email }}</p></div>

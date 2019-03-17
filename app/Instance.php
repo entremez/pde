@@ -14,7 +14,12 @@ class Instance extends Model
 
     protected $fillable = [
         'name', 'company_name', 'description', 'long_description'
-    ];
+    ];  
+
+    public function identifier()
+    {
+        return $this->id;
+    }
 
     public function provider()
     {

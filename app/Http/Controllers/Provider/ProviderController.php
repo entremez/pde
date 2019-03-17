@@ -186,10 +186,9 @@ class ProviderController extends Controller
         return redirect('providers/dashboard')->withSuccess( 'Solicitud enviada a administradores');
      }
 
-
      public function getCommunes($id)
      {
-        return Commune::where('city_id', $id)->get();
+        return Commune::where('city_id', $id)->orderBy('commune', 'asc')->get();
      }
 }
 

@@ -72,4 +72,24 @@ class User extends Authenticatable
                     break;
         }
     }
+
+    public function evaluateText()
+    {
+        switch ($this->role_id) {
+            case 3:
+                return "Evalúa a tu empresa";
+                break;
+            case 1:
+                return "Admin, regístrate como empresa para evaluarte";
+                break;
+            case 2:
+                return "Regístrate como empresa para evaluarte";
+                break;
+        }
+    }
+
+    public function needTravel()
+    {
+        return $this->role_id == 3;
+    }
 }

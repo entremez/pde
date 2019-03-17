@@ -23,7 +23,7 @@
             </div>
             @endif
 
-    <form class="contact-form" method="POST" action="{{ route('cases.update', $case->id ) }}" enctype="multipart/form-data" id="edit-form">
+    <form class="contact-form" method="POST" action="{{ route('cases.update', $identifier ) }}" enctype="multipart/form-data" id="edit-form">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
 
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row   mt-4">
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Nombre empresa &nbsp;<small>(Donde se llevó a cabo el caso)</small></label>
@@ -84,11 +84,25 @@
                 
         </div>
 
+        <div class="row  mt-4">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="bmd-label-floating">Tipo de negocio</label>
+                    <select class="form-control" id="business" name="business" required>
+                      <option value="">Seleccionar...</option>
+                        @foreach($businesses as $business)
+                            <option value="{{ $business->id }}" {{ $business->id == $case->business_type ? 'selected': '' }}>{{ $business->type }} - {{ $business->name }}</option>
+                        @endforeach
+                    </select>   
+                </div>
+            </div>                
+        </div>
+
         <label class="bmd-label-floating mb-2 mt-4">Construye la frase principal del impacto de tu caso</label>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <small>Cantidad</small>
+                    <small>Cantidad (separar decimal con comas)</small>
 
                     <input type="number" name="quantity" class="form-control" id="quantity" value="{{ $case->quantity, old('quantity') }}" min="1" required>
                     
@@ -171,18 +185,18 @@
             </div>
 
 
-        <div class="form-group mt-4">
+        <div class="form-group mt-5  mb-2 ">
             <label for="" class="bmd-label-floating">Cuéntanos el caso con mas detalle</label>
             <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución">{{ $case->long_description, old('long_description') }}</textarea>
         </div>
 
-        <div class="form-group mt-4">
+        <div class="form-group mt-5 mb-4">
             <label for="quote" class="bmd-label-floating">Cita del cliente que muestre los efectos del caso</label>
             <input type="text" name="quote" id="quote" class="form-control" value="{{ $case->quote, old('quote') }}" />
         </div>
 
 
-<div class="mb-3 dm-uploader" >
+<div class="mb-3 dm-uploader mt-5" >
   <div class="form-row">
     <div class="col-md-9 col-sm-12 align-grid-r">
       <div class="from-group mb-2">
@@ -259,11 +273,21 @@
             </div>
             @endforeach
         </div>
-    </div> 
+    </div>
+    <div class="row my-5">
+    <div class="col">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="terms">
+          <label class="form-check-label" for="terms">
+            Cuento con autorización del cliente de este caso para publicar la información.
+          </label>
+        </div>
+    </div>
+</div>
         <br>
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
-                <button type="submit" class="btn btn-primary btn-raised d-inline">
+                <button type="submit" class="btn btn-primary btn-raised d-inline" disabled="true" id="submit">
                     Guardar cambios
                 </button>
                 <button class="btn btn-primary btn-raised d-inline" id="preview-edit" data-toggle="modal" data-target="#previewModal" >
