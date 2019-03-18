@@ -7,7 +7,7 @@
 <div class="after-menu"></div>
 
 <div class="col-md-10 offset-md-1">
-    <h3 class="pt-5">Hola <span>{{ $data->name }}</span>, bienvenido a tu escritorio</h3>
+    <h3 class="pt-5">Hola <span>{{ $personalData->name }}</span>, bienvenido a tu escritorio</h3>
     <div class="row mt-5">
         <div class="col-md-3 provider-data">
                 <img src="{{ $data->imagen_logo }}" class="mx-auto d-block img-fluid provider-logo"  alt="provider logo">
@@ -24,22 +24,22 @@
                 <hr>
                 <p>{{ $user->email }}</p>
                 <hr>
-                <p>{{ $data->phone }}</p>
+                <p>{{ $personalData->phone }}</p>
                 <hr>
-                <p>{{ Rut::parse($data->rut."-".$data->dv_rut)->format()}}</p>
+                <p>{{ Rut::parse($personalData->rut."-".$personalData->dv_rut)->format()}}</p>
                 <hr>
-                <p>{{ $data->address }}</p>
+                <p>{{ $personalData->address }}</p>
                 <hr>
-                <p>{{ $data->web }}</p>
+                <p>{{ $personalData->web }}</p>
                 <hr>
-                <p>{{ str_limit($data->long_description, 100, ' (...)')}}</p>
+                <p>{{ str_limit($personalData->long_description, 100, ' (...)')}}</p>
                 <hr>
                 <p>Caracterización de profesionales de diseño</p>
                     <ul>
-                    <li>Técnicos: {{ $data->team->tecnics }} </li>
-                    <li>Profesionales: {{ $data->team->professionals }} </li>
-                    <li>Masters: {{ $data->team->masters }} </li>
-                    <li>Doctores: {{ $data->team->doctors }} </li>
+                    <li>Técnicos: {{ $personalData->team->tecnics }} </li>
+                    <li>Profesionales: {{ $personalData->team->professionals }} </li>
+                    <li>Masters: {{ $personalData->team->masters }} </li>
+                    <li>Doctores: {{ $personalData->team->doctors }} </li>
                     </ul>
                 <br>
                 <a class="btn btn-danger" href="{{route('provider.settings')}}">Editar</a>
