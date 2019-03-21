@@ -22,7 +22,9 @@
                 </ul>
             </div>
             @endif
-
+    <div class="mb-4" style="display: {{ $case->isBuffered() ? '':'none' }}">
+        <small>*Los últimos cambios realizados están a la espera de aprobación por parte del equipo del proyecto</small>
+    </div>
     <form class="contact-form" method="POST" action="{{ route('cases.update', $identifier ) }}" enctype="multipart/form-data" id="edit-form">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
@@ -223,7 +225,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{url($case->image)}}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
+      <img src="{{url($case->my_image)}}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
     </div>
   </div>
 </div>
@@ -277,17 +279,18 @@
     <div class="row my-5">
     <div class="col">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="terms">
+          <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
           <label class="form-check-label" for="terms">
             Cuento con autorización del cliente de este caso para publicar la información.
           </label>
         </div>
+        <div class="errorTerms"></div>
     </div>
 </div>
         <br>
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
-                <button type="submit" class="btn btn-primary btn-raised d-inline" disabled="true" id="submit">
+                <button type="submit" class="btn btn-primary btn-raised d-inline" id="submit">
                     Guardar cambios
                 </button>
                 <button class="btn btn-primary btn-raised d-inline" id="preview-edit" data-toggle="modal" data-target="#previewModal" >

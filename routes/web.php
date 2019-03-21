@@ -14,7 +14,7 @@ Route::get('/provider', 'ProviderController@show')->name('providers-list');
 Route::post('/provider/service/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
 Route::get('/provider/service/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
 
-Route::get('/provider/{provider}', 'ProviderController@detail')->name('provider');
+Route::get('/provider/{provider}', 'ProviderController@detail')->middleware('verified.approval')->name('provider');
 
 Route::post('/provider/c/{providerId}', 'ProviderController@counterClick')->name('provider-counter');
 
@@ -49,7 +49,13 @@ Route::group([
     Route::resource('questions', 'Survey\QuestionController');
     Route::resource('question_types', 'Survey\QuestionTypeController');
     Route::resource('response_choices', 'Survey\ResponseChoiceController');
+
+
+    Route::get('/dashboard/provider-approve/{provider}', 'Provider\ProviderController@approveProvider')->name('approve.provider');
+    Route::get('/dashboard/instance-approve/{instance}', 'Provider\ProviderController@approveInstance')->name('approve.instance');
 });
+
+
 
 //RUTAS PROVEEDORES
 

@@ -215,9 +215,15 @@ class CaseController extends Controller
         if(InstanceBuffer::where('instance_id',$instance->id)->count() > 0){
             $buffer = InstanceBuffer::where('instance_id',$id)->first();
         }else{
+            if(!$instance->approved){
+                $this->updatePreviousApproval($instance, $request);
+                return redirect()->route('provider.dashboard');
+            }
             $buffer = new InstanceBuffer();
+            $buffer->image = $instance->my_image;
+            $buffer->instance_id = $id;
+            $buffer->company_logo = $instance->company_logo;
         }
-        $buffer->instance_id = $id;
         $buffer->classification_id = $request->input('sector');
         $buffer->city_id = $request->input('region');
         $buffer->employees_range = $request->input('employees');
@@ -231,7 +237,7 @@ class CaseController extends Controller
         $buffer->year = $request->input('year');
         $buffer->quote = $request->input('quote');
 
-        $buffer->company_logo = $instance->company_logo;
+
         if(!is_null($request->file('company-logo'))){
             $image = $request->file('company-logo');
             $path = public_path().'/providers/case-images/'.$id.'/';
@@ -250,7 +256,6 @@ class CaseController extends Controller
             $instance_service->save();
         }
 
-        $buffer->image = $instance->image;
         if(!is_null($request->file('image'))){
 //            $instance_image = InstanceImage::where('instance_id', $id)->delete();
             $images = $request->file('image');$image = $request->file('image');
@@ -276,6 +281,59 @@ class CaseController extends Controller
         $instance = Instance::find($request->input('id'));
         $instance->delete();
 
+    }
+
+    private function updatePreviousApproval($instance, $request)
+    {
+        $instance->classification_id = $request->input('sector');
+        $instance->city_id = $request->input('region');
+        $instance->employees_range = $request->input('employees');
+        $instance->name = $request->input('name');
+        $instance->company_name = $request->input('company_name');
+        $instance->quantity = $request->input('quantity');
+        $instance->unit = is_null($request->input('unit'))?'':$request->input('unit');
+        $instance->sentence = $request->input('sentence');
+        $instance->Business_type = $request->input('business');
+        $instance->long_description = $request->input('long_description');
+        $instance->year = $request->input('year');
+        $instance->quote = $request->input('quote');
+
+
+        if(!is_null($request->file('company-logo'))){
+            $image = $request->file('company-logo');
+            $path = public_path().'/providers/case-images/'.$instance->id.'/';
+            $fileName = uniqid()."-".$image->getClientOriginalName();
+            $image->move($path, $fileName);
+            $instance->company_logo = $fileName;
+        }
+
+        if(InstanceServiceBuffer::where('instance_id','=',$instance->id)->count() > 0)
+            $servicesBuffer = InstanceServiceBuffer::where('instance_id','=',$instance->id)->delete();
+        $services = $request->input('service');
+        foreach ($services as $service) {
+            $instance_service = new InstanceServiceBuffer();
+            $instance_service->instance_id = $instance->id;
+            $instance_service->service_id = $service;
+            $instance_service->save();
+        }
+
+
+        if(!is_null($request->file('image'))){
+            $image = $request->file('image');
+            $path = public_path().'/providers/case-images/'.$instance->id.'/';
+            $fileName = uniqid()."-".$image->getClientOriginalName();
+            $image->move($path, $fileName);
+            InstanceImage::where('instance_id', $instance->id)->delete();
+            $instance_image = new InstanceImage;
+            $instance_image->image = $fileName;
+            $instance_image->instance_id = $instance->id;
+            $instance_image->featured = true;
+            $instance_image->save();
+        }
+
+        InstanceService::where('instance_id', $instance->id)->delete();
+        $this->saveServicesOfInstance($instance->id, $request->input('service'));
+        $instance->save();
     }
 
 }

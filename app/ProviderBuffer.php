@@ -40,12 +40,17 @@ class ProviderBuffer extends Model
 
     public function isMyService($service)
     {
-        return !is_null(ProviderService::where('provider_id',$this->provider_id)->where('service_id', $service)->first());
+        return !is_null(ProviderServiceBuffer::where('provider_id',$this->provider_id)->where('service_id', $service)->first());
     }
 
     public function isMyRegion($city)
     {
-        return !is_null(ProviderRegion::where('provider_id',$this->provider_id)->where('city_id', $city)->first());
+        return !is_null(ProviderRegionBuffer::where('provider_id',$this->provider_id)->where('city_id', $city)->first());
+    }
+
+    public function isBuffered()
+    {
+        return true;
     }
 
 }

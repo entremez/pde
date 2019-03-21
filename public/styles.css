@@ -14518,6 +14518,7 @@ display: none;
 #commune-error,
 #password-confirm-register-error,
 #business-error,
+#terms-error,
 .error-class,
 .help-block {
   font-size: .8rem;

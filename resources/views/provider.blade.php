@@ -45,7 +45,7 @@
                         <div class="col-md-11"><p>{{ Rut::parse($provider->rut."-".$provider->dv_rut)->format()}}</p></div>
                     </div>
                     <div class="row text-left">
-                        <div class="col-md-11"><p>{{ $provider->address }}</p></div>
+                        <div class="col-md-11"><p>{{ $provider->address() }}</p></div>
                     </div>
                 </div>
             </div>

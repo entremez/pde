@@ -10,8 +10,8 @@
     <h3 class="pt-5">Hola <span>{{ $personalData->name }}</span>, bienvenido a tu escritorio</h3>
     <div class="row mt-5">
         <div class="col-md-3 provider-data">
-                <img src="{{ $data->imagen_logo }}" class="mx-auto d-block img-fluid provider-logo"  alt="provider logo">
 
+                <img src="{{ $data->imagen_logo }}" class="mx-auto d-block img-fluid provider-logo"  alt="provider logo">
             
                 <div class="provider-name"></div>
                     <p>Servicios de diseño:</p>
@@ -28,7 +28,7 @@
                 <hr>
                 <p>{{ Rut::parse($personalData->rut."-".$personalData->dv_rut)->format()}}</p>
                 <hr>
-                <p>{{ $personalData->address }}</p>
+                <p>{{ $personalData->address() }}</p>
                 <hr>
                 <p>{{ $personalData->web }}</p>
                 <hr>
@@ -42,6 +42,9 @@
                     <li>Doctores: {{ $personalData->team->doctors }} </li>
                     </ul>
                 <br>
+                <div class="mb-4" style="display: {{ $personalData->isBuffered() ? '':'none' }}">
+                    <small>*Los últimos cambios realizados están a la espera de aprobación por parte del equipo del proyecto</small>
+                </div>
                 <a class="btn btn-danger" href="{{route('provider.settings')}}">Editar</a>
         </div>
         <div class="col-md-9 hidden">
@@ -56,8 +59,9 @@
                             <div class="col-md-4 col-sm-6 instance-dashboard">
                                 <div class="service">
                                     <a href="{{ route('case', $instance->id) }}">
-                                            <div class="corner dashboard">{{ $instance->classification->classification }}</div>
-                                        <div class="image-container dashboard" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url('{{url($instance->image)}}')">
+                                            <div class="corner dashboard">{{ $instance->status ? $instance->corner_buffered :
+                                            $instance->classification->classification }}</div>
+                                        <div class="image-container dashboard" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url('{{url($instance->my_image)}}')">
 
                                         <div class="container"> 
                                                 <div class="row-c">
@@ -105,13 +109,14 @@
                             <div class="col-md-4 col-sm-6 instance-dashboard">
                                 <div class="service">
                                     <a href="{{ route('case', $instance->id) }}">
-                                            <div class="corner dashboard">{{ $instance->classification->classification }}</div>
-                                        <div class="image-container dashboard" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url('{{url($instance->image)}}')">
+                                            <div class="corner dashboard">{{ $instance->status ? $instance->corner_buffered :
+                                            $instance->classification->classification }}</div>
+                                        <div class="image-container dashboard" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url('{{$instance->status ? url($instance->my_image_buffered):url($instance->my_image)}}')">
 
                                         <div class="container"> 
                                                 <div class="row-c">
-                                                <div class="div2">{{ $instance->quantity}}</div>
-                                                <div class="div1"><div class="porcentaje">{{ $instance->unit}}</div><br>{{ $instance->sentence }}</div>
+                                                <div class="div2">{{ $instance->status ? $instance->quantity_buffered:$instance->quantity}}</div>
+                                                <div class="div1"><div class="porcentaje">{{$instance->status ? $instance->unit_buffered: $instance->unit}}</div><br>{{ $instance->status ? $instance->sentence_buffered:$instance->sentence }}</div>
                                                 </div>
                                         </div>
                                                 

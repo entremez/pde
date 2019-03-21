@@ -27,6 +27,16 @@ class Provider extends Model
         return $this->hasOne('App\ProviderMember');
     }
 
+    public function city()
+    {
+        return $this->hasOne('App\City', 'id', 'city_id');
+    }
+
+    public function commune()
+    {
+        return $this->hasOne('App\Commune', 'id', 'commune_id');
+    }
+
     public function getImagenLogoAttribute()
     {
         if(substr($this->logo, 0, 4) === "http")
@@ -107,5 +117,16 @@ class Provider extends Model
                 break;
         }
         
+    }
+
+    public function isBuffered()
+    {
+        return $this->status;
+    }
+
+    public function address()
+    {
+        $regionAndCommune = $this->commune()->first()->commune == "En el extranjero" ? '': ', ' . $this->commune()->first()->commune. ', ' .$this->city()->first()->region. '.';
+        return $this->address . $regionAndCommune ;
     }
 }

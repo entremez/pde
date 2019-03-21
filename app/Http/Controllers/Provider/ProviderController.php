@@ -110,11 +110,11 @@ class ProviderController extends Controller
     public function settings(Request $request)
     {
         return view('provider.settings',[
-            'data' => auth()->user()->instance()->status == 0 ? auth()->user->instance():ProviderBuffer::where('provider_id',auth()->user()->instance()->id)->first(),
+            'data' => auth()->user()->instance()->status == 0 ? auth()->user()->instance():ProviderBuffer::where('provider_id',auth()->user()->instance()->id)->first(),
             'services' => Service::get(),
             'cities' => City::get(),
             'categories' => Category::get(),
-            'communes' => Commune::where('city_id', auth()->user()->instance()->city_id)->get()
+            'communes' => Commune::where('city_id', auth()->user()->instance()->city_id)->orderBy('commune')->get()
         ]);
     }
 
@@ -137,13 +137,19 @@ class ProviderController extends Controller
         ];
         $this->validate($request, $rules, $messages);
         $provider = auth()->user()->instance();
+
         if(ProviderBuffer::where('provider_id',$provider->id)->count() > 0){
-            $providerBuffer = ProviderBuffer::where('provider_id',$provider->id);
+            $providerBuffer = ProviderBuffer::where('provider_id',$provider->id)->first();
         }else{
+            if(!$provider->approved){
+                $this->updatePreviousApproval($provider, $request);
+                return redirect()->route('provider.dashboard');
+            }
             $providerBuffer = new ProviderBuffer();
             $providerBuffer->provider_id = $provider->id;
+            $providerBuffer->logo = $provider->logo;
         }
-        $providerBuffer->logo = $provider->logo;
+
         if ($request->hasFile('logo')) {
             $file = $request->file('logo');
             $path = public_path().'/providers/logos';
@@ -151,7 +157,6 @@ class ProviderController extends Controller
             $file->move($path, $fileName);
             $providerBuffer->logo = $fileName;
         }
-
         $providerBuffer->name = $request->input('name');
         $providerBuffer->address = $request->input('address');
         $providerBuffer->phone = $request->input('phone');
@@ -211,6 +216,61 @@ class ProviderController extends Controller
      public function getCommunes($id)
      {
         return Commune::where('city_id', $id)->orderBy('commune', 'asc')->get();
+     }
+
+     private function updatePreviousApproval($provider, $request)
+     {
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $path = public_path().'/providers/logos';
+            $fileName = $provider->id."-".uniqid()."-".$file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $provider->logo = $fileName;
+        }
+        $provider->name = $request->input('name');
+        $provider->address = $request->input('address');
+        $provider->phone = $request->input('phone');
+        $provider->long_description = $request->input('long_description');
+        $provider->city_id = $request->input('region');
+        $provider->commune_id = $request->input('commune');
+        $provider->web = $request->input('web');
+        $rut = Rut::parse($request->input('rut'))->toArray();
+        $provider->rut = $rut[0];
+        $provider->dv_rut = $rut[1];
+        $provider->save();
+
+        $services = $request->input('service');
+
+        ProviderService::where('provider_id','=',$provider->id)->delete();
+        for ($i=0; $i < count($services); $i++) {
+            $providerService = new ProviderService();
+            $providerService->provider_id = $provider->id;
+            $providerService->service_id = $services[$i];
+            $providerService->save();
+        }
+
+        $regions = $request->input('regions');
+        ProviderRegion::where('provider_id','=',$provider->id)->delete();
+        for ($i=0; $i < count($regions); $i++) {
+            $providerRegion = new ProviderRegion();
+            $providerRegion->provider_id = $provider->id;
+            $providerRegion->city_id = $regions[$i];
+            $providerRegion->save();
+        }
+
+        if(ProviderMember::where('provider_id', $provider->id)->count() > 0){
+            $providerMember = ProviderMember::where('provider_id', $provider->id)->first();
+        }else{
+            $providerMember = new ProviderMember();
+            $providerMember->provider_id = $provider->id;
+        }
+
+        $providerMember->tecnics = $request->input('team-tecnics');
+        $providerMember->professionals = $request->input('team-professionals');
+        $providerMember->masters = $request->input('team-masters');
+        $providerMember->doctors = $request->input('team-doctors');
+        $providerMember->save();
+        $provider->save();   
      }
 }
 

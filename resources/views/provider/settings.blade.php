@@ -20,6 +20,9 @@
                 </ul>
             </div>
             @endif
+    <div class="mb-4" style="display: {{ $data->isBuffered() ? '':'none' }}">
+        <small>*Los últimos cambios realizados están a la espera de aprobación por parte del equipo del proyecto</small>
+    </div>
     <form class="contact-form" method="POST" action="{{ route('provider.update') }}" enctype="multipart/form-data" id="submit-edit-provider">
         {{ csrf_field() }}
 

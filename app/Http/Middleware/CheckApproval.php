@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Instance;
+use App\Provider;
 
 class CheckApproval
 {
@@ -16,13 +17,28 @@ class CheckApproval
      */
     public function handle($request, Closure $next)
     {
-        $instance = Instance::whereId(explode("/",$request->path())[1])->first();
-        if($instance->approved)
-            return $next($request);
-        if(!auth()->check())
-            abort(404);
-        if(auth()->user()->instance()->id == $instance->provider_id)
-            return $next($request);
-        abort(404);
+        switch (explode("/",$request->path())[0]) {
+            case 'provider':
+                $provider = Provider::whereId(explode("/",$request->path())[1])->first();
+                if($provider->approved)
+                    return $next($request);
+                if(!auth()->check())
+                    abort(404);
+                if( auth()->user()->role_id == 1 || auth()->user()->instance()->id == $provider->id)
+                    return $next($request);
+                abort(404);
+                break;
+            
+            case 'case':
+                $instance = Instance::whereId(explode("/",$request->path())[1])->first();
+                if($instance->approved)
+                    return $next($request);
+                if(!auth()->check())
+                    abort(404);
+                if(auth()->user()->role_id == 1 || auth()->user()->instance()->id == $instance->provider_id)
+                    return $next($request);
+                abort(404);
+                break;
+        }
     }
 }

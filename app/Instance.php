@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Classification;
 use App\InstanceCounter;
+use App\InstanceBuffer;
 use Illuminate\Support\Collection;
 
 class Instance extends Model
@@ -42,7 +43,7 @@ class Instance extends Model
         return $this->belongsTo('App\Employees','employees_range');
     }
 
-    public function getImageAttribute()
+    public function getMyImageAttribute()
     {
         if($this->images()->first()!= null){
             if(substr($this->images()->first()->image, 0, 4) === "http")
@@ -151,5 +152,36 @@ class Instance extends Model
         return false;
     }
 
+    public function isBuffered()
+    {
+        return $this->status;
+    }
+
+    public function getCornerBufferedAttribute()
+    {
+        $classification_id = InstanceBuffer::where('instance_id', $this->id)->first()->classification_id;
+        return Classification::find($classification_id)->classification;
+    }
+
+
+    public function getMyImageBufferedAttribute()
+    {
+        return InstanceBuffer::where('instance_id', $this->id)->first()->my_image;
+    }
+
+    public function getQuantityBufferedAttribute()
+    {
+        return InstanceBuffer::where('instance_id', $this->id)->first()->quantity;
+    }
+
+    public function getSentenceBufferedAttribute()
+    {
+        return InstanceBuffer::where('instance_id', $this->id)->first()->sentence;
+    }
+
+    public function getUnitBufferedAttribute()
+    {
+        return InstanceBuffer::where('instance_id', $this->id)->first()->unit;
+    }
 
 }

@@ -4,7 +4,7 @@
 
 @section('headers')
 <meta property="og:title" content="PDE | {{$instance->name}}" />
-<meta property="og:image" content="{{url($instance->image)}}" />
+<meta property="og:image" content="{{url($instance->my_image)}}" />
 <meta property="og:type" content="website" />
 
 @endsection
@@ -19,7 +19,7 @@
     <div class="col-md-10 offset-md-1 mt-5 section">
             <div class="row">
                 <div class="col-md-9">
-                    <img class="image-container image-case" style="background-image: linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(0,0,0,0.4995040252429097) 33%, rgba(0,0,0,0.502305145691089) 50%, rgba(0,0,0,0.4995040252429097) 67%, rgba(255,255,255,0) 85%), url('{{ url($instance->image) }}')">
+                    <img class="image-container image-case" style="background-image: linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(0,0,0,0.4995040252429097) 33%, rgba(0,0,0,0.502305145691089) 50%, rgba(0,0,0,0.4995040252429097) 67%, rgba(255,255,255,0) 85%), url('{{ url($instance->my_image) }}')">
                     <div class="middle-case">
                             <div class="text-case">{{ $instance->quantity}} {{ $instance->unit}} {{$instance->sentence }}</div>
                     </div>

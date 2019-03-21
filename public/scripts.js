@@ -23555,7 +23555,8 @@ $('#edit-form').validate({
             'long_description' : {required:true},
             'quote' : {required:true},
             'service[]' : {required:true},
-            'ragion' : {required:true}
+            'ragion' : {required:true},
+            'terms' : {required:true}
           },
           messages: {
            'name': {
@@ -23590,6 +23591,9 @@ $('#edit-form').validate({
             },
            'quote' : { 
                 required:'*Este campo es obligatorio.'
+            },
+           'terms' : { 
+                required:'*Debes confirmar que cuentas con autorización.'
             }
           },
           errorPlacement: function(error, element) {
@@ -23598,6 +23602,8 @@ $('#edit-form').validate({
               element.parents('.servicios').find('.error').addClass('error-class');
             } else if(element.attr("name") == "sector") {
               error.insertBefore('.errorSector');
+            } else if(element.attr("name") == "terms") {
+              error.insertBefore('.errorTerms');
             } else {
               error.insertBefore(element);
             }
@@ -23714,6 +23720,8 @@ var quantity = '';
 var sentence = '';
 var unit = '';
 
+      isPreviewReady();
+
     $('#file-input').change(function(e) {
       addImage(e); 
       isPreviewReady();
@@ -23763,6 +23771,7 @@ var unit = '';
       e.preventDefault();
       var img = $('#imgSalida').attr('src');
       $('.image-container').css("background-image", 'linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url('+img+')');
+      
       $('.corner').html(sector);
       $('.div2').html(quantity);
       $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
@@ -23776,11 +23785,14 @@ var unit = '';
     $('#preview-edit').click(function(e){
       e.preventDefault();
       var img = encodeURI($('#imgSalida').attr('src'));
+      console.log(img);
       var quantity = $('#quantity').val();
       var unit = $('#unit').val();
       var sentence = $('#sentence').val();
-      $('.image-container').css("background-image", 'linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url('+img+')');
-      $('.corner').html($('.seleccionado').attr('id'));
+      var sector = $('.seleccionado').attr('id');
+      //$('.image-container').css('background-image','linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url('+img+')');
+      $('.image-container').css('background-image','linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url(\''+img+'\')');
+      $('.corner').html(sector);
       $('.div2').html(quantity);
       $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
       $('.div2-grande').html(quantity);
@@ -24053,21 +24065,11 @@ $('#region').change(function (e) {
 })
 
 
-
-
-$('#terms').on('click', function(event) {
-    if($('#submit').prop('disabled') == true){
-        $('#submit').prop('disabled',false);
-    }else{
-        $('#submit').prop('disabled',true);
-    }
-});
-
 function getProvidersByService(service){
     var lis = service.parents('.row').children('.col-md-3').find('a');
         $.each(lis, function(){
             $(this).removeClass();
-            $(this).addClass('link');
+            $(this).addClass('link-default');
             $(this).addClass('service-filter');
         });
         service.addClass('selected');
@@ -24099,7 +24101,30 @@ $(document).on('click', '#travelOrRegister', function(event) {
     }else{
         window.location.pathname = '/new'
     }
-}); 
+});
+
+$(document).on('click', '#providers_to_approve', function(event) {
+  $('#providers_to_approve_table').toggle();
+});
+$(document).on('click', '#providers_in_buffer', function(event) {
+  $('#providers_in_buffer_table').toggle();
+});
+
+$(document).on('click', '#instances_to_approve', function(event) {
+  $('#instances_to_approve_table').toggle();
+});
+
+$(document).on('click', '#instances_buffered', function(event) {
+  $('#instances_buffered_table').toggle();
+});
+
+$(document).on('click', '#providers_approved', function(event) {
+  $('#providers_approved_table').toggle();
+});
+
+$(document).on('click', '#instances_approved', function(event) {
+  $('#instances_approved_table').toggle();
+});
 
 });
 

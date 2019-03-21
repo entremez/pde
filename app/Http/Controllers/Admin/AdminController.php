@@ -19,29 +19,13 @@ class AdminController extends Controller
         return view('admin/dashboard', [
             'instances' => Instance::get(),
             'instancesApproved' => Instance::where('approved', true)->get(),
+            'instancesWaitingForApproval' => Instance::where('approved', false)->get(),
             'intancesBuffered' => InstanceBuffer::get(),
             'providers' => Provider::get(),
-            'providersBuffered' = ProviderBuffer::get()
+            'providersApproved' => Provider::where('approved', true)->get(),
+            'providersWaitinfForApproval' => Provider::where('approved', false)->get(),
+            'providersBuffered' => ProviderBuffer::get()
         ]);
     }
 
-    public function showProviders()
-    {
-        return view('admin/dashboard-providers',[
-            'providers' => Provider::all()
-        ]);
-    }
-
-    public function request()
-    {
-        $providers = Provider::all();
-        return view('admin/dashboard-providers-request')->with(compact('providers'));
-    }
-
-    public function showCompanies()
-    {
-        $companies = Company::all();
-        $providers = Provider::all();
-        return view('admin/dashboard-companies')->with(compact('companies', 'providers'));
-    }
 }
