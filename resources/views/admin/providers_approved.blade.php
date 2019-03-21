@@ -1,6 +1,6 @@
     <div class="row mt-5">
     	<div class="col">
-    		<h4>Proveedores aprobados ({{ $providersApproved->count() }}) <span id="providers_approved"><i class="fas fa-sort-down"></i></span></h4>
+    		<h4>Proveedores aprobados ({{ $providersApproved->count() }}) <span id="providers_approved"><i class="fas fa-sort-down"></i></span><span id="providers_approved_up" style="display: none"><i class="fas fa-sort-up"></i></span></h4>
     		<table class="table" id="providers_approved_table" style="display: none">
 			  <thead>
 			    <tr>

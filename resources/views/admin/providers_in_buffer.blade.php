@@ -1,6 +1,6 @@
     <div class="row mt-5">
     	<div class="col">
-    		<h4>Proveedores con cambios ({{ $providersBuffered->count() }}) ESTE TAMPOCO!<span id="providers_in_buffer"><i class="fas fa-sort-down"></i></span></h4>
+    		<h4>Proveedores con cambios ({{ $providersBuffered->count() }}) ESTE TAMPOCO!<span id="providers_in_buffer"><i class="fas fa-sort-down"></i></span><span id="providers_in_buffer_up" style="display: none"><i class="fas fa-sort-up"></i></span></h4>
     		<table class="table" style="display: none" id="providers_in_buffer_table">
 			  <thead>
 			    <tr>

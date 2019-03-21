@@ -103,6 +103,14 @@ class ProviderController extends Controller
         $providerMember->doctors = $request->input('team-doctors');
         $providerMember->save();
 
+        $regions = $request->input('regions');
+        for ($i=0; $i < count($regions); $i++) {
+            $providerRegion = new ProviderRegion();
+            $providerRegion->provider_id = $provider->id;
+            $providerRegion->city_id = $regions[$i];
+            $providerRegion->save();
+        }
+
 
         return redirect('providers/dashboard');
     }
@@ -273,4 +281,3 @@ class ProviderController extends Controller
         $provider->save();   
      }
 }
-

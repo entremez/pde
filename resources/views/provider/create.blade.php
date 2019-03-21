@@ -272,17 +272,18 @@
 <div class="row my-5">
     <div class="col">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="terms">
+          <input class="form-check-input" type="checkbox" id="terms" name="terms">
           <label class="form-check-label" for="terms">
             Cuento con autorización del cliente de este caso para publicar la información.
           </label>
         </div>
+        <div class="errorTerms"></div>
     </div>
 </div>
         <br>
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
-                <button type="submit" class="btn btn-primary btn-raised d-inline" disabled="true" id="submit">
+                <button type="submit" class="btn btn-primary btn-raised d-inline" id="submit">
                     Enviar
                 </button>
                 <button class="btn btn-primary btn-raised d-inline" id="preview" data-toggle="modal" data-target="#previewModal" disabled="true">

@@ -1,6 +1,6 @@
     <div class="row mt-5">
     	<div class="col">
-    		<h4>Casos con cambios ({{ $intancesBuffered->count() }}) ESTE AUN NO!<span id="instances_buffered"><i class="fas fa-sort-down"></i></span></h4>
+    		<h4>Casos con cambios ({{ $intancesBuffered->count() }}) ESTE AUN NO!<span id="instances_buffered"><i class="fas fa-sort-down"></i></span><span id="instances_buffered_up" style="display: none"><i class="fas fa-sort-up"></i></span></h4>
     		<table class="table" id="instances_buffered_table" style="display: none">
 			  <thead>
 			    <tr>

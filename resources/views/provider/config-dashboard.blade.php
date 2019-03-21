@@ -152,7 +152,7 @@
 
             </div>
         </div>
-        <div class="servicios">            
+        <div class="regiones">            
             <label class="bmd-label-floating pt-4">Selecciona regiones donde la empresa presta sus servicios</label>
             <div class="errorRegions"></div>
             <div class="row pt-3">

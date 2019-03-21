@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProviderBuffer extends Model
 {
+    public function commune()
+    {
+        return $this->hasOne('App\Commune', 'id', 'commune_id');
+    }
+
     public function getImagenLogoAttribute()
     {
         if(substr($this->logo, 0, 4) === "http")
@@ -51,6 +56,17 @@ class ProviderBuffer extends Model
     public function isBuffered()
     {
         return true;
+    }
+
+    public function address()
+    {
+        $regionAndCommune = $this->commune()->first()->commune == "En el extranjero" ? '': ', ' . $this->commune()->first()->commune. ', ' .$this->city()->first()->region. '.';
+        return $this->address . $regionAndCommune ;
+    }
+
+    public function city()
+    {
+        return $this->hasOne('App\City', 'id', 'city_id');
     }
 
 }

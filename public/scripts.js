@@ -23353,6 +23353,7 @@ $(document).ready(function () {
             'long_description' : {required:true},
             'service[]' : {required:true},
             'region' : {required:true},
+            'regions[]' : {required:true},
             'commune' : {required:true},
             'logo' : {required:true}
           },
@@ -23385,6 +23386,9 @@ $(document).ready(function () {
            'service[]' : { 
                 required:'*Selecciona al menos un servicio.'
             },
+           'regions[]' : { 
+                required:'*Selecciona al menos una región donde presta sus servicios.'
+            },
            'logo' : { 
                 required:'*Selecciona una imagen.'
             }
@@ -23395,6 +23399,9 @@ $(document).ready(function () {
               element.parents('.servicios').find('.error').addClass('error-class');
             } else if(element.attr("name") == "logo") {
               error.insertBefore('.errorLogo');
+            } else if(element.attr("name") == "regions[]") {
+              error.insertBefore('.errorRegions');
+              element.parents('.regiones').find('.error').addClass('error-class');
             } else {
               error.insertBefore(element);
             }
@@ -23414,6 +23421,7 @@ $(document).ready(function () {
             'phone' : {required:true},
             'long_description' : {required:true},
             'service[]' : {required:true},
+            'regions[]' : {required:true},
             'commune' : {required:true},
             'region' : {required:true}
           },
@@ -23421,6 +23429,9 @@ $(document).ready(function () {
            'name': {
               required: "*Ingrese su nombre o el de su empresa."
            },
+           'regions[]' : { 
+                required:'*Selecciona al menos una región donde presta sus servicios.'
+            },
            'rut' : { 
                 required:'*Este campo es obligatorio.', 
                 rut:'*Por favor revise que esté escrito correctamente'
@@ -23453,7 +23464,10 @@ $(document).ready(function () {
               element.parents('.servicios').find('.error').addClass('error-class');
             } else if(element.attr("name") == "logo") {
               error.insertBefore('.errorLogo');
-            } else {
+            }else if(element.attr("name") == "regions[]") {
+              error.insertBefore('.errorRegions');
+              element.parents('.regiones').find('.error').addClass('error-class');
+            }  else {
               error.insertBefore(element);
             }
           }
@@ -23479,7 +23493,8 @@ $(document).ready(function () {
             'quote' : {required:true},
             'company-logo' : {required:true},
             'service[]' : {required:true},
-            'ragion' : {required:true}
+            'ragion' : {required:true},
+            'terms' : {required:true}
           },
           messages: {
            'name': {
@@ -23523,6 +23538,9 @@ $(document).ready(function () {
             },
            'quote' : { 
                 required:'*Este campo es obligatorio.'
+            },
+           'terms' : { 
+                required:'*Debes confirmar que cuentas con autorización.'
             }
           },
           errorPlacement: function(error, element) {
@@ -23535,6 +23553,8 @@ $(document).ready(function () {
               error.insertBefore('.errorLogo');
             } else if(element.attr("name") == "company-logo") {
               error.insertBefore('.errorLogoCompany');
+            } else if(element.attr("name") == "terms") {
+              error.insertBefore('.errorTerms');
             } else {
               error.insertBefore(element);
             }
@@ -23720,7 +23740,7 @@ var quantity = '';
 var sentence = '';
 var unit = '';
 
-      isPreviewReady();
+    isPreviewReady();
 
     $('#file-input').change(function(e) {
       addImage(e); 
@@ -24105,25 +24125,73 @@ $(document).on('click', '#travelOrRegister', function(event) {
 
 $(document).on('click', '#providers_to_approve', function(event) {
   $('#providers_to_approve_table').toggle();
+  $('#providers_to_approve').toggle();
+  $('#providers_to_approve_up').toggle();
 });
+
+$(document).on('click', '#providers_to_approve_up', function(event) {
+  $('#providers_to_approve_table').toggle();
+  $('#providers_to_approve').toggle();
+  $('#providers_to_approve_up').toggle();
+});
+
 $(document).on('click', '#providers_in_buffer', function(event) {
   $('#providers_in_buffer_table').toggle();
+  $('#providers_in_buffer').toggle();
+  $('#providers_in_buffer_up').toggle();
+});
+$(document).on('click', '#providers_in_buffer_up', function(event) {
+  $('#providers_in_buffer_table').toggle();
+  $('#providers_in_buffer').toggle();
+  $('#providers_in_buffer_up').toggle();
 });
 
 $(document).on('click', '#instances_to_approve', function(event) {
   $('#instances_to_approve_table').toggle();
+  $('#instances_to_approve').toggle();
+  $('#instances_to_approve_up').toggle();
+});
+
+$(document).on('click', '#instances_to_approve_up', function(event) {
+  $('#instances_to_approve_table').toggle();
+  $('#instances_to_approve').toggle();
+  $('#instances_to_approve_up').toggle();
 });
 
 $(document).on('click', '#instances_buffered', function(event) {
   $('#instances_buffered_table').toggle();
+  $('#instances_buffered').toggle();
+  $('#instances_buffered_up').toggle();
+});
+
+$(document).on('click', '#instances_buffered_up', function(event) {
+  $('#instances_buffered_table').toggle();
+  $('#instances_buffered').toggle();
+  $('#instances_buffered_up').toggle();
 });
 
 $(document).on('click', '#providers_approved', function(event) {
   $('#providers_approved_table').toggle();
+  $('#providers_approved').toggle();
+  $('#providers_approved_up').toggle();
+});
+
+$(document).on('click', '#providers_approved_up', function(event) {
+  $('#providers_approved_table').toggle();
+  $('#providers_approved').toggle();
+  $('#providers_approved_up').toggle();
 });
 
 $(document).on('click', '#instances_approved', function(event) {
   $('#instances_approved_table').toggle();
+  $('#instances_approved_up').toggle();
+  $('#instances_approved').toggle();
+});
+
+$(document).on('click', '#instances_approved_up', function(event) {
+  $('#instances_approved_table').toggle();
+  $('#instances_approved_up').toggle();
+  $('#instances_approved').toggle();
 });
 
 });

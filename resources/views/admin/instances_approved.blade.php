@@ -1,6 +1,6 @@
     <div class="row mt-5">
     	<div class="col">
-    		<h4>Casos aprobados ({{ $instancesApproved->count() }}) <span id="instances_approved"><i class="fas fa-sort-down"></i></span></h4>
+    		<h4>Casos aprobados ({{ $instancesApproved->count() }}) <span id="instances_approved"><i class="fas fa-sort-down"></i></span><span id="instances_approved_up" style="display: none"><i class="fas fa-sort-up"></i></span></h4>
     		<table class="table" id="instances_approved_table" style="display: none">
 			  <thead>
 			    <tr>
