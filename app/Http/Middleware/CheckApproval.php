@@ -23,10 +23,10 @@ class CheckApproval
                 if($provider->approved)
                     return $next($request);
                 if(!auth()->check())
-                    abort(404);
+                    return response()->view('errors.404', [], 404);
                 if( auth()->user()->role_id == 1 || auth()->user()->instance()->id == $provider->id)
                     return $next($request);
-                abort(404);
+                return response()->view('errors.404', [], 404);
                 break;
             
             case 'case':
@@ -34,10 +34,10 @@ class CheckApproval
                 if($instance->approved)
                     return $next($request);
                 if(!auth()->check())
-                    abort(404);
+                    return response()->view('errors.404', [], 404);
                 if(auth()->user()->role_id == 1 || auth()->user()->instance()->id == $instance->provider_id)
                     return $next($request);
-                abort(404);
+                return response()->view('errors.404', [], 404);
                 break;
         }
     }

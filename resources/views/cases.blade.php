@@ -17,6 +17,9 @@
 <div class="after-menu"></div>
 
     <div class="col-md-10 offset-md-1 mt-5 section">
+            <div class="mb-4" style="display: {{ !$instance->approved ? '':'none' }}">
+                    <small>*Caso pendiente de aprobación.</small>
+            </div>
             <div class="row">
                 <div class="col-md-9">
                     <img class="image-container image-case" style="background-image: linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(0,0,0,0.4995040252429097) 33%, rgba(0,0,0,0.502305145691089) 50%, rgba(0,0,0,0.4995040252429097) 67%, rgba(255,255,255,0) 85%), url('{{ url($instance->my_image) }}')">

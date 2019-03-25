@@ -3,9 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use App\Provider;
 
 class ProviderBuffer extends Model
 {
+
+    public function regions()
+    {
+        return $this->hasMany('App\ProviderRegionBuffer', 'provider_id');
+    }
     public function commune()
     {
         return $this->hasOne('App\Commune', 'id', 'commune_id');
@@ -67,6 +74,70 @@ class ProviderBuffer extends Model
     public function city()
     {
         return $this->hasOne('App\City', 'id', 'city_id');
+    }
+
+    public function services()
+    {
+        return $this->hasMany('App\ProviderServiceBuffer', 'provider_id' , 'id');
+    }
+
+
+    public function getAllServicesJsonAttribute(){
+        $services = $this->services()->orderBy('service_id')->get();
+        $service = new Collection();
+        foreach ($services as $s) {
+            $service->push($s->service()->first());
+        }
+        return $service;
+    }
+
+
+    public function equalServices(Provider $provider){
+        return $provider->all_services_json->diff($this->all_services_json)->count() + $this->all_services_json->diff($provider->all_services_json)->count() == 0;
+    }
+
+    public function servicesMaintained(Provider $provider)
+    {
+        return $provider->all_services_json->intersect($this->all_services_json);
+    }
+
+    public function servicesRemoved(Provider $provider)
+    {
+        return $provider->all_services_json->diff($this->all_services_json);
+    }
+
+    public function servicesAdded(Provider $provider)
+    {
+        return $this->all_services_json->diff($provider->all_services_json);
+    }
+
+    public function equalRegions(Provider $provider){
+
+        return $provider->getRegions()->diff($this->getRegions())->count() + $this->getRegions()->diff($provider->getRegions())->count() == 0;
+    }
+
+    public function regionMaintained(Provider $provider)
+    {
+        return $provider->getRegions()->intersect($this->getRegions());
+    }
+
+    public function regionRemoved(Provider $provider)
+    {
+        return $provider->getRegions()->diff($this->getRegions());
+    }
+
+    public function regionAdded(Provider $provider)
+    {
+        return $this->getRegions()->diff($provider->getRegions());
+    }
+
+    public function getRegions()
+    {
+        $regions = collect();
+        foreach ($this->regions as $region) {
+            $regions->push($region->region()->first()->region);
+        }
+        return $regions;
     }
 
 }

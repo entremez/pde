@@ -386,7 +386,8 @@ $(document).ready(function () {
             'company-logo' : {required:true},
             'service[]' : {required:true},
             'ragion' : {required:true},
-            'terms' : {required:true}
+            'terms' : {required:true},
+            'business' : {required:true}
           },
           messages: {
            'name': {
@@ -431,6 +432,9 @@ $(document).ready(function () {
            'quote' : { 
                 required:'*Este campo es obligatorio.'
             },
+           'business' : { 
+                required:'*Selecciona el tipo de negocio.'
+            },
            'terms' : { 
                 required:'*Debes confirmar que cuentas con autorización.'
             }
@@ -450,6 +454,9 @@ $(document).ready(function () {
             } else {
               error.insertBefore(element);
             }
+          },
+          invalidHandler:function(event, validator) {
+            $('#previewModal').modal('hide');
           }
       });
 
@@ -468,7 +475,8 @@ $('#edit-form').validate({
             'quote' : {required:true},
             'service[]' : {required:true},
             'ragion' : {required:true},
-            'terms' : {required:true}
+            'terms' : {required:true},
+            'business' : {required:true}
           },
           messages: {
            'name': {
@@ -504,6 +512,9 @@ $('#edit-form').validate({
            'quote' : { 
                 required:'*Este campo es obligatorio.'
             },
+           'business' : { 
+                required:'*Selecciona el tipo de negocio.'
+            },
            'terms' : { 
                 required:'*Debes confirmar que cuentas con autorización.'
             }
@@ -519,6 +530,9 @@ $('#edit-form').validate({
             } else {
               error.insertBefore(element);
             }
+          },
+          invalidHandler:function(event, validator) {
+            $('#previewModal').modal('hide');
           }
       });
 

@@ -14,7 +14,7 @@
 			  </thead>
 			  <tbody>
 			  	@foreach( $providers as $provider)
-			  		@if(!$provider->approved)
+			  		@if(!$provider->approved && $provider->rut != null)
 				    <tr>
 				      <th scope="row">{{ $provider->id}}</th>
 				      <td>{{ $provider->name}}</td>

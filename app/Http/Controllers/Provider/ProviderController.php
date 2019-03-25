@@ -18,6 +18,8 @@ use App\ProviderMember;
 use App\ProviderMemberBuffer;
 use Freshwork\ChileanBundle\Rut;
 use App\Commune;
+use App\Mail\RegisterSuccess;
+use Illuminate\Support\Facades\Mail;
 
 class ProviderController extends Controller
 {
@@ -111,6 +113,7 @@ class ProviderController extends Controller
             $providerRegion->save();
         }
 
+        Mail::send(new RegisterSuccess(auth()->user()));
 
         return redirect('providers/dashboard');
     }

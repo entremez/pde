@@ -23,7 +23,7 @@ class AdminController extends Controller
             'intancesBuffered' => InstanceBuffer::get(),
             'providers' => Provider::get(),
             'providersApproved' => Provider::where('approved', true)->get(),
-            'providersWaitinfForApproval' => Provider::where('approved', false)->get(),
+            'providersWaitinfForApproval' => Provider::where('approved', false)->where('rut', '!=' , '')->get(),
             'providersBuffered' => ProviderBuffer::get()
         ]);
     }

@@ -11,6 +11,9 @@
 
 <section class="mt-5">
     <div class="col-md-10 offset-md-1">
+        <div class="mb-4" style="display: {{ !$provider->approved ? '':'none' }}">
+                    <small>*Proveedor pendiente de aprobación.</small>
+            </div>
         <div class="row">
             <div class="col-md-9">
                 
@@ -58,14 +61,17 @@
     <input type="hidden" name="counter_id" value="{{ $counterId }}">
 </form>
 
-<div class="col-md-10 offset-md-1 section">
-    <div class="section-title">
-        <p class="mt-0"><span class="first-color">Más Casos de diseño de</span> <span class="secondary-color">{{ $provider->name }}</span></p>
+
+@if($cases->count() > 0)
+    <div class="col-md-10 offset-md-1 section">
+        <div class="section-title">
+            <p class="mt-0"><span class="first-color">Más Casos de diseño de</span> <span class="secondary-color">{{ $provider->name }}</span></p>
+        </div>
+
+        @include('partials/instances')
+
     </div>
-
-    @include('partials/instances')
-
-</div>
+@endif
 
 @include('partials/footer')
 

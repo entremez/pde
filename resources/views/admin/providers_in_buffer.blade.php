@@ -19,7 +19,7 @@
 				      <td>{{ $provider->name}}</td>
 				      <td>{{ $provider->web}}</td>
 				      <td>{{ $provider->long_description}}</td>
-				      <td><a target="_blank" class="btn btn-primary" href="{{ route('provider', $provider->id) }}">Ver proveedor</a></td>
+				      <td><a target="_blank" class="btn btn-primary" href="{{ route('provider.buffered', $provider) }}">Ver proveedor</a></td>
 				      <td><a class="btn btn-danger" href="{{ route('approve.provider', $provider) }}">Aprobar</a></td>
 				    </tr>
 			    @endforeach

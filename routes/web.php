@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/mail', function () {
+      return  Mail::send(new App\Mail\CreateCaseSuccess(App\Instance::find(2)));
+});
+
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 
 Route::get('/cases', 'InstanceController@index')->name('cases');
@@ -53,6 +57,8 @@ Route::group([
 
     Route::get('/dashboard/provider-approve/{provider}', 'Provider\ProviderController@approveProvider')->name('approve.provider');
     Route::get('/dashboard/instance-approve/{instance}', 'Provider\ProviderController@approveInstance')->name('approve.instance');
+
+    Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');
 });
 
 

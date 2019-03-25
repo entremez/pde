@@ -56,7 +56,7 @@ class ProviderController extends Controller
     {
         return view('provider',[
             'provider' => $provider,
-            'cases' => Instance::inRandomOrder()->limit(3)->get(),
+            'cases' => Instance::inRandomOrder()->limit(3)->where('provider_id',$provider->id)->get(),
             'service' => $provider->allServicesJson,
             'counterId' => $provider->counter($request->ip())
             ]);

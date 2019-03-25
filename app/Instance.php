@@ -8,6 +8,7 @@ use App\Classification;
 use App\InstanceCounter;
 use App\InstanceBuffer;
 use Illuminate\Support\Collection;
+use App\Provider;
 
 class Instance extends Model
 {
@@ -182,6 +183,11 @@ class Instance extends Model
     public function getUnitBufferedAttribute()
     {
         return InstanceBuffer::where('instance_id', $this->id)->first()->unit;
+    }
+
+    public function emailProvider()
+    {
+        return User::where('role_id', 2)->where('type_id', Provider::find($this->provider_id)->id)->first()->email;
     }
 
 }

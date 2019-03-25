@@ -15,6 +15,8 @@ use App\Gain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use App\Mail\FirstStep;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -123,6 +125,8 @@ class RegisterController extends Controller
         ]);
 
         $user ->type_id = $company->id;
+
+
         $user->save();        
     }
 
@@ -132,6 +136,7 @@ class RegisterController extends Controller
         ]);
 
         $user ->type_id = $provider->id;
+
         $user->save();
     }
 

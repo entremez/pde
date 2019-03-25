@@ -137,7 +137,7 @@
                                 <ul>
                                     @foreach($services as $service)
                                         @if($service->category_id == $category->id)
-                                        <div class="form-check">
+                                        <div class="form-check" data-toggle="tooltip" data-placement="left" title="{{ $service->description }}">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" {{ $data->isMyService($service->id) ? 'checked':'' }} @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif ><span class="docepx">{{ $service->name }}</span>
                                                 <span class="form-check-sign">

@@ -17,6 +17,20 @@ class Provider extends Model
         'rut', 'dv_rut', 'name', 'address'
     ];
 
+    public function regions()
+    {
+        return $this->hasMany('App\ProviderRegion');
+    }
+
+    public function getRegions()
+    {
+        $regions = collect();
+        foreach ($this->regions as $region) {
+            $regions->push($region->region()->first()->region);
+        }
+        return $regions;
+    }
+
     public function cases()
     {
         return $this->hasMany('App\Instance');
@@ -74,7 +88,7 @@ class Provider extends Model
     }
 
     public function getAllServicesJsonAttribute(){
-        $services = $this->services()->get();
+        $services = $this->services()->orderBy('service_id')->get();
         $service = new Collection();
         foreach ($services as $s) {
             $service->push($s->service()->first());

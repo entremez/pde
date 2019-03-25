@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
             $table->increments('id');
 
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
 
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');

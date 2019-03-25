@@ -298,8 +298,6 @@
                 </button>
             </div>
         </div>
-    </form
->
 <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content bigModal">
@@ -360,12 +358,13 @@
 
         <div class="row buttons-preview">
             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Editar</button>
-            <button id="submit-create-case" class="btn btn-danger">Guardar cambios</button>
+            <button id="submit-create-case" type="submit" class="btn btn-danger">Guardar cambios</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+    </form>
 
 
 </div>
