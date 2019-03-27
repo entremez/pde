@@ -14897,3 +14897,7 @@ color: white;
   max-width: 50%;
   margin: 0 auto;
 }
+
+.tooltip {
+  max-height: 300px;
+}

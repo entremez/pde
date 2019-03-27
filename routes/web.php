@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/mail', function () {
+Route::get('/mail_mail_mail', function () {
       return  Mail::send(new App\Mail\CreateCaseSuccess(App\Instance::find(2)));
 });
 
@@ -23,6 +23,8 @@ Route::get('/provider/{provider}', 'ProviderController@detail')->middleware('ver
 Route::post('/provider/c/{providerId}', 'ProviderController@counterClick')->name('provider-counter');
 
 Route::get('/case/{instance}', 'InstanceController@show')->middleware('verified.approval')->name('case');
+
+Route::get('/case/{instance}/buffer', 'InstanceController@showBuffered')->middleware('verified.approval')->name('case.buffered');
 
 Route::post('/case/{provider}', 'CounterController@provider')->name('provider.counter');
 
@@ -55,8 +57,10 @@ Route::group([
     Route::resource('response_choices', 'Survey\ResponseChoiceController');
 
 
-    Route::get('/dashboard/provider-approve/{provider}', 'Provider\ProviderController@approveProvider')->name('approve.provider');
-    Route::get('/dashboard/instance-approve/{instance}', 'Provider\ProviderController@approveInstance')->name('approve.instance');
+    Route::post('/dashboard/provider-approve', 'Provider\ProviderController@approveProvider')->name('approve.provider');
+    Route::post('/dashboard/instance-approve', 'Provider\ProviderController@approveInstance')->name('approve.instance');
+    Route::post('/dashboard/instance-buffered-approve', 'Provider\ProviderController@approveInstanceBuffered')->name('approve.instance.buffered');
+    Route::post('/dashboard/provider-buffered-approve', 'Provider\ProviderController@approveProviderBuffered')->name('approve.provider.buffered');
 
     Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');
 });

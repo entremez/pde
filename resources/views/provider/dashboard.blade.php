@@ -55,7 +55,7 @@
                     <input type="hidden" id="delete" value="{{ route('delete.case')}}">
 
                     @foreach($instances as $instance)
-                        @if(!$instance->approved)
+                        @if(!$instance->approved or $instance->isBuffered())
                             <div class="col-md-4 col-sm-6 instance-dashboard">
                                 <div class="service">
                                     <a href="{{ route('case', $instance->id) }}">
@@ -75,7 +75,7 @@
 
                                         <div class="middle">
                                             <div class="edit">
-                                                <a href="{{route('case', $instance)}}"><i class="fas fa-search-plus link"></i></a>
+                                                <a href="{{ $instance->isBuffered() ? route('case.buffered', $instance) : route('case', $instance) }} " target="_blank"><i class="fas fa-search-plus link"></i></a>
                                                 <a href="{{route('cases.edit', $instance)}}"><i class="fas fa-edit link"></i></a>
                                                 <a href="#" ><i class="far fa-trash-alt link delete"  data-id="{{ $instance->id}}"></i></a>
 
@@ -105,7 +105,7 @@
                     <input type="hidden" id="delete" value="{{ route('delete.case')}}">
 
                     @foreach($instances as $instance)
-                        @if($instance->approved)
+                        @if($instance->approved && !$instance->isBuffered())
                             <div class="col-md-4 col-sm-6 instance-dashboard">
                                 <div class="service">
                                     <a href="{{ route('case', $instance->id) }}">

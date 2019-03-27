@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Instance;
+use App\InstanceBuffer;
 use App\CounterController;
 use App\Employees;
 use App\Sector;
@@ -118,11 +119,24 @@ class InstanceController extends Controller
     public function show(Instance $instance)
     {
         $instance->counter(request()->ip());
+
         return view('cases',[
             'instance' => $instance,
             'provider' => $instance->provider()->first(),
             'cases' => $instance->related(3)
             ]);
+    }
+   
+    public function showBuffered(Instance $instance)
+    {
+        $provider = $instance->provider()->first();
+        $instanceBuffered = InstanceBuffer::where('instance_id', $instance->id)->first();
+            return view('cases_buffered',[
+                'instance' => $instanceBuffered,
+                'provider' => $provider,
+                'original' => $instance
+                ]);
+
     }
 
 }

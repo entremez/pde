@@ -24208,5 +24208,119 @@ $(document).on('click', '#instances_approved_up', function(event) {
   $('#instances_approved').toggle();
 });
 
+$(document).on('click', '#approve-provider', function(event) {
+  event.preventDefault();
+  $.ajax({
+     url : $(this).data('url'),
+     method : "POST",
+     cache: false,
+     data : {"_token": $(this).data('token'), "id" : $(this).data('id')},
+     success : function (data)
+              {
+                $('#provider-'+data.id).hide('100');
+                $('#provider-approved').append(addProviderToApproved(data));
+              }
+    });
 });
+
+$(document).on('click', '#approve-instance', function(event) {
+  event.preventDefault();
+  $.ajax({
+     url : $(this).data('url'),
+     method : "POST",
+     cache: false,
+     data : {"_token": $(this).data('token'), "id" : $(this).data('id')},
+     success : function (data)
+              {                
+                var number = $('#number_instances');
+                var instances = Number(number.html()) + 1;
+                number.html(instances);
+                number = $('#number_instances_to_approve');
+                instances = number.html() - 1;
+                if(Number.isNaN(instances)){
+                  instances = '0';
+                }
+                number.html(instances);
+
+
+                $('#instance-'+data[0].id).hide('100');
+                $('#instance-approved').append(addInstanceToApproved(data));
+              }
+    });
+});
+
+$(document).on('click', '#approve-instance-buffered', function(event) {
+  event.preventDefault();
+  $.ajax({
+     url : $(this).data('url'),
+     method : "POST",
+     cache: false,
+     data : {"_token": $(this).data('token'), "id" : $(this).data('id')},
+     success : function (data)
+              { 
+                var number = $('#number_instances_buffered');
+                var casesBuffered = Number(number.html()) - 1;
+                if(Number.isNaN(casesBuffered)){
+                  casesBuffered = '0';
+                }
+                number.html(casesBuffered);
+                $('#instance-approved-'+data[0].id).hide('200');
+                $('#instance-buffered-'+data[0].id).hide('200');
+                $('#instance-approved').append(addInstanceToApproved(data));
+              }
+    });
+});
+
+$(document).on('click', '#approve-provider-buffered', function(event) {
+  event.preventDefault();
+  $.ajax({
+     url : $(this).data('url'),
+     method : "POST",
+     cache: false,
+     data : {"_token": $(this).data('token'), "id" : $(this).data('id')},
+     success : function (data)
+              { 
+                var number = $('#number_providers_buffered');
+                var providerBuffered = Number(number.html()) - 1;
+                if(Number.isNaN(providerBuffered)){
+                  providerBuffered = '0';
+                }
+                number.html(providerBuffered);
+                $('#provider-approved-'+data.id).hide('200');
+                $('#provider-buffered-'+data.id).hide('200');
+                $('#provider-approved').append(addProviderToApproved(data));
+              }
+    });
+});
+
+});
+
+
+
+function addProviderToApproved(data){
+
+  return `
+          <tr>
+            <th scope="row">${data.id}</th>
+            <td>${data.name}</td>
+            <td>${data.web}</td>
+            <td>${data.long_description}</td>
+            <td><a target="_blank" class="btn btn-primary" href="/provider/${data.id}">Ver proveedor</a></td>
+          </tr>
+  `;
+}
+
+function addInstanceToApproved(data){
+
+  return `
+          <tr id = "instance-approved-${data[0].id}">
+            <th scope="row">${data[0].id}</th>
+            <td>${data[0].name}</td>
+            <td>${data[1]}</td>
+            <td>${data[0].company_name}</td>
+            <td>${data[0].long_description}</td>
+            <td><a target="_blank" class="btn btn-primary" href="/case/${data[0].id}">Ver caso</a></td>
+          </tr>
+  `;
+}
 

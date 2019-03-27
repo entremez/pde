@@ -18,6 +18,8 @@ use App\City;
 use App\Employees;
 use App\BusinessType;
 use File;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CreateCaseSuccess;
 
 class CaseController extends Controller
 {

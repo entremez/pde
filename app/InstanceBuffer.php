@@ -7,10 +7,15 @@ use App\Instance;
 
 class InstanceBuffer extends Model
 {
-	public function identifier()
-	{
-		return $this->provider_id;
-	}
+    public function identifier()
+    {
+        return $this->provider_id;
+    }
+
+    public function instance()
+    {
+        return $this->hasOne('App\Instance' ,'id','instance_id');
+    }
 
     public function provider()
     {
@@ -62,6 +67,39 @@ class InstanceBuffer extends Model
     public function isBuffered()
     {
         return true;
+    }    
+
+    public function tags()
+    {
+
+        foreach ($this->services()->get() as $service) { //0 = services , 1 = sector , 2 = classification, 3 = employees, 4 = city , 5 = year 
+            $aux['key'] = 0;
+            $aux['name'] = $service->service()->first()->name;
+            $aux['id'] = $service->service()->first()->id;
+            $tags[] = $aux;
+        }
+        $aux['key'] = 1;
+        $aux['name'] = $this->classification()->first()->sector()->first()->name;
+        $aux['id'] = $this->classification()->first()->sector()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 2;
+        $aux['name'] = $this->classification()->first()->classification;
+        $aux['id'] = $this->classification()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 3;
+        $aux['name'] = $this->employees()->first()->range;
+        $aux['id'] = $this->employees()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 4;
+        $aux['name'] = $this->city()->first()->region;
+        $aux['id'] = $this->city()->first()->id;
+        $tags[] = $aux;
+        $aux['key'] = 5;
+        $aux['name'] = $this->year;
+        $aux['id'] = $this->year;
+        $tags[] = $aux;
+
+        return $tags;
     }
 
 }

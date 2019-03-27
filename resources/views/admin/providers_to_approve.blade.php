@@ -15,13 +15,13 @@
 			  <tbody>
 			  	@foreach( $providers as $provider)
 			  		@if(!$provider->approved && $provider->rut != null)
-				    <tr>
+				    <tr id="provider-{{ $provider->id }}">
 				      <th scope="row">{{ $provider->id}}</th>
 				      <td>{{ $provider->name}}</td>
 				      <td>{{ $provider->web}}</td>
 				      <td>{{ $provider->long_description}}</td>
 				      <td><a target="_blank" class="btn btn-primary" href="{{ route('provider', $provider->id) }}">Ver proveedor</a></td>
-				      <td><a class="btn btn-danger" href="{{ route('approve.provider', $provider) }}">Aprobar</a></td>
+				      <td><button class="btn btn-danger" id="approve-provider" data-id = "{{ $provider->id }}" data-url = "{{ route('approve.provider', $provider) }}" data-token = "{{ csrf_token() }}">Aprobar</button></td>
 				    </tr>
 				    @endif
 			    @endforeach

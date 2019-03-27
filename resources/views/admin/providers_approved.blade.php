@@ -11,10 +11,10 @@
 			      <th scope="col">Ver</th>
 			    </tr>
 			  </thead>
-			  <tbody>
+			  <tbody id="provider-approved">
 			  	@foreach( $providers as $provider)
 			  		@if($provider->approved)
-				    <tr>
+				    <tr  id="provider-approved-{{ $provider->id }}">
 				      <th scope="row">{{ $provider->id}}</th>
 				      <td>{{ $provider->name}}</td>
 				      <td>{{ $provider->web}}</td>

@@ -9,9 +9,14 @@ use App\Provider;
 class ProviderBuffer extends Model
 {
 
+    public function provider()
+    {
+        return Provider::find($this->provider_id);
+    }
+
     public function regions()
     {
-        return $this->hasMany('App\ProviderRegionBuffer', 'provider_id');
+        return $this->hasMany('App\ProviderRegionBuffer', 'provider_id', 'provider_id');
     }
     public function commune()
     {
@@ -78,7 +83,7 @@ class ProviderBuffer extends Model
 
     public function services()
     {
-        return $this->hasMany('App\ProviderServiceBuffer', 'provider_id' , 'id');
+        return $this->hasMany('App\ProviderServiceBuffer' , 'provider_id', 'provider_id');
     }
 
 

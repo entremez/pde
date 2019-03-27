@@ -21,38 +21,37 @@
                     <h3>{{ $providerBuffered->name }}</h3>
                 </div>
 
-
                 @if($providerBuffered->equalServices($provider))
                 <div class="provider-subtitle">
                     @foreach($service as $s)
-                    <a class="badge badge-success" href="{{ route('providers-list-filtered', $s->id)}}">{{ $s->name }}</a>
+                    <a class="badge badge-success" href="#!">{{ $s->name }}</a>
                     @endforeach
                 </div>
                 @else
 
-                    @if($providerBuffered->servicesMaintained($provider)->count() != 0)
+                    @if($providerBuffered->servicesMaintained($provider)->count() > 0)
                     Servicios que se mantienen
                     <div class="provider-subtitle">
                         @foreach($providerBuffered->servicesMaintained($provider) as $s)
-                        <a class="badge badge-success" href="{{ route('providers-list-filtered', $s->id)}}">{{ $s->name }}</a>
+                        <a class="badge badge-success" href="#!">{{ $s->name }}</a>
                         @endforeach
                     </div>
                     @endif
 
-                    @if($providerBuffered->servicesRemoved($provider)->count() != 0)
+                    @if($providerBuffered->servicesRemoved($provider)->count() > 0)
                     Servicios eliminados
                     <div class="provider-subtitle">
                         @foreach($providerBuffered->servicesRemoved($provider) as $s)
-                        <a class="badge badge-success" href="{{ route('providers-list-filtered', $s->id)}}">{{ $s->name }}</a>
+                        <a class="badge badge-success" href="#!">{{ $s->name }}</a>
                         @endforeach
                     </div>
                     @endif
 
-                    @if($providerBuffered->servicesAdded($provider)->count() != 0)
+                    @if($providerBuffered->servicesAdded($provider)->count() > 0)
                     Servicios agregados
                     <div class="provider-subtitle">
                         @foreach($providerBuffered->servicesAdded($provider) as $s)
-                        <a class="badge badge-success" href="{{ route('providers-list-filtered', $s->id)}}">{{ $s->name }}</a>
+                        <a class="badge badge-success" href="#!">{{ $s->name }}</a>
                         @endforeach
                     </div>
                     @endif
@@ -63,22 +62,28 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-3">
-                <img class="image-container w-100" src="{{ $provider->imagen_logo }}">
+                <div>
+                    <img class="w-100" src="{{ $provider->imagen_logo }}">
+                </div>
             </div>
             @else
             <div class="col-md-3">
                 <p>Logo original</p>
-                <img class="image-container w-100" src="{{ $provider->imagen_logo }}">
+                <div>
+                    <img class="w-100" src="{{ $provider->imagen_logo }}">
+                </div>
             </div>
             <div class="col-md-3">
                 <p>Nuevo logo</p>
-                <img class="image-container w-100" src="{{ $providerBuffered->imagen_logo }}">
+                <div>
+                    <img class="w-100" src="{{ $providerBuffered->imagen_logo }}">
+                </div>
             </div>
             @endif
         </div>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col">
-                <h4 class="mt-2">Descripción</h4>
+                <h4>Descripción</h4>
                 @if($providerBuffered->long_description ==  $provider->long_description)
                     <div class="provider-description">
                         {{ $providerBuffered->long_description }}
@@ -93,9 +98,7 @@
 
                 <h4 class="mt-4">Telefono</h4>
                 @if($providerBuffered->phone == $provider->phone)
-                    <div class="row text-left">
-                        <div class="col-md-11"><p>{{ $providerBuffered->phone }}</p></div>
-                    </div>
+                    <p>{{ $providerBuffered->phone }}</p>
                 @else
                     <p>Teléfono inicial <br>
                         {{ $provider->phone }}</p>
@@ -104,7 +107,7 @@
                 @endif
 
                 <h4 class="mt-4">Rut</h4>
-                @if($providerBuffered->rut == $provider->rut))
+                @if($providerBuffered->rut == $provider->rut)
 
                     <p>{{ Rut::parse($providerBuffered->rut."-".$providerBuffered->dv_rut)->format()}}
                     </p>
