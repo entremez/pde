@@ -88,6 +88,10 @@
                         <input type="hidden" name="{{ $key == 2 ? 'classification':'year' }}" value="{{ $id }}">
                     @endif
 
+                    @if($key == 6 )
+                        <input type="hidden" name="business_type" value="{{ $id }}">
+                    @endif
+
     </div>
         <form method="post" action="{{ route('cases') }}" id="form-filter">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

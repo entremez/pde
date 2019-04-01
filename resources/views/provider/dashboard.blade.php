@@ -58,7 +58,7 @@
                         @if(!$instance->approved or $instance->isBuffered())
                             <div class="col-md-4 col-sm-6 instance-dashboard">
                                 <div class="service">
-                                    <a href="{{ route('case', $instance->id) }}">
+                                    <a href="{{ $instance->isBuffered() ?   route('case.buffered', $instance) : route('case', $instance) }}" target="_blank">
                                             <div class="corner dashboard">{{ $instance->status ? $instance->corner_buffered :
                                             $instance->classification->classification }}</div>
                                         <div class="image-container dashboard" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url('{{url($instance->my_image)}}')">

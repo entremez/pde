@@ -14,6 +14,7 @@ class InstanceBuffer extends Model
 
     public function instance()
     {
+
         return $this->hasOne('App\Instance' ,'id','instance_id');
     }
 
@@ -25,6 +26,10 @@ class InstanceBuffer extends Model
     public function providerName()
     {
         return Instance::find($this->instance_id)->provider()->first()->name;
+    }
+
+    public function businessType(){
+        return $this->hasOne('App\BusinessType', 'id', 'business_type');
     }
 
     public function services(){
@@ -97,6 +102,10 @@ class InstanceBuffer extends Model
         $aux['key'] = 5;
         $aux['name'] = $this->year;
         $aux['id'] = $this->year;
+        $tags[] = $aux;
+        $aux['key'] = 6;
+        $aux['name'] = $this->businessType()->first()->type;
+        $aux['id'] = $this->business_type;
         $tags[] = $aux;
 
         return $tags;

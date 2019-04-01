@@ -27,8 +27,9 @@ class InstanceController extends Controller
             $serviceFiltered = $this->filter($request->input('services'), 4) == null ? $cases : $this->filter($request->input('services'), 4);
             $classificationFiltered = $this->filter($request->input('classification'), 5) == null ? $cases : $this->filter($request->input('classification'), 5);
             $yearFiltered = $this->filter($request->input('year'), 6) == null ? $cases : $this->filter($request->input('year'), 6);
+            $businessTypeFiltered = $this->filter($request->input('business_type'), 7) == null ? $cases : $this->filter($request->input('business_type'), 7);
             
-            return response()->json($citiesFiltered->intersect($casesFiltered)->intersect($sectorFiltered)->intersect($categoryFiltered)->intersect($serviceFiltered)->intersect($classificationFiltered)->intersect($yearFiltered));
+            return response()->json($citiesFiltered->intersect($casesFiltered)->intersect($sectorFiltered)->intersect($categoryFiltered)->intersect($serviceFiltered)->intersect($classificationFiltered)->intersect($yearFiltered)->intersect($businessTypeFiltered));
         }
         return view('index-cases', [
             'cases'  => Instance::where('approved', true)->inRandomOrder()->get(),
@@ -93,6 +94,10 @@ class InstanceController extends Controller
                         break;
                     case 6:
                         if($case->year == $selection)
+                            $instances->push($case);
+                        break;
+                    case 7:
+                        if($case->business_type == $selection)
                             $instances->push($case);
                         break;
                 }

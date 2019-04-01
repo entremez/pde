@@ -40,6 +40,12 @@ class HomeController extends Controller
     }
 
 
+    public function welcomeSoon()
+    {
+        return view('soon');
+    }
+
+
     public function resources()
     {
         return view('resources');

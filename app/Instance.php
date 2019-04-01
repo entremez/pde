@@ -32,6 +32,10 @@ class Instance extends Model
         return $this->hasMany('App\InstanceImage');
     }
 
+    public function businessType(){
+        return $this->hasOne('App\BusinessType', 'id', 'business_type');
+    }
+
     public function services(){
         return $this->hasMany('App\InstanceService');
     }
@@ -78,7 +82,7 @@ class Instance extends Model
     public function tags()
     {
 
-        foreach ($this->services()->get() as $service) { //0 = services , 1 = sector , 2 = classification, 3 = employees, 4 = city , 5 = year 
+        foreach ($this->services()->get() as $service) { //0 = services , 1 = sector , 2 = classification, 3 = employees, 4 = city , 5 = year , 6 = business type
             $aux['key'] = 0;
             $aux['name'] = $service->service()->first()->name;
             $aux['id'] = $service->service()->first()->id;
@@ -103,6 +107,10 @@ class Instance extends Model
         $aux['key'] = 5;
         $aux['name'] = $this->year;
         $aux['id'] = $this->year;
+        $tags[] = $aux;
+        $aux['key'] = 6;
+        $aux['name'] = $this->businessType()->first()->type;
+        $aux['id'] = $this->business_type;
         $tags[] = $aux;
 
         return $tags;

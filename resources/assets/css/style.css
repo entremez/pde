@@ -1194,15 +1194,21 @@ display: none;
 
 @media (max-width: 1080px) {
 
-  *{
+/*  *{
     display: none;
   }
   
   .modal.login{
     display: none;
   }
+*/
+
+.footer-logos {
+    margin-top: -30px;
+    justify-content: center!important;
 
 
+}
 }
 
 
@@ -1614,6 +1620,12 @@ color: white;
     border-right-color: #000033;
 }
 
+.tooltip:active,
+.tooltip:visited
+ {
+    visibility: hidden;
+}
+
 
 .footer-logos{
   margin-top: -30px;
@@ -1623,6 +1635,7 @@ color: white;
 .logof img {
   width: 70%;
 }
+
 
 .provider-name {
   font-size: 1.2rem;
@@ -1653,4 +1666,31 @@ color: white;
 
 .tooltip {
   max-height: 300px;
+}
+
+.with-comments{
+  background-color: deepskyblue;
+}
+.highlight{
+  background-color: yellow;
+}
+
+.ls{
+  letter-spacing: 1.2px;
+}
+
+.logos {
+  width: 24%;
+}
+
+.row.footer-logos img {
+    width: 70%;
+}
+
+.img-soon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 65%;
+    margin: 0 auto;
 }

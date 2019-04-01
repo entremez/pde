@@ -10,6 +10,7 @@ use App\ProviderCounter;
 use App\ProviderService;
 use App\ProviderMember;
 use App\ProviderRegion;
+use App\ProviderComment;
 
 class Provider extends Model
 {
@@ -79,6 +80,11 @@ class Provider extends Model
         return $this->hasMany('App\Instance', 'provider_id' , 'id');
     }
 
+    public function instancesApproved()
+    {
+        return $this->instances->where('approved', true)->count();
+    }
+
     public function getAllServicesAttribute(){
         $services = '';
         foreach ($this->services as $service) {
@@ -142,5 +148,20 @@ class Provider extends Model
     {
         $regionAndCommune = $this->commune()->first()->commune == "En el extranjero" ? '': ', ' . $this->commune()->first()->commune. ', ' .$this->city()->first()->region. '.';
         return $this->address . $regionAndCommune ;
+    }
+
+    public function hasComments()
+    {
+        return ProviderComment::where('provider_id', $this->id)->where('status', '<>', 0)->get()->count() > 0;
+    }
+
+    public function comments()
+    {
+        return $this->hasComments() ? ProviderComment::where('provider_id', $this->id)->first()->message : '';
+    }
+
+    public function changesAfterComments()
+    {
+        return ProviderComment::where('provider_id', $this->id)->where('status', 2)->get()->count() > 0;
     }
 }

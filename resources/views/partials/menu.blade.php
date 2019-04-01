@@ -18,7 +18,7 @@
                         <span class="menu-name">{{ Auth::user()->email }}</span>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('home') }}">Dashboard</a>
+                        <a class="dropdown-item" href="{{ route('home') }}">Escritorio</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}" class="dropdown-item"
                       onclick="event.preventDefault();

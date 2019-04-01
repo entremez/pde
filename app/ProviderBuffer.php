@@ -29,6 +29,12 @@ class ProviderBuffer extends Model
             return $this->logo;
         return asset('/providers/logos/'.$this->logo);
     }
+
+    public function getEmailAttribute()
+    {
+        $users = User::where('type_id',$this->provider_id)->where('role_id', 2)->get()->first();
+        return $users->email;
+    }
 	
     public function team()
     {
@@ -143,6 +149,21 @@ class ProviderBuffer extends Model
             $regions->push($region->region()->first()->region);
         }
         return $regions;
+    }
+
+    public function hasComments()
+    {
+        return ProviderComment::where('provider_id', $this->provider_id)->get()->count() > 0;
+    }
+
+    public function comments()
+    {
+        return $this->hasComments() ? ProviderComment::where('provider_id', $this->provider_id)->first()->message : '';
+    }
+
+    public function changesAfterComments()
+    {
+        return ProviderComment::where('provider_id', $this->provider_id)->where('status', 2)->get()->count() > 0;
     }
 
 }

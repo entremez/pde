@@ -93,7 +93,7 @@
                     <select class="form-control" id="business" name="business" required>
                       <option value="">Seleccionar...</option>
                         @foreach($businesses as $business)
-                            <option value="{{ $business->id }}" {{ $business->id == $case->business_type ? 'selected': '' }}>{{ $business->type }} - {{ $business->name }}</option>
+                            <option value="{{ $business->id }}" {{ $business->id == $case->business_type ? 'selected': '' }}>{{ $business->type }} - {{ $business->name }}, {{ $business->description }}</option>
                         @endforeach
                     </select>   
                 </div>

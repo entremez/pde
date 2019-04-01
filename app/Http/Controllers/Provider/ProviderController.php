@@ -19,7 +19,9 @@ use App\ProviderMemberBuffer;
 use Freshwork\ChileanBundle\Rut;
 use App\Commune;
 use App\Mail\RegisterSuccess;
+use App\Mail\ProviderChange;
 use Illuminate\Support\Facades\Mail;
+use App\ProviderComment;
 
 class ProviderController extends Controller
 {
@@ -114,6 +116,7 @@ class ProviderController extends Controller
         }
 
         Mail::send(new RegisterSuccess(auth()->user()));
+        Mail::send(new ProviderChange(1, $provider->name));
 
         return redirect('providers/dashboard');
     }
@@ -154,6 +157,7 @@ class ProviderController extends Controller
         }else{
             if(!$provider->approved){
                 $this->updatePreviousApproval($provider, $request);
+                Mail::send(new ProviderChange(3, $provider->name));
                 return redirect()->route('provider.dashboard');
             }
             $providerBuffer = new ProviderBuffer();
@@ -168,6 +172,7 @@ class ProviderController extends Controller
             $file->move($path, $fileName);
             $providerBuffer->logo = $fileName;
         }
+
         $providerBuffer->name = $request->input('name');
         $providerBuffer->address = $request->input('address');
         $providerBuffer->phone = $request->input('phone');
@@ -213,6 +218,13 @@ class ProviderController extends Controller
         $providerMemberBuffer->save();
         $provider->status = 1;
         $provider->save();
+
+        $this->statusComments($provider);
+
+
+        Mail::send(new ProviderChange(3, $provider->name));
+
+
         return redirect('providers/dashboard')->withSuccess( 'Datos modificados correctamente');
     }
 
@@ -281,6 +293,21 @@ class ProviderController extends Controller
         $providerMember->masters = $request->input('team-masters');
         $providerMember->doctors = $request->input('team-doctors');
         $providerMember->save();
-        $provider->save();   
+        $provider->save();
+
+        $this->statusComments($provider);
+     }
+
+     private function statusComments($provider)
+     {
+         if( $provider->hasComments() ){
+            $comments = ProviderComment::where('provider_id',$provider->id)
+                                        ->where('status', 1)->first();
+            $comments->status = 2;
+            $comments->save();
+
+            Mail::send(new ProviderChange(3, auth()->user()->instance()->name));
+         }
+
      }
 }

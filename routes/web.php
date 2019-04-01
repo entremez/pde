@@ -4,7 +4,8 @@ Route::get('/mail_mail_mail', function () {
       return  Mail::send(new App\Mail\CreateCaseSuccess(App\Instance::find(2)));
 });
 
-Route::get('/', 'HomeController@welcome' )->name('welcome');
+Route::get('/', 'HomeController@welcomeSoon' )->name('welcome');
+Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' )->name('welcome');
 
 Route::get('/cases', 'InstanceController@index')->name('cases');
 Route::get('/cases/{key}/{id}', 'InstanceController@indexWithParameters')->name('casesWithParameters');
@@ -61,6 +62,10 @@ Route::group([
     Route::post('/dashboard/instance-approve', 'Provider\ProviderController@approveInstance')->name('approve.instance');
     Route::post('/dashboard/instance-buffered-approve', 'Provider\ProviderController@approveInstanceBuffered')->name('approve.instance.buffered');
     Route::post('/dashboard/provider-buffered-approve', 'Provider\ProviderController@approveProviderBuffered')->name('approve.provider.buffered');
+
+
+    Route::post('/dashboard/provider-comments', 'Provider\ProviderController@sendCommentsToProvider')->name('comment.provider');
+
 
     Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');
 });

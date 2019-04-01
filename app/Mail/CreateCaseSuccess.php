@@ -31,8 +31,7 @@ class CreateCaseSuccess extends Mailable
      */
     public function build()
     {
-        return $this->from('pde@pde.cl', 'Registro Puente DE')
-                    ->subject('Nuevo Caso - '.$this->instance->name)
+        return $this->subject('Nuevo Caso - '.$this->instance->name)
                     ->to($this->instance->emailProvider())
                     ->view('mails.create-instance-success',[
                         'instance' => $this->instance,

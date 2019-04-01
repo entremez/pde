@@ -23109,8 +23109,11 @@ if(typeof jQuery==="undefined"){throw new Error("jquery-confirm requires jQuery"
 $(document).ready(function () {
 
 
-  $('[data-toggle="tooltip"]').tooltip();
-
+  $('[data-toggle="tooltip"]').mouseover(function(event) {
+    $(this).tooltip('show');
+  }).mouseleave(function(event) {
+    $(this).tooltip('hide');
+  });
 
     new WOW().init();
 
@@ -23991,9 +23994,15 @@ function filters() {
     $("input[name=classification]").each(function (index) {  
           classification.push($(this).val());
     });
+    
     var year = [];
     $("input[name=year]").each(function (index) {  
           year.push($(this).val());
+    });
+    
+    var business_type = [];
+    $("input[name=business_type]").each(function (index) {  
+          business_type.push($(this).val());
     });
 
     var form = $('#form-filter');
@@ -24011,7 +24020,8 @@ function filters() {
               categories:categories,
               services:services,
               classification:classification,
-              year:year},
+              year:year,
+              business_type:business_type},
       success : function (data)
       {
 
@@ -24210,17 +24220,30 @@ $(document).on('click', '#instances_approved_up', function(event) {
 
 $(document).on('click', '#approve-provider', function(event) {
   event.preventDefault();
-  $.ajax({
-     url : $(this).data('url'),
-     method : "POST",
-     cache: false,
-     data : {"_token": $(this).data('token'), "id" : $(this).data('id')},
-     success : function (data)
-              {
-                $('#provider-'+data.id).hide('100');
-                $('#provider-approved').append(addProviderToApproved(data));
+  var url = $(this).data('url');
+  var token = $(this).data('token');
+  var id = $(this).data('id');
+  var numberOfInstances = $(this).data('numberofinstances');
+
+  if(numberOfInstances <= 0){
+      $.confirm({
+          title: 'Aprobar proveedor',
+          content: 'El proveedor no tienen ningun caso aprobado ¿Realmente deseas aprobarlo?',
+          buttons: {
+              Confirmar: {
+                  btnClass: 'btn-primary',
+                  action: function () {
+                        approveProvider(url, token, id);
+                    },
+                  },
+              Volver: function () {
+
               }
-    });
+          }
+      });
+    }else{
+      approveProvider(url, token, id);
+    }
 });
 
 $(document).on('click', '#approve-instance', function(event) {
@@ -24293,6 +24316,44 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     });
 });
 
+
+  $(document).on('click', '.comment-to-provider', function(event) {
+    event.preventDefault();
+    $('#send-comment-to-provider').attr('disabled', false);
+    $('#emailProvider').attr('value', $(this).data('mail'));
+    $('#idProvider').attr('value', $(this).data('id'));
+    $('#message').html($(this).data('comments'));
+    $('#commentToProvider').modal('show');
+  });
+
+  $(document).on('click', '#send-comment-to-provider', function(event) {
+    event.preventDefault();
+    $(this).attr('disabled', true);
+    var mail = $('#emailProvider').val();
+    var message = $('#message').val();
+    var message = message.replace(/\n/g, "<br>");
+    var id = $('#idProvider').val();
+    $.ajax({
+       url : $(this).data('url'),
+       method : "POST",
+       cache: false,
+       data : { "_token": $(this).data('token'), 
+                "mail" : mail, 
+                "message": message, 
+                "id": id},
+       success : function (data)
+                { 
+                  $('#message').val('');
+                  $('#commentToProvider').modal('hide');
+                  $('#comment-provider-'+id).attr('disabled', 'disabled');
+                  $('#comment-provider-'+id).text('Comentarios enviados');
+
+                }
+    });
+
+
+  });
+
 });
 
 
@@ -24322,5 +24383,19 @@ function addInstanceToApproved(data){
             <td><a target="_blank" class="btn btn-primary" href="/case/${data[0].id}">Ver caso</a></td>
           </tr>
   `;
+}
+
+function approveProvider(url, token, id){
+  $.ajax({
+   url : url,
+   method : "POST",
+   cache: false,
+   data : {"_token": token, "id" : id},
+   success : function (data)
+            {
+              $('#provider-'+data.id).hide('100');
+              $('#provider-approved').append(addProviderToApproved(data));
+            }
+  });
 }
 

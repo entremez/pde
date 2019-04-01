@@ -6,7 +6,7 @@
 			    <tr>
 			      <th scope="col">#</th>
 			      <th scope="col">Nombre</th>
-			      <th scope="col">Web</th>
+			      <th scope="col">Casos ingresados</th>
 			      <th scope="col">Descripción</th>
 			      <th scope="col">Ver</th>
 			      <th scope="col">Acción</th>
@@ -15,14 +15,21 @@
 			  <tbody>
 			  	@foreach( $providers as $provider)
 			  		@if(!$provider->approved && $provider->rut != null)
-				    <tr id="provider-{{ $provider->id }}">
+				    <tr class="{{ $provider->hasComments() ? 'with-comments':'' }} {{ $provider->changesAfterComments() ? 'highlight':'' }}" id="provider-{{ $provider->id }}">
 				      <th scope="row">{{ $provider->id}}</th>
 				      <td>{{ $provider->name}}</td>
-				      <td>{{ $provider->web}}</td>
+				      <td>{{ $provider->instances->count()}}</td>
 				      <td>{{ $provider->long_description}}</td>
 				      <td><a target="_blank" class="btn btn-primary" href="{{ route('provider', $provider->id) }}">Ver proveedor</a></td>
-				      <td><button class="btn btn-danger" id="approve-provider" data-id = "{{ $provider->id }}" data-url = "{{ route('approve.provider', $provider) }}" data-token = "{{ csrf_token() }}">Aprobar</button></td>
+				      <td>
+				      	<div class="d-flex">
+					      	<button class="btn btn-danger" id="approve-provider" data-id = "{{ $provider->id }}" data-url = "{{ route('approve.provider', $provider) }}" data-token = "{{ csrf_token() }}" data-numberOfInstances="{{ $provider->instancesApproved()}}">Aprobar</button>
+					      	<button id="comment-provider-{{ $provider->id }}" class="btn btn-danger ml-1 comment-to-provider" data-mail="{{ $provider->email }}" data-id="{{ $provider->id }}" data-comments = "{{ $provider->comments() }}">Enviar comentarios</button>
+
+					    </div>
+				      </td>
 				    </tr>
+
 				    @endif
 			    @endforeach
 			  </tbody>

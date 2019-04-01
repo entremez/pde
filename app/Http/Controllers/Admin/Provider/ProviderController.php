@@ -17,6 +17,9 @@ use App\InstanceImage;
 use App\InstanceBuffer;
 use App\InstanceService;
 use App\InstanceServiceBuffer;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CommentToProvider;
+use App\ProviderComment;
 
 class ProviderController extends Controller
 {
@@ -25,6 +28,7 @@ class ProviderController extends Controller
         $provider = Provider::find($request->input('id'));
         $provider->approved = true;
         $provider->save();
+        ProviderComment::where('provider_id', $provider->id)->delete();
         return response()->json($provider);
     }
 
@@ -51,6 +55,7 @@ class ProviderController extends Controller
     {
         $providerBuffered = ProviderBuffer::find($request->input('id'));
         $provider = $this->updateProvider($providerBuffered);
+        ProviderComment::where('provider_id', $provider->id)->delete();
         return response()->json($provider);
     }
 
@@ -167,5 +172,24 @@ class ProviderController extends Controller
 
         ProviderBuffer::where('provider_id', $provider->id)->delete();
         return $provider;
+    }
+
+    public function sendCommentsToProvider(Request $request)
+    {
+        if(ProviderComment::where('provider_id', $request->input('id'))->get()->count() == 0)
+        {
+            $comment = new ProviderComment();
+        }else{
+            $comment = ProviderComment::where('provider_id', $request->input('id'))->first();
+        }
+
+        $comment->admin_id = auth()->user()->instance()->id;
+        $comment->provider_id = $request->input('id');
+        $comment->message = $request->input('message');
+        $comment->status = 1;
+        $comment->save();
+
+        Mail::send(new CommentToProvider($request->input('mail'), $request->input('message')));
+        return response()->json(['status' => '1']);
     }
 }

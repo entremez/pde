@@ -33,8 +33,7 @@ class RegisterSuccess extends Mailable
     public function build()
     {
         $provider = Provider::where('user_id', $this->user->id)->first();
-        return $this->from('example@example.com', 'Registro Puente DE')
-                    ->subject('Registro Puente DE')
+        return $this->subject('Confirmación inscripción plataforma Puente Diseño Empresa')
                     ->to($this->user->email)
                     ->view('mails.provider-success',[
                         'user' => $this->user,

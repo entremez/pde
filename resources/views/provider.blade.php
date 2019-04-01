@@ -11,9 +11,12 @@
 
 <section class="mt-5">
     <div class="col-md-10 offset-md-1">
-        <div class="mb-4" style="display: {{ !$provider->approved ? '':'none' }}">
-                    <small>*Proveedor pendiente de aprobación.</small>
-            </div>
+        <div class="mb-2" style="display: {{ !$provider->approved ? '':'none' }}">
+            <small>*Proveedor pendiente de aprobación.</small>
+        </div>
+        <div class="mb-4" style="display: {{ $provider->hasComments() ? '':'none' }}">
+            <small>*Dejó observaciones a este proveedor.</small>
+        </div>
         <div class="row">
             <div class="col-md-9">
                 
