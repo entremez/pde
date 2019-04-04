@@ -112,7 +112,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{ asset('/images/not-found.png') }}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
+      <img src="{{ asset('/images/not-found.png') }}" alt="sin imagen" class="img-thumbnail w-100 h-100" id="imgSalida">
     </div>
   </div>
 </div>

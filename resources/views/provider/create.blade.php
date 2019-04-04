@@ -161,7 +161,7 @@
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 @foreach($sectors as $key => $sector)
                   <li class="nav-item">
-                    <a class="nav-link  pills-sectors {{ $key == 0 ? 'active':''}} docepx" id="pills-{{ $sector->id }}-tab" data-toggle="pill" href="#pills-{{ $sector->id }}" role="tab" aria-controls="pills-{{ $sector->id }}" aria-selected="true">{{ $sector->name }}</a>
+                    <a class="nav-link  pills-sectors {{ $key == 0 ? 'active':''}} docepx" id="pills-{{ $sector->id }}-tab" data-toggle="pill" href="#pills-{{ $sector->id }}" role="tab" aria-controls="pills-{{ $sector->id }}" aria-selected="true" data-name="{{ $sector->name }}">{{ $sector->name }}</a>
                   </li>
                 @endforeach
             </ul>
@@ -185,7 +185,7 @@
 
         <div class="form-group mt-4 mb-3">
             <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" maxlength="500">{{ old('long_description') }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" maxlength="500" id="description">{{ old('long_description') }}</textarea>
         </div>
 
         <div class="form-group mt-5 mb-3">
@@ -221,7 +221,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
+      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100 h-100" id="imgSalida">
     </div>
   </div>
 </div>
@@ -246,7 +246,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgCompany">
+      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100 h-100" id="imgCompany">
     </div>
   </div>
 </div>
@@ -259,7 +259,7 @@
         <div class="col-md-3 col-sm-4">
             <div class="form-check">
                 <label class="form-check-label docepx">
-                    <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif >{{ $service->name }}
+                    <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}" data-name="{{ $service->name }}" @if(is_array(old('service')) && in_array($service->id,old('service'))) checked @endif >{{ $service->name }}
                     <span class="form-check-sign">
                         <span class="check"></span>
                     </span>
@@ -291,73 +291,9 @@
                 </button>
             </div>
         </div>
-
-<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content bigModal">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      <div class="modal-body">
-            <span>Visualización del caso en los catalogos de casos</span>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="service">
-
-                    <div class="corner"></div>
-                        <div class="image-container">
-
-                        <div class="container"> 
-                            <div class="row-c">
-                                <div class="div2"></div>
-                                <div class="div1"></div>
-                            </div>
-                        </div>
-                            
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="service">
-
-                    <div class="corner"></div>
-                        <div class="image-container">
-
-                        <div class="container"> 
-                            <div class="row-c">
-                                <div class="div2-grande"></div>
-                                <div class="div1-grande"></div>
-                            </div>
-                        </div>
-                            
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <section>
-
-            <span>Visualización del caso en la página particular del caso</span>
-            <div class="row">
-                <div class="col-md-12">
-                    <img class="image-container image-case" >
-                    <div class="middle-case">
-                            <div class="text-case"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="row buttons-preview">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Editar</button>
-            <button id="submit-create-case" type="submit" class="btn btn-danger">Enviar caso</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<input type="hidden" id="imagen_logo" data-image="{{ auth()->user()->instance()->imagen_logo }}">
+    
+    @include('provider.modal-preview')
 
     </form>
 

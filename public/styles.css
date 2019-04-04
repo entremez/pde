@@ -13878,10 +13878,11 @@ ul.dashed > li:before {
     position: relative;
     overflow: hidden;
     height: 210px!important;
-    background-size: cover;
+    background-size: contain;
     overflow: hidden;
     margin-bottom: 30px;
     background-position: 50% 50%;
+    background-repeat: no-repeat;
 }
 
 .image-column {
@@ -13891,6 +13892,11 @@ ul.dashed > li:before {
 .image-case {
     width: 100%;
     height: 300px!important;
+}
+
+.image-case-preview {
+    width: 100%;
+    height: 214px!important;
 }
 
 .op08 {
@@ -14220,6 +14226,15 @@ margin-top: 1.4rem;
   line-height: 1.4;
 }
 
+.text-case-preview {
+  margin: 0 auto;
+  color: white;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 1.4;
+  transform: translate(0, -25%);
+}
+
 .login-container {
   margin-top: 140px;
 }
@@ -14437,6 +14452,11 @@ display: none;
     width:940px;
     right:213px;
   }
+  .bigModalPreview{
+    margin-top: 100px;
+    width:1100px;
+    left: -280px;
+  }
 }
 
 @media (max-width: 1080px) {
@@ -14508,6 +14528,7 @@ display: none;
 #region-error,
 #web-error,
 #long_description-error,
+#description-error,
 #file-input-error,
 #teamMembers-error,
 #company_name-error,
@@ -14941,3 +14962,34 @@ color: white;
     width: 65%;
     margin: 0 auto;
 }
+
+.form-group input[type="text"]::-webkit-input-placeholder {
+  color: #B2BABB;
+  font-style: italic;
+}
+
+.form-group input[type="number"]::-webkit-input-placeholder {
+  color: #B2BABB;
+  font-style: italic;
+}
+
+::placeholder {
+  color: #B2BABB;
+  font-style: italic;
+}
+
+:-ms-input-placeholder{
+  color: #B2BABB;
+  font-style: italic;
+}
+
+::-ms-input-placeholder{
+  color: #B2BABB;
+  font-style: italic;
+}
+
+.provider-image-solo { 
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+

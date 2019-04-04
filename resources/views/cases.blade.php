@@ -54,7 +54,7 @@
                 <div class="col-md-3">
                     <p>Proveedor de diseño</p>
                     <div class="image-container center-img">
-                        <img class="w-100" src="{{ url($provider->imagen_logo) }}" alt="{{ $provider->name }}">
+                        <img class="w-100 h-100" src="{{ url($provider->imagen_logo) }}" alt="{{ $provider->name }}">
                     </div>
                     <a href="{{ route('provider', $provider->id) }}" class="btn btn-danger w-100 provider-btn">Ver proveedor de diseño</a>
                 </div>

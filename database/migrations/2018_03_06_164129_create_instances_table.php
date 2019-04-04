@@ -35,7 +35,7 @@ class CreateInstancesTable extends Migration
             $table->string('company_name');
             $table->string('company_logo')->nullable();
             $table->integer('quantity');
-            $table->string('unit');
+            $table->string('unit')->nullable();;
             $table->string('sentence');
             $table->text('long_description');
             $table->text('quote');

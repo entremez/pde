@@ -12,6 +12,7 @@ use App\City;
 use App\Category;
 use App\Classification;
 use App\InstanceService;
+use App\BusinessType;
 
 class InstanceController extends Controller
 {
@@ -39,6 +40,7 @@ class InstanceController extends Controller
             'sectors' => Sector::all(),
             'categories' => Category::all(),
             'classifications' => Classification::all(),
+            'business_types' => BusinessType::all(),
             'key' => null,
             'id' => null
             ]);
@@ -54,6 +56,7 @@ class InstanceController extends Controller
             'sectors' => Sector::all(),
             'categories' => Category::all(),
             'classifications' => Classification::all(),
+            'business_types' => BusinessType::all(),
             'key' => $key,
             'id' => $id
             ]);   

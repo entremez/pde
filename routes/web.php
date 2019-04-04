@@ -1,9 +1,5 @@
 <?php
 
-Route::get('/mail_mail_mail', function () {
-      return  Mail::send(new App\Mail\CreateCaseSuccess(App\Instance::find(2)));
-});
-
 Route::get('/', 'HomeController@welcomeSoon' )->name('welcome');
 Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' )->name('welcome');
 

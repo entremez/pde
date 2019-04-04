@@ -707,6 +707,38 @@ var unit = '';
       $('.div2-grande').html(quantity);
       $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><br>'+sentence+'</div>');
       $('.text-case').html(quantity+' '+unit+' '+sentence);
+
+      var imageCompany = encodeURI($('#imgCompany').attr('src'));
+      console.log(imageCompany);
+      var quote = $('#quote').val();
+      var name = $('#name').val();
+      var description = $('#description').val();
+
+      var services = $('.servicios').find('input');
+      var servicesHtml = '';
+      services.each(function(index, el) {
+        if($(this).is(':checked'))
+          servicesHtml+= getServiceBadge($(this).data('name'));
+      });
+
+      servicesHtml+= getServiceBadge($('.pills-sectors.active').data('name'));
+      servicesHtml+= getServiceBadge(sector);
+      servicesHtml+= getServiceBadge($('#employees option:selected').text());
+      servicesHtml+= getServiceBadge($('#region option:selected').text());
+      servicesHtml+= getServiceBadge($('#year').text());
+      servicesHtml+= getServiceBadge($('#business option:selected').text().substring(0, 3));
+
+      $('.image-container').css('background-image','linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url(\''+img+'\')');
+      $('.preview').css('background-image','linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(0,0,0,0.4995040252429097) 33%, rgba(0,0,0,0.502305145691089) 50%, rgba(0,0,0,0.4995040252429097) 67%, rgba(255,255,255,0) 85%),url(\''+img+'\')');
+      $('.image-company').attr('src', imageCompany);      
+      $('.corner').html(sector);
+      $('.text-case-preview').html(quantity+' '+unit+' '+sentence);
+      $('.quote').html('"'+quote+'"');
+      $('.name').html(name);
+      $('.description').html(description);
+      $('#tags').html(servicesHtml);
+      $('#image_logo_preview').attr('src', encodeURI($('#imagen_logo').data('image')));
+
     });
 
 
@@ -714,20 +746,49 @@ var unit = '';
     $('#preview-edit').click(function(e){
       e.preventDefault();
       var img = encodeURI($('#imgSalida').attr('src'));
-      console.log(img);
-      var quantity = $('#quantity').val();
-      var unit = $('#unit').val();
-      var sentence = $('#sentence').val();
       var sector = $('.seleccionado').attr('id');
+      var quantity = $('#quantity').val();
+      var sentence = $('#sentence').val();
+      var unit = $('#unit').val();
+      var imageCompany = encodeURI($('#imgCompany').attr('src'));
+      var quote = $('#quote').val();
+      var name = $('#name').val();
+      var description = $('#description').val();
+
+      var services = $('.servicios').find('input');
+      var servicesHtml = '';
+      services.each(function(index, el) {
+        if($(this).is(':checked'))
+          servicesHtml+= getServiceBadge($(this).data('name'));
+      });
+
+      servicesHtml+= getServiceBadge($('.pills-sectors.active').data('name'));
+      servicesHtml+= getServiceBadge(sector);
+      servicesHtml+= getServiceBadge($('#employees option:selected').text());
+      servicesHtml+= getServiceBadge($('#region option:selected').text());
+      servicesHtml+= getServiceBadge($('#year').val());
+      servicesHtml+= getServiceBadge($('#business option:selected').text().substring(0, 3));
+      $('#tags').html(servicesHtml);
+
       //$('.image-container').css('background-image','linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url('+img+')');
       $('.image-container').css('background-image','linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%),url(\''+img+'\')');
+      $('.preview').css('background-image','linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(0,0,0,0.4995040252429097) 33%, rgba(0,0,0,0.502305145691089) 50%, rgba(0,0,0,0.4995040252429097) 67%, rgba(255,255,255,0) 85%),url(\''+img+'\')');
+      $('.image-company').attr('src', imageCompany);
       $('.corner').html(sector);
       $('.div2').html(quantity);
       $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
       $('.div2-grande').html(quantity);
       $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><br>'+sentence+'</div>');
-      $('.text-case').html(quantity+' '+unit+' '+sentence);
+      $('.text-case-preview').html(quantity+' '+unit+' '+sentence);
+      $('.quote').html('"'+quote+'"');
+      $('.name').html(name);
+      $('.description').html(description);
+      $('#image_logo_preview').attr('src', encodeURI($('#imagen_logo').data('image')));
     });
+
+    function getServiceBadge(service){
+      return '<a href="#!" class="badge badge-success">'+ service +'</a> ';
+    }
 
     function isPreviewReady(){
       if(file == '')
@@ -737,6 +798,8 @@ var unit = '';
       if(quantity == '')
         return
       if(sentence == '')
+        return
+      if(companyLogo == '')
         return
       if(companyLogo == '')
         return
@@ -893,8 +956,11 @@ function filters() {
     });
     
     var business_type = [];
-    $("input[name=business_type]").each(function (index) {  
+    $("input[name=business_type]").each(function (index) {
+        if($(this).is(':checked')){
+          console.log($(this).val());
           business_type.push($(this).val());
+        }
     });
 
     var form = $('#form-filter');

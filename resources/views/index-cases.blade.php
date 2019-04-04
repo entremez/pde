@@ -48,6 +48,19 @@
                     </div>
                     @endforeach
 
+                    <p class="mb-2 mt-3">Tipo de negocio</p>
+                    @foreach($business_types as $business_type)
+                    <div class="form-check">
+                        <label class="form-check-label docepx">
+                            <input class="form-check-input filter" type="checkbox" name="business_type" value="{{ $business_type->id }}" {{ ($key == 6 && $id == $business_type->id) ? 'checked' : ''  }}>
+                            <div data-toggle="tooltip" data-placement="right" title="{{ $business_type->description }}">{{ $business_type->type }}</div>
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    @endforeach
+
                     <p class="mb-2 mt-3">Regiones</p>
                     @foreach($cities as $city)
                     <div class="form-check">
@@ -88,9 +101,7 @@
                         <input type="hidden" name="{{ $key == 2 ? 'classification':'year' }}" value="{{ $id }}">
                     @endif
 
-                    @if($key == 6 )
-                        <input type="hidden" name="business_type" value="{{ $id }}">
-                    @endif
+
 
     </div>
         <form method="post" action="{{ route('cases') }}" id="form-filter">

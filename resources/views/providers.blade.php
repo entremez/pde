@@ -49,7 +49,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="service">
                 <a href="{{ route('provider', $provider->id) }}">
-                    <div class="image-container" style="background-image: url('{{url($provider->imagen_logo)}}')" title="{{$provider->name}}">         
+                    <div class="image-container provider-image-solo" style="background-image: url('{{url($provider->imagen_logo)}}')" title="{{$provider->name}}">         
                     </div>
                 </a>
             </div>

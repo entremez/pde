@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-3">
 
-                            <img class="w-100" src="{{ $instance->image_company }}">
+                            <img class="w-100 h-100" src="{{ $instance->image_company }}">
                     <br>
                     <p class="text-center mt-3">"{{ $instance->quote }}"</p>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="col-md-3">
                     <p>Proveedor de diseño</p>
                     <div class="image-container center-img">
-                        <img class="w-100" src="{{ url($provider->imagen_logo) }}" alt="{{ $provider->name }}">
+                        <img class="w-100 h-100" src="{{ url($provider->imagen_logo) }}" alt="{{ $provider->name }}">
                     </div>
                     <a href="{{ route('provider', $provider->id) }}" class="btn btn-danger w-100 provider-btn">Ver proveedor de diseño</a>
                 </div>
