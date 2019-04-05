@@ -35,13 +35,22 @@ class ProviderController extends Controller
     public function filtered(Request $request, $serviceId)
     {
         if($request->ajax()){
+
             $service = Service::find($serviceId);
+            if($service == '')
+                return;
             $providers = $service->providers()->get();
             $providersFiltered = new Collection();
+            $providersImages = new Collection();
             foreach ($providers as $provider) {
                 $providersFiltered->push($provider->provider()->first());
+                $providersImages->push($provider->provider()->first()->imagen_logo);
             }
-            return $providersFiltered;
+
+            $providers = new Collection(); 
+            $providers->put('providers',$providersFiltered); 
+            $providers->put('images', $providersImages);   
+            return $providers;
         }
 
         return view('providers',[

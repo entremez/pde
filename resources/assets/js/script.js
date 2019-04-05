@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
-
-  $('[data-toggle="tooltip"]').mouseover(function(event) {
+    $('[data-toggle="tooltip"]').mouseover(function(event) {
     $(this).tooltip('show');
   }).mouseleave(function(event) {
     $(this).tooltip('hide');
@@ -1067,35 +1066,6 @@ $('#region').change(function (e) {
 })
 
 
-function getProvidersByService(service){
-    var lis = service.parents('.row').children('.col-md-3').find('a');
-        $.each(lis, function(){
-            $(this).removeClass();
-            $(this).addClass('link-default');
-            $(this).addClass('service-filter');
-        });
-        service.addClass('selected');
-        service.parents('.categorias').toggle();
-        var title = service.text();
-        var serviceId = service.parents('li').data('id');
-        var url = $('#form-filter').attr('action').replace(':SERVICE_ID', serviceId);
-        var data = $('#form-filter').serialize();
-
-        $.post(url, data, function (result){
-            $('.results').children('container').remove();
-            var text ='';
-            text = '<div class="container"><h3 class="mb-5">'+title+'</h3><div class="row">';
-            $.each(result, function () {
-                  text += '<div class="col-md-3 col-sm-6"><div class="service"><a href="/provider/'+this.id+'"><div class="image-container" title="'+this.name+'" style="background-image: url('+this.logo +')"></div></a></div></div>';
-              });
-            text+= '</div></div>';
-            $('.results').html(text);
-             var new_position = $('#horizontal-line').offset();
-             window.scrollTo(new_position.left,new_position.top);
-        });
-}
-
-
 $(document).on('click', '#travelOrRegister', function(event) {
     event.preventDefault();
     if($(this).data('type') == 'register'){
@@ -1356,4 +1326,33 @@ function approveProvider(url, token, id){
             }
   });
 }
+
+function getProvidersByService(service){
+    var lis = service.parents('.row').children('.col-md-3').find('a');
+        $.each(lis, function(){
+            $(this).removeClass();
+            $(this).addClass('link-default');
+            $(this).addClass('service-filter');
+        });
+        service.addClass('selected');
+        service.parents('.categorias').toggle();
+        var title = service.text();
+        var serviceId = service.parents('li').data('id');
+        var url = $('#form-filter').attr('action').replace(':SERVICE_ID', serviceId);
+        var data = $('#form-filter').serialize();
+
+        $.post(url, data, function (result){
+            $('.results').children('container').remove();
+            var text ='';
+            text = '<div class="container"><h3 class="mb-5">'+title+'</h3><div class="row">';
+            $.each(result.providers, function (index) {
+                  text += '<div class="col-md-3 col-sm-6"><div class="service"><a href="/provider/'+this.id+'"><div class="image-container  provider-image-solo" title="'+this.name+'" style="background-image: url(\''+ result.images[index] +'\')"></div></a></div></div>';
+              });
+            text+= '</div></div>';
+            $('.results').html(text);
+             var new_position = $('#horizontal-line').offset();
+             window.scrollTo(new_position.left,new_position.top);
+        });
+}
+
 
