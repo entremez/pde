@@ -184,18 +184,28 @@
                         </div>
                 @endforeach
             </div>
-
-
-        <div class="form-group mt-5  mb-2 ">
-            <label for="" class="bmd-label-floating">Cuéntanos el caso con mas detalle</label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" id="description">{{ $case->long_description, old('long_description') }}</textarea>
-        </div>
-
         <div class="form-group mt-5 mb-4">
             <label for="quote" class="bmd-label-floating">Cita del cliente que muestre los efectos del caso</label>
             <input type="text" name="quote" id="quote" class="form-control" value="{{ $case->quote, old('quote') }}" />
         </div>
 
+        <div class="form-group mt-5 mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name_quote" class="bmd-label-floating">Nombre del autor de la cita</label>
+                    <input type="text" name="name_quote" id="name_quote" class="form-control" value="{{ $case->name_quote, old('name_quote') }}" />
+                </div>
+                <div class="col-md-6">
+                    <label for="position_quote" class="bmd-label-floating">Cargo del autor de la cita</label>
+                    <input type="text" name="position_quote" id="position_quote" class="form-control" value="{{ $case->position_quote, old('position_quote') }}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-5  mb-4 ">
+            <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" id="description">{{ $case->long_description, old('long_description') }}</textarea>
+        </div>
 
 <div class="mb-3 dm-uploader mt-5" >
   <div class="form-row">

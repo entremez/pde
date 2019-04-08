@@ -58,14 +58,14 @@
         </div>
 
 
-        <div class="row pt-4">
+        <div class="row my-4">
             <div class="col">
                 <label>Cantidad de trabajadores </label>
                 <div class="employees"></div>
                     @foreach($employees as $employee)
                     <div class="form-check">
-                      <input class="form-check-input required" type="radio" name="employees" value="{{ $employee->id }}">
-                      <label class="form-check-label docepx" for="employees">
+                      <input class="form-check-input required" type="radio" name="employees" id="employee-{{ $employee->id }}" value="{{ $employee->id }}">
+                      <label class="form-check-label docepx" for="employee-{{ $employee->id }}">
                         {{ $employee->range }}
                       </label>
                     </div>
@@ -76,14 +76,16 @@
                 <div class="gain"></div>
                     @foreach($gains as $gain)
                     <div class="form-check">
-                      <input class="form-check-input required" type="radio" name="gain" value="{{ $gain->id }}">
-                      <label class="form-check-label docepx" for="gain">
+                      <input class="form-check-input required" type="radio" name="gain" value="{{ $gain->id }}" id="gain-{{ $gain->id }}">
+                      <label class="form-check-label docepx" for="gain-{{ $gain->id }}">
                         {{ $gain->range }} UF
                       </label>
                     </div>
                     @endforeach
             </div>
         </div>
+
+        @include('partials/terms')
 
             <hr class="horizontal-line">
         <div class="py-5 text-center">

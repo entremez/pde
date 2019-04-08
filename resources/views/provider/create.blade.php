@@ -181,18 +181,28 @@
                         </div>
                 @endforeach
             </div>
-
-
-        <div class="form-group mt-4 mb-3">
-            <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" maxlength="500" id="description">{{ old('long_description') }}</textarea>
-        </div>
-
         <div class="form-group mt-5 mb-3">
             <label for="quote" class="bmd-label-floating">Cita del cliente que muestre los efectos del caso</label>
             <input type="text" name="quote" id="quote" class="form-control" value="{{ old('quote') }}" maxlength="300" />
         </div>
 
+        <div class="form-group mt-5 mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name_quote" class="bmd-label-floating">Nombre del autor de la cita</label>
+                    <input type="text" name="name_quote" id="name_quote" class="form-control" value="{{ old('name_quote') }}" />
+                </div>
+                <div class="col-md-6">
+                    <label for="position_quote" class="bmd-label-floating">Cargo del autor de la cita</label>
+                    <input type="text" name="position_quote" id="position_quote" class="form-control" value="{{ old('position_quote') }}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-5 mb-4">
+            <label for="" class="bmd-label-floating">Descripción del caso&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" placeholder="Indicar desafío de diseño en función del rubro de la empresa y su solución" maxlength="500" id="description">{{ old('long_description') }}</textarea>
+        </div>
 
 <div class="mb-3 dm-uploader mt-5 mb-3" >
   <div class="form-row">
@@ -221,7 +231,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100 h-100" id="imgSalida">
+      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
     </div>
   </div>
 </div>
@@ -246,7 +256,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100 h-100" id="imgCompany">
+      <img src="{{asset('/images/not-found.png')}}" alt="sin imagen" class="img-thumbnail w-100" id="imgCompany">
     </div>
   </div>
 </div>

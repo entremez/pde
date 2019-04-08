@@ -122,6 +122,8 @@ class CaseController extends Controller
         $instance->year = $request->input('year');
         $instance->approved = false;
         $instance->quote = $request->input('quote');
+        $instance->name_quote = $request->input('name_quote');
+        $instance->position_quote = $request->input('position_quote');
         $instance->save();
         return $instance->id;
     }
@@ -240,6 +242,8 @@ class CaseController extends Controller
         $buffer->long_description = $request->input('long_description');
         $buffer->year = $request->input('year');
         $buffer->quote = $request->input('quote');
+        $buffer->name_quote = $request->input('name_quote');
+        $buffer->position_quote = $request->input('position_quote');
 
 
         if(!is_null($request->file('company-logo'))){
@@ -301,6 +305,8 @@ class CaseController extends Controller
         $instance->long_description = $request->input('long_description');
         $instance->year = $request->input('year');
         $instance->quote = $request->input('quote');
+        $instance->name_quote = $request->input('name_quote');
+        $instance->position_quote = $request->input('position_quote');
 
 
         if(!is_null($request->file('company-logo'))){

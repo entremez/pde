@@ -4,6 +4,7 @@
 
 @section('headers')
 <meta property="og:title" content="PDE | {{$instance->name}}" />
+<meta property="og:description" content="{{$instance->long_description}}" />
 <meta property="og:image" content="{{url($instance->my_image)}}" />
 <meta property="og:type" content="website" />
 
@@ -30,8 +31,6 @@
                 <div class="col-md-3">
 
                             <img class="w-100" src="{{ $instance->image_company }}">
-                    <br>
-                    <p class="text-center mt-3">"{{ $instance->quote }}"</p>
                 </div>
             </div>
             <div class="row mt-4">
@@ -41,6 +40,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <h3>{{ ucfirst($instance->name) }}</h3>
+                    <p class="text-left font-italic mt-3">"{{ $instance->quote }}"<br><span class="font-normal">{{ $instance->name_quote }} - {{ $instance->position_quote }}</span></p>
                     <p>{{ $instance->long_description }}</p>
 
                     

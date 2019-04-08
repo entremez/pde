@@ -19,9 +19,7 @@
                 </div>
                 <div class="col-md-3">
 
-                            <img class="w-100 h-100" src="{{ $instance->image_company }}">
-                    <br>
-                    <p class="text-center mt-3">"{{ $instance->quote }}"</p>
+                            <img class="w-100" src="{{ $instance->image_company }}">
                 </div>
             </div>
             <div class="row mt-4">
@@ -31,6 +29,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <h3>{{ ucfirst($instance->name) }}</h3>
+                    <p class="text-left font-italic mt-3">"{{ $instance->quote }}"<br><span class="font-normal">{{ $instance->name_quote }} - {{ $instance->position_quote }}</span></p>
                     <p>{{ $instance->long_description }}</p>
 
                     

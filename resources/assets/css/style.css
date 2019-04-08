@@ -631,11 +631,10 @@ ul.dashed > li:before {
     position: relative;
     overflow: hidden;
     height: 210px!important;
-    background-size: contain;
+    background-size: cover;
     overflow: hidden;
     margin-bottom: 30px;
     background-position: 50% 50%;
-    background-repeat: no-repeat;
 }
 
 .image-column {
@@ -1746,3 +1745,6 @@ color: white;
   background-repeat: no-repeat;
 }
 
+.font-normal{
+  font-style: normal;
+}

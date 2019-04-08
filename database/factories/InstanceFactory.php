@@ -20,6 +20,8 @@ $factory->define(App\Instance::class, function (Faker $faker) {
         'business_type' => rand(1,2),
         'freatured' => rand(0,1),
         'employees_range' => rand(1,4),
-        'quote' => $faker->realText($faker->numberBetween(10,20)),
+        'quote' => $faker->realText($faker->numberBetween(20,50)),
+        'name_quote' => $faker->name(),
+        'position_quote' => $faker->jobTitle(),
     ];
 });

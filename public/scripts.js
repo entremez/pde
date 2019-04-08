@@ -23357,7 +23357,8 @@ $(document).ready(function () {
             'region' : {required:true},
             'regions[]' : {required:true},
             'commune' : {required:true},
-            'logo' : {required:true}
+            'logo' : {required:true},
+            'terms' : {required:true}
           },
           messages: {
            'name': {
@@ -23393,6 +23394,9 @@ $(document).ready(function () {
             },
            'logo' : { 
                 required:'*Selecciona una imagen.'
+            },
+           'terms' : { 
+                required:'*Debes aceptar los términos y condiciones.'
             }
           },
           errorPlacement: function(error, element) {
@@ -23404,6 +23408,8 @@ $(document).ready(function () {
             } else if(element.attr("name") == "regions[]") {
               error.insertBefore('.errorRegions');
               element.parents('.regiones').find('.error').addClass('error-class');
+            } else if(element.attr("name") == "terms") {
+              error.insertBefore('.errorTerms');
             } else {
               error.insertBefore(element);
             }
@@ -23698,29 +23704,32 @@ $('#edit-form').validate({
               } ,
       messages : { 
                 rut : { 
-                  required:'Este campo es obligatorio.', 
-                  rut:'Por favor revise que esté escrito correctamente'
+                  required:'*Este campo es obligatorio.', 
+                  rut:'*Por favor revise que esté escrito correctamente'
                   },
-                'cities[]' : 'Seleccione al menos una región.',
-                classification : 'Debe seleccionar el rubro de su empresa',
-                name : 'Este campo es obligatorio.',
-                address : 'Este campo es obligatorio.',
-                phone : 'Este campo es obligatorio.',
-                employees : 'Seleccione el rango.',
-                gain : 'Seleccione el rango.'
+                'cities[]' : '*Seleccione al menos una región.',
+                classification : '*Debe seleccionar el rubro de su empresa',
+                name : '*Este campo es obligatorio.',
+                address : '*Este campo es obligatorio.',
+                phone : '*Este campo es obligatorio.',
+                employees : '*Seleccione el rango.',
+                gain : '*Seleccione el rango.',
+                terms : '*Debe aceptar los términos y condiciones.'
                 },
       errorPlacement: function(error, element) {
 
         if (element.attr("name") == "cities[]") {
           error.insertBefore('.errorTxt');
-          element.parents('.col').find('.error').addClass('error-class');
+          element.parents('.col-md-12').find('.error').addClass('error-class');
         } else if(element.attr('name') == 'employees') {
           error.insertBefore('.employees');
         } else if(element.attr('name') == 'gain') {
           error.insertAfter('.gain');
         } else if(element.attr('name') == 'classification') {
           error.insertAfter('.classification');
-        } else {
+        } else if(element.attr("name") == "terms") {
+              error.insertBefore('.errorTerms');
+            } else {
           error.insertBefore(element);
         }
     }
@@ -23818,6 +23827,8 @@ var unit = '';
       var imageCompany = encodeURI($('#imgCompany').attr('src'));
       console.log(imageCompany);
       var quote = $('#quote').val();
+      var name_quote = $('#name_quote').val();
+      var position_quote = $('#position_quote').val();
       var name = $('#name').val();
       var description = $('#description').val();
 
@@ -23840,7 +23851,7 @@ var unit = '';
       $('.image-company').attr('src', imageCompany);      
       $('.corner').html(sector);
       $('.text-case-preview').html(quantity+' '+unit+' '+sentence);
-      $('.quote').html('"'+quote+'"');
+      $('.quote').html('"'+quote+'"<br><span class="font-normal">'+name_quote+' - '+position_quote+'</span>');
       $('.name').html(name);
       $('.description').html(description);
       $('#tags').html(servicesHtml);
@@ -23859,6 +23870,8 @@ var unit = '';
       var unit = $('#unit').val();
       var imageCompany = encodeURI($('#imgCompany').attr('src'));
       var quote = $('#quote').val();
+      var name_quote = $('#name_quote').val();
+      var position_quote = $('#position_quote').val();
       var name = $('#name').val();
       var description = $('#description').val();
 
@@ -23887,7 +23900,7 @@ var unit = '';
       $('.div2-grande').html(quantity);
       $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><br>'+sentence+'</div>');
       $('.text-case-preview').html(quantity+' '+unit+' '+sentence);
-      $('.quote').html('"'+quote+'"');
+      $('.quote').html('"'+quote+'"<br><span class="font-normal">'+name_quote+' - '+position_quote+'</span>');
       $('.name').html(name);
       $('.description').html(description);
       $('#image_logo_preview').attr('src', encodeURI($('#imagen_logo').data('image')));

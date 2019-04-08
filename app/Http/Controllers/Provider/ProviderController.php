@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Service;
+use App\Provider;
 use App\ProviderService;
 use App\ProviderRegion;
 use App\ProviderServiceBuffer;
@@ -22,24 +23,30 @@ use App\Mail\RegisterSuccess;
 use App\Mail\ProviderChange;
 use Illuminate\Support\Facades\Mail;
 use App\ProviderComment;
+use App\User;
 
 class ProviderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
+
     public function index(Request $request)
     {
-
         if($request->ajax())
             return response()->json($this->getCommunes($request->input('id')));
 
         $user = auth()->user();
-        $provider = $user->instance();
-        $data = $provider->status == 0 ? $user->instance():ProviderBuffer::where('provider_id',$provider->id)->first();
         $services = Service::get();
         $cities = City::get();
         $categories = Category::get();
-        if (empty($data->logo) OR empty($data->long_description))
-            return view('provider.config-dashboard')->with(compact('data','user', 'services', 'cities', 'categories'));
-        $services = $provider->status == 0 ? ProviderService::where('provider_id',$provider->id)->get(): ProviderServiceBuffer::where('provider_id',$provider->id)->get();
+        $provider = $user->instance();
+        if(is_null($provider))
+            return view('provider.config-dashboard')->with(compact('user', 'services', 'cities', 'categories'));            
+        $data = $this->getData($provider, $user);
+        $services = $this->getServices($provider);
         return view('provider.dashboard',[
             'user' => $user,
             'personalData'=> $data,
@@ -49,7 +56,17 @@ class ProviderController extends Controller
         ]);
     }
 
-    public function edit(Request $request)
+    private function getData($provider, $user)
+    {
+        return $provider->status == 0 ? $user->instance():ProviderBuffer::where('provider_id',$provider->id)->first();
+    }
+
+    private function getServices($provider)
+    {
+        return $provider->status == 0 ? ProviderService::where('provider_id',$provider->id)->get(): ProviderServiceBuffer::where('provider_id',$provider->id)->get();
+    }
+
+    public function create(Request $request)
     {
 
         $messages = [
@@ -70,9 +87,9 @@ class ProviderController extends Controller
             'service' => 'required',
         ];
         $this->validate($request, $rules, $messages);
+        $provider = $this->getProvider(auth()->user());
         $file = $request->file('logo');
         $path = public_path().'/providers/logos';
-        $provider = auth()->user()->instance();
         $fileName = $provider->id."-".uniqid()."-".$file->getClientOriginalName();
         $file->move($path, $fileName);
 
@@ -119,6 +136,16 @@ class ProviderController extends Controller
         Mail::send(new ProviderChange(1, $provider->name));
 
         return redirect('providers/dashboard');
+    }
+
+    private function getProvider(User $user)
+    {
+        $provider = Provider::create([
+            'user_id' => $user->id,
+        ]);
+        $user ->type_id = $provider->id;
+        $user->save();
+        return $provider;
     }
 
     public function settings(Request $request)

@@ -20,7 +20,7 @@ class CompanyController extends Controller
 
     public function index()
     {
-        if(Company::where('user_id',auth()->user()->id)->count() == 0){
+        if(Company::where('user_id',auth()->user()->id)->get()->count() == 0 ){
             return view('company.config',[
                 'cities' => City::get(),
                 'employees' => Employees::get(),
@@ -49,7 +49,8 @@ class CompanyController extends Controller
                                     'user_id' => $user->id,
                                     'classification_id' => $request->input('classification'),
                                     'employees_id' => $request->input('employees'),
-                                    'gain_id' => $request->input('gains'),
+                                    'gain_id' => $request->input('gain'),
+                                    'phone' => $request->input('phone'),
                                     ]);
 
         foreach ($request->input('cities') as $city) {
@@ -69,16 +70,4 @@ class CompanyController extends Controller
         return Rut::parse($rut)->toArray();
     }
 
-    public function results(Request $request)
-    {
-        dd($request);
-    }
-
-    public function timeline(){
-        $surveys = auth()->user()->instance()->survey_responses();
-        return view('company.timeline',[
-            'number_of_surveys' => count($surveys->get()),
-            'surveys' => $surveys->orderBy('created_at','desc')->get(),
-        ]);
-    }
 }

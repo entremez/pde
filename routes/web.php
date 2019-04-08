@@ -76,10 +76,13 @@ Route::group([
         'namespace'  => 'Provider'],
         function()
 {
+
+    Route::get('/verify' , 'VerifyMailController@verify')->name('verify');
+    Route::get('/verify/{id}/{token}' , 'VerifyMailController@verification')->name('verification');
     Route::get('/dashboard', 'ProviderController@index')->name('provider.dashboard');
     Route::get('/c/dashboard', 'ProviderController@index')->name('cities');
-    Route::post('/dashboard','ProviderController@edit')->name('provider.config');
-    Route::put('/dashboard','ProviderController@request')->name('provider.request');
+    Route::post('/dashboard','ProviderController@create')->name('provider.config');
+    Route::put('/dashboard','ProviderController@request')->name('provider.request'); // ?
     Route::get('/settings','ProviderController@settings')->name('provider.settings');
     Route::post('/settings','ProviderController@update')->name('provider.update');
     Route::get('/cases/delete/', 'CaseController@destroy')->name('delete.case');

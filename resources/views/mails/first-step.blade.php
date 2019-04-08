@@ -5,7 +5,7 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<p>Bienvenido</p>
+			<p>Verifica tu mail haciendo <a href="http://127.0.0.1:8000/providers/verify/{{ $user->id }}/{{ $token }}">Click acá</a></p>
 		</div>
 	</div>
 </div>

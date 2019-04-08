@@ -39,6 +39,8 @@ class CreateInstancesTable extends Migration
             $table->string('sentence');
             $table->text('long_description');
             $table->text('quote');
+            $table->text('name_quote');
+            $table->text('position_quote');
             $table->integer('year');
             $table->boolean('approved');
             $table->boolean('freatured')->default(false);

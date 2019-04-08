@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'company' => Middleware\CompanyMiddleware::class,
         'auth.travel' => Middleware\AuthTravel::class,
         'verified.approval' => Middleware\CheckApproval::class,
+        'verified' => Middleware\VerifyProviderMail::class,
 
     ];
 }

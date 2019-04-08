@@ -112,32 +112,19 @@ class RegisterController extends Controller
             'role_id' => $role
         ]);
 
-        isset($data['provider']) ? $this->createProvider($user) : $this->createProvider($user);
+        isset($data['provider']) ? $this->createProvider($user) : '';
 
         return $user;
     }
 
-
-    private function createCompany(User $user)
-    {
-        $company = Company::create([
-            'user_id' => $user->id,
-        ]);
-
-        $user ->type_id = $company->id;
-
-
-        $user->save();        
-    }
-
     private function createProvider(User $user){
-        $provider = Provider::create([
-            'user_id' => $user->id,
-        ]);
 
-        $user ->type_id = $provider->id;
-
+        $token = str_random(16);
+        $user->remember_token = $token;
         $user->save();
+
+        Mail::send(new FirstStep($user, $token));
+
     }
 
 

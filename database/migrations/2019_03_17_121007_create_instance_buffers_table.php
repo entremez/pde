@@ -35,10 +35,12 @@ class CreateInstanceBuffersTable extends Migration
             $table->string('company_name');
             $table->string('company_logo')->nullable();
             $table->integer('quantity');
-            $table->string('unit')->nullable();;
+            $table->string('unit')->nullable();
             $table->string('sentence');
             $table->text('long_description');
             $table->text('quote');
+            $table->text('name_quote');
+            $table->text('position_quote');
             $table->integer('year');
             $table->string('image');
 

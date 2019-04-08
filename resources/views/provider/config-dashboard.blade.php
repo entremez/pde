@@ -27,12 +27,12 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Nombre de empresa</label>
-                    <input type="text" name="name" class="form-control" value="{{ old('name', $data->name) }}" required>
+                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <label class="bmd-label-floating">Rut de su empresa</label>
-                <input type="text" class="form-control" name="rut" id="rut" value="{{ old('rut', $data->rut) }}" required>
+                <input type="text" class="form-control" name="rut" id="rut" value="{{ old('rut') }}" required>
             </div>
         </div>
 
@@ -66,13 +66,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Dirección</label>
-                    <input type="text" name="address" class="form-control" value="{{ old('address', $data->address) }}" required>
+                    <input type="text" name="address" class="form-control" value="{{ old('address') }}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Teléfono</label>
-                    <input type="text" name="phone" class="form-control" value="{{ old('phone', $data->phone) }}" required>
+                    <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" required>
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Sitio Web</label>
-                    <input type="text" name="web" class="form-control" value="{{ old('web', $data->web) }}">
+                    <input type="text" name="web" class="form-control" value="{{ old('web') }}">
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
 
         <div class="form-group">
             <label for="long_description" class="bmd-label-floating">Describe a tu empresa&nbsp;&nbsp;&nbsp;<small>(500 caracteres)</small></label>
-            <textarea type="textarea" name="long_description" class="form-control" rows="4" id="long_description" maxlength="500">{{ old('long_description', $data->long_description) }}</textarea>
+            <textarea type="textarea" name="long_description" class="form-control" rows="4" id="long_description" maxlength="500">{{ old('long_description') }}</textarea>
         </div>
         <div class="servicios">            
             <label class="bmd-label-floating pt-4">Selecciona los servicios que prestas</label>
@@ -162,7 +162,7 @@
                     <div class="col-md-3">
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="regions[]" value="{{ $city->id }}" {{ $data->isMyRegion($city->id) ? 'checked':'' }} ><span class="docepx">{{ $city->region }}</span>
+                                <input class="form-check-input" type="checkbox" name="regions[]" value="{{ $city->id }}" ><span class="docepx">{{ $city->region }}</span>
                                 <span class="form-check-sign">
                                     <span class="check"></span>
                                 </span>
@@ -177,7 +177,7 @@
                     <div class="col-md-3">
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="regions[]" value="{{ $city->id }}" {{ $data->isMyRegion($city->id) ? 'checked':'' }} ><span class="docepx">{{ $city->region }}</span>
+                                <input class="form-check-input" type="checkbox" name="regions[]" value="{{ $city->id }}" ><span class="docepx">{{ $city->region }}</span>
                                 <span class="form-check-sign">
                                     <span class="check"></span>
                                 </span>
@@ -225,6 +225,8 @@
         </div>
     </div>
 </div>
+
+@include('partials/terms')
 
         <div class="row">
             <div class="col-md-4 ml-auto mr-auto text-center">
