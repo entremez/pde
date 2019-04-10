@@ -58,6 +58,7 @@ Route::group([
     Route::post('/dashboard/instance-approve', 'Provider\ProviderController@approveInstance')->name('approve.instance');
     Route::post('/dashboard/instance-buffered-approve', 'Provider\ProviderController@approveInstanceBuffered')->name('approve.instance.buffered');
     Route::post('/dashboard/provider-buffered-approve', 'Provider\ProviderController@approveProviderBuffered')->name('approve.provider.buffered');
+    Route::post('/dashboard/featured', 'AdminController@instanceFeatured')->name('featured');
 
 
     Route::post('/dashboard/provider-comments', 'Provider\ProviderController@sendCommentsToProvider')->name('comment.provider');

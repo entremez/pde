@@ -5,7 +5,7 @@
             <div class="row">
             @foreach($providers as $provider)
                 <div class="col-md-6 ">
-                    <a href="{{ route('provider', $provider->id) }}"><div class="image-container image-column" style="background-image: url({{ $provider->logo }});"></div></a>
+                    <a href="{{ route('provider', $provider->id) }}"><div class="image-container image-column" style="background-image: url('{{ $provider->imagen_logo }}');"></div></a>
                 </div>
                 <div class="col-md-6 mb-3">
                     <a href="{{ route('provider', $provider->id) }}" class="link"><h6 class="provider-title">{{ $provider->name }}</h6></a>

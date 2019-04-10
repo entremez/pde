@@ -123,8 +123,6 @@ class RegisterController extends Controller
         $user->remember_token = $token;
         $user->save();
 
-        Mail::send(new FirstStep($user, $token));
-
     }
 
 

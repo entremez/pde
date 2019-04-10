@@ -24,6 +24,8 @@ class CheckApproval
                     return $next($request);
                 if(!auth()->check())
                     return response()->view('errors.404', [], 404);
+                if(is_null(auth()->user()->type_id))
+                    return response()->view('errors.404', [], 404);
                 if( auth()->user()->role_id == 1 || auth()->user()->instance()->id == $provider->id)
                     return $next($request);
                 return response()->view('errors.404', [], 404);
@@ -34,6 +36,8 @@ class CheckApproval
                 if($instance->approved)
                     return $next($request);
                 if(!auth()->check())
+                    return response()->view('errors.404', [], 404);
+                if(is_null(auth()->user()->type_id))
                     return response()->view('errors.404', [], 404);
                 if(auth()->user()->role_id == 1 || auth()->user()->instance()->id == $instance->provider_id)
                     return $next($request);

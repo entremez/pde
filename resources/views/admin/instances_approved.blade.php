@@ -4,6 +4,7 @@
     		<table class="table" id="instances_approved_table" style="display: none">
 			  <thead>
 			    <tr>
+			      <th scope="col"></th>
 			      <th scope="col">#</th>
 			      <th scope="col">Nombre</th>
 			      <th scope="col">Proveedor</th>
@@ -15,13 +16,18 @@
 			  <tbody id="instance-approved">
 			  	@foreach( $instances as $instance)
 			  		@if($instance->approved)
-				    <tr id="instance-approved-{{ $instance->id }}">
+				    <tr id="instance-approved-{{ $instance->id }}" >
+				    	<th>
+				    		<div class="">
+				    			<i class="fas fa-heart feature heart {{ $instance->featured ? 'featured':'' }}" data-id="{{ $instance->id }}" data-url="{{ route('featured') }}" data-token="{{ csrf_token() }}"></i>
+				    		</div>
+				    	</th>
 				      <th scope="row">{{ $instance->id}}</th>
 				      <td>{{ $instance->name}}</td>
 				      <td>{{ $instance->provider()->first()->name}}</td>
 				      <td>{{ $instance->company_name}}</td>
 				      <td>{{ $instance->long_description}}</td>
-				      <td><a target="_blank" class="btn btn-primary" href="{{ route('case', $instance->id) }}">Ver caso</a></td>
+				      <td><div class="d-flex"><a target="_blank" class="btn btn-primary" href="{{ route('case', $instance->id) }}">Ver caso</a></div></td>
 				    </tr>
 				    @endif
 			    @endforeach

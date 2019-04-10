@@ -14995,3 +14995,12 @@ color: white;
 .font-normal{
   font-style: normal;
 }
+
+.heart{
+  font-size: 1.5rem;
+  color: gainsboro;
+}
+
+.featured{
+  color: #e7004b;
+}

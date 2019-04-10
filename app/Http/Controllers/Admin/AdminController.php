@@ -28,4 +28,12 @@ class AdminController extends Controller
         ]);
     }
 
+    public function instanceFeatured(Request $request)
+    {
+        $instance = Instance::find($request->input('id'));
+        $instance->featured = !$instance->featured;
+        $instance->save();
+        return ;
+    }
+
 }

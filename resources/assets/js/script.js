@@ -1295,6 +1295,24 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
 
   });
 
+    $(document).on('click','.feature',function(e) {
+      var id = $(this).data('id');
+      $.ajax({
+       url : $(this).data('url'),
+       method : "POST",
+       cache: false,
+       data : { "_token": $(this).data('token'), 
+                "id": id},
+       success : function (data)
+                { 
+                  console.log(data);
+                  $('#instance-approved-'+id).find('.feature').toggleClass('featured');
+
+                }
+      });
+
+    });
+
 });
 
 

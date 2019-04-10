@@ -43,7 +43,7 @@ class CreateInstancesTable extends Migration
             $table->text('position_quote');
             $table->integer('year');
             $table->boolean('approved');
-            $table->boolean('freatured')->default(false);
+            $table->boolean('featured')->default(false);
 
             $table->boolean('status')->default(false); //0 sin modificación, 1 con info en buffer
 

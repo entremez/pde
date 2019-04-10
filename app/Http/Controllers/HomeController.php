@@ -57,13 +57,13 @@ class HomeController extends Controller
         return view('evaluate');
     }
 
-    public function notSoRandom($freatured, $normal)
+    public function notSoRandom($featured, $normal)
     {
         $instances = collect();
-        foreach(Instance::where('approved',true)->where('freatured',true)->inRandomOrder()->limit($freatured)->get() as $instance){
+        foreach(Instance::where('approved',true)->where('featured',true)->inRandomOrder()->limit($featured)->get() as $instance){
             $instances->push($instance);
         }
-        foreach(Instance::where('approved',true)->where('freatured',false)->inRandomOrder()->limit($normal)->get() as $instance){
+        foreach(Instance::where('approved',true)->where('featured',false)->inRandomOrder()->limit($normal)->get() as $instance){
             $instances->push($instance);
         }
         return $instances;
