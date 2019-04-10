@@ -27,12 +27,6 @@ use App\User;
 
 class ProviderController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('verified');
-    }
-
-
     public function index(Request $request)
     {
         if($request->ajax())

@@ -20,8 +20,8 @@ class CheckApproval
         switch (explode("/",$request->path())[0]) {
             case 'provider':
                 $provider = Provider::whereId(explode("/",$request->path())[1])->first();
-                if($provider->approved)
-                    return $next($request);
+                //if($provider->approved)
+                //    return $next($request);
                 if(!auth()->check())
                     return response()->view('errors.404', [], 404);
                 if(is_null(auth()->user()->type_id))
@@ -33,8 +33,8 @@ class CheckApproval
             
             case 'case':
                 $instance = Instance::whereId(explode("/",$request->path())[1])->first();
-                if($instance->approved)
-                    return $next($request);
+                //if($instance->approved)
+                //    return $next($request);
                 if(!auth()->check())
                     return response()->view('errors.404', [], 404);
                 if(is_null(auth()->user()->type_id))

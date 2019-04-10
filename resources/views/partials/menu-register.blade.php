@@ -36,28 +36,6 @@
               </li>
               @endif
           </ul>
-
-         @if(Auth::check())  
-          @if(auth()->user()->role_id == 1)
-          <ul class="navbar-nav ml-auto">  <!--ml-auto alinea a derecha-->
-            <li class="nav-item">
-              <a class="nav-link @yield('title-active')" href="{{ route('welcome') }}">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @yield('title-cases')" href="{{ route('cases') }}">Casos de diseño en los negocios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @yield('title-evaluate')" href="{{ route('evaluate') }}">Evalúa tu empresa</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @yield('title-providers')" href="{{ route('providers-list') }}">Proveedores de diseño</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @yield('title-resources')" href="{{ route('resources') }}">Recursos</a>
-            </li>
-          </ul>
-          @endif
-        @endif
         </div>
       </nav>
       </div>

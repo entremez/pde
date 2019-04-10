@@ -3,6 +3,12 @@
 Route::get('/', 'HomeController@welcomeSoon' )->name('welcome');
 Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' )->name('welcome');
 
+
+Route::get('/proveedores', 'Auth\RegisterController@providerRegister' )->name('provider.register');
+
+
+
+
 Route::get('/cases', 'InstanceController@index')->name('cases');
 Route::get('/cases/{key}/{id}', 'InstanceController@indexWithParameters')->name('casesWithParameters');
 Route::post('/cases', 'InstanceController@index');

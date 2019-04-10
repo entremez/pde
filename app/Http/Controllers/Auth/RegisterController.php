@@ -59,6 +59,12 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function providerRegister()
+    {
+        return view('welcome-register',[
+        ]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
