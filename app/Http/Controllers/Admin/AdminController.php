@@ -10,6 +10,7 @@ use App\Company;
 use App\Instance;
 use App\InstanceBuffer;
 use App\CompanySurvey;
+use App\MailBody;
 use Charts;
 
 class AdminController extends Controller
@@ -34,6 +35,24 @@ class AdminController extends Controller
         $instance->featured = !$instance->featured;
         $instance->save();
         return ;
+    }
+
+    public function mails()
+    {
+        return view('admin/mails', [
+            'mail_body' => MailBody::first()
+        ]);
+    }
+
+    public function mailsStore(Request $request)
+    {
+        $mail = MailBody::first();
+        $mail->new_provider = $request->input('new_provider');
+        $mail->provider_approved = $request->input('provider_approved');
+        $mail->new_instance = $request->input('new_instance');
+        $mail->instance_approved = $request->input('instance_approved');
+        $mail->save();
+        return redirect()->back();
     }
 
 }

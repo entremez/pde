@@ -63,20 +63,20 @@
             </div>
             <div class="col-md-3">
                 <div>
-                    <img class="w-100 h-100" src="{{ $provider->imagen_logo }}">
+                    <img class="w-100" src="{{ $provider->imagen_logo }}">
                 </div>
             </div>
             @else
             <div class="col-md-3">
                 <p>Logo original</p>
                 <div>
-                    <img class="w-100 h-100" src="{{ $provider->imagen_logo }}">
+                    <img class="w-100" src="{{ $provider->imagen_logo }}">
                 </div>
             </div>
             <div class="col-md-3">
                 <p>Nuevo logo</p>
                 <div>
-                    <img class="w-100 h-100" src="{{ $providerBuffered->imagen_logo }}">
+                    <img class="w-100" src="{{ $providerBuffered->imagen_logo }}">
                 </div>
             </div>
             @endif

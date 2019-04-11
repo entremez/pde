@@ -83,7 +83,7 @@
                 <div class="col-md-3">
                     <p>Proveedor de diseño</p>
                     <div class="center-img">
-                        <img class="w-100 h-100" id="image_logo_preview">
+                        <img class="w-100" id="image_logo_preview">
                     </div>
                     <a href="#!" class="btn btn-danger w-100 provider-btn">Ver proveedor de diseño</a>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Provider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Provider;
+use App\User;
 use App\ProviderBuffer;
 use App\ProviderMember;
 use App\ProviderRegion;
@@ -19,6 +20,8 @@ use App\InstanceService;
 use App\InstanceServiceBuffer;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommentToProvider;
+use App\Mail\RegisterProviderSuccess;
+use App\Mail\CreateCaseSuccess;
 use App\ProviderComment;
 
 class ProviderController extends Controller
@@ -28,6 +31,8 @@ class ProviderController extends Controller
         $provider = Provider::find($request->input('id'));
         $provider->approved = true;
         $provider->save();
+        $user = User::find($provider->user_id);
+        Mail::send(new RegisterProviderSuccess($user));
         ProviderComment::where('provider_id', $provider->id)->delete();
         return response()->json($provider);
     }
@@ -37,6 +42,7 @@ class ProviderController extends Controller
         $instance = Instance::find($request->input('id'));
         $instance->approved = true;
         $instance->save();
+        Mail::send(new CreateCaseSuccess($instance, 2));
         $response[] = $instance;
         $response[] = $instance->provider()->first()->name;
         return response()->json($response);

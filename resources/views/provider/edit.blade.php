@@ -105,7 +105,7 @@
                 <div class="form-group">
                     <small>Cantidad (separar decimal con comas)</small>
 
-                    <input type="number" name="quantity" class="form-control" id="quantity" value="{{ $case->quantity, old('quantity') }}" min="1" required>
+                    <input type="text" name="quantity" class="form-control" id="quantity" value="{{ $case->quantity, old('quantity') }}"  required>
                     
                 </div>
             </div>
@@ -234,7 +234,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{url($case->my_image)}}" alt="sin imagen" class="img-thumbnail w-100 h-100" id="imgSalida">
+      <img src="{{url($case->my_image)}}" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
     </div>
   </div>
 </div>
@@ -259,7 +259,7 @@
       </div>
     </div>
     <div class="col-md-3  d-md-block  d-sm-none align-grid">
-      <img src="{{url($case->image_company)}}" alt="sin imagen" class="img-thumbnail w-100 h-100" id="imgCompany">
+      <img src="{{url($case->image_company)}}" alt="sin imagen" class="img-thumbnail w-100" id="imgCompany">
     </div>
   </div>
 </div>

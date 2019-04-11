@@ -1313,6 +1313,13 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
 
     });
 
+
+    $('#quantity').on('input', function (e) {
+    if (!/^[0-9,.]*$/i.test(this.value)) {
+        this.value = this.value.replace(/[^ 0-9,.]+/ig,"");
+    }
+    });
+
 });
 
 
@@ -1384,6 +1391,9 @@ function getProvidersByService(service){
              var new_position = $('#horizontal-line').offset();
              window.scrollTo(new_position.left,new_position.top);
         });
+
+
+
 }
 
 

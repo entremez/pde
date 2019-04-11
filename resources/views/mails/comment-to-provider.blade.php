@@ -6,6 +6,6 @@
 	<div class="row">
 		<p>{!! $comment !!}</p>
 
-		<p>Equipo PDE</p>
+		@include('mails/signature')
 	</div>
 </body>

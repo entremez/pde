@@ -14994,6 +14994,8 @@ color: white;
 
 .font-normal{
   font-style: normal;
+    margin-top: 1rem;
+    display: block;
 }
 
 .heart{

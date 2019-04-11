@@ -55,6 +55,9 @@
             <li class="nav-item">
               <a class="nav-link @yield('title-resources')" href="{{ route('resources') }}">Recursos</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link @yield('title-mails')" href="{{ route('mails.body') }}">Mails</a>
+            </li>
           </ul>
           @endif
         @endif

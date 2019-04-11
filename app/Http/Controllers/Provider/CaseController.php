@@ -90,7 +90,7 @@ class CaseController extends Controller
         $instance->company_logo = $fileName;
         $instance->save();
 
-        Mail::send(new CreateCaseSuccess($instance));
+        Mail::send(new CreateCaseSuccess($instance, 1));
 
         return redirect('providers/dashboard')->withSuccess( 'Caso agregado correctamente');
     }

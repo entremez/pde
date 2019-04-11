@@ -10,7 +10,7 @@ use App\User;
 use App\Provider;
 use App\MailBody;
 
-class RegisterSuccess extends Mailable
+class RegisterProviderSuccess extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -35,9 +35,9 @@ class RegisterSuccess extends Mailable
     {
         $provider = Provider::where('user_id', $this->user->id)->first();
         $mail_body = MailBody::first();
-        $body = nl2br($mail_body->new_provider);
+        $body = nl2br($mail_body->provider_approved);
         $body = str_replace('[NOMBRE_USUARIO]', $provider->name, $body);
-        return $this->subject('Confirmación inscripción plataforma Puente Diseño Empresa')
+        return $this->subject('Proveedor aprobado en plataforma Puente Diseño Empresa')
                     ->to($this->user->email)
                     ->view('mails.provider-success',[
                         'body' => $body

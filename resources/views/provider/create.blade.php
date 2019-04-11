@@ -102,7 +102,7 @@
                 <div class="form-group">
                     <small>Cantidad (separar decimal con comas)</small>
 
-                    <input type="number" name="quantity" class="form-control" id="quantity" value="{{ old('quantity') }}" min="1" required placeholder="200">
+                    <input type="text" name="quantity" class="form-control" id="quantity" value="{{ old('quantity') }}" required placeholder="200">
                     
                 </div>
             </div>
