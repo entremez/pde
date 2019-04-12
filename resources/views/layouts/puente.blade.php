@@ -14,9 +14,12 @@
 </head>
 <body>
 
-    @yield('content')
+    <div class="after-menu mobile">@include('mobile')</div>
+
+        @yield('content')
+
 
     <script src="{{ asset('scripts.js') }}"></script>
 
-</body>
+</body>  
 </html>

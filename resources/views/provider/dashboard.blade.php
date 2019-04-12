@@ -4,6 +4,8 @@
 @section('content')
 
 @include('partials/menu')
+
+
 <div class="after-menu"></div>
 
 <div class="col-md-10 offset-md-1">

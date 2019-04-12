@@ -198,4 +198,9 @@ class Instance extends Model
         return User::where('role_id', 2)->where('type_id', Provider::find($this->provider_id)->id)->first()->email;
     }
 
+    public function nameProvider()
+    {
+        return Provider::find($this->provider_id)->first()->name;
+    }
+
 }

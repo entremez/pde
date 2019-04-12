@@ -1104,6 +1104,31 @@ margin-top: 1.4rem;
   .video-container{
     display: initial;
   }
+  .mobile{
+    display: none;
+  }
+  .menu{
+    display: initial;
+  }
+  .soon{
+    display: initial;
+  }
+  
+}
+
+@media (max-width: 990px) { 
+  .section{
+    display: none;
+  }
+  .mobile{
+    display: initial;
+  }
+  .menu{
+    display: none;
+  }
+  .soon{
+    display: none;
+  }
 }
 
 video{
@@ -1758,4 +1783,10 @@ color: white;
 
 .featured{
   color: #e7004b;
+}
+
+.errorNumber {
+    font-weight: 600;
+    color: #000033;
+    font-size: 1.4rem;
 }

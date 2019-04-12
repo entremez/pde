@@ -36,6 +36,7 @@ class CreateCaseSuccess extends Mailable
     {                    
         $body = $this->getBody();
         $body = str_replace('[NOMBRE_CASO]', $this->instance->name, $body);
+        $body = str_replace('[NOMBRE_USUARIO]', $this->instance->nameProvider(), $body);
         return $this->subject($this->getSubject())
                     ->to($this->instance->emailProvider())
                     ->view('mails.provider-success',[

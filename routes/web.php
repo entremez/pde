@@ -1,10 +1,13 @@
 <?php
 
 Route::get('/', 'HomeController@welcomeSoon' )->name('welcome');
-Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' )->name('welcome');
+Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' );
 
 
 Route::get('/proveedores', 'Auth\RegisterController@providerRegister' )->name('provider.register');
+Route::get('/login', function(){
+    return redirect()->route('provider.register');
+} );
 
 
 
