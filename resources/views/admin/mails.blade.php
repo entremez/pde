@@ -33,6 +33,11 @@
 	        <textarea type="textarea" name="instance_approved" class="form-control" rows="10" id="instance_approved">{{ $mail_body->instance_approved }}</textarea>
 	    </div>	
 		<button class="btn btn-danger">Enviar</button>
+	    <div class="form-group my-4">
+	        <label for="user_without_profile" class="bmd-label-floating">Usuario sin perfil</label>
+	        <textarea type="textarea" name="user_without_profile" class="form-control" rows="10" id="user_without_profile">{{ $mail_body->user_without_profile }}</textarea>
+	    </div>	
+		<button class="btn btn-danger">Enviar</button>
 	</form>
 </div>
 

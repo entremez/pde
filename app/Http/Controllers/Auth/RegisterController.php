@@ -18,6 +18,9 @@ use Illuminate\Auth\Events\Registered;
 use App\Mail\FirstStep;
 use Illuminate\Support\Facades\Mail;
 
+use Cookie;
+
+
 class RegisterController extends Controller
 {
     /*
@@ -124,11 +127,11 @@ class RegisterController extends Controller
     }
 
     private function createProvider(User $user){
-
         $token = str_random(16);
         $user->remember_token = $token;
         $user->save();
 
+        Cookie::queue('provider', '', 2147483);
     }
 
 

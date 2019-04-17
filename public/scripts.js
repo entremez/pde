@@ -24231,6 +24231,18 @@ $(document).on('click', '#instances_to_approve_up', function(event) {
   $('#instances_to_approve_up').toggle();
 });
 
+$(document).on('click', '#users_without_profile', function(event) {
+  $('#users_without_profile_table').toggle();
+  $('#users_without_profile').toggle();
+  $('#users_without_profile_up').toggle();
+});
+
+$(document).on('click', '#users_without_profile_up', function(event) {
+  $('#users_without_profile_table').toggle();
+  $('#users_without_profile').toggle();
+  $('#users_without_profile_up').toggle();
+});
+
 $(document).on('click', '#instances_buffered', function(event) {
   $('#instances_buffered_table').toggle();
   $('#instances_buffered').toggle();
@@ -24317,6 +24329,20 @@ $(document).on('click', '#approve-instance', function(event) {
 
                 $('#instance-'+data[0].id).hide('100');
                 $('#instance-approved').append(addInstanceToApproved(data));
+              }
+    });
+});
+
+$(document).on('click', '#userWithoutProfile', function(event) {
+  event.preventDefault();
+  $.ajax({
+     url : $(this).data('url'),
+     method : "POST",
+     cache: false,
+     data : {"_token": $(this).data('token'), "id" : $(this).data('id')},
+     success : function (data)
+              {   
+                  $('#users-no-profile-'+data.id).text(data.time);
               }
     });
 });

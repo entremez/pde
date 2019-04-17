@@ -630,7 +630,7 @@ ul.dashed > li:before {
 .image-container {
     position: relative;
     overflow: hidden;
-    height: 210px!important;
+    height: 240px!important;
     background-size: cover;
     overflow: hidden;
     margin-bottom: 30px;

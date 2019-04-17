@@ -11,7 +11,10 @@ use App\Instance;
 use App\InstanceBuffer;
 use App\CompanySurvey;
 use App\MailBody;
+use App\User;
 use Charts;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CommentToUser;
 
 class AdminController extends Controller
 {
@@ -25,7 +28,8 @@ class AdminController extends Controller
             'providers' => Provider::get(),
             'providersApproved' => Provider::where('approved', true)->get(),
             'providersWaitinfForApproval' => Provider::where('approved', false)->where('rut', '!=' , '')->get(),
-            'providersBuffered' => ProviderBuffer::get()
+            'providersBuffered' => ProviderBuffer::get(),
+            'usersWithoutProfile' => User::where('type_id', null)->get()
         ]);
     }
 
@@ -51,8 +55,21 @@ class AdminController extends Controller
         $mail->provider_approved = $request->input('provider_approved');
         $mail->new_instance = $request->input('new_instance');
         $mail->instance_approved = $request->input('instance_approved');
+        $mail->user_without_profile = $request->input('user_without_profile');
         $mail->save();
         return redirect()->back();
+    }
+
+    public function userWithoutProfile(Request $request)
+    {
+        $user = User::find($request->input('id'));
+        $user->updated_at = now();
+        $user->save();
+        Mail::send(new CommentToUser($user, 1));
+        return response()->json([
+                        'id' => $request->input('id'),
+                        'time' => date('d-m-Y', strtotime(now()))
+                    ]);
     }
 
 }

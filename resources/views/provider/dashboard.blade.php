@@ -12,9 +12,10 @@
     <h3 class="pt-5">Hola <span>{{ $personalData->name }}</span>, bienvenido a tu escritorio</h3>
     <div class="row mt-5">
         <div class="col-md-3 provider-data">
+                <div class="image-container">
+                    <img src="{{ $personalData->imagen_logo }}" class="w-100"  alt="provider logo">
+                </div>
 
-                <img src="{{ $data->imagen_logo }}" class="mx-auto d-block img-fluid provider-logo"  alt="provider logo">
-            
                 <div class="provider-name"></div>
                     <p>Servicios de diseño:</p>
                         @foreach($services as $service)

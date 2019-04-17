@@ -93,4 +93,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->role_id == 3;
     }
+
+    public function type()
+    {
+        switch ($this->role_id) {
+            case 3:
+                return "Empresa";
+                break;
+            case 1:
+                return "Admin";
+                break;
+            case 2:
+                return "Proveedor";
+                break;
+        }  
+    }
 }

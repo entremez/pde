@@ -12,7 +12,8 @@
     <p><span class="with-comments">&nbsp;&nbsp;&nbsp;&nbsp;</span> Con comentarios de administradores <br>
       <span class="highlight">&nbsp;&nbsp;&nbsp;&nbsp;</span> Con cambios luego de enviar comentarios</p>
 
-	@include('admin/providers_to_approve')
+  @include('admin/users_without_profile')
+  @include('admin/providers_to_approve')
 	@include('admin/instances_to_approve')
 	@include('admin/providers_in_buffer')
 	@include('admin/instances_in_buffer')

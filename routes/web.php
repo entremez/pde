@@ -73,7 +73,7 @@ Route::group([
 
 
     Route::post('/dashboard/provider-comments', 'Provider\ProviderController@sendCommentsToProvider')->name('comment.provider');
-
+    Route::post('/dashboard/user-without-profile', 'AdminController@userWithoutProfile')->name('user.without.profile');
 
     Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');
 });

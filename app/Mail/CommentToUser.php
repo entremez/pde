@@ -6,24 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Instance;
+use App\User;
 use App\MailBody;
 
-class CreateCaseSuccess extends Mailable
+class CommentToUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $instance;
-    protected $type; // 1: creado , 2: aprobado
+    protected $user;
+    protected $type;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Instance $instance, $type)
+    public function __construct(User $user, $type)
     {
-        $this->instance = $instance;
+        $this->user = $user;
         $this->type = $type;
     }
 
@@ -33,27 +33,14 @@ class CreateCaseSuccess extends Mailable
      * @return $this
      */
     public function build()
-    {                    
+    {
         $body = $this->getBody();
-        $body = str_replace('[NOMBRE_CASO]', $this->instance->name, $body);
-        $body = str_replace('[NOMBRE_USUARIO]', $this->instance->nameProvider(), $body);
+        $body = str_replace('[TIPO_USUARIO]', $this->getType(), $body);
         return $this->subject($this->getSubject())
-                    ->to($this->instance->emailProvider())
+                    ->to($this->user->email)
                     ->view('mails.provider-success',[
                         'body' => $body
                 ]);
-    }
-
-    private function getSubject()
-    {
-        switch ($this->type) {
-            case 1:
-                return 'Has creado un nuevo caso';
-                break;
-            case 2:
-                return 'Tu caso ha sido aprobdo';
-                break;
-        }
     }
 
     private function getBody()
@@ -61,12 +48,30 @@ class CreateCaseSuccess extends Mailable
         $mail_body = MailBody::first();
         switch ($this->type) {
             case 1:
-                return nl2br($mail_body->new_instance);
-                break;
-            case 2:
-                return nl2br($mail_body->instance_approved);
+                return nl2br($mail_body->user_without_profile);
                 break;
             case 3:
+        }
+    }
+
+    private function getSubject()
+    {
+        switch ($this->type) {
+            case 1:
+                return 'Completa tu perfil';
+                break;
+        }
+    }
+
+    private function getType()
+    {
+        switch ($this->user->role_id) {
+            case 2:
+                return 'proveedor de servicios de diseño';
+                break;
+            case 2:
+                return 'empresa';
+                break;
         }
     }
 }
