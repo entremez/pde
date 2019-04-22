@@ -48,7 +48,10 @@
                 <div class="mb-4" style="display: {{ $personalData->isBuffered() ? '':'none' }}">
                     <small>*Los últimos cambios realizados están a la espera de aprobación por parte del equipo del proyecto</small>
                 </div>
-                <a class="btn btn-danger" href="{{route('provider.settings')}}">Editar</a>
+                <div>
+                    <a class="btn btn-danger" href="{{route('provider.settings')}}">Editar</a>
+                    <a class="btn btn-danger" href="{{route('provider', $data->id)}}" target="_blank">Ver perfil</a>
+                </div>
         </div>
         <div class="col-md-9 hidden">
             <h4 class="pb-4">Casos en espera de aprobación para su publicación</h4>
@@ -69,7 +72,9 @@
                                         <div class="container"> 
                                                 <div class="row-c">
                                                 <div class="div2">{{ $instance->quantity}}</div>
-                                                <div class="div1"><div class="porcentaje">{{ $instance->unit}}</div><br>{{ $instance->sentence }}</div>
+                                                <div class="div1">
+                                                    <div class="porcentaje">{{ $instance->unit}}</div>
+                                                    <div class="sentence">{{ $instance->sentence }}</div></div>
                                                 </div>
                                         </div>
                                                 

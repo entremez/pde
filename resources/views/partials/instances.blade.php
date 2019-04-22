@@ -22,7 +22,10 @@
                 <div class="container"> 
                         <div class="row-c">
                         <div class="{{$izquierda}}">{{ $case->quantity}}</div>
-                        <div class="{{$derecha}}"><div class="{{$porcentaje}}">{{  $case->unit }}</div><br>{{ $case->sentence }}</div>
+                        <div class="{{$derecha}}">
+                            <div class="{{$porcentaje}}">{{  $case->unit }}</div>
+                            <div class="sentence">{{ $case->sentence }}</div>
+                        </div>
                         </div>
                 </div>
                         

@@ -14697,21 +14697,18 @@ a .row-c{
 
 .porcentaje-grande{
   font-size: 3rem;
-  position: absolute;
-  top: 45%;
   color: white;
 }
 .div1-grande {
   line-height: 1;
   flex: 1 1 auto;
   font-size: 1.8rem;
-  margin-top: 6rem;
-  margin-bottom: 2.7rem;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    font-style: italic;
+  margin-top: 4.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  font-style: italic;
+  overflow: hidden;
 }
 
 .div2-grande {
@@ -14727,13 +14724,13 @@ a .row-c{
   line-height: 1;
   flex: 1 1 auto;
   font-size: 1rem;
-  margin-top: 7rem;
-  margin-bottom: 1rem;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical; 
-    font-style: italic;
+  margin-top: 6rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical; 
+  font-style: italic;
 }
 
 .div2 {
@@ -14746,9 +14743,8 @@ letter-spacing: -0.2rem;
 }
 
 .porcentaje{
+  min-height: .5rem;
   font-size: 2rem;
-  position: absolute;
-  top: 55%;
 }
 
 .contenedor{

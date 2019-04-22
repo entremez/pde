@@ -63,11 +63,12 @@ class ProviderController extends Controller
 
     public function detail(Provider $provider, Request $request)
     {
+        $counterId = $provider->counter($request->ip());
         return view('provider',[
             'provider' => $provider,
             'cases' => Instance::inRandomOrder()->limit(3)->where('provider_id',$provider->id)->get(),
             'service' => $provider->allServicesJson,
-            'counterId' => $provider->counter($request->ip())
+            'counterId' => $counterId
             ]);
     }
 

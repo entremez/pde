@@ -126,13 +126,26 @@ class InstanceController extends Controller
    
     public function show(Instance $instance)
     {
-        $instance->counter(request()->ip());
+        if($this->isCountable($instance))
+            $instance->counter(request()->ip());
+
 
         return view('cases',[
             'instance' => $instance,
             'provider' => $instance->provider()->first(),
             'cases' => $instance->related(3)
             ]);
+    }
+
+    private function isCountable(Instance $instance)
+    {
+        if(!auth()->check())
+            return true;
+        if(auth()->user()->role_id == 1)
+            return false;
+        if(auth()->user()->role_id == 2 && auth()->user()->instance()->isMyCase($instance))
+            return false;
+        return true;
     }
    
     public function showBuffered(Instance $instance)

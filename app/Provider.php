@@ -11,6 +11,7 @@ use App\ProviderService;
 use App\ProviderMember;
 use App\ProviderRegion;
 use App\ProviderComment;
+use App\Instance;
 
 class Provider extends Model
 {
@@ -163,5 +164,10 @@ class Provider extends Model
     public function changesAfterComments()
     {
         return ProviderComment::where('provider_id', $this->id)->where('status', 2)->get()->count() > 0;
+    }
+
+    public function isMyCase(Instance $instance)
+    {
+        return $instance->provider_id == $this->id;
     }
 }

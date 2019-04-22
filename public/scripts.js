@@ -23819,9 +23819,9 @@ var unit = '';
       
       $('.corner').html(sector);
       $('.div2').html(quantity);
-      $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
+      $('.div1').html('<div class="porcentaje">'+unit+'</div><div class="sentence">'+sentence+'</div></div>');
       $('.div2-grande').html(quantity);
-      $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><br>'+sentence+'</div>');
+      $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><div class="sentence">'+sentence+'</div></div>');
       $('.text-case').html(quantity+' '+unit+' '+sentence);
 
       var imageCompany = encodeURI($('#imgCompany').attr('src'));
@@ -23896,9 +23896,9 @@ var unit = '';
       $('.image-company').attr('src', imageCompany);
       $('.corner').html(sector);
       $('.div2').html(quantity);
-      $('.div1').html('<div class="porcentaje">'+unit+'</div><br>'+sentence+'</div>');
+      $('.div1').html('<div class="porcentaje">'+unit+'</div><div class="sentence">'+sentence+'</div></div>');
       $('.div2-grande').html(quantity);
-      $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><br>'+sentence+'</div>');
+      $('.div1-grande').html('<div class="porcentaje-grande">'+unit+'</div><div class="sentence">'+sentence+'</div></div>');
       $('.text-case-preview').html(quantity+' '+unit+' '+sentence);
       $('.quote').html('"'+quote+'"<br><span class="font-normal">'+name_quote+' - '+position_quote+'</span>');
       $('.name').html(name);
@@ -24114,7 +24114,7 @@ function filters() {
             output += '<div class="container">';
             output += '<div class="row-c">';
             output += '<div class="div2">'+ data[i].quantity+'</div>';
-            output += '<div class="div1"><div class="porcentaje">'+ data[i].unit+'</div><br>'+ data[i].sentence+'</div>';
+            output += '<div class="div1"><div class="porcentaje">'+ data[i].unit+'</div><div class="sentence">'+ data[i].sentence+'</div></div>';
             output += '</div>';
             output += '</div>';               
             output += '</div>';
