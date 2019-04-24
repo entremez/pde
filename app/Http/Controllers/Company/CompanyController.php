@@ -13,6 +13,7 @@ use App\Gain;
 use App\Classification;
 use Freshwork\ChileanBundle\Rut;
 use App\CompanyCity;
+use App\DpStage;
 
 
 class CompanyController extends Controller
@@ -30,8 +31,8 @@ class CompanyController extends Controller
         }
 
         return view('company.dashboard',[
-                'travels' => Travels::where('company_id',auth()->user()->id)->get(),
-                'data' => auth()->user()->instance()
+                'data' => auth()->user()->instance(),
+                'stages' => DpStage::all()
             ]);
     }
 

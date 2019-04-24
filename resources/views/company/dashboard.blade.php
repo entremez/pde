@@ -6,8 +6,8 @@
 @include('partials/menu')
 <div class="after-menu"></div>
 
-<div class="col-md-10 offset-md-1">
-    <div class="row mt-5">
+<div class="col-md-10 offset-md-1 section">
+    <div class="row">
         <div class="col-md-3 provider-data">
             
                 <p>{{ $data->name }}</p>
@@ -23,8 +23,9 @@
         </div>
         <div class="col-md-9 text-center">
 
-            <a class="btn btn-danger" href="{{ route('travel') }}">Evalua tu empresa</a>
+            <a class="btn btn-danger" href="{{ route('travel') }}" style="display: none">Evalua tu empresa</a>
 
+            @include('partials/display')
         </div>
     </div>
 </div>

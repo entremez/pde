@@ -1786,3 +1786,121 @@ color: white;
     color: #000033;
     font-size: 1.4rem;
 }
+
+
+.display-header{
+      padding: 1rem;
+      background-color: #000033;
+      color: white;    
+      background-size: cover;
+      background-position-y: 45%;
+}
+
+.display-header-title {
+    font-size: 2.5rem;
+}
+
+span.display-header-subtitle {
+    letter-spacing: 0.2rem;
+}
+.stage {
+    border-top: 6px solid #d4d4d4;
+    padding: 1rem 2.5rem;
+    text-align: left;
+}
+
+span.stage-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.sub-stage {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    border-top-width: 3px;
+    border-top-style: solid;
+    color: white;
+    background-size: cover;
+    background-position: center 110%, center -10%;
+    background-repeat: no-repeat, no-repeat;
+    
+}
+
+.sub-stage-name{
+    line-height: 5.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sub-stage-name>span {
+    display:inline-block;
+    vertical-align:middle;
+    line-height:normal;
+    text-align: left;
+    padding-top: 2rem;
+  }
+
+.sub-stage-image {
+    width: 20%;
+}
+
+.stage-content {
+  display: none;
+}
+.arrow-up {
+  display: none;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+
+.arrow-down {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+
+.w-title {
+    text-align: left;
+    font-weight: bold;
+    color: white;
+    padding: .5rem 2.5rem;
+    font-size: .9rem;
+    height: 100%;
+}
+
+.dark-blue{
+  background-color: #0a0f44;
+}
+
+.blue{
+  background-color: #29307e;
+}
+
+.w-body {
+    text-align: left;
+    padding: 1rem 2.5rem 0 2.5rem;
+    padding-bottom: 2rem;
+}
+
+.gray{
+  background-color: #f2f0f0;
+}
+
+.dark-gray{
+  background-color: #d5d4d4;
+}
+
+.border-0, 
+.border-1{
+  padding-right: 0;
+}
+.border-1,
+.border-2{
+  padding-left: 0;
+}
+
+
+

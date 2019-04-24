@@ -99,7 +99,7 @@
                     <div class="col-md-4 col-sm-6">
                         <a href="{{route('cases.create')}}" class="link">
                             <div class="service add">
-                                    <img src="{{ asset('images/agregar_caso.png')}}" alt="Agregar caso" height="210px">
+                                    <img src="{{ asset('images/agregar_caso.png')}}" alt="Agregar caso" class="image-container">
                             </div>
                         </a>
                     </div>
@@ -122,10 +122,13 @@
                                         <div class="image-container dashboard" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 17%,rgba(0,0,0,0.54) 72%,rgba(0,0,0,0.65) 83%,rgba(0,0,0,0.65) 98%), url('{{$instance->status ? url($instance->my_image_buffered):url($instance->my_image)}}')">
 
                                         <div class="container"> 
-                                                <div class="row-c">
+                                            <div class="row-c">
                                                 <div class="div2">{{ $instance->status ? $instance->quantity_buffered:$instance->quantity}}</div>
-                                                <div class="div1"><div class="porcentaje">{{$instance->status ? $instance->unit_buffered: $instance->unit}}</div><br>{{ $instance->status ? $instance->sentence_buffered:$instance->sentence }}</div>
+                                                <div class="div1">
+                                                    <div class="porcentaje">{{$instance->status ? $instance->unit_buffered: $instance->unit}}</div>
+                                                    <div class="sentence">{{ $instance->status ? $instance->sentence_buffered:$instance->sentence }}</div>
                                                 </div>
+                                            </div>
                                         </div>
                                                 
                                         </div>

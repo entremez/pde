@@ -1105,6 +1105,7 @@ $(document).on('click', '#providers_in_buffer', function(event) {
   $('#providers_in_buffer').toggle();
   $('#providers_in_buffer_up').toggle();
 });
+
 $(document).on('click', '#providers_in_buffer_up', function(event) {
   $('#providers_in_buffer_table').toggle();
   $('#providers_in_buffer').toggle();
@@ -1344,6 +1345,13 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     if (!/^[0-9,.]*$/i.test(this.value)) {
         this.value = this.value.replace(/[^ 0-9,.]+/ig,"");
     }
+    });
+
+
+    $(document).on('click', '.position-relative', function(event) {
+      $(this).next('.stage-content').toggle();
+      $(this).children('.arrow-up').toggle();
+      $(this).children('.arrow-down').toggle();
     });
 
 });
