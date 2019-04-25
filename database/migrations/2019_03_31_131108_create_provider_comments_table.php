@@ -22,6 +22,10 @@ class CreateProviderCommentsTable extends Migration
             $table->integer('provider_id')->unsigned();
             $table->foreign('provider_id')->references('id')->on('providers');
 
+            $table->integer('instance_id')->unsigned()->nullable();
+            $table->foreign('instance_id')->references('id')->on('instances');
+
+            $table->integer('type');
             $table->text('message');
 
             $table->integer('status')->default(1);

@@ -16,14 +16,18 @@
 			  <tbody>
 			  	@foreach( $instances as $instance)
 			  		@if(!$instance->approved)
-				    <tr id="instance-{{ $instance->id }}">
+				    <tr class="{{ $instance->hasComments() ? 'with-comments':'' }} {{ $instance->changesAfterComments() ? 'highlight':'' }}" id="instance-{{ $instance->id }}">
 				      <th scope="row">{{ $instance->id}}</th>
 				      <td>{{ $instance->name}}</td>
 				      <td>{{ $instance->provider()->first()->name}}</td>
 				      <td>{{ $instance->company_name}}</td>
 				      <td>{{ $instance->long_description}}</td>
 				      <td><a target="_blank" class="btn btn-primary" href="{{ route('case', $instance->id) }}">Ver caso</a></td>
-				      <td><button class="btn btn-danger" id="approve-instance" data-id = "{{ $instance->id }}" data-url = "{{ route('approve.instance') }}" data-token = "{{ csrf_token() }}">Aprobar</button></td>
+				      <td>
+				      	<div class="d-flex">
+				      		<button class="btn btn-danger" id="approve-instance" data-id = "{{ $instance->id }}" data-url = "{{ route('approve.instance') }}" data-token = "{{ csrf_token() }}">Aprobar</button><button id="comment-instance-{{ $instance->id }}" class="btn btn-danger ml-1 comment-to-instance" data-mail="{{ $instance->emailProvider() }}" data-provider-id="{{ $instance->provider_id }}"data-instance-id="{{ $instance->id }}" data-instance="{{ $instance->name }}" data-comments = "{{ $instance->comments() }}">Enviar comentarios</button>
+						</div>	
+				      </td>
 				    </tr>
 				    @endif
 			    @endforeach

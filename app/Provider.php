@@ -153,17 +153,17 @@ class Provider extends Model
 
     public function hasComments()
     {
-        return ProviderComment::where('provider_id', $this->id)->where('status', '<>', 0)->get()->count() > 0;
+        return ProviderComment::where('provider_id', $this->id)->where('type', 1)->where('status', '<>', 0)->get()->count() > 0;
     }
 
     public function comments()
     {
-        return $this->hasComments() ? ProviderComment::where('provider_id', $this->id)->first()->message : '';
+        return $this->hasComments() ? ProviderComment::where('provider_id', $this->id)->where('type', 1)->first()->message : '';
     }
 
     public function changesAfterComments()
     {
-        return ProviderComment::where('provider_id', $this->id)->where('status', 2)->get()->count() > 0;
+        return ProviderComment::where('provider_id', $this->id)->where('type', 1)->where('status', 2)->get()->count() > 0;
     }
 
     public function isMyCase(Instance $instance)

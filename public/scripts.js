@@ -24397,7 +24397,22 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     event.preventDefault();
     $('#send-comment-to-provider').attr('disabled', false);
     $('#emailProvider').attr('value', $(this).data('mail'));
+    $('#subject').val('Observaciones perfil proveedor de servicios de diseño');
     $('#idProvider').attr('value', $(this).data('id'));
+    $('#type').attr('value', 1); 
+    $('#message').html($(this).data('comments'));
+    $('#commentToProvider').modal('show');
+  });
+
+  $(document).on('click', '.comment-to-instance', function(event) {
+    event.preventDefault();
+    $('#send-comment-to-provider').attr('disabled', false);
+    $('#emailProvider').attr('value', $(this).data('mail'));
+    var instance = $(this).data('instance');
+    $('#subject').val('Observaciones caso '+ instance);
+    $('#idProvider').attr('value', $(this).data('provider-id'));
+    $('#idInstance').attr('value', $(this).data('instance-id'));
+    $('#type').attr('value', 2);
     $('#message').html($(this).data('comments'));
     $('#commentToProvider').modal('show');
   });
@@ -24409,6 +24424,9 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     var message = $('#message').val();
     var message = message.replace(/\n/g, "<br>");
     var id = $('#idProvider').val();
+    var instance_id = $('#idInstance').val();
+    var type = $('#type').val();
+    var subject = $('#subject').val();
     $.ajax({
        url : $(this).data('url'),
        method : "POST",
@@ -24416,14 +24434,22 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
        data : { "_token": $(this).data('token'), 
                 "mail" : mail, 
                 "message": message, 
-                "id": id},
+                "id": id, 
+                "instance_id": instance_id, 
+                "type": type, 
+                "subject": subject},
        success : function (data)
                 { 
                   $('#message').val('');
                   $('#commentToProvider').modal('hide');
-                  $('#comment-provider-'+id).attr('disabled', 'disabled');
-                  $('#comment-provider-'+id).text('Comentarios enviados');
 
+                  if(type == 1){
+                    $('#comment-provider-'+id).attr('disabled', 'disabled');
+                    $('#comment-provider-'+id).text('Comentarios enviados');
+                  }else{
+                    $('#comment-instance-'+instance_id).attr('disabled', 'disabled');
+                    $('#comment-instance-'+instance_id).text('Comentarios enviados');                    
+                  }
                 }
     });
 

@@ -40,7 +40,7 @@
 		  </div>
 		  <div class="form-group">
 		    <label>Asunto</label>
-		    <input type="text" class="form-control" value="Observaciones perfil proveedor de servicios de diseño" disabled>
+		    <input type="text" class="form-control" value="" disabled id="subject">
 		  </div>
 		  <div class="form-group">
 		    <label>Mensaje</label>
@@ -53,6 +53,8 @@
       </div>
     </div>
     <input type="hidden" id="idProvider">
+    <input type="hidden" id="idInstance">
+    <input type="hidden" id="type"> <!-- 1: Perfil de usuario, 2: Caso de éxito -->
   </form>
   </div>
 </div>

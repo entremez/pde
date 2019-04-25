@@ -7,12 +7,8 @@
                 <div class="row-c">
                 <div class="div2">{{ $case->quantity}}</div>
                 <div class="div1">
-                	<div class="porcentaje">
-                		{{  $case->unit }}
-                	</div>
-                	<div class="sentence">
-                		{{ $case->sentence }}
-                	</div>
+                	<div class="porcentaje">{{  $case->unit }}</div>
+                	<div class="sentence">{{ $case->sentence }}</div>
                 </div>
                 </div>
         </div>

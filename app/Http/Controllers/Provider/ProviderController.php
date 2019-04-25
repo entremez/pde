@@ -178,7 +178,8 @@ class ProviderController extends Controller
         }else{
             if(!$provider->approved){
                 $this->updatePreviousApproval($provider, $request);
-                Mail::send(new ProviderChange(3, $provider->name));
+                if(!$provider->hasComments())
+                    Mail::send(new ProviderChange(3, $provider->name));
                 return redirect()->route('provider.dashboard');
             }
             $providerBuffer = new ProviderBuffer();
@@ -322,12 +323,19 @@ class ProviderController extends Controller
      private function statusComments($provider)
      {
          if( $provider->hasComments() ){
-            $comments = ProviderComment::where('provider_id',$provider->id)
-                                        ->where('status', 1)->first();
-            $comments->status = 2;
-            $comments->save();
 
-            Mail::send(new ProviderChange(3, auth()->user()->instance()->name));
+
+            $comments = ProviderComment::where('provider_id',$provider->id)
+                                        ->where('type', 1)
+                                        ->where('status', 1)->first();
+            if($comments != null){
+                $comments->status = 2;
+                $comments->save();
+
+                Mail::send(new ProviderChange(5, auth()->user()->instance()->name));
+            }else{
+                Mail::send(new ProviderChange(3, $provider->name));   
+            }
          }
 
      }

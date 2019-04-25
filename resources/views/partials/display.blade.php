@@ -23,7 +23,7 @@
 			                <div class="row">
 			                	@foreach($title->bodies as $key => $body)
 			                    <div class="col-md-4 border-{{ $key }}">
-			                        <div class="w-title" style="background-color: {{ $body->sentence->background }}">{{ $body->sentence->sentence }}</div>
+			                        <div class="w-title" style="background-color: {{ $body->sentence->background }}"><span>{{ $body->sentence->sentence }}</span></div>
 			                    </div>
 								@endforeach
 			                	@foreach($title->bodies as $key => $body)

@@ -203,4 +203,20 @@ class Instance extends Model
         return Provider::find($this->provider_id)->first()->name;
     }
 
+
+    public function hasComments()
+    {
+        return ProviderComment::where('instance_id', $this->id)->where('type', 2)->where('status', '<>', 0)->get()->count() > 0;
+    }
+
+    public function comments()
+    {
+        return $this->hasComments() ? ProviderComment::where('instance_id', $this->id)->where('type', 2)->first()->message : '';
+    }
+
+    public function changesAfterComments()
+    {
+        return ProviderComment::where('instance_id', $this->id)->where('type', 2)->where('status', 2)->get()->count() > 0;
+    }
+
 }

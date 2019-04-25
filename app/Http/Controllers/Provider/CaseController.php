@@ -20,6 +20,8 @@ use App\BusinessType;
 use File;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CreateCaseSuccess;
+use App\ProviderComment;
+use App\Mail\ProviderChange;
 
 class CaseController extends Controller
 {
@@ -344,6 +346,26 @@ class CaseController extends Controller
         InstanceService::where('instance_id', $instance->id)->delete();
         $this->saveServicesOfInstance($instance->id, $request->input('service'));
         $instance->save();
+
+        $this->statusComments($instance);
     }
+
+     private function statusComments($instance)
+     {
+         if( $instance->hasComments() ){
+            $comments = ProviderComment::where('instance_id',$instance->id)
+                                        ->where('type', 2)
+                                        ->where('status', 1)->first();
+            if($comments != null){
+                $comments->status = 2;
+                $comments->save();
+
+                Mail::send(new ProviderChange(4, auth()->user()->instance()->name));
+            }else{
+
+            }
+         }
+
+     }    
 
 }

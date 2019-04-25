@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function welcome()
     {
         return view('welcome',[
-            'cases' => $this->notSoRandom(5,1),
+            'cases' => $this->notSoRandom(3,3),
             'providers' => Provider::where('approved',true)->inRandomOrder()->limit(3)->get(),
         ]);
     }

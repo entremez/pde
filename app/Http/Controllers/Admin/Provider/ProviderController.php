@@ -45,6 +45,7 @@ class ProviderController extends Controller
         Mail::send(new CreateCaseSuccess($instance, 2));
         $response[] = $instance;
         $response[] = $instance->provider()->first()->name;
+        ProviderComment::where('instance_id', $instance->id)->delete();
         return response()->json($response);
     }
 
@@ -182,20 +183,26 @@ class ProviderController extends Controller
 
     public function sendCommentsToProvider(Request $request)
     {
-        if(ProviderComment::where('provider_id', $request->input('id'))->get()->count() == 0)
+        $type = $request->input('type');
+        if(ProviderComment::where('provider_id', $request->input('id'))->where('type', $type)->get()->count() == 0)
         {
             $comment = new ProviderComment();
+            $comment->provider_id = $request->input('id');        
+            $comment->type = $type;
+            if($type == 2){
+                $comment->instance_id = $request->input('instance_id');
+            }
+
         }else{
-            $comment = ProviderComment::where('provider_id', $request->input('id'))->first();
+            $comment = ProviderComment::where('provider_id', $request->input('id'))->where('type', $type)->first();
         }
 
         $comment->admin_id = auth()->user()->instance()->id;
-        $comment->provider_id = $request->input('id');
         $comment->message = $request->input('message');
         $comment->status = 1;
         $comment->save();
 
-        Mail::send(new CommentToProvider($request->input('mail'), $request->input('message')));
-        return response()->json(['status' => '1']);
+        Mail::send(new CommentToProvider($request->input('mail'), $request->input('message'), $type, $request->input('subject')));
+        return response()->json(['status' => '1', 'type' => $type]);
     }
 }

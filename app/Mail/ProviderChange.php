@@ -62,13 +62,16 @@ class ProviderChange extends Mailable
                 return "El proveedor ".$name." ha creado su perfil.";
                 break;
             case 2:
-                return "El proveedor ".$name." ha agegado un caso de éxito.";
+                return "El proveedor ".$name." ha agregado un caso de éxito.";
                 break;
             case 3:
                 return "El proveedor ".$name." ha realizado cambios en su perfil.";
                 break;
             case 4:
-                return "El proveedor ".$name." ha realizado cambios en un caso de éxito.";
+                return "El proveedor ".$name." ha realizado cambios en un caso de éxito que tenía obsrvaciones.";
+                break;
+            case 5:
+                return "El proveedor ".$name.", que tenía observaciones, ha realizado cambios en su perfil.";
                 break;
         }
     }
@@ -87,6 +90,9 @@ class ProviderChange extends Mailable
                 break;
             case 4:
                 return 'Cambios a un caso con observaciones';
+                break;
+            case 5:
+                return 'Proveedor con observaciones realizó cambios en su perfil';
                 break;
         }
     }

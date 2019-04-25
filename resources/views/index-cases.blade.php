@@ -18,7 +18,7 @@
 
 <div class="row">
     <div class="col-3">
-<div class="input-group">
+            <div class="input-group">
                         <input type="text" class="form-control search-place"  placeholder="Busca un caso" >
                     </div>
 

@@ -21,6 +21,7 @@ class CreateMailBodiesTable extends Migration
             $table->text('new_instance')->nulleable();
             $table->text('instance_approved')->nulleable();
             $table->text('new_company')->nulleable();
+            $table->text('user_without_profile')->nulleable();
             
             $table->timestamps();
         });
