@@ -44,16 +44,26 @@
                 <button id="provider-btn" data-id="{{ $provider->id }}" class="btn btn-danger w-100">Ver contacto</button>
                 <div class="provider-contact">
                     <div class="row text-left">
-                        <div class="col-md-11"><p>{{ $provider->email }}</p></div>
+                        <div class="col-md-11 d-flex">
+                            <div>   
+                                <img src="{{ asset('images/bp_mail.svg') }}" width="30px"  class="mr-icon noselect">
+                            </div>
+                            <div>{{ $provider->contact_email }}</div>
+                        </div>
                     </div>
                     <div class="row text-left">
-                        <div class="col-md-11"><p>{{ $provider->phone }}</p></div>
+                        <div class="col-md-11"><img src="{{ asset('images/bp_phone.svg') }}" width="30px"  class="mr-icon noselect">{{ $provider->phone }}</div>
                     </div>
                     <div class="row text-left">
-                        <div class="col-md-11"><p>{{ Rut::parse($provider->rut."-".$provider->dv_rut)->format()}}</p></div>
+                        <div class="col-md-11"><img src="{{ asset('images/bp_web.svg') }}" width="30px" class="mr-icon noselect">{{ $provider->web }}</div>
                     </div>
                     <div class="row text-left">
-                        <div class="col-md-11"><p>{{ $provider->address() }}</p></div>
+                        <div class="col-md-11 d-flex">
+                            <div>   
+                                <i class="fas fa-map-marker-alt mr-icon" style="font-size: 1.3rem;padding-left: .5rem;padding-right: .4rem;padding-top: .3rem;"></i>
+                            </div>
+                            <div>{{ $provider->address() }}</div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -95,6 +95,7 @@ class ProviderController extends Controller
         $provider->city_id = $request->input('region');
         $provider->commune_id = $request->input('commune');
         $provider->web = $request->input('web');
+        $provider->mail = $request->input('mail');
         $rut = Rut::parse($request->input('rut'))->toArray();
         $provider->rut = $rut[0];
         $provider->dv_rut = $rut[1];
@@ -202,6 +203,7 @@ class ProviderController extends Controller
         $providerBuffer->city_id = $request->input('region');
         $providerBuffer->commune_id = $request->input('commune');
         $providerBuffer->web = $request->input('web');
+        $providerBuffer->mail = $request->input('mail');
         $rut = Rut::parse($request->input('rut'))->toArray();
         $providerBuffer->rut = $rut[0];
         $providerBuffer->dv_rut = $rut[1];
@@ -279,6 +281,7 @@ class ProviderController extends Controller
         $provider->city_id = $request->input('region');
         $provider->commune_id = $request->input('commune');
         $provider->web = $request->input('web');
+        $provider->mail = $request->input('mail');
         $rut = Rut::parse($request->input('rut'))->toArray();
         $provider->rut = $rut[0];
         $provider->dv_rut = $rut[1];

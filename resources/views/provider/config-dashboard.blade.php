@@ -62,7 +62,6 @@
         </div>
 
         <div class="row pt-4">
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="bmd-label-floating">Dirección</label>
@@ -71,8 +70,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">Teléfono</label>
-                    <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" required>
+                    <label class="bmd-label-floating">Sitio Web</label>
+                    <input type="text" name="web" class="form-control" value="{{ old('web') }}">
                 </div>
             </div>
         </div>
@@ -80,8 +79,14 @@
         <div class="row py-4">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="bmd-label-floating">Sitio Web</label>
-                    <input type="text" name="web" class="form-control" value="{{ old('web') }}">
+                    <label class="bmd-label-floating">Teléfono</label>
+                    <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="bmd-label-floating">Mail de contacto</label>
+                    <input type="text" name="mail" class="form-control" value="{{ old('mail') }}" required>
                 </div>
             </div>
         </div>

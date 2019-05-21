@@ -35,6 +35,11 @@ class ProviderBuffer extends Model
         $users = User::where('type_id',$this->provider_id)->where('role_id', 2)->get()->first();
         return $users->email;
     }
+
+    public function getContactEmailAttribute()
+    {
+        return $this->mail;
+    }
 	
     public function team()
     {

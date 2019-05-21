@@ -14,6 +14,28 @@ class Instance extends Model
 {
     use SoftDeletes;
 
+    public static function approved(){
+        $instances = Instance::where('approved', true)->get();
+        $count = 0;
+        foreach ($instances as $instance) {
+            if($instance->isProviderActive())
+                $count++;
+        }
+        return $count;
+    }
+
+    public static function pendingForApproval(){
+        $instances = Instance::where('approved', false)->get();
+        $count = 0;
+        foreach ($instances as $instance) {
+            if($instance->isProviderActive())
+                $count++;
+        }
+        return $count;
+    }
+
+
+
     protected $fillable = [
         'name', 'company_name', 'description', 'long_description'
     ];  
@@ -195,12 +217,12 @@ class Instance extends Model
 
     public function emailProvider()
     {
-        return User::where('role_id', 2)->where('type_id', Provider::find($this->provider_id)->id)->first()->email;
+        return Provider::find($this->provider_id)->email;
     }
 
     public function nameProvider()
     {
-        return Provider::find($this->provider_id)->first()->name;
+        return Provider::find($this->provider_id)->name;
     }
 
 
@@ -217,6 +239,10 @@ class Instance extends Model
     public function changesAfterComments()
     {
         return ProviderComment::where('instance_id', $this->id)->where('type', 2)->where('status', 2)->get()->count() > 0;
+    }
+
+    public function isProviderActive(){
+        return Provider::find($this->provider_id) != null ;
     }
 
 }

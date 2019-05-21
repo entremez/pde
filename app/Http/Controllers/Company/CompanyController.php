@@ -21,6 +21,8 @@ class CompanyController extends Controller
 
     public function index()
     {
+        $backgrounds = [asset('/images/FONDOS-01.png'), asset('/images/FONDOS-02.png'), asset('/images/FONDOS-03.png'), asset('/images/FONDOS-04.png'), asset('/images/FONDOS-05.png'), asset('/images/FONDOS-06.png'), asset('/images/FONDOS-07.png'), asset('/images/FONDOS-08.png')];
+        $survey = Survey::where('active',1)->get()->first();
         if(Company::where('user_id',auth()->user()->id)->get()->count() == 0 ){
             return view('company.config',[
                 'cities' => City::get(),
@@ -32,9 +34,13 @@ class CompanyController extends Controller
 
         return view('company.dashboard',[
                 'data' => auth()->user()->instance(),
-                'stages' => DpStage::all()
+                'stages' => DpStage::all(),
+                'statements' => $survey->statements()->get(),
+                'survey' => $survey,
+                'backgrounds' => $backgrounds
             ]);
     }
+
 
     public function config(Request $request)
     {

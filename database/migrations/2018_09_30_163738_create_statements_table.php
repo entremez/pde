@@ -23,6 +23,7 @@ class CreateStatementsTable extends Migration
             $table->foreign('survey_id')->references('id')->on('surveys');
 
             $table->string('statement');
+            $table->text('background');
 
             $table->timestamps();
         });

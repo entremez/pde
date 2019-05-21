@@ -19,7 +19,11 @@
 				      <td>{{ $provider->name}}</td>
 				      <td>{{ $provider->web}}</td>
 				      <td>{{ $provider->long_description}}</td>
-				      <td><a target="_blank" class="btn btn-primary" href="{{ route('provider', $provider->id) }}">Ver proveedor</a></td>
+				      <td>
+						<div class="d-flex">
+					      	<a target="_blank" class="btn btn-primary" href="{{ route('provider', $provider->id) }}">Ver proveedor</a>
+					      	<button class="btn btn-danger ml-1" id="delete-provider" data-id = "{{ $provider->id }}" data-url = "{{ route('delete.provider') }}" data-token = "{{ csrf_token() }}">Descartar</button></td>
+					    </div>
 				    </tr>
 				    @endif
 			    @endforeach

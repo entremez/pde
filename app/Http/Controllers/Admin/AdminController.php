@@ -22,8 +22,8 @@ class AdminController extends Controller
     {
         return view('admin/dashboard', [
             'instances' => Instance::get(),
-            'instancesApproved' => Instance::where('approved', true)->get(),
-            'instancesWaitingForApproval' => Instance::where('approved', false)->get(),
+            'instancesApproved' => Instance::approved(),
+            'instancesWaitingForApproval' => Instance::pendingForApproval(),
             'intancesBuffered' => InstanceBuffer::get(),
             'providers' => Provider::get(),
             'providersApproved' => Provider::where('approved', true)->get(),
@@ -70,6 +70,12 @@ class AdminController extends Controller
                         'id' => $request->input('id'),
                         'time' => date('d-m-Y', strtotime(now()))
                     ]);
+    }
+
+    public function userIgnore(Request $request)
+    {
+        User::where('id' , $request->input('id'))->delete();
+        return ;
     }
 
 }

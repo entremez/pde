@@ -13,7 +13,6 @@ $(document).ready(function () {
 
     $('#send-survey').click(function(event){
       event.preventDefault();
-      var data = $('#survey-form').serialize();
       $('#survey-form').submit();
     });
 
@@ -717,7 +716,6 @@ var unit = '';
       $('.text-case').html(quantity+' '+unit+' '+sentence);
 
       var imageCompany = encodeURI($('#imgCompany').attr('src'));
-      console.log(imageCompany);
       var quote = $('#quote').val();
       var name_quote = $('#name_quote').val();
       var position_quote = $('#position_quote').val();
@@ -970,7 +968,6 @@ function filters() {
     var business_type = [];
     $("input[name=business_type]").each(function (index) {
         if($(this).is(':checked')){
-          console.log($(this).val());
           business_type.push($(this).val());
         }
     });
@@ -1198,6 +1195,69 @@ $(document).on('click', '#approve-provider', function(event) {
     }else{
       approveProvider(url, token, id);
     }
+
+});$(document).on('click', '#delete-provider', function(event) {
+  event.preventDefault();
+  var url = $(this).data('url');
+  var token = $(this).data('token');
+  var id = $(this).data('id');
+
+  $.confirm({
+          title: 'Descartar proveedor',
+          content: '¿Realmente desea descartar este proveedor?<br>La acción recargará la página',
+          buttons: {
+              Confirmar: {
+                  btnClass: 'btn-primary',
+                  action: function () {
+                        deleteProvider(url, token, id);
+                    },
+                  },
+              Volver: function () {
+
+              }
+          }
+      });
+  
+
+});
+
+$(document).on('click', '#ignore', function(event) {
+      event.preventDefault();
+      var row = $(this).parents('tr');
+      var url = $(this).data('url');
+      var token = $(this).data('token');
+      var id = $(this).data('id');
+      $.confirm({
+          title: 'Ignorar registro',
+          content: '¿Realmente deseas ignorar a este usuario?',
+          buttons: {
+              Confirmar: {
+                  btnClass: 'btn-primary',
+                  action: function () {
+                          $.ajax({
+                               url : url,
+                               method : "POST",
+                               cache: false,
+                               data : {"_token": token, "id" : id},
+                               success : function (data)
+                                        {
+                                          row.hide('100');
+                                          var number = $('#number_users');
+                                          var users = number.html() - 1;
+                                          if(Number.isNaN(users)){
+                                            users = '0';
+                                          }
+                                          number.html(users);
+                                        }
+                              });
+                    },
+                  },
+              Volver: function () {
+
+              }
+          }
+      });
+
 });
 
 $(document).on('click', '#approve-instance', function(event) {
@@ -1222,6 +1282,31 @@ $(document).on('click', '#approve-instance', function(event) {
 
                 $('#instance-'+data[0].id).hide('100');
                 $('#instance-approved').append(addInstanceToApproved(data));
+              }
+    });
+});
+
+$(document).on('click', '#delete-instance', function(event) {
+  event.preventDefault();
+  $.ajax({
+     url : $(this).data('url'),
+     method : "POST",
+     cache: false,
+     data : {"_token": $(this).data('token'), "id" : $(this).data('id')},
+     success : function (data)
+              {                
+                var number = $('#number_instances');
+                var instances = Number(number.html()) + 1;
+                number.html(instances);
+                number = $('#number_instances_to_approve');
+                instances = number.html() - 1;
+                if(Number.isNaN(instances)){
+                  instances = '0';
+                }
+                number.html(instances);
+
+                $('#instance-'+data[0].id).hide('100');
+                $('#instance-approved-'+data[0].id).hide('100');
               }
     });
 });
@@ -1358,7 +1443,6 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
                 "id": id},
        success : function (data)
                 { 
-                  console.log(data);
                   $('#instance-approved-'+id).find('.feature').toggleClass('featured');
 
                 }
@@ -1380,8 +1464,278 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
       $(this).children('.arrow-down').toggle();
     });
 
+
+     var actualStament = 1;
+     var statements = $(document).find('.travel-wrapper');
+     var totalStatements = statements.length;
+
+     var options = $('#order').data('order');
+     var option = 0;
+
+     if($('#istravel').val() == 1){
+        $('.type-3').html(affirmation(5));
+        $('.type-4').html(enumerar(4));
+        setOptions(options, option);
+        setFirst(actualStament, statements);
+     }
+
+     $(document).on('click', '.sq.active', function(event) {
+      event.preventDefault();
+      var bar = 100*(1 - ((options.length - (option+1)) / options.length));
+      $('.custom-progress-bar').css('width', bar+'%');
+      cleanActives($('.wrapper-'+options[option]));
+      setInput(getType(options, option), $(this).text(), options[option]);
+      var alto = $(this).parents('.wrapper-'+options[option]).height();
+      alto = alto + 50;
+      $(this).addClass('selected');
+      $(this).parents('.wrapper-'+options[option]).css({
+        'margin-top': '-'+alto+'px',
+        'opacity': '0',
+        'transition': 'margin-top 1s, opacity 1s',
+      });;
+      var last = $('.wrapper-'+options[option]).parent().parent().data('last');
+      option++;
+      if(last == option){
+        actualStament++;
+        setTravel(actualStament, statements)
+      }
+      setOptions(options, option); 
+    });
+
+    $(document).on('click', '.name-type-2', function(event) {
+        $(this).parent().parent().children().each(function(index, el) {
+          $(this).find('.name-type').removeClass('type-2-selected');
+        });
+        $(this).addClass('type-2-selected');
+        option++;
+        actualStament++;
+        setTravel(actualStament, statements);
+        setOptions(options, option);
+    });
+
+    $(document).on('click', '.name-type-1', function(event) {
+      var id = $(this).parent().data('stmnt');
+        if($(this).hasClass('type-2-selected')){
+          setInput(1, id, 0);
+          $(this).removeClass('type-2-selected');
+        }else{ 
+          $(this).addClass('type-2-selected');
+          setInput(1, id, id);
+        }
+    });
+
+     $(document).on('click', '.reverse', function(event) {
+      if(actualStament == 1){
+        if(option != 0)
+          option--;
+        setOptions(options, option, 1);
+      }else{
+
+        if($(this).data('type') != 3){
+          
+            if($(this).parents('.wrapper-stmt').prev().find('.travel-wrapper').data('type') == 3){
+              option = $(this).parents('.wrapper-stmt').prev().find('.travel-wrapper').data('last')-1;
+              setOptions(options, option, 1);
+            }
+            actualStament--;
+            setTravel(actualStament, statements);
+        }else{
+
+            if(option+1 == $('.wrapper-'+options[option]).parent().parent().data('first')){
+              option = $(this).parents('.wrapper-stmt').prev().find('.travel-wrapper').data('last');
+              setOptions(options, option, 1);              
+              actualStament--;
+              setTravel(actualStament, statements);
+            }
+            option--;
+            setOptions(options, option, 1);
+        }
+      }
+     });
+
+     $(document).on('click', '.avanzar', function(event) {
+        actualStament++;
+        setTravel(actualStament, statements);
+     });
+
+     $(document).on('click', '.enum', function(event) {
+      var flag = 0;
+      var actual = $(this);
+      var enums = $(this).parent('.type-4').find('.enum');
+      var opt = $(this).parents('.wrapper').data('stmnt');
+      setInput(4, $(this).text(), opt);
+      if ($(this).hasClass('type-4-selected')) {
+        $(this).removeClass('type-4-selected')
+      }else{
+       var selected = $(this).parent().find('.type-4-selected');
+       var others = $(this).parents('.wrapper').parent().find('.wrapper');
+         $.each(others, function(index, val) {
+
+            $.each($(this).find('.enum'), function(index, val) {
+              if($(this).hasClass('type-4-selected')){
+                if($(this).text() == actual.text())
+                  flag++
+              }
+            });
+         });
+       if(selected.length != 0)
+          flag++;
+      if(flag == 0)
+        $(this).addClass('type-4-selected')
+     }
+   });
+
+    $(document).on('click', '.submit-type-4', function(event) {
+      var wrappers = $(this).parents('.travel-wrapper').find('.wrapper');
+      var count = 0;
+      $.each(wrappers, function(index, val) {
+        var countLine = 0;
+        $.each($(this).find('.type-4').find('.enum'), function(index, val) {
+            if($(this).hasClass('type-4-selected')){
+              count++;
+              countLine++;
+            }
+            if(countLine > 1)
+              count = 0;
+          });
+      });
+      if(count == 4){
+        actualStament++;
+        setTravel(actualStament, statements);
+      }else{
+        $('.message').show();
+      }
+    });
+ 
+    $(document).on('click', '.submit-type-2', function(event) {
+      
+      actualStament++;
+      setTravel(actualStament, statements);
+
+    });
+
 });
 
+function cleanActives(container) {
+  $.each(container.find('.sq'), function(index, val) {
+     $(this).removeClass('selected');
+  });
+}
+
+function setTravel(actualStament, statements){
+
+  $('#actualStatement').text(actualStament-1);
+  $('.wrapper-stmt-'+actualStament).show();
+  $.each(statements, function(index, val) {
+      $(this).hide(800);
+      if($(this).hasClass('full-stmts-'+actualStament))
+        $(this).show(800);
+  });
+  if(actualStament >= statements.length){
+    $('.full-stmts-'+actualStament).addClass('travel-wrapper-final');
+    $('.progress-wrapper').hide();
+  }
+}
+
+function setFirst(actualStament, statements){
+  $('#actualStatement').text(actualStament-1);
+  $('.wrapper-stmt-'+actualStament).show();
+    $.each(statements, function(index, val) {
+        $(this).hide();
+        if($(this).hasClass('full-stmts-'+actualStament))
+          $(this).show();
+    });
+
+}
+
+function setOptions(options, option, action=0){
+  if(getType(options, option) == 3){
+    var sqrs = $('.wrapper-'+options[option]).find('.sq');
+    $.each(sqrs, function(index, val) {
+     $(this).addClass('active');
+    });
+    $('.wrapper-'+options[option]).show();
+    $('.wrapper-'+options[option]).css('filter', 'opacity(1)');
+    $('.wrapper-'+options[option]).css('cursor', 'pointer'); 
+    $('.wrapper-'+options[option]).css('transition', 'filter 1s'); 
+    for (var i = 1; i < 3; i++) {
+      $('.wrapper-'+options[option+i]).css('filter', 'opacity(.5)');
+      $('.wrapper-'+options[option+i]).css('cursor', 'not-allowed'); 
+      $('.wrapper-'+options[option]).css('transition', 'filter 1s'); 
+    }
+    if(action == 1){
+      $('.wrapper-'+options[option]).css({
+        'margin-top': '0',
+        'opacity': '1',
+        'transition': 'margin-top 1s, opacity 1s',
+      });
+      sqrs = $('.wrapper-'+options[option+1]).find('.sq');
+      $.each(sqrs, function(index, val) {
+        $(this).removeClass('active');
+      });
+    }
+  }else{
+    for (var i = 1; i < 3; i++) {
+      $('.wrapper-'+options[option+i]).css('filter', 'opacity(1)');
+    }    
+  }
+
+  if(getType(options, option) == 4){
+      var actual = $('.wrapper-'+options[option]);
+      var statement = actual.parents('.travel-wrapper');
+      var last = statement.data('last');
+      for (var i = options[option]; i <= last; i++) {
+        $('.wrapper-'+i).show();
+        $('.wrapper-'+i).css('filter', 'opacity(1)');
+        $('.wrapper-'+i).css('cursor', 'pointer');
+      }
+
+  }
+
+  if(getType(options, option) == 2){
+      var actual = $('.wrapper-'+options[option]);
+      var statement = actual.parents('.travel-wrapper');
+      var last = statement.data('last');
+      for (var i = options[option]; i <= last; i++) {
+        $('.wrapper-'+i).show();
+        $('.wrapper-'+i).css('filter', 'opacity(1)');
+        $('.wrapper-'+i).css('cursor', 'pointer');
+      }  
+
+  }
+
+
+}
+
+function setInput(type, value, option) {
+    $('#'+option).prop('value', value);
+
+}
+
+function getType(options, option) {
+  return $('.wrapper-'+options[option]).parent().parent().data('type');
+}
+
+function affirmation(numberOfLevels) {
+
+  var out = '<div class="affirmation-container">';
+  for (var i = 0; i < numberOfLevels; i++) {
+    out += '<div class="sq">'+(i+1)+'</div>';
+  }
+  out+='</div><div class="legend"><div>Para nada</div><div>Si, absolutamente</div></div>';
+
+  return out;
+}
+
+function enumerar(numberOfLevels) {
+
+  var out = '';
+  for (var i = 0; i < numberOfLevels; i++) {
+    out += '<div class="enum">'+(i+1)+'</div>';
+  }
+
+  return out;
+}
 
 
 function addProviderToApproved(data){
@@ -1425,6 +1779,21 @@ function approveProvider(url, token, id){
   });
 }
 
+function deleteProvider(url, token, id){
+  $.ajax({
+   url : url,
+   method : "POST",
+   cache: false,
+   data : {"_token": token, "id" : id},
+   success : function (data)
+            {
+              $('#provider-'+data.id).hide('100');
+              $('#provider-approved-'+data.id).hide('100');
+              location.reload();
+            }
+  });
+}
+
 function getProvidersByService(service){
     var lis = service.parents('.row').children('.col-md-3').find('a');
         $.each(lis, function(){
@@ -1451,10 +1820,8 @@ function getProvidersByService(service){
              var new_position = $('#horizontal-line').offset();
              window.scrollTo(new_position.left,new_position.top);
         });
-
-
-
 }
+
 
 
 

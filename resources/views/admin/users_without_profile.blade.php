@@ -25,7 +25,12 @@
 				      	@else
 							<span id="users-no-profile-{{ $user->id }}">{{ date('d-m-Y', strtotime($user->updated_at))}}</span>
 				      	@endif</td>
-				      <td><button class="btn btn-danger" id="userWithoutProfile" data-id = "{{ $user->id }}" data-url = "{{ route('user.without.profile') }}" data-token = "{{ csrf_token() }}">Enviar recordatorio</button></td>
+				      <td>
+				      	<div class="d-flex">
+				      		<button class="btn btn-danger" id="userWithoutProfile" data-id = "{{ $user->id }}" data-url = "{{ route('user.without.profile') }}" data-token = "{{ csrf_token() }}">Enviar recordatorio</button>
+				      		<button class="btn btn-danger ml-1" id="ignore" data-id = "{{ $user->id }}" data-url = "{{ route('user.ignore') }}" data-token = "{{ csrf_token() }}">Ignorar</button>
+				      	</div>
+				      </td>
 				    </tr>
 			    @endforeach
 			  </tbody>

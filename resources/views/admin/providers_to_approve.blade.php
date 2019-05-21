@@ -23,7 +23,8 @@
 				      <td><a target="_blank" class="btn btn-primary" href="{{ route('provider', $provider->id) }}">Ver proveedor</a></td>
 				      <td>
 				      	<div class="d-flex">
-					      	<button class="btn btn-danger" id="approve-provider" data-id = "{{ $provider->id }}" data-url = "{{ route('approve.provider', $provider) }}" data-token = "{{ csrf_token() }}" data-numberOfInstances="{{ $provider->instancesApproved()}}">Aprobar</button>
+				      		<button class="btn btn-danger" id="delete-provider" data-id = "{{ $provider->id }}" data-url = "{{ route('delete.provider') }}" data-token = "{{ csrf_token() }}">Descartar</button>
+					      	<button class="btn btn-danger ml-1" id="approve-provider" data-id = "{{ $provider->id }}" data-url = "{{ route('approve.provider', $provider) }}" data-token = "{{ csrf_token() }}" data-numberOfInstances="{{ $provider->instancesApproved()}}">Aprobar</button>
 					      	<button id="comment-provider-{{ $provider->id }}" class="btn btn-danger ml-1 comment-to-provider" data-mail="{{ $provider->email }}" data-id="{{ $provider->id }}" data-comments = "{{ $provider->comments() }}">Enviar comentarios</button>
 
 					    </div>

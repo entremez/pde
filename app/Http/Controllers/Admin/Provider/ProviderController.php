@@ -37,6 +37,13 @@ class ProviderController extends Controller
         return response()->json($provider);
     }
 
+    public function deleteProvider(Request $request)
+    {
+        $provider = Provider::find($request->input('id'));
+        $provider->delete();
+        return response()->json($provider);
+    }
+
     public function approveInstance(Request $request)
     {
         $instance = Instance::find($request->input('id'));
@@ -46,6 +53,14 @@ class ProviderController extends Controller
         $response[] = $instance;
         $response[] = $instance->provider()->first()->name;
         ProviderComment::where('instance_id', $instance->id)->delete();
+        return response()->json($response);
+    }
+
+    public function deleteInstance(Request $request)
+    {
+        $instance = Instance::find($request->input('id'));
+        $instance->delete();
+        $response[] = $instance;
         return response()->json($response);
     }
 
@@ -133,6 +148,7 @@ class ProviderController extends Controller
         $provider->address = $providerBuffered->address;
         $provider->phone = $providerBuffered->phone;
         $provider->web = $providerBuffered->web;
+        $provider->mail = $providerBuffered->mail;
         $provider->logo = $providerBuffered->logo;
         $provider->long_description = $providerBuffered->long_description;
         $provider->city_id = $providerBuffered->city_id;

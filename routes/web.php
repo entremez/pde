@@ -1,6 +1,8 @@
 <?php
 
 Route::get('/', 'HomeController@welcomeSoon' )->name('welcome');
+Route::get('/travel', 'Company\TravelController@travel' );
+Route::post('/travel', 'Company\TravelController@responses')->name('response.travel');
 Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' );
 
 
@@ -66,7 +68,9 @@ Route::group([
 
 
     Route::post('/dashboard/provider-approve', 'Provider\ProviderController@approveProvider')->name('approve.provider');
+    Route::post('/dashboard/provider-delete', 'Provider\ProviderController@deleteProvider')->name('delete.provider');
     Route::post('/dashboard/instance-approve', 'Provider\ProviderController@approveInstance')->name('approve.instance');
+    Route::post('/dashboard/instance-destroy', 'Provider\ProviderController@deleteInstance')->name('delete.instance');
     Route::post('/dashboard/instance-buffered-approve', 'Provider\ProviderController@approveInstanceBuffered')->name('approve.instance.buffered');
     Route::post('/dashboard/provider-buffered-approve', 'Provider\ProviderController@approveProviderBuffered')->name('approve.provider.buffered');
     Route::post('/dashboard/featured', 'AdminController@instanceFeatured')->name('featured');
@@ -74,6 +78,7 @@ Route::group([
 
     Route::post('/dashboard/provider-comments', 'Provider\ProviderController@sendCommentsToProvider')->name('comment.provider');
     Route::post('/dashboard/user-without-profile', 'AdminController@userWithoutProfile')->name('user.without.profile');
+    Route::post('/dashboard/user-ignore', 'AdminController@userIgnore')->name('user.ignore');
 
     Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');
 });

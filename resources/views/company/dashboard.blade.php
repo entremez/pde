@@ -10,20 +10,11 @@
     <div class="row">
         <div class="col-md-3 provider-data">
             
-                <p>{{ $data->name }}</p>
-                <hr>
-                <p>{{ Rut::parse($data->rut."-".$data->dv_rut)->format()}}</p>
-                <hr>
-                <p>{{ $data->address }}</p>
-                <hr>
-                <p>{{ $data->phone }}</p>
-                <hr>
-                <br>
-                <a class="btn btn-danger" href="">Editar</a>
+
         </div>
         <div class="col-md-9 text-center">
 
-            <a class="btn btn-danger" href="{{ route('travel') }}" style="display: none">Evalua tu empresa</a>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modalTravel">Evalua tu empresa</button>
 
             @include('partials/display')
         </div>
@@ -33,5 +24,16 @@
 
 @include('partials/footer')
 
-@endsection
+<div class="modal fade mx-0 px-0" id="modalTravel" tabindex="-1" role="dialog" aria-labelledby="modalTravel" aria-hidden="true">
+  <div class="modal-dialog modal-survey" role="document">
+  <form>
+    <div class="modal-content">
+        @include('company/travel')
 
+    </div>
+  </form>
+  </div>
+</div>
+
+
+@endsection

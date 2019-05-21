@@ -25,7 +25,7 @@
                         @endforeach
 
                 <hr>
-                <p>{{ $user->email }}</p>
+                <p>{{ $personalData->contact_email }}</p>
                 <hr>
                 <p>{{ $personalData->phone }}</p>
                 <hr>

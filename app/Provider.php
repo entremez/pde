@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 
 use App\User;
@@ -15,6 +16,8 @@ use App\Instance;
 
 class Provider extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'rut', 'dv_rut', 'name', 'address'
     ];
@@ -67,6 +70,14 @@ class Provider extends Model
 
     public function getEmailAttribute()
     {
+        $users = User::where('type_id',$this->id)->where('role_id', 2)->get()->first();
+        return $users->email;
+    }
+
+    public function getContactEmailAttribute()
+    {
+        if(!is_null($this->mail))
+            return $this->mail;
         $users = User::where('type_id',$this->id)->where('role_id', 2)->get()->first();
         return $users->email;
     }

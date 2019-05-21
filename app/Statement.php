@@ -14,4 +14,14 @@ class Statement extends Model
     {
         return $this->hasMany('App\Option');
     }
+
+    public function last()
+    {
+    	return $this->options->last()->id;
+    }
+
+    public function first()
+    {
+    	return $this->options->first()->id;
+    }
 }
