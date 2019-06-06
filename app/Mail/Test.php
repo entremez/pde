@@ -28,6 +28,8 @@ class Test extends Mailable
      */
     public function build()
     {
-        return $this->view('test');
+        return $this->subject('asdasd')
+                    ->to('astexc@gmail.com')
+                    ->view('test');
     }
 }

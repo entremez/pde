@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetPassword;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -108,4 +110,9 @@ class User extends Authenticatable implements MustVerifyEmail
                 break;
         }  
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::send(new ResetPassword($this->email, $token));
+    }   
 }

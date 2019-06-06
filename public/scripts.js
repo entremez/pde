@@ -25476,6 +25476,11 @@ function addInstanceToApproved(data){
 
   return `
           <tr id = "instance-approved-${data[0].id}">
+            <th>
+              <div>
+                <i class="fas fa-heart feature heart " data-id="${data[0].id}" data-url="http://www.puentedisenoempresa.cl/admin/dashboard/featured" data-token="GAzQY9dmiD3Ns4CbFAGlZJwtAyE2se4BXykxMV50"></i>
+              </div>
+            </th>
             <th scope="row">${data[0].id}</th>
             <td>${data[0].name}</td>
             <td>${data[1]}</td>

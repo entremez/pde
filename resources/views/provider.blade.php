@@ -80,7 +80,7 @@
 @if($cases->count() > 0)
     <div class="col-md-10 offset-md-1 section">
         <div class="section-title">
-            <p class="mt-0"><span class="first-color">Más Casos de diseño de</span> <span class="secondary-color">{{ $provider->name }}</span></p>
+            <p class="mt-0"><span class="first-color">Casos de diseño de</span> <span class="secondary-color">{{ $provider->name }}</span></p>
         </div>
 
         @include('partials/instances')

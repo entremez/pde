@@ -17,7 +17,7 @@
 
             </div>
             <div class="col-md-7 col-sm-12">
-                <div class="row footer-logos">   
+                <div class="row footer-logos mb-3">   
                     <div class="logof">
                         <img src="{{ asset('images/footer/uc.png') }}">
                     </div>
@@ -25,35 +25,36 @@
                         <img src="{{ asset('images/footer/disenouc.png') }}">
                     </div>
                     <div class="logof">
-                        <img src="{{ asset('images/footer/mada.png') }}">
+                        <img src="{{ asset('images/footer/chilecreativo.png') }}">
                     </div>
                     <div class="logof">
                         <img src="{{ asset('images/footer/corfo.png') }}">
                     </div>  
-                    <div class="logof">
-                        <img src="{{ asset('images/footer/gobchile.png') }}">
-                    </div>
-                    <div class="logof">
-                        <img src="{{ asset('images/footer/chilecreativo.png') }}">
-                    </div>
-                    <div class="logof">
-                        <div class="mma">
-                        <img src="{{ asset('images/footer/chilediseno.png') }}">
-                        </div>
-                    </div>
+                </div>
+                <div class="row footer-logos mb-3">
                     <div class="logof">
                         <img src="{{ asset('images/footer/sofofa.png') }}">
                     </div>  
-                    <div class="logof">
-                        <img src="{{ asset('images/footer/colegiodiseno.png') }}">
-                    </div>
                     <div class="logof">
                         <img src="{{ asset('images/footer/minculturas.png') }}">
                     </div>
                     <div class="logof">
                         <img src="{{ asset('images/footer/minturismo.png') }}">
                     </div>
-                    <div class="logof" style="width: 150px">
+                    <div class="logof"  style="width: 25%">
+                        
+                    </div>
+                </div>
+                <div class="row footer-logos">
+                    <div class="logof">
+                        <img src="{{ asset('images/footer/colegiodiseno.png') }}">
+                    </div>
+                    <div class="logof">
+                        <div class="mma">
+                        <img src="{{ asset('images/footer/chilediseno.png') }}">
+                        </div>
+                    </div>
+                    <div class="logof" style="width: 50%">
                         
                     </div>
                 </div>

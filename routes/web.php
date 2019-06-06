@@ -56,7 +56,7 @@ Route::group([
     Route::get('/dashboard/providers', 'AdminController@showProviders')->name('providers');
     Route::get('/dashboard/providers/request', 'AdminController@request')->name('admin.request');
     Route::get('/dashboard/companies', 'AdminController@showCompanies')->name('companies');
-    Route::get('/dashboard/providers/{provider}/edit', 'Provider\AdminProviderController@edit')->name('edit-provider');
+    //Route::get('/dashboard/providers/{provider}/edit', 'Provider\AdminProviderController@edit')->name('edit-provider');
     Route::get('/register', 'RegisterController@showRegistrationForm')->name('admin-register');
     Route::post('/register', 'RegisterController@create');
 
