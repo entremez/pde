@@ -372,6 +372,26 @@ $(document).ready(function () {
           }
       });
 
+// CAMBIO DE CONTRASEÑA
+
+     $('#form-new-pass').validate({
+
+          rules: {
+            'password' : { required : true, minlength: 6},
+            'password_confirmation' : { required : true, equalTo : "#password"}
+          },
+          messages: {
+           'password': {
+              required: "*Este campo es obligatorio.",
+              minlength: "*La contraseña debe tener al menos 6 caracteres."
+           },
+           'password_confirmation': {
+              required: "*Este campo es obligatorio.",
+              equalTo: "*Las contraseñas deben coincidir."
+           }
+          }
+     });
+
 
      //crear caso de éxito
 

@@ -14,7 +14,6 @@
                     <p>Reportes</p>
                     <p>Links de interés</p>
                     <p>Contáctanos</p>
-
             </div>
             <div class="col-md-7 col-sm-12">
                 <div class="row footer-logos mb-3">   

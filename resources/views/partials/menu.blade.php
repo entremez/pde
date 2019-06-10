@@ -20,6 +20,8 @@
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('home') }}">Escritorio</a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('password.new') }}">Cambiar contraseña</a>
+                        <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}" class="dropdown-item"
                       onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">

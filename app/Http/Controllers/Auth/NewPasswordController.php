@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewPassword;
 
-class ResetPasswordController extends Controller
+class NewPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -35,6 +37,25 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        
+    }
+
+    public function new()
+    {
+        return view('provider/new-password');
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $newPassword = $request->input('password');
+        $user = auth()->user();
+        $user->password = bcrypt($newPassword);
+        $user->save();
+        Mail::send(new NewPassword($user->email));
+        return redirect()->route('home');
     }
 }

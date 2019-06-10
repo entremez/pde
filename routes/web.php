@@ -42,7 +42,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
-
 //RUTAS ADMINISTRADORES
 Route::group([
             'prefix' => 'admin',
@@ -108,10 +107,11 @@ Route::group([
     Route::delete('/case/{id}/images','CaseImagesController@destroy')->name('images.destroy');
     Route::post('/case/{id}/images','CaseImagesController@featured')->name('images.featured');
     Route::put('/case/{id}/images','CaseImagesController@update')->name('images.update');
-
 });
 //Route::get('/providers/register', 'Provider\RegisterController@showRegistrationForm')->name('provider-register');
 Route::get('/providers/register', 'Provider\RegisterController@register')->name('provider-register-from-home');
+Route::get('/password/new', 'Auth\NewPasswordController@new')->name('password.new')->middleware('provider');
+Route::post('/password/new', 'Auth\NewPasswordController@store')->name('password.store');
 
 
 // RUTAS EMPRESAS

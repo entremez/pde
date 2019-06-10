@@ -7,18 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Test extends Mailable
+class NewPassword extends Mailable
 {
     use Queueable, SerializesModels;
+
+    protected $email;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($email)
     {
-        //
+        $this->email = $email;
     }
 
     /**
@@ -28,10 +30,8 @@ class Test extends Mailable
      */
     public function build()
     {
-        return $this->subject('Confirmación inscripción plataforma Puente Diseño Empresa')
-                    ->to($this->user->email)
-                    ->view('mails.provider-success',[
-                        'body' => $body
-                ]);
+        return $this->subject('Confirmación de cambio de contraseña')
+                    ->to($this->email)
+                    ->view('mails.new-password');
     }
 }
