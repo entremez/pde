@@ -15048,12 +15048,14 @@ color: white;
 }
 
 
-.display-header{
+.display-header,
+.response-header{
       padding: 1rem;
       background-color: #000033;
       color: white;    
       background-size: cover;
       background-position-y: 45%;
+      width: 100%;
 }
 
 .display-header-title {
@@ -15386,4 +15388,52 @@ display: flex;
 
 .mr-icon{
   margin-right: .5rem;
+}
+
+.message-final{
+  font-size: 2rem;
+}
+
+.image-final-survey{
+  width: 40%;
+  margin-top: 3rem;
+}
+
+.btn-send-survey{
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 4rem;
+}
+
+.stairs-phrase{
+      font-size: 1.6rem;
+}
+
+.same-level{
+    font-size: 1.5rem;
+    text-align: left;
+    color: gray;
+}
+
+.view-more-recommendations{
+      display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.btn-view-more-service {
+    font-size: 1.5rem;
+}
+
+.span-stages{
+  color: gray;
+}
+
+.stage.w-100 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.titles-response{
+  display: none;
 }

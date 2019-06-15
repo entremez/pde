@@ -47,9 +47,9 @@
                     Entrar
                 </button>
 
-                <div class="btn btn-link link-default" href="{{ route('password.update') }}">
+                <a class="btn btn-link link-default" href="{{ route('password.update') }}">
                     ¿Olvidaste tu contraseña?
-                </div>
+                </a>
             </div>
         </div>
 

@@ -7,11 +7,6 @@ Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' );
 
 
 Route::get('/proveedores', 'Auth\RegisterController@providerRegister' )->name('provider.register');
-Route::get('/login', function(){
-    return redirect()->route('provider.register');
-} );
-
-
 
 
 Route::get('/cases', 'InstanceController@index')->name('cases');

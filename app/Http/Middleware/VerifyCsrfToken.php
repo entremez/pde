@@ -25,7 +25,7 @@ public function render($request, Exception $exception)
         session()->flash('alert-warning','Your session expired. Please login to continue.');
 
         // Go to login.
-        return redirect()->route('login');
+        return redirect()->route('home');
      }
 
     return parent::render($request, $exception);

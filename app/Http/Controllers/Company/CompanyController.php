@@ -33,7 +33,7 @@ class CompanyController extends Controller
         }
 
         return view('company.dashboard',[
-                'data' => auth()->user()->instance(),
+                'company' => auth()->user()->instance(),
                 'stages' => DpStage::all(),
                 'statements' => $survey->statements()->get(),
                 'survey' => $survey,

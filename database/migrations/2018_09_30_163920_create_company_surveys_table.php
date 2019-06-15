@@ -20,7 +20,20 @@ class CreateCompanySurveysTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
 
             $table->integer('survey_id')->unsigned();
+            $table->boolean('active')->default(true);
             $table->foreign('survey_id')->references('id')->on('surveys');
+
+            $table->integer('area_id')->unsigned()->nullable();
+            $table->foreign('area_id')->references('id')->on('areas');
+
+            $table->integer('level')->unsigned()->nullable();
+            $table->foreign('level')->references('id')->on('options');
+
+            $table->integer('service_id')->unsigned()->nullable();
+            $table->foreign('service_id')->references('id')->on('services');
+
+
+
 
             $table->timestamps();
         });

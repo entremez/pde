@@ -25198,6 +25198,11 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     }
     });
 
+    $(document).on('click', '.stage-response', function(event) {
+      $(this).next('.titles-response').toggle();
+      $(this).children('.arrow-up').toggle();
+      $(this).children('.arrow-down').toggle();
+    });
 
     $(document).on('click', '.position-relative', function(event) {
       $(this).next('.stage-content').toggle();
@@ -25236,7 +25241,7 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
       });;
       var last = $('.wrapper-'+options[option]).parent().parent().data('last');
       option++;
-      if(last == option){
+      if(options.indexOf(last) == option-1){
         actualStament++;
         setTravel(actualStament, statements)
       }
@@ -25244,10 +25249,13 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     });
 
     $(document).on('click', '.name-type-2', function(event) {
+      var bar = 100*(1 - ((options.length - (option+1)) / options.length));
+      $('.custom-progress-bar').css('width', bar+'%');
         $(this).parent().parent().children().each(function(index, el) {
           $(this).find('.name-type').removeClass('type-2-selected');
         });
         $(this).addClass('type-2-selected');
+        setInput(2, $(this).parent().data('stmnt'), $(this).parent().data('stmnt'));////////////type, value, option
         option++;
         actualStament++;
         setTravel(actualStament, statements);
@@ -25283,11 +25291,22 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
         }else{
 
             if(option+1 == $('.wrapper-'+options[option]).parent().parent().data('first')){
-              option = $(this).parents('.wrapper-stmt').prev().find('.travel-wrapper').data('last');
+              last = $(this).parents('.wrapper-stmt').prev().find('.travel-wrapper').data('last');
+              option = options.indexOf(last);
               setOptions(options, option, 1);              
               actualStament--;
               setTravel(actualStament, statements);
             }
+
+            if(options[option] == $('.wrapper-'+options[option]).parent().parent().data('first')){
+              last = $(this).parents('.wrapper-stmt').prev().find('.travel-wrapper').data('last');
+              option = options.indexOf(last+1);
+              setOptions(options, option, 1);              
+              actualStament--;
+              setTravel(actualStament, statements);
+            }
+              
+
             option--;
             setOptions(options, option, 1);
         }
@@ -25327,6 +25346,9 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
    });
 
     $(document).on('click', '.submit-type-4', function(event) {
+
+      var bar = 100*(1 - ((options.length - (option+1)) / options.length));
+      $('.custom-progress-bar').css('width', bar+'%');
       var wrappers = $(this).parents('.travel-wrapper').find('.wrapper');
       var count = 0;
       $.each(wrappers, function(index, val) {
@@ -25349,10 +25371,12 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     });
  
     $(document).on('click', '.submit-type-2', function(event) {
-      
+
+      var bar = 100*(1 - ((options.length - (option+1)) / options.length));
+      $('.custom-progress-bar').css('width', bar+'%');
+      option++;
       actualStament++;
       setTravel(actualStament, statements);
-
     });
 
 });
@@ -25450,7 +25474,6 @@ function setOptions(options, option, action=0){
 
 function setInput(type, value, option) {
     $('#'+option).prop('value', value);
-
 }
 
 function getType(options, option) {

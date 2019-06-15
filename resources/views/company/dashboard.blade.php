@@ -13,10 +13,12 @@
 
         </div>
         <div class="col-md-9 text-center">
-
             <button class="btn btn-danger" data-toggle="modal" data-target="#modalTravel">Evalua tu empresa</button>
-
-            @include('partials/display')
+            @if($company->hasTravels())
+                @include('company/last-travel')
+            @else
+                @include('partials/display')
+            @endif
         </div>
     </div>
 </div>
@@ -24,14 +26,14 @@
 
 @include('partials/footer')
 
-<div class="modal fade mx-0 px-0" id="modalTravel" tabindex="-1" role="dialog" aria-labelledby="modalTravel" aria-hidden="true">
+<div class="modal fade mx-0 px-0" id="modalTravel" tabindex="-1" role="dialog" aria-labelledby="modalTravel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-survey" role="document">
-  <form>
+
     <div class="modal-content">
         @include('company/travel')
 
     </div>
-  </form>
+
   </div>
 </div>
 

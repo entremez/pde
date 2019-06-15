@@ -28,8 +28,7 @@ class Survey extends Model
                 foreach ($statement->options as $option) {
                     $order[] = $option->id;
                 }
-            }
-            if($statement->statement_type_id == 4 || $statement->statement_type_id == 2){
+            }else{
                 $order[] = $statement->options->first()->id;
             }
         }
