@@ -333,5 +333,37 @@ class SurveysSeeder extends Seeder
         $survey->option_id = 37;
         $survey->save();
 
+
+
+
+        $level = new App\Level();
+        $level->phrase = " no tienes información de cómo se usa el diseño en tu organización.";
+        $level->option_id = 15;
+        $level->image = "escala-0.png";
+        $level->save();
+
+        $level = new App\Level();
+        $level->phrase = "el diseño no se usa tu organización.";
+        $level->option_id = 14;
+        $level->image = "escala-1.png";
+        $level->save();
+
+        $level = new App\Level();
+        $level->phrase = "el diseño se usa en la terminación, mejorando la apariencia y el atractivo de los productos o servicios de tu organización.";
+        $level->option_id = 13;
+        $level->image = "escala-2.png";
+        $level->save();
+
+        $level = new App\Level();
+        $level->phrase = "el diseño se usa como parte integral del desarrollo de productos o servicios en tu organización.";
+        $level->option_id = 12;
+        $level->image = "escala-3.png";
+        $level->save();
+     
+        $level = new App\Level();
+        $level->phrase = "el diseño se usa como parte central en la estrategia de tu organización.";
+        $level->option_id = 11;
+        $level->image = "escala-4.png";
+        $level->save();
     }
 }

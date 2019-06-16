@@ -43,8 +43,10 @@ class ProviderController extends Controller
             $providersFiltered = new Collection();
             $providersImages = new Collection();
             foreach ($providers as $provider) {
+                if($provider->approved == 1){
                 $providersFiltered->push($provider->provider()->first());
                 $providersImages->push($provider->provider()->first()->imagen_logo);
+                }
             }
 
             $providers = new Collection(); 

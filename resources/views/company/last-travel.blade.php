@@ -11,7 +11,7 @@
 	</div>
 	<div class="col-md-5 px-5 mt-4">
 		<div class="text-right">
-			<img style="width: 100%" src="{{ $company->stairs()[1] }}" alt="">
+			<img style="width: 100%" src="{{ asset('/images/stairs/'.$company->stairs()[1]) }}" alt="">
 		</div>
 	</div>
 </div>
@@ -40,10 +40,10 @@
 
 
 		@foreach($company->getProviders($company->recomendation()[1]) as $key => $provider)
-			@if($key<8)
+			@if($key<8 && $provider->approved == 1)
 	        <div class="col-md-3 col-sm-6">
 	            <div class="service">
-	                <a href="{{ route('provider', $provider->id) }}">
+	                <a href="{{ route('provider', $provider->id) }}" target="_blank">
 	                    <div class="image-container provider-image-solo" style="background-image: url('{{url($provider->imagen_logo)}}')" title="{{$provider->name}}">         
 	                    </div>
 	                </a>

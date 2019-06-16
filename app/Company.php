@@ -7,6 +7,7 @@ use App\CompanySurvey;
 use App\Response;
 use App\Option;
 use App\Service;
+use App\Level;
 
 class Company extends Model
 {
@@ -28,7 +29,7 @@ class Company extends Model
     }   
 
     public function lastTravelDate(){
-        return $this->fechaCastellano(CompanySurvey::where('company_id', $this->id)->orderBy('created_at', 'desc')->first()->created_at);
+        return CompanySurvey::where('company_id', $this->id)->orderBy('created_at', 'desc')->first()->getDate();
     }   
 
     public function sameLevel()
@@ -38,36 +39,12 @@ class Company extends Model
 
     public function stairs()
     {
-        $lasttravel = $this->lastTravel();
-        $responses = Response::where('company_survey_id', $lasttravel->id)->whereBetween('option_id', [11, 15])->get()->first()->option_id;
+        $lasttravel = $this->lastTravel();;
         $out = [];
-        switch ($responses) {
-            case 11:
-                $out[0] = "el diseño se usa como parte central en la estrategia de tu organización.";
-                $out[1] = asset('images/stairs/escala-4.png');
-                return $out;
-                break;
-            case 12:
-                $out[0] = "el diseño se usa como parte integral del desarrollo de productos o servicios en tu organización.";
-                $out[1] = asset('images/stairs/escala-3.png');
-                return $out;
-                break;
-            case 13:
-                $out[0] = "el diseño se usa en la terminación, mejorando la apariencia y el atractivo de los productos o servicios de tu organización.";
-                $out[1] = asset('images/stairs/escala-2.png');
-                return $out;
-                break;
-            case 14:
-                $out[0] = "el diseño no se usa tu organización.";
-                $out[1] = asset('images/stairs/escala-1.png');
-                return $out;
-                break;
-            case 15:
-                $out[0] = "no tienes información de cómo se usa el diseño en tu organización.";
-                $out[1] = asset('images/not-found.png');
-                return $out;
-                break;
-        }
+        $out[0] = $lasttravel->level->phrase;
+        $out[1] = $lasttravel->level->image;
+        return $out;
+    
     }
 
     public function recomendation()
@@ -89,19 +66,4 @@ class Company extends Model
         return $out;
     }
 
-    private function fechaCastellano ($fecha) 
-    {
-        $fecha = substr($fecha, 0, 10);
-        $numeroDia = date('d', strtotime($fecha));
-        $dia = date('l', strtotime($fecha));
-        $mes = date('F', strtotime($fecha));
-        $anio = date('Y', strtotime($fecha));
-        $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
-        $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-        $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-        $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-        $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-        $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-        return $numeroDia." de ".$nombreMes." de ".$anio;
-    }
 }

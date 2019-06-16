@@ -26,8 +26,8 @@ class CreateCompanySurveysTable extends Migration
             $table->integer('area_id')->unsigned()->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
 
-            $table->integer('level')->unsigned()->nullable();
-            $table->foreign('level')->references('id')->on('options');
+            $table->integer('level_id')->unsigned()->nullable();
+            $table->foreign('level_id')->references('id')->on('levels');
 
             $table->integer('service_id')->unsigned()->nullable();
             $table->foreign('service_id')->references('id')->on('services');

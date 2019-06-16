@@ -1,5 +1,25 @@
 <?php
 
+Route::get('pdf', function(){
+
+
+    $survey = \App\CompanySurvey::first();
+
+
+    $pdf = PDF::loadView('test',[
+                            'date' => $survey->getDate(),
+                            'area' => $survey->area->name,
+                            'imageArea' => $survey->area->image,
+                            'phrase' => $survey->level->phrase,
+                            'image' => $survey->level->image,
+                            'service' => $survey->service->name,
+                            'providers' => $survey->getProviders(),
+                            'company' => $survey->company->name
+                        ]);
+    return $pdf->stream();
+});
+
+
 Route::get('/', 'HomeController@welcomeSoon' )->name('welcome');
 Route::get('/travel', 'Company\TravelController@travel' );
 Route::post('/travel', 'Company\TravelController@responses')->name('response.travel');

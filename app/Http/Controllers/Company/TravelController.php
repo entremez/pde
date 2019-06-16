@@ -17,6 +17,7 @@ use App\User;
 use App\Area;
 use App\Statement;
 use App\RecommendedService;
+use App\Level;
 
 class TravelController extends Controller
 {
@@ -59,7 +60,7 @@ class TravelController extends Controller
         $survey->active = false;
         $survey->area_id = $recommended_area->id;
         $survey->service_id = $service_id;
-        $survey->level = $level;
+        $survey->level_id = $level->id;
         $survey->save();
 
         return redirect()->route('home');
@@ -113,6 +114,7 @@ class TravelController extends Controller
 
         $serviceContainer = collect();
         $servicesId = collect();
+
         foreach ($services as  $service) {
             if($service->services->id == $this->productDesign && 
                 $request->input('survey')[1] == 2)
@@ -140,11 +142,12 @@ class TravelController extends Controller
 
     private function getLevel($options)
     {
-
         for($i=$this->firstLevel-1; $i <= $this->lastLevel-1; $i++) { 
-            if($options->input('survey')[$i] != null)
-                return $i+1;
-        }   
+            if($options->input('survey')[$i] != null){
+                $option =  $i+1;
+            }
+        }
+        return Level::where('option_id', $option)->first();
     }
 
     private function hasPreviousTravel()
