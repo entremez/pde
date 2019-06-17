@@ -40,7 +40,7 @@
 
 
 		@foreach($company->getProviders($company->recomendation()[1]) as $key => $provider)
-			@if($key<8 && $provider->approved == 1)
+
 	        <div class="col-md-3 col-sm-6">
 	            <div class="service">
 	                <a href="{{ route('provider', $provider->id) }}" target="_blank">
@@ -49,7 +49,7 @@
 	                </a>
 	            </div>
 	        </div>
-	        @endif
+
 		@endforeach
 
 	<div class="row w-100 mt-3">

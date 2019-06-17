@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Provider;
 
 class CompanySurvey extends Model
 {
@@ -28,11 +29,21 @@ class CompanySurvey extends Model
 
     public function getProviders()
     {
+    	$providers = Provider::where('approved', true)->get();
+
         $out = collect();
-        foreach(Service::find($this->service_id)->providers as $key => $serviceProvider) {
-        	if($key < 6)
-            	$out->push($serviceProvider->provider);
-        }
+        $count = 0;
+    	foreach ($providers as $provider) {
+    		foreach($provider->services as $service){
+    			if($service->service_id == $this->service_id){
+            		$out->push($provider);
+            		$count++;  
+            		break;
+            	}				
+    		}
+    		if($count == 6)
+    			break;
+    	}
         return $out;
     }
 

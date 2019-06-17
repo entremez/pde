@@ -14,6 +14,7 @@ use App\Classification;
 use Freshwork\ChileanBundle\Rut;
 use App\CompanyCity;
 use App\DpStage;
+use App\CompanySurvey;
 
 
 class CompanyController extends Controller
@@ -76,5 +77,15 @@ class CompanyController extends Controller
     private function getRut($rut){
         return Rut::parse($rut)->toArray();
     }
+
+    public function timeline()
+    {
+        
+        return view('company/timeline', [
+                        'surveys' => CompanySurvey::where('company_id', auth()->user()->type_id)->where('active', false)->orderBy('created_at', 'desc')->get()
+                    ]);
+    }
+
+
 
 }

@@ -10,6 +10,7 @@
     <div class="row">
         <div class="col-md-3 provider-data">
             
+            @include('company/sidebar')
 
         </div>
         <div class="col-md-9 text-center">

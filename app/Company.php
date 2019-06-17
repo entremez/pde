@@ -57,13 +57,26 @@ class Company extends Model
         return $out;
     }
 
-    public function getProviders($service)
+    public function getProviders($serviceR)
     {
+        $providers = Provider::where('approved', true)->get();
+
         $out = collect();
-        foreach(Service::find($service)->providers as $serviceProvider) {
-            $out->push($serviceProvider->provider);
+        $count = 0;
+        foreach ($providers as $provider) {
+            foreach($provider->services as $service){
+                if($service->service_id == $serviceR){
+                    $out->push($provider);
+                    $count++;  
+                    break;
+                }                 
+            }
+            if($count == 8)
+                break;
         }
         return $out;
     }
+
+
 
 }
