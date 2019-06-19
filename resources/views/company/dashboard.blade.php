@@ -14,9 +14,30 @@
 
         </div>
         <div class="col-md-9 text-center">
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modalTravel">Evalua tu empresa</button>
+
+            <div class="row">
+                    <div class="col-md-6 left-column dffdcjcsb">
+
+                    <div>
+                        <h5>El diseño mejora significativamente la rentabilidad de los negocios</h5>
+                        <p>El viaje Puente Diseño Empresa es una herramienta que te ayudará a descubrir qué nivel de diseño tiene tu empresa, te guiará en cómo puedes integrar diseño y qué tipo de diseño es el indicado para tus desafíos.</p>
+                    </div>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modalTravel">Haz click aquí para evaluar tu empresa</button>
+                </div>
+                    <div class="col-md-6">
+                    <video controls class="w-100">
+                          <source src="{{ asset('images/video_bien_publico.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                    </div>
+            </div>
+
+            <div class="horizontal-line" style="border-bottom: 1px solid lightgray"></div>
             @if($company->hasTravels())
-                @include('company/last-travel')
+                <div class="mt-3">
+                    @include('company/last-travel')
+                </div>
             @else
                 @include('partials/display')
             @endif

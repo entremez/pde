@@ -39,8 +39,7 @@
               @endif
           </ul>
 
-         @if(Auth::check())  
-          @if(auth()->user()->role_id == 1)
+
           <ul class="navbar-nav ml-auto">  <!--ml-auto alinea a derecha-->
             <li class="nav-item">
               <a class="nav-link @yield('title-active')" href="{{ route('welcome') }}">Inicio</a>
@@ -57,11 +56,13 @@
             <li class="nav-item">
               <a class="nav-link @yield('title-resources')" href="{{ route('resources') }}">Recursos</a>
             </li>
+        @if(Auth::check())  
+            @if(auth()->user()->role_id == 1)
             <li class="nav-item">
               <a class="nav-link @yield('title-mails')" href="{{ route('mails.body') }}">Mails</a>
             </li>
+            @endif
           </ul>
-          @endif
         @endif
         </div>
       </nav>

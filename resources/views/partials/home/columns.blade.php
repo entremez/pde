@@ -16,7 +16,7 @@
             <a class="btn btn-danger btn-block mt-5" href="{{ route('providers-list')}}">Más proveedores de diseño</a>
         </div>
         <div class="col-md-6">
-            <h4 class="pb-4"><span class="first-color">Documentos</span> <span class="secondary-color">de interes</span></h4>
+            <h4 class="pb-4"><span class="first-color">Recursos</span> <span class="secondary-color">de interes</span></h4>
             <div class="row">
             @foreach($providers as $provider)
                 <div class="col-md-6 ">
@@ -29,7 +29,7 @@
                 </div>
             @endforeach
             </div>
-            <button class="btn btn-danger btn-block mt-5">Documentos</button>
+            <button class="btn btn-danger btn-block mt-5">Más recursos</button>
         </div>
     </div>
 </div>

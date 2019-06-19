@@ -185,26 +185,26 @@
 						<tr>
 							<td width="50%" height="50px">
 								<div class="providers-image">
-								<img  height="50px" src="images/areas/venta-postventa.png">
+								<img  height="50px" src="images/fundings/{{ $fundings[0]->image }}">
 								</div>
 							</td>
 							<td width="50%" height="50px">
 								<div class="providers-image">
-								<img  height="50px" src="images/areas/venta-postventa.png">
+								<img  height="50px" src="images/fundings/{{ $fundings[1]->image }}">
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td width="50%" height="50px">
 								<div class="text-center">
-									<div class="font-bold">Nombre de Financiamiento</div>
-									<div class="web font-regular">www.financiamiento.cl</div>
+									<div class="font-bold">{{ $fundings[0]->name }}</div>
+									<div class="web font-regular">{{ $fundings[0]->web }}</div>
 								</div>
 							</td>
 							<td width="50%" height="50px">
 								<div class="text-center">
-									<div class="font-bold">Nombre de Financiamiento</div>
-									<div class="web font-regular">www.financiamiento.cl</div>
+									<div class="font-bold">{{ $fundings[1]->name }}</div>
+									<div class="web font-regular">{{ $fundings[1]->web }}</div>
 								</div>
 							</td>
 						</tr>

@@ -15,6 +15,7 @@ use Freshwork\ChileanBundle\Rut;
 use App\CompanyCity;
 use App\DpStage;
 use App\CompanySurvey;
+use App\Funding;
 
 
 class CompanyController extends Controller
@@ -38,7 +39,8 @@ class CompanyController extends Controller
                 'stages' => DpStage::all(),
                 'statements' => $survey->statements()->get(),
                 'survey' => $survey,
-                'backgrounds' => $backgrounds
+                'backgrounds' => $backgrounds,
+                'fundings' => Funding::take(6)->get()
             ]);
     }
 
@@ -82,8 +84,20 @@ class CompanyController extends Controller
     {
         
         return view('company/timeline', [
-                        'surveys' => CompanySurvey::where('company_id', auth()->user()->type_id)->where('active', false)->orderBy('created_at', 'desc')->get()
+                        'surveys' => CompanySurvey::where('company_id', auth()->user()->type_id)->where('active', false)->orderBy('created_at', 'desc')->get(),
+                        'company' => auth()->user()->instance(),
+                        'stages' => DpStage::all(),
+                        'fundings' => Funding::take(6)->get()
                     ]);
+    }
+
+    public function popUp(Request $request)
+    {
+        $survey = CompanySurvey::find($request->input('id'));
+        $response = collect();
+        $response->put('date', $survey->getDate());
+        $response->put('providers',$survey->getProviders());
+        return response()->json($response);
     }
 
 

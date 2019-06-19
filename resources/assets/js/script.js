@@ -1658,6 +1658,30 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
       setTravel(actualStament, statements);
     });
 
+    $(document).on('click', '.show-survey', function(event) {
+      $('#show-survey').toggle();
+    });
+
+
+    $(document).on('click', '.travel-popup', function(event) {
+       var id = $(this).data('id');
+       var token = $('input[name="_token"]').val();
+       var url = $('#url').val();
+        $.ajax({
+         url : url,
+         method : "POST",
+         cache: false,
+         data : { "_token": token, 
+                  "id": id},
+         success : function (data)
+                  { 
+                    console.log(data);
+
+                  }
+        });
+
+    });
+
 });
 
 function cleanActives(container) {

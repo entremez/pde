@@ -24,7 +24,7 @@
                         @if($statement->statement_type_id ==3)wrapper-type-3 @endif
                         @if($statement->statement_type_id ==1)wrapper-type-1 @endif wrapper-{{ $option->id }}" data-stmnt="{{ $option->id }}">
                         <div class="name-type name-type-{{ $statement->statement_type_id }}">
-                            <span>@if($statement->statement_type_id ==3){{ $letters[$key] }}) @endif{{ ucfirst($option->option) }}</span>
+                            <span>@if($statement->statement_type_id ==3){{ $letters[$key] }}) @endif{{ $option->option }}</span>
                             @if( $option->info != null)
                                 <span data-toggle="tooltip" data-placement="right" title="{{ $option->info }}"><i class="fas fa-info-circle"></i></span>
                             @endif

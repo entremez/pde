@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'HomeController@welcomeSoon' )->name('welcome');
+Route::get('/', 'HomeController@welcome' )->name('welcome');
 Route::get('/travel', 'Company\TravelController@travel' );
 Route::post('/travel', 'Company\TravelController@responses')->name('response.travel');
 Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' );
@@ -14,6 +14,7 @@ Route::get('/cases/{key}/{id}', 'InstanceController@indexWithParameters')->name(
 Route::post('/cases', 'InstanceController@index');
 
 Route::get('/resources', 'HomeController@resources')->name('resources');
+Route::get('/team', 'HomeController@team')->name('team');
 
 Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
 
@@ -122,6 +123,7 @@ Route::group([
 
 
     Route::get('/timeline', 'CompanyController@timeline')->name('timeline');
+    Route::post('/timeline/popup', 'CompanyController@popUp')->name('popup');
     Route::get('/travel','TravelController@travel')->name('travel');
     Route::post('/travel','TravelController@responses')->name('responses');
 });

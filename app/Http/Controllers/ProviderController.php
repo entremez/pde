@@ -35,7 +35,6 @@ class ProviderController extends Controller
     public function filtered(Request $request, $serviceId)
     {
         if($request->ajax()){
-
             $service = Service::find($serviceId);
             if($service == '')
                 return;
@@ -43,7 +42,7 @@ class ProviderController extends Controller
             $providersFiltered = new Collection();
             $providersImages = new Collection();
             foreach ($providers as $provider) {
-                if($provider->approved == 1){
+                if($provider->provider->approved == 1){
                 $providersFiltered->push($provider->provider()->first());
                 $providersImages->push($provider->provider()->first()->imagen_logo);
                 }

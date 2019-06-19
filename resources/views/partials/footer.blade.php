@@ -5,15 +5,14 @@
                 <p>El proyecto Bien Público</p>
                 <ul class="dashed">
                     <li>Ecosistema del proyecto</li>
-                    <li>El equipo</li>
-                    <li>Formulación</li>
+                    <li><a class="link" href="{{ route('team') }}">El equipo</a></li>
                 </ul>
             </div>
             <div class="col-md-2">
 
-                    <p>Reportes</p>
-                    <p>Links de interés</p>
-                    <p>Contáctanos</p>
+                    <!--<p>Reportes</p>-->
+                    <p>Recursos</p>
+                    <p><a class="link" href="mailto:contacto@puentedisenoempresa.cl">Contáctanos </a></p>
             </div>
             <div class="col-md-7 col-sm-12">
                 <div class="row footer-logos mb-3">   
