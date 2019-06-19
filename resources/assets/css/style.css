@@ -2254,3 +2254,9 @@ display: flex;
 .form-check-label {
     padding-top: 1px;
 }
+
+.mb{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

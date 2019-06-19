@@ -42,9 +42,11 @@ class ProviderController extends Controller
             $providersFiltered = new Collection();
             $providersImages = new Collection();
             foreach ($providers as $provider) {
-                if($provider->provider->approved == 1){
-                $providersFiltered->push($provider->provider()->first());
-                $providersImages->push($provider->provider()->first()->imagen_logo);
+                if(!is_null($provider->provider)){
+                    if($provider->provider->approved == 1){
+                    $providersFiltered->push($provider->provider()->first());
+                    $providersImages->push($provider->provider()->first()->imagen_logo);
+                    }
                 }
             }
 

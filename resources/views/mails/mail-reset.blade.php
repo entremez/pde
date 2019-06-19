@@ -3,7 +3,7 @@
 <br>
 <div style="text-align: center">
 	<a style="
-		background:    #3d85c6;
+		background:    #e7004b;
 		border-radius: 4px;
 		padding:       8px 20px;
 		color:         #ffffff;

@@ -6,7 +6,12 @@ Route::post('/travel', 'Company\TravelController@responses')->name('response.tra
 Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' );
 
 
-Route::get('/proveedores', 'Auth\RegisterController@providerRegister' )->name('provider.register');
+//Route::get('/proveedores', 'Auth\RegisterController@providerRegister' )->name('provider.register');
+Route::get('/proveedores', 'HomeController@welcome' )->name('provider.register');
+Route::get('/empresas', 'Auth\RegisterController@providerRegister' )->name('provider.register');
+Route::post('/empresas', 'Auth\RegisterController@companyRegister' )->name('register-company');
+Route::get('/new-company/{token}', 'Auth\RegisterController@newCompany' )->name('new-company');
+Route::post('/new-company/', 'Auth\RegisterController@newCompanyNewPass' )->name('new-company-new-pass');
 
 
 Route::get('/cases', 'InstanceController@index')->name('cases');

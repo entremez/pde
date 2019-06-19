@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use App\Mail\FirstStep;
 use Illuminate\Support\Facades\Mail;
-
-use Cookie;
+use Illuminate\Support\Facades\Hash;
+use App\Mail\RegisterCompany;
 
 
 class RegisterController extends Controller
@@ -130,8 +130,62 @@ class RegisterController extends Controller
         $token = str_random(16);
         $user->remember_token = $token;
         $user->save();
+    }
 
-        Cookie::queue('provider', '', 2147483);
+    public function companyRegister(Request $request)
+    {
+        $this->validatorCompany($request->all())->validate();
+
+        $pass = bcrypt(str_random(15));
+        $token = str_random(15);
+        $user = User::create([
+            'email' => $request->input('email-register'),
+            'password' => $pass,
+            'role_id' => 3,
+            'remember_token' => $token
+        ]);
+
+        Mail::send(new RegisterCompany($request->input('email-register'), $token));
+
+        return redirect()->route('provider.register');
+        
+    }
+
+    protected function validatorCompany(array $data)
+    {
+
+        return Validator::make($data, [
+            'email-register' => 'required|string|email|max:255|unique:users,email',
+        ],[
+            'email-register.unique' => '*Correo electrónico ya registrado.',
+        ]);
+    }
+
+    public function newCompany($token)
+    {   
+        return view('company/new-company',[
+                        'user' => User::where('remember_token',$token)->first()
+        ]);
+
+    }
+
+    public function newCompanyNewPass(Request $request)
+    {
+        $this->validatorPass($request->all())->validate();
+        $user = User::find($request->input('id'));
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+        $this->guard()->login($user);
+
+        return redirect()->route('home');        
+    }
+
+    protected function validatorPass(array $data)
+    {
+
+        return Validator::make($data, [
+            'password' => 'required|string|min:6'
+        ]);
     }
 
 
