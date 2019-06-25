@@ -1702,6 +1702,9 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
 
     });
 
+    $(document).on('click', '.filter-toggle', function(event) {
+      $(this).next('.filters-target').toggle();
+    });
 });
 
 function cleanActives(container) {

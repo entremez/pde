@@ -1117,11 +1117,47 @@ margin-top: 1.4rem;
   .soon{
     display: initial;
   }
+
+.porcentaje-grande{
+  font-size: 3rem;
+  color: white;
+}
+.div1-grande {
+  line-height: 1;
+  flex: 1 1 auto;
+  font-size: 1.8rem;
+  margin-top: 4.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-style: italic;
+  overflow: hidden!important;
+}
+
+.div2-grande {
+  font-weight: bold;
+    letter-spacing: -.3rem;
+    flex: 0 0 auto;
+    font-size: 9.5rem;
+    padding-top: 0;
+    margin-right: .7rem;
+}
+
+.contenedor{
+  display: initial;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.display-mobile{
+  display: none;
+}
   
 }
 
 @media (max-width: 990px) { 
-  .section{
+/*  .section{
     display: none;
   }
   .mobile{
@@ -1133,7 +1169,185 @@ margin-top: 1.4rem;
   .soon{
     display: none;
   }
+*/
 
+  .mobile{
+    display: none;
+  }
+
+  .section{
+    margin-top: 10px;
+  }
+
+  .section-title{
+    padding: 0 1rem;
+  }
+
+  .banner-home{
+    margin-top: 2rem;
+  }
+
+  .btn-averigua{
+    padding-top: .6rem;
+  }
+
+  .row-home{
+    margin: 0;
+  }
+
+  .rentabilidad{
+    padding-left: 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .text-center-mobile{
+    text-align: center;
+    padding: 0 3rem;
+    margin-bottom: 3rem !important;
+  }
+
+  .image-column{
+    margin-bottom: 1rem;
+  }
+
+  .margin-top-0{
+    margin-top: 0!important;
+  }
+  .margin-bottom-3{
+    margin-bottom: 3rem!important;
+  }
+  .margin-top-3{
+    margin-top: 3rem!important;
+  }
+
+  .recursos{
+    display: none;
+  }
+
+  .display-none{
+    display: none;
+  }
+
+  .display-mobile{
+    display: initial;
+  }
+
+  .footer-container{
+    text-align: center;
+    margin-top: 5rem;
+  }
+
+  .footer-container > div{
+    margin-bottom: 3rem;
+  }
+
+  .middle-case{
+    display: none;
+  }
+
+  .text-case-mobile{
+  display: initial;
+  font-size: 2rem;
+  }
+
+  .text-case-font{
+  margin-top: 1rem;
+    text-align: center;
+  }
+
+  .margin-x{
+    padding: 0 1rem;
+  }
+
+  .image-container.provider-desktop{
+    display: none;
+  }
+
+  .provider-mobile{
+    display: block!important;
+  }
+
+  #provider-btn{
+    margin: 1.5rem 0;
+  }
+
+  .div1-grande {
+    line-height: 1;
+    flex: 1 1 auto;
+    font-size: 1rem;
+    margin-top: 6rem;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical; 
+    font-style: italic;
+  }
+
+  .div2-grande {
+  letter-spacing: -0.2rem;
+      flex: 0 0 auto;
+      font-size: 5rem;
+      padding-top: 4.5rem;
+      margin-right: 1rem;  
+      font-style: italic;
+  }
+
+  .porcentaje-grande{
+    min-height: .5rem;
+    font-size: 2rem;
+  }
+
+  .contenedor{
+    display: none;
+  }
+
+  .filters-desktop{
+    display: none;
+  }
+
+  .title-filters{
+    font-size: 1.5rem;
+  }
+
+  .btn-danger.btn-register{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .image-final-survey {
+    width: 100%!important;
+    margin-top: 0!important;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-send-survey {
+    margin-top: 1rem!important;
+}
+
+.image-final-survey img {
+    width: 40%!important;
+}
+
+.message-final {
+    font-size: 1.5rem!important;
+}
+
+.hidden{
+  margin-top: 2rem;
+}
+
+}
+
+
+.text-case-mobile{
+  display: none;
+}
+
+.provider-mobile{
+  display: none;
 }
 
 video{
@@ -1523,30 +1737,7 @@ a .row-c{
   overflow: hidden;
 }
 
-.porcentaje-grande{
-  font-size: 3rem;
-  color: white;
-}
-.div1-grande {
-  line-height: 1;
-  flex: 1 1 auto;
-  font-size: 1.8rem;
-  margin-top: 4.2rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  font-style: italic;
-  overflow: hidden!important;
-}
 
-.div2-grande {
-  font-weight: bold;
-    letter-spacing: -.3rem;
-    flex: 0 0 auto;
-    font-size: 9.5rem;
-    padding-top: 0;
-    margin-right: .7rem;
-}
 
 .div1 {
   line-height: 1;
@@ -1575,12 +1766,7 @@ letter-spacing: -0.2rem;
   font-size: 2rem;
 }
 
-.contenedor{
-    position: relative;
-    display: inline-block;
-    text-align: center;
-}
- 
+
 
 .centrado{
     position: absolute;

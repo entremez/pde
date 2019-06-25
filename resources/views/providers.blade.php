@@ -14,7 +14,7 @@
 </div> 
 
 <div class="col-md-10 offset-md-1 mt-5  section">
-    <h4 class="mb-5">¿Qué servicio de diseño necesitas?</h4>
+    <h4 class="mb-5 text-center-mobile">¿Qué servicio de diseño necesitas?</h4>
     <div class="row">    
         @foreach($categories as $key=>$category)
 

@@ -1,10 +1,10 @@
-<div class="col-md-12  section">
+<div class="col-md-12  section banner-home">
     <hr class="divider">
-    <div class="row w-100">
+    <div class="row w-100 row-home">
         <div class="col-md-6 banner-left">
             <div class="section-title"><pre class="averigua" >Averigua cuanto aporta
 el diseño en tu empresa hoy</pre></div>
-            <button class="btn btn-danger btn-averigua">Evalúa tu empresa hoy</button>
+            <a href="{{ route('evaluate') }}" class="btn btn-danger btn-averigua">Evalúa tu empresa hoy</a>
         </div>
         <div class="col-md-6 rentabilidad">
             <div class="txt-center">

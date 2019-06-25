@@ -39,6 +39,21 @@
                     <span class="ml-2 message" style="display: none">*Para continuar se deben emuerar todas las áreas</span>
                 </div>
                 @endif
+
+                <div class="display-mobile">
+                    @if($statement->id != 1 )
+                        <div class="btn btn-danger reverse" data-type="{{ $statement->statement_type_id }}">Volver</div>
+                    @endif
+                    @if($statement->statement_type_id == 4)
+                            <div class="btn btn-danger submit-type-4">Continuar</div>
+
+                    @endif
+                    @if($statement->statement_type_id == 1)
+
+                            <div class="btn btn-danger submit-type-2">Continuar</div>
+
+                    @endif
+                </div>
             </div>
             <div class="col-md-5 bar">
             <!--    <div class="dfcr">

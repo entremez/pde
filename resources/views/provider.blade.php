@@ -24,6 +24,9 @@
                     <h3>{{ $provider->name }}</h3>
                 </div>
 
+                <div class="image-container provider-mobile">
+                    <img class="w-100" src="{{ $provider->imagen_logo }}">
+                </div>
 
 
                 <div class="provider-subtitle">
@@ -38,7 +41,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="image-container">
+                <div class="image-container provider-desktop">
                     <img class="w-100" src="{{ $provider->imagen_logo }}">
                 </div>
                 <button id="provider-btn" data-id="{{ $provider->id }}" class="btn btn-danger w-100">Ver contacto</button>

@@ -16,13 +16,19 @@
 <section class="columns-evaluate">
         <div class="col-md-10 offset-md-1 section">
             <div class="row">
-                    <div class="col-md-6 left-column dffdcjcsb">
+                  <div class="col display-mobile">
+                    <video controls class="w-100">
+                          <source src="{{ asset('images/video_bien_publico.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <div class="col-md-6 left-column dffdcjcsb">
 
-                    <div>
+                    <div class="margin-x margin-top-3">
                         <h2>El diseño mejora significativamente la rentabilidad de los negocios</h2>
                         <p>El viaje Puente Diseño Empresa es una herramienta que te ayudará a descubrir qué nivel de diseño tiene tu empresa, te guiará en cómo puedes integrar diseño y qué tipo de diseño es el indicado para tus desafíos.</p>
                     </div>
-                    <div>
+                    <div class="margin-bottom-3">
                         @if(auth()->check())
                             <a class="btn btn-danger w-100 link" id="travelOrRegister" data-type="{{ auth()->user()->needTravel() ? 'travel':'register' }}" style="margin-bottom: 5px" href="/dashboard">
                                 {{ auth()->user()->evaluateText()}}
@@ -34,13 +40,12 @@
                         @endif
                     </div>
                 </div>
-                    <div class="col-md-6">
+                <div class="col-md-6 display-none">
                     <video controls class="w-100">
                           <source src="{{ asset('images/video_bien_publico.mp4') }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-
-                    </div>
+                </div>
             </div>
         </div>
 </section>

@@ -1,6 +1,6 @@
 <footer class="footer section">  
     <div class="section">
-        <div class="menu-container footer-container">
+        <div class="menu-container footer-container row">
             <div class="col-md-3">
                 <p>El proyecto Bien Público</p>
                 <ul class="dashed">
@@ -12,7 +12,7 @@
 
                     <!--<p>Reportes</p>-->
                     <p>Recursos</p>
-                    <p><a class="link" href="mailto:contacto@puentedisenoempresa.cl">Contáctanos </a></p>
+                    <p><a class="link" href="mailto:contacto@puentedisenoempresa.cl">Contáctanos</a></p>
             </div>
             <div class="col-md-7 col-sm-12">
                 <div class="row footer-logos mb-3">   
@@ -39,7 +39,7 @@
                     <div class="logof">
                         <img src="{{ asset('images/footer/minturismo.png') }}">
                     </div>
-                    <div class="logof"  style="width: 25%">
+                    <div class="logof display-none"  style="width: 25%">
                         
                     </div>
                 </div>

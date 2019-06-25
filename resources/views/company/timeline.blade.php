@@ -8,7 +8,7 @@
 
 <div class="col-md-10 offset-md-1 mt-4">
     <div class="row">
-        <div class="col-md-3 provider-data">
+        <div class="col-md-3 provider-data display-none">
             
             @include('company/sidebar')
 
