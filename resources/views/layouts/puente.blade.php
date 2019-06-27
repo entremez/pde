@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('styles.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <meta name="google-site-verification" content="TyBXDeDl5VvT16szqrBx9CQgkbANsnIhDfKzhcfSYlA" />
 </head>
 <body>
 
@@ -20,6 +21,7 @@
 
 
     <script src="{{ asset('scripts.js') }}"></script>
+    @yield('scripts')
 
 </body>  
 </html>

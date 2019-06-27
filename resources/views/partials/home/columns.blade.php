@@ -22,7 +22,7 @@
             <div class="row">
             @foreach($providers as $provider)
                 <div class="col-md-6 ">
-                    <div class="image-container  image-column"></div>
+                    <div class="image-container image-column"></div>
                 </div>
                 <div class="col-md-6 mb-3">
 

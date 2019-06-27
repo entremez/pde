@@ -78,14 +78,12 @@
                             Comparte el caso
                         </div>
                         <div class="share">
-                            <i class="fab fa-facebook-square"></i>
-                            <i class="fab fa-twitter-square"></i>
-                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&t={{ ucfirst($instance->name) }}" target="_blank" class="link-default" title="Compartir en Facebook"><i class="fab fa-facebook-square"></i></a>
+                            <a href="https://twitter.com/intent/tweet?source={{ Request::url() }}&text=Mira este caso de éxito en el diseño: {{ Request::url() }}" target="_blank" title="Tweet" class="link-default"><i class="fab fa-twitter-square"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-
 
         <section class="case-related">
 

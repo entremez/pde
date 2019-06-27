@@ -10,9 +10,11 @@ use App\Company;
 use App\Instance;
 use App\InstanceBuffer;
 use App\CompanySurvey;
+use App\City;
 use App\MailBody;
 use App\User;
 use Charts;
+use App\Statement;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommentToUser;
 
@@ -76,6 +78,15 @@ class AdminController extends Controller
     {
         User::where('id' , $request->input('id'))->delete();
         return ;
+    }
+
+    public function statistics()
+    {
+        return view('admin/statistics', [
+            'companies' => Company::where('id','!=', 1)->where('id','!=', 2)->where('id','!=', 9)->get(),
+            'regions' => City::countRegion(),
+            'statements' => Statement::all()
+        ]);
     }
 
 }

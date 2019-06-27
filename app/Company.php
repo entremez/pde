@@ -3,11 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Classification;
+use App\Employees;
+use App\Gain;
 use App\CompanySurvey;
 use App\Response;
 use App\Option;
 use App\Service;
 use App\Level;
+use Freshwork\ChileanBundle\Rut;
+use App\Sector;
 
 class Company extends Model
 {
@@ -15,8 +20,34 @@ class Company extends Model
         'rut', 'dv_rut', 'name', 'address', 'user_id', 'classification_id', 'employees_id', 'gain_id', 'phone'
     ];
 
+    public function classification()
+    {
+        return $this->hasOne('App\Classification' ,'id', 'classification_id');
+    }
+
+    public function employees()
+    {
+        return $this->hasOne('App\Employees' ,'id', 'employees_id');
+    }
+
+    public function gain()
+    {
+        return $this->hasOne('App\Gain' ,'id', 'gain_id');
+    }
+
     public function survey_responses(){
         return $this->hasMany('App\SurveyResponse');
+    }
+
+    public function getEmailAttribute()
+    {
+        $users = User::where('type_id',$this->id)->where('role_id', 2)->get()->first();
+        return $users->email;
+    }
+
+    public function getRut()
+    {
+        return Rut::parse($this->rut.$this->dv_rut)->format();
     }
 
     public function hasTravels()
@@ -75,6 +106,35 @@ class Company extends Model
                 break;
         }
         return $out;
+    }
+
+    public function sector()
+    {
+        $primario = 0;
+        $secundario = 0;
+        $terciario = 0;
+        foreach (Company::where('id','!=', 1)->where('id','!=', 2)->where('id','!=', 9)->get() as $company) {
+            switch (($company->classification->sector_id)) {
+                case 1:
+                    $primario++;
+                    break;
+                case 2:
+                    $secundario++;
+                    break;
+                case 3:
+                    $terciario++;
+                    break;
+            }
+        }
+        $counts = [$primario, $secundario, $terciario];
+
+        foreach (Sector::all() as $key => $sector) {
+            $yes["name"] = $sector->name;
+            $yes["y"] =  $counts[$key];
+            $out[] = $yes;
+        }
+
+        return json_encode($out);
     }
 
 

@@ -63,6 +63,9 @@
             <li class="nav-item">
               <a class="nav-link @yield('title-mails')" href="{{ route('mails.body') }}">Mails</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link @yield('title-statistics')" href="{{ route('statistics') }}">Estadistica</a>
+            </li>
             @endif
           </ul>
         @endif

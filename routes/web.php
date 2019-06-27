@@ -53,6 +53,7 @@ Route::group([
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
     Route::get('/dashboard/mails', 'AdminController@mails')->name('mails.body');
     Route::post('/dashboard/mails', 'AdminController@mailsStore')->name('mails.store');
+    Route::get('/dashboard/statistics', 'AdminController@statistics')->name('statistics');
     Route::get('/dashboard/providers', 'AdminController@showProviders')->name('providers');
     Route::get('/dashboard/providers/request', 'AdminController@request')->name('admin.request');
     Route::get('/dashboard/companies', 'AdminController@showCompanies')->name('companies');
