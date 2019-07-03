@@ -1,8 +1,6 @@
 @extends('layouts.puente')
 @section('title', 'Puente DE')
 
-
-
 @section('title-active', 'active-menu')
 
 @section('content')

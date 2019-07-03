@@ -11,8 +11,13 @@
 <div class="after-menu"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2 mt-5">
+        <div class="col-md-12 mt-5">
                     <form class="form-horizontal" method="POST" action="{{ route('new-company-new-pass') }}" id="submit-new-company">
+            <div class="ml-3">
+                <h3>Establece tu contraseña</h3>
+                <p>Para continuar tu inscripción en la plataforma Puente Diseño Empresa y auto-evaluar a tu empresa en el uso de diseño, crea tu contraseña y presiona "establecer contraseña"</p>
+            </div>
+
                         {{ csrf_field() }}
 						
 						<input type="hidden" name="id" value="{{ $user->id }}">

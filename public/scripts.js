@@ -25427,7 +25427,6 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
       $(this).next('.filters-target').toggle();
     });
 
-    $('#table_id').DataTable();
 });
 
 function cleanActives(container) {

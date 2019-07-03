@@ -3,8 +3,6 @@
 Route::get('/', 'HomeController@welcome' )->name('welcome');
 Route::get('/travel', 'Company\TravelController@travel' );
 Route::post('/travel', 'Company\TravelController@responses')->name('response.travel');
-Route::get('/3f85f188a71b745a89806eec337d34ea', 'HomeController@welcome' );
-
 
 //Route::get('/proveedores', 'Auth\RegisterController@providerRegister' )->name('provider.register');
 Route::get('/proveedores', 'HomeController@welcome' )->name('provider.register');

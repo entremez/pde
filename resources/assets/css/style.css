@@ -2446,3 +2446,16 @@ display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.title-graph {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.graph{
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}

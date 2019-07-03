@@ -46,13 +46,24 @@
 	        @endforeach
 	    </tbody>
 	</table>
-
-	<h3 class="mt-3">Resumen</h3>
+    <div class="col-md-12">
+	   <h3 class="mt-3">Resumen</h3>
 
 		Empresas inscritas: {{ $companies->count() }}
-
-		<div id="sector" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>		
-		<div id="region" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <div class="graph">
+            <div class="col-md-10 offset-md-1 d-flex">
+                <div class="col-md-2"><img src="{{asset('images/logo.png')}}" alt="" width="100%"></div>
+                <div class="col-md-10 title-graph">% de empresas en cada rubro</div>
+            </div>  
+    		<div id="sector" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        </div>
+        <div class="graph">
+            <div class="col-md-10 offset-md-1 d-flex">
+                <div class="col-md-2"><img src="{{asset('images/logo.png')}}" alt="" width="100%"></div>
+                <div class="col-md-10 title-graph">% de empresas por región</div>
+            </div> 
+		  <div id="region" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        </div>
 		<h4>Autoevaluación</h4>
 		<input type="hidden" id="max" value="{{ $statements->count() }}">
 		@php
@@ -60,17 +71,22 @@
 		@endphp
 		@foreach($statements as $key => $statement)
 			@if($key < $statements->count()-5)
-				<div class="my-5">
-					<div class="text-center mt-1">{{ $statement->statement }}</div>
-					<input type="hidden" id="data-{{ $key }}" value="{{ $statement->graph() }}">
-					<div id="graph-{{ $key }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="mb-3"></div>
-				</div>
+        <div class="graph">
+            <div class="col-md-10 offset-md-1 d-flex">
+                <div class="col-md-2"><img src="{{asset('images/logo.png')}}" width="100%"></div>
+                <div class="col-md-10 title-graph">{{ $statement->statement }}</div>
+            </div>
+			<input type="hidden" id="data-{{ $key }}" value="{{ $statement->graph() }}">
+			<div id="graph-{{ $key }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="mb-3"></div>
+		</div>
 			@elseif($key == $statements->count()-1)
 				<div class="text-center mt-1">{{ $statement->statement }}</div>
 				@foreach($statement->options as $key2 => $option)
-					<div class="my-5">
-						
-						<div class="text-center mt-1">{{ $option->option }}</div>
+                    <div class="graph">
+                        <div class="col-md-10 offset-md-1 d-flex">
+                            <div class="col-md-2"><img src="{{asset('images/logo.png')}}" width="100%"></div>
+                            <div class="col-md-10 title-graph">{{ $option->option }}</div>
+                        </div>
 						<input type="hidden" id="data-bar-last-{{ $key2 }}" value="{{ $option->responses() }}">
 						<div id="graph-bar-last-{{ $key2 }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="mb-3"></div>
 					</div>
@@ -81,9 +97,11 @@
 			@else
 				<div class="text-center mt-1">{{ $statement->statement }}</div>
 				@foreach($statement->options as $option)
-					<div class="my-5">
-						
-						<div class="text-center mt-1">{{ $option->option }}</div>
+                    <div class="graph">
+                        <div class="col-md-10 offset-md-1 d-flex">
+                            <div class="col-md-2"><img src="{{asset('images/logo.png')}}" width="100%"></div>
+                            <div class="col-md-10 title-graph">{{ $option->option }}</div>
+                        </div>
 						<input type="hidden" id="data-bar-{{ $count }}" value="{{ $option->responses() }}">
 						<div id="graph-bar-{{ $count }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="mb-3"></div>
 					</div>
@@ -95,9 +113,22 @@
 		@endforeach
 
 
-		<input type="hidden" id="sectors" value="{{$companies[0]->sector()}}">
-		<input type="hidden" id="regions" value="{{$regions}}">
+        <div class="graph">
+            <div class="col-md-10 offset-md-1 d-flex">
+                <div class="col-md-2"><img src="{{asset('images/logo.png')}}" alt="" width="100%"></div>
+                <div class="col-md-10 title-graph">ENUMERE según prioridad la que considera necesita mejorar con mayor urgencia (donde 1 es mayor urgencia y 4 menor urgencia).</div>
+            </div>  
+            <div id="enum" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        </div>
+        <input type="hidden" id="sectors" value="{{$companies[0]->sector()}}">
+        <input type="hidden" id="regions" value="{{$regions}}">
 
+        <input type="hidden" id="uno" value="{{$uno}}">
+        <input type="hidden" id="dos" value="{{$dos}}">
+        <input type="hidden" id="tres" value="{{$tres}}">
+        <input type="hidden" id="cuatro" value="{{$cuatro}}">
+
+    </div>
 </div>
 
 
@@ -112,6 +143,76 @@
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
 
+
+Highcharts.chart('enum', {
+    chart: {
+        type: 'column'
+    },
+    credits: {
+            text: 'Fuente: Puente Diseño Empresa',
+            href: '/'
+    },
+    title: {
+        text: null
+    },
+    xAxis: {
+        categories: ['Innovación', 'Operación', 'Productos/Servicios', 'Venta / Post Venta']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Respuestas'
+        },
+        stackLabels: {
+            enabled: false,
+            style: {
+                fontWeight: 'bold',
+                color: ( // theme
+                    Highcharts.defaultOptions.title.style &&
+                    Highcharts.defaultOptions.title.style.color
+                ) || 'gray'
+            }
+        }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 0,
+        floating: true,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: 'prioridad {series.name}: {point.y}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    series: [{
+        name: '4',
+        data: $.parseJSON($('#cuatro').val())
+    }, {
+        name: '3',
+        data: $.parseJSON($('#tres').val())
+    }, {
+        name: '2',
+        data: $.parseJSON($('#dos').val())
+    }, {
+        name: '1',
+        data: $.parseJSON($('#uno').val())
+    }]
+});
+
 Highcharts.chart('sector', {
     chart: {
         plotBackgroundColor: null,
@@ -119,8 +220,12 @@ Highcharts.chart('sector', {
         plotShadow: false,
         type: 'pie'
     },
+    credits: {
+            text: 'Fuente: Puente Diseño Empresa',
+            href: '/'
+    },
     title: {
-        text: '% de empresas en cada rubro'
+        text: null,
     },
     tooltip: {
         pointFormat: 'N° de empresas: <b>{point.y}</b>'
@@ -149,8 +254,12 @@ Highcharts.chart('region', {
         plotShadow: false,
         type: 'pie'
     },
+    credits: {
+            text: 'Fuente: Puente Diseño Empresa',
+            href: '/'
+    },
     title: {
-        text: '% de empresas por región'
+        text: null
     },
     tooltip: {
         pointFormat: 'N° de empresas: <b>{point.y}</b>'
@@ -190,6 +299,10 @@ function chartBar(id, data, title){
 	Highcharts.chart(id, {
     chart: {
         type: 'column'
+    },
+    credits: {
+            text: 'Fuente: Puente Diseño Empresa',
+            href: '/'
     },
     title: {
         text: title
@@ -236,6 +349,10 @@ function chartBarLast(id, data, title){
 	Highcharts.chart(id, {
     chart: {
         type: 'column'
+    },
+    credits: {
+            text: 'Fuente: Puente Diseño Empresa',
+            href: '/'
     },
     title: {
         text: title
@@ -286,6 +403,10 @@ function chart(id, data){
         plotShadow: false,
         type: 'pie'
     },
+    credits: {
+            text: 'Fuente: Puente Diseño Empresa',
+            href: '/'
+    },
     title: {
         text:''
     },
@@ -310,6 +431,7 @@ function chart(id, data){
 });
 }
 
+    $('#table_id').DataTable();
 
 </script>
 @endsection

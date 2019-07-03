@@ -13,6 +13,7 @@ use App\CompanySurvey;
 use App\City;
 use App\MailBody;
 use App\User;
+use App\Option;
 use Charts;
 use App\Statement;
 use Illuminate\Support\Facades\Mail;
@@ -85,7 +86,11 @@ class AdminController extends Controller
         return view('admin/statistics', [
             'companies' => Company::where('id','!=', 1)->where('id','!=', 2)->where('id','!=', 9)->get(),
             'regions' => City::countRegion(),
-            'statements' => Statement::all()
+            'statements' => Statement::all(),
+            'uno' => Option::getResponse(1),
+            'dos' => Option::getResponse(2),
+            'tres' => Option::getResponse(3),
+            'cuatro' => Option::getResponse(4),
         ]);
     }
 

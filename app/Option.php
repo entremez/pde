@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Response;
 
 class Option extends Model
 {
@@ -43,5 +44,15 @@ class Option extends Model
         	return json_encode([$uno,$dos,$tres, $cuatro]);
         return json_encode([$uno,$dos,$tres, $cuatro, $cinco]);
 
+    }
+
+    public static function getResponse($response)
+    {
+        $out = collect();
+        foreach (Option::where('statement_id', 8)->get() as $option) {
+            $value = Response::where('option_id', $option->id)->where('value', $response)->where('company_survey_id','!=', 6)->where('company_survey_id','!=', 7)->where('company_survey_id','!=', 11)->get()->count();
+            $out->push($value);
+        }
+        return json_encode($out);
     }
 }

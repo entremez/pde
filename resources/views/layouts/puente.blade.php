@@ -3,8 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta property="og:title" content="Puente Diseño Empresa" />
+    <meta property="og:description" content="El diseño mejora tu negocio" />
+    <meta property="og:image" content="{{asset('images/PDE-Cuadrado.jpg')}}" />
+    <meta property="og:image:width" content="900" />
+    <meta property="og:image:height" content="560" />
+    <meta property="og:type" content="website" />
     @yield('headers')
     <link rel="shortcut icon" href="{{ asset('pdefavicon.ico') }}" type="image/x-icon">
     <title>@yield('title', 'PuenteDE')</title>
