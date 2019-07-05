@@ -127,7 +127,7 @@ Route::group([
 
 
     Route::get('/timeline', 'CompanyController@timeline')->name('timeline');
-    Route::post('/timeline/popup', 'CompanyController@popUp')->name('popup');
+    Route::post('/timeline', 'CompanyController@popUp')->name('popup');
     Route::get('/travel','TravelController@travel')->name('travel');
     Route::post('/travel','TravelController@responses')->name('responses');
 });

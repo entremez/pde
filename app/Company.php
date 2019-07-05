@@ -65,7 +65,17 @@ class Company extends Model
 
     public function sameLevel()
     {
-        return rand(30,60);
+        $level = $this->lastTravel()->level_id;
+        $count_level = CompanySurvey::where('level_id', $level)->get()->count();
+        $total_count = CompanySurvey::all()->count();
+        return round(100*($count_level/ $total_count) , 0);
+    }
+
+    public function sameLevelWithLevel($level)
+    {
+        $count_level = CompanySurvey::where('level_id', $level)->get()->count();
+        $total_count = CompanySurvey::all()->count();
+        return round(100*($count_level/ $total_count) , 0);
     }
 
     public function stairs()

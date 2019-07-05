@@ -1695,8 +1695,16 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
                   "id": id},
          success : function (data)
                   { 
-                    console.log(data);
-
+                    $('#date').text(data['date']);
+                    $('#phrase').text(data['phrase']);
+                    $('#percentage').text(data['percentage']);
+                    $('#image-stair').attr("src", data['image-stair']);
+                    $('#area').text(data['area']);
+                    $('#service').text(data['service']);
+                    $('#image-area').attr("src", data['image-area']);
+                    $('#providers').html(getProvidersForTravel(data['providers'], data['providers-image']));
+                    $('#link-recommendation').attr("href",data['link-recommendation']);
+                    $('#modalT').modal('show');
                   }
         });
 
@@ -1707,6 +1715,24 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
     });
 
 });
+
+function getProvidersForTravel(providers, images){
+
+  var out = '<div class="row">';
+  for (var i = 0; i < providers.length; i++) {
+  out+= `<div class="col-md-3 col-sm-6">
+          <div class="service">
+            <a href="/provider/${providers[i]['id']}" target="_blank">
+                <div class="image-container provider-image-solo" style="background-image: url('${images[i]}')" title="${providers[i]['name']}">         
+                </div>
+            </a>
+          </div>
+        </div>`;
+  }
+  return out+'</div>';
+
+}
+          
 
 function cleanActives(container) {
   $.each(container.find('.sq'), function(index, val) {

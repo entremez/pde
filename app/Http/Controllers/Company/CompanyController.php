@@ -96,10 +96,19 @@ class CompanyController extends Controller
         $survey = CompanySurvey::find($request->input('id'));
         $response = collect();
         $response->put('date', $survey->getDate());
-        $response->put('providers',$survey->getProviders());
+        $response->put('phrase', $survey->level->phrase);
+        $response->put('percentage', $survey->company->sameLevelWithLevel($survey->level_id));
+        $response->put('image-stair', asset('images/stairs/'.$survey->level->image));
+        $providers = $survey->getProviders();
+        $response->put('providers',$providers);
+        $response->put('providers-image',$survey->getProvidersImage($providers));
+        $response->put('area',$survey->area->name);
+        $response->put('service',$survey->service->name);
+        $response->put('image-area',asset('images/areas/'.$survey->area->image));
+        $response->put('link-recommendation', route('providers-list-filtered', $survey->service_id));
+
+
         return response()->json($response);
     }
-
-
 
 }

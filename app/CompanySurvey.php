@@ -29,21 +29,30 @@ class CompanySurvey extends Model
 
     public function getProviders()
     {
-    	$providers = Provider::where('approved', true)->get();
+        $providers = Provider::where('approved', true)->get();
 
         $out = collect();
         $count = 0;
-    	foreach ($providers as $provider) {
-    		foreach($provider->services as $service){
-    			if($service->service_id == $this->service_id){
-            		$out->push($provider);
-            		$count++;  
-            		break;
-            	}				
-    		}
-    		if($count == 6)
-    			break;
-    	}
+        foreach ($providers as $provider) {
+            foreach($provider->services as $service){
+                if($service->service_id == $this->service_id){
+                    $out->push($provider);
+                    $count++;  
+                    break;
+                }               
+            }
+            if($count == 6)
+                break;
+        }
+        return $out;
+    }
+
+    public function getProvidersImage($providers)
+    {
+        $out = collect();
+        foreach ($providers as $provider) {
+            $out->push($provider->imagen_logo);
+        }
         return $out;
     }
 
