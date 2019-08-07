@@ -14418,6 +14418,10 @@ margin-top: 1.4rem;
   }
 */
 
+.btn-view-more-service {
+    font-size: 1rem!important;
+}
+
   .mobile{
     display: none;
   }

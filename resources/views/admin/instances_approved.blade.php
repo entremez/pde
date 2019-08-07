@@ -23,9 +23,9 @@
 				    		</div>
 				    	</th>
 				      <th scope="row">{{ $instance->id}}</th>
-				      <td>{{ $instance->name}}</td>
-				      <td>{{ $instance->provider()->first()->name}}</td>
-				      <td>{{ $instance->company_name}}</td>
+				      <td>{{ $instance->name}}<br><a href="{{ route('admin.download', [$instance , 1]) }}" class="link-default"><i class="fas fa-image"></i></a></td>
+				      <td>{{ $instance->provider()->first()->name}}<br><a href="{{ route('admin.download', [$instance , 2]) }}" class="link-default"><i class="fas fa-image"></i></a></td>
+				      <td>{{ $instance->company_name}}<br><a href="{{ route('admin.download', [$instance , 3]) }}" class="link-default"><i class="fas fa-image"></i></a></td>
 				      <td>{{ $instance->long_description}}</td>
 				      <td><div class="d-flex">
 				      	<a target="_blank" class="btn btn-primary" href="{{ route('case', $instance->id) }}">Ver caso</a>

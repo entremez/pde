@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Controller;
 use App\Provider;
 use App\ProviderBuffer;
@@ -14,6 +15,7 @@ use App\City;
 use App\MailBody;
 use App\User;
 use App\Option;
+use App\InstanceImage;
 use Charts;
 use App\Statement;
 use Illuminate\Support\Facades\Mail;
@@ -94,4 +96,21 @@ class AdminController extends Controller
         ]);
     }
 
+    public function download(Instance $instance, $type) // type 1 = imagen de caso, 2 = proveedor, 3 = mandante
+    {
+        switch ($type) {
+            case 1:
+                $images = InstanceImage::where('instance_id', $instance->id)->where('featured', true)->get()->first();
+                $filepath = public_path('providers/case-images/'.$instance->id.'/'.$images->image);
+                break;
+            case 2:
+                $provider = $instance->provider()->get()->first();
+                $filepath = public_path('providers/logos/'.$provider->logo);
+                break;
+            case 3:
+                $filepath = public_path('providers/case-images/'.$instance->id.'/'.$instance->company_logo);
+                break;
+        }
+        return response()->download($filepath);
+    }
 }

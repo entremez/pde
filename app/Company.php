@@ -41,8 +41,8 @@ class Company extends Model
 
     public function getEmailAttribute()
     {
-        $users = User::where('type_id',$this->id)->where('role_id', 2)->get()->first();
-        return $users->email;
+        $users = User::where('type_id',$this->id)->where('role_id', 3)->get()->first();
+        return $users != null ? $users->email:'error';
     }
 
     public function getRut()

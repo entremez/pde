@@ -49,6 +49,7 @@ Route::group([
             function()
 {
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/download/{instance}/{type}', 'AdminController@download')->name('admin.download');
     Route::get('/dashboard/mails', 'AdminController@mails')->name('mails.body');
     Route::post('/dashboard/mails', 'AdminController@mailsStore')->name('mails.store');
     Route::get('/dashboard/statistics', 'AdminController@statistics')->name('statistics');

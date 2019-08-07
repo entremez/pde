@@ -81,6 +81,10 @@
 	        </div>
 		@endforeach
 		</div>
-		<a href="#!"class="btn btn-danger btn-view-more-service mt-5">Ver más fuentes de financiamiento <i class="fas fa-chevron-right"></i></a>
+    	<div class="row w-100 mt-3">
+    		<div class="col-md-12 w-100">
+    			<div class="btn btn-danger btn-view-more-service">Ver más fuentes de financiamiento <i class="fas fa-chevron-right"></i></div>
+    		</div>
+    	</div>
 	</div>
 </div>

@@ -17,7 +17,7 @@ mix.styles([
         'resources/assets/css/jconfirm.css',
         'resources/assets/css/style.css'
         ], 'public/styles.css')
-        .scripts([
+        .babel([
             'resources/assets/js/jquery.js',
             'resources/assets/js/jquery.validate.js',
             'resources/assets/js/wow.js',
