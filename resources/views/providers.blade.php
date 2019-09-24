@@ -24,7 +24,7 @@
                         <ul>
                             @foreach($services as $service)
                                 @if($service->category_id == $category->id)
-                                    <li id="service" data-id="{{ $service->id }}"><a href="{{ route('providers-list', $service->id) }}" class="link-default service-filter " id="{{ $service->id }}">{{ $service->name }}</a></li>
+                                    <li id="service" data-id="{{ $service->id }}" data-toggle="tooltip" data-placement="right" title="{{ $service->description }}"><a href="{{ route('providers-list', $service->id) }}" class="link-default service-filter " id="{{ $service->id }}" >{{ $service->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
