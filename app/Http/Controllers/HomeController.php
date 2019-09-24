@@ -10,6 +10,7 @@ use App\Service;
 use App\Classification as EconomicActivity;
 use Illuminate\Support\Collection;
 use App\Team;
+use App\Link;
 
 class HomeController extends Controller
 {
@@ -37,6 +38,8 @@ class HomeController extends Controller
         return view('welcome',[
             'cases' => $this->notSoRandom(3,3),
             'providers' => Provider::where('approved',true)->inRandomOrder()->limit(3)->get(),
+            'links' => Link::inRandomOrder()->limit(3)->get(),
+
         ]);
     }
 
@@ -49,7 +52,9 @@ class HomeController extends Controller
 
     public function resources()
     {
-        return view('resources');
+        return view('resources', [
+            'links' => Link::all()
+        ]);
     }
 
 

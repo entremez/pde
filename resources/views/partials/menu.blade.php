@@ -58,14 +58,21 @@
             <li class="nav-item">
               <a class="nav-link @yield('title-resources')" href="{{ route('resources') }}">Recursos</a>
             </li>
-        @if(Auth::check())  
+        @if(Auth::check()) 
             @if(auth()->user()->role_id == 1)
-            <li class="nav-item">
-              <a class="nav-link @yield('title-mails')" href="{{ route('mails.body') }}">Mails</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @yield('title-statistics')" href="{{ route('statistics') }}">Estadistica</a>
-            </li>
+
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>Gestión</span>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="nav-link @yield('title-mails')" href="{{ route('mails.body') }}">Mails</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="nav-link @yield('title-statistics')" href="{{ route('statistics') }}">Estadistica</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="nav-link @yield('title-service-crud')" href="{{ route('service.crud') }}">Servicios</a>
+                      </div>
+                    </li>
             @endif
           </ul>
         @endif

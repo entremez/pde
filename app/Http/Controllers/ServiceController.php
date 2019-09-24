@@ -8,11 +8,20 @@ use App\Instance;
 
 class ServiceController extends Controller
 {
-    public function show(Service $service)
+    public function show()
     {
         return view('services', [
-        	'instances' => $service->instances()->inRandomOrder()->get(), 
-        	'service' => $service
+        	'services' => Service::all()
         ]);
     }
+
+    public function save(Request $request)
+    {
+        $service = Service::find($request->input('serviceId'));
+        $service->name = $request->input('name');
+        $service->description = $request->input('description');
+        $service->save();
+        return redirect()->back();
+    }
+
 }

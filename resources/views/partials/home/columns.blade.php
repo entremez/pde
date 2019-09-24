@@ -15,20 +15,29 @@
                 </div>
             @endforeach
             </div>
-            <a class="btn btn-danger btn-block mt-5 margin-top-0" href="{{ route('providers-list')}}">Más proveedores de diseño</a>
         </div>
         <div class="col-md-6 recursos">
             <h4 class="pb-4"><span class="first-color">Recursos</span> <span class="secondary-color">de interes</span></h4>
             <div class="row">
-            @foreach($providers as $provider)
+            @foreach($links as $link)
                 <div class="col-md-6 ">
-                    <div class="image-container image-column"></div>
+                    <a href="{{ $link->link }}" target="_blank"><div class="image-container image-column" style="background-image: url('{{ $link->linkImage() }}');"></div></a>
                 </div>
-                <div class="col-md-6 mb-3">
-
+                <div class="col-md-6 mb-3 text-center-mobile">
+                    <h6 class="provider-title links-title">{{ $link->title }}</h6>
+                    <h6 class="provider-services links-description">{{ $link->description }}</h6>
                 </div>
             @endforeach
             </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-10 offset-md-1 margin-bottom-3">
+    <div class="row">
+        <div class="col-md-6 vertical-line">
+            <a class="btn btn-danger btn-block mt-5 margin-top-0" href="{{ route('providers-list')}}">Más proveedores de diseño</a>
+        </div>
+        <div class="col-md-6 recursos pr-0">
             <button class="btn btn-danger btn-block mt-5">Más recursos</button>
         </div>
     </div>

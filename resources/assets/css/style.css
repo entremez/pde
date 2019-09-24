@@ -2464,3 +2464,21 @@ display: flex;
   margin-top: 2rem;
   margin-bottom: 3rem;
 }
+
+.links-description{
+  -webkit-line-clamp: 3;
+}
+
+.links-title {
+  text-align: justify;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+}
+
+.resources-full{
+  max-height: none;
+  overflow: auto;
+  -webkit-line-clamp: unset;
+}

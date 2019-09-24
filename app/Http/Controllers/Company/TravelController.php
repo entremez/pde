@@ -91,7 +91,7 @@ class TravelController extends Controller
             if($key >= $this->start_question and $key <= $this->end_question)
                 $response->put($key,$value);
         }
-        $response = $response->flip()->sortKeys()->last();
+        $response = $response->flip()->sortKeysDesc()->last();
         $area = Area::where('option_id',$response+1)->first();
         return $area;
     }

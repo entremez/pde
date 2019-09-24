@@ -1714,6 +1714,15 @@ $(document).on('click', '#approve-provider-buffered', function(event) {
       $(this).next('.filters-target').toggle();
     });
 
+    $(document).on('click', '#edit-service', function(event) {
+        var id = $(this).data('id');
+        var data = $(this).data('data');
+        $('#nameEdit').val(data['name'])
+        $('#descriptionEdit').val(data['description'])
+        $('#categoryEdit').val($(this).data('category'))
+        $('#serviceId').val(id);
+        $('#myModal').modal('show');
+    });
 });
 
 function getProvidersForTravel(providers, images){

@@ -139,6 +139,8 @@ class InstanceController extends Controller
 
     private function isCountable(Instance $instance)
     {
+        if(is_null($instance))
+            return false;
         if(!auth()->check())
             return true;
         if(auth()->user()->role_id == 1)

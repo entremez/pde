@@ -17,9 +17,10 @@ Route::get('/cases/{key}/{id}', 'InstanceController@indexWithParameters')->name(
 Route::post('/cases', 'InstanceController@index');
 
 Route::get('/resources', 'HomeController@resources')->name('resources');
-Route::get('/team', 'HomeController@team')->name('team');
+Route::get('/ecosystem-and-team', 'HomeController@team')->name('team');
 
 Route::get('/evaluate', 'HomeController@evaluate')->name('evaluate');
+
 
 Route::get('/provider', 'ProviderController@show')->name('providers-list');
 Route::post('/provider/service/{serviceId}', 'ProviderController@filtered')->name('providers-list-filtered');
@@ -42,6 +43,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
 //RUTAS ADMINISTRADORES
+
+Route::get('/dashboard/services', 'ServiceController@show')->name('service.crud')->middleware('admin');
+Route::post('/dashboard/services', 'ServiceController@save')->name('service.crud.save')->middleware('admin');
 Route::group([
             'prefix' => 'admin',
             'middleware' => ['admin'],

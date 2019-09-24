@@ -13,8 +13,12 @@
 </div>
 
 <div class="col-md-10 offset-md-1">
+    <h3 class="mt-4">Ecosistema</h3>
+    <img src="{{ asset('/images/ecosistema.png')}}" class="img-fluid" alt="ecosistema">
 
-    <h3 class="mt-4">El equipo</h3>
+    <div id="team" class="mb-5"></div>
+    <div class="mt-5">&nbsp;</div>
+    <h3 class="mt-5">El equipo</h3>
 
     <div class="row mt-5">
         @foreach($team as $people)
