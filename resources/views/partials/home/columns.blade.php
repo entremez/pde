@@ -38,7 +38,7 @@
             <a class="btn btn-danger btn-block mt-5 margin-top-0" href="{{ route('providers-list')}}">Más proveedores de diseño</a>
         </div>
         <div class="col-md-6 recursos pr-0">
-            <button class="btn btn-danger btn-block mt-5">Más recursos</button>
+            <a class="btn btn-danger btn-block mt-5 margin-top-0" href="{{ route('resources')}}">Más recursos</a>
         </div>
     </div>
 </div>

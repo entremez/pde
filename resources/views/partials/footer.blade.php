@@ -67,12 +67,13 @@
                     </div>
                 </div>
                 <div class="row footer-logos my-3">
-                    <div class="logof">
+                    <div class="logof" style="width: 25%">
                         <p>Participa:</p>
                         <img src="{{ asset('images/footer/redis.png') }}" style="width:110px">
                     </div>
                     <div class="logof" style="width: 25%">
-                        
+                        <p>&nbsp;</p>
+                        <img src="{{ asset('images/footer/lip.png') }}"  style="width:110px">
                     </div>
                     <div class="logof" style="width: 25%">
                         
