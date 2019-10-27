@@ -46,6 +46,7 @@ Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 
 Route::get('/dashboard/services', 'ServiceController@show')->name('service.crud')->middleware('admin');
 Route::post('/dashboard/services', 'ServiceController@save')->name('service.crud.save')->middleware('admin');
+
 Route::group([
             'prefix' => 'admin',
             'middleware' => ['admin'],
@@ -84,7 +85,8 @@ Route::group([
     Route::post('/dashboard/user-without-profile', 'AdminController@userWithoutProfile')->name('user.without.profile');
     Route::post('/dashboard/user-ignore', 'AdminController@userIgnore')->name('user.ignore');
 
-    Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');
+    Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');    
+    Route::get('/dashboard/resources', 'AdminController@showResources' )->name('resources.show');
 });
 
 

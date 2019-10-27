@@ -20,6 +20,7 @@ use Charts;
 use App\Statement;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommentToUser;
+use App\Link;
 
 class AdminController extends Controller
 {
@@ -85,9 +86,12 @@ class AdminController extends Controller
 
     public function statistics()
     {
+        City::countRegionf();
         return view('admin/statistics', [
             'companies' => Company::where('id','!=', 1)->where('id','!=', 2)->where('id','!=', 9)->get(),
             'regions' => City::countRegion(),
+            'regions_qty' => City::countRegionQty(),
+            'regions_qtyf' => City::countRegionf(),
             'statements' => Statement::all(),
             'uno' => Option::getResponse(1),
             'dos' => Option::getResponse(2),
@@ -112,5 +116,12 @@ class AdminController extends Controller
                 break;
         }
         return response()->download($filepath);
+    }
+
+    public function showResources()
+    {
+        return view('resources-show',[
+            'links' => Link::all()
+        ]);
     }
 }

@@ -60,7 +60,7 @@
         <div class="graph">
             <div class="col-md-10 offset-md-1 d-flex">
                 <div class="col-md-2"><img src="{{asset('images/logo.png')}}" alt="" width="100%"></div>
-                <div class="col-md-10 title-graph">% de empresas por región</div>
+                <div class="col-md-10 title-graph">N° de empresas por región</div>
             </div> 
 		  <div id="region" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
         </div>
@@ -122,6 +122,8 @@
         </div>
         <input type="hidden" id="sectors" value="{{$companies[0]->sector()}}">
         <input type="hidden" id="regions" value="{{$regions}}">
+        <input type="hidden" id="regions_qty" value="{{$regions_qty}}">
+        <input type="hidden" id="regions_qtyf" value="{{key($regions_qtyf)}}">
 
         <input type="hidden" id="uno" value="{{$uno}}">
         <input type="hidden" id="dos" value="{{$dos}}">
@@ -142,7 +144,6 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
-
 
 Highcharts.chart('enum', {
     chart: {
@@ -249,37 +250,47 @@ Highcharts.chart('sector', {
 
 Highcharts.chart('region', {
     chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
+        type: 'bar'
     },
     credits: {
             text: 'Fuente: Puente Diseño Empresa',
             href: '/'
+    },   
+    xAxis: {
+        categories: $.parseJSON($('#regions').val()),
+        title: {
+            text: null
+        }
     },
+    yAxis: {
+        min: 0,
+        step:1,
+        tickInterval: 1,
+        title: {
+            text: 'N° de empresas',
+            align: 'high'
+        }
+    },
+    legend:false,
     title: {
         text: null
     },
-    tooltip: {
-        pointFormat: 'N° de empresas: <b>{point.y}</b>'
-    },
     plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
+        bar: {
             dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                enabled: true
             }
         }
     },
+    credits: {
+        enabled: false
+    },
     series: [{
-        name: 'Sector',
-        colorByPoint: true,
-        data: $.parseJSON($('#regions').val())
+        data: $.parseJSON($('#regions_qty').val())
     }]
 });
+
+
 
 var max = $('#max').val();
 for (var i = 0; i < max-5; i++) {

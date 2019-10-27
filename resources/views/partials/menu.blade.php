@@ -71,6 +71,8 @@
                         <a class="nav-link @yield('title-statistics')" href="{{ route('statistics') }}">Estadistica</a>
                         <div class="dropdown-divider"></div>
                         <a class="nav-link @yield('title-service-crud')" href="{{ route('service.crud') }}">Servicios</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="nav-link @yield('title-resources-crud')" href="{{ route('resources.show') }}">Recursos</a>
                       </div>
                     </li>
             @endif
