@@ -10,4 +10,9 @@ class RecommendedService extends Model
     {
     	return $this->hasOne('App\Service', 'id', 'service_id');
     }
+
+    public function options()
+    {
+    	return $this->hasOne('App\Option', 'id', 'option_id');
+    }
 }

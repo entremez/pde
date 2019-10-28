@@ -10,7 +10,7 @@ class Statement extends Model
 {
     public function statement_type()
     {
-        return $this->hasOne('App\StatementType', 'id');
+        return $this->hasOne('App\StatementType', 'id', 'statement_type_id');
     }
     public function options()
     {

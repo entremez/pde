@@ -88,6 +88,9 @@ Route::group([
     Route::get('/buffered/{provider}/provider', 'Provider\ProviderController@providerBuffered' )->name('provider.buffered');    
     Route::get('/dashboard/resources', 'AdminController@showResources' )->name('resources.show');    
     Route::post('/dashboard/resources', 'AdminController@updateResources' )->name('resources.show');
+    Route::get('/dashboard/survey', 'AdminController@showSurvey' )->name('survey.show');  
+    Route::post('/dashboard/survey', 'AdminController@updateSurvey' )->name('survey.show'); 
+    Route::get('/dashboard/recommendation', 'AdminController@showRecommendation' )->name('recomm.show');   
 });
 
 

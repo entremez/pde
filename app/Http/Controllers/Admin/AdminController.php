@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\CommentToUser;
 use App\Link;
 use File;
+use App\RecommendedService;
 
 class AdminController extends Controller
 {
@@ -153,5 +154,43 @@ class AdminController extends Controller
         }
         $link->save();
         return redirect()->back();
+    }
+
+    public function showSurvey()
+    {
+        return view('survey-show',[
+            'statements' => Statement::orderBy('id', 'asc')->get()
+        ]);
+    }
+
+    public function updateSurvey(Request $request)
+    {
+        $statement = Statement::find($request->input('id'));
+        $statement->statement = $request->input('statement');
+        if(!is_null($request->file('image'))){
+            $file = $request->file('image');
+            $path = public_path().'/images';
+            $fileName = uniqid()."_".$file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $statement->background = $fileName;
+        }
+        $statement->save();
+
+        foreach ($request->input('option') as $key => $value) {
+            $option = Option::find($key);
+            $option->option = $value;
+            $option->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function showRecommendation()
+    {
+        return view('recommendation-show',[
+            'recommendations' => RecommendedService::get(),
+            'areas' => [4 => 'Innovación', 5 => 'Operación', 6 => 'Productos o Servicios', 7 => 'Venta y Post-Venta'],
+            'spans' => [6, 3, 5, 5]
+        ]);
     }
 }
