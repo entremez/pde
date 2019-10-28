@@ -21,6 +21,7 @@ use App\Statement;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CommentToUser;
 use App\Link;
+use File;
 
 class AdminController extends Controller
 {
@@ -123,5 +124,34 @@ class AdminController extends Controller
         return view('resources-show',[
             'links' => Link::all()
         ]);
+    }
+
+    public function updateResources(Request $request)
+    {
+        if(is_null($request->input('id'))){
+            $link = new Link();
+        }else{
+            $link = Link::find($request->input('id'));
+        }
+        if(!is_null($request->file('image'))){
+            $file = $request->file('image');
+            $path = public_path().'/images/links';
+            $fileName = uniqid()."-".$file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $link->image = $fileName;
+        }
+        $link->title = $request->input('title');
+        $link->description = $request->input('description');
+        if(!is_null($request->file('document'))){
+            $file = $request->file('document');
+            $path = public_path().'/documents';
+            $fileName = uniqid()."_".$file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $link->link = $path.'/'.$fileName;
+        }else{
+            $link->link = $request->input('link');
+        }
+        $link->save();
+        return redirect()->back();
     }
 }

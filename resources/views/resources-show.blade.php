@@ -10,6 +10,8 @@
 <div class="after-menu"></div>
 
 <div class="col-md-10 offset-md-1 mt-5  section">
+
+  <div class="btn btn-danger mb-5" id="new_link">Nuevo recurso</div>
     <table id="myTable" class="display">
         <thead>
             <tr>
@@ -41,26 +43,26 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Editar Servicio</h5>
+        <h5 class="modal-title">Editar Recurso</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="" method="post">
+      <form action="" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
 
         
           <div class="row">
-            <div class="col-md-6">
+            <div class="col">
               <div class="form-group">
-                <label for="nameEdit">Nombre</label>
-                <input type="text" class="form-control" id="nameEdit" name="name">
+                <label for="titleEdit">Título</label>
+                <textarea class="form-control" id="titleEdit" name="title"></textarea>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col">
               <div class="form-group">
                 <label for="descriptionEdit">Descripción</label>
                 <textarea class="form-control" id="descriptionEdit" name="description">
@@ -69,19 +71,50 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+          <div class="col">
+            <div class="form-group">
+              <label for="linkEdit">Link</label>
+              <input type="text" class="form-control" id="linkEdit" name="link">
+              <br>
+              <label for="linkEdit">o subir archivo</label>
+              <input type="file" name="document">
+            </div>
+          </div>
+        </div>         
+          <input required type="hidden" id="id" name="id" value="">
+        
+        <div class="mb-3 dm-uploader mt-5" >
+          <div class="form-row">
+            <div class="col-md-9 col-sm-12 align-grid-r">
+              <div class="from-group mb-2">
+                <label>Cambia la imagen del recurso&nbsp;&nbsp;&nbsp;<small>(Formatos permitidos: jpeg, png, bmp, gif o svg)</small></label>
+                <div class="errorLogo"></div>
+                <input required type="text" class="form-control" aria-describedby="fileHelp" placeholder="Selecciona una imagen..." readonly="readonly" id="image-data" />
+
+                <div class="progress mb-2 d-none">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+                    role="progressbar"
+                    style="width: 0%;" 
+                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="0">
+                    0%
+                  </div>
+                </div>
+
+              </div>
               <div class="form-group">
-                <label for="categoryEdit">Categoría</label>
-                <input type="text" class="form-control" id="categoryEdit" name="category" disabled="disabled">
+                <div role="button" class="btn btn-primary mr-2">
+                  Examinar archivos
+                  <input type="file" id="file-input" name="image" />
+                </div>
+                <small class="status text-muted">Busca la imagen en tus archivos</small>
               </div>
             </div>
-          </div>            
-          <input type="hidden" id="linkId" name="linkId" value="">
-
-        
-
-
+            <div class="col-md-3  d-md-block  d-sm-none align-grid">
+              <img src="" alt="sin imagen" class="img-thumbnail w-100" id="imgSalida">
+            </div>
+          </div>
         </div>
+</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="submit"  class="btn btn-primary">Guardar cambios</button>
@@ -103,17 +136,29 @@
 
 <script>
 $(document).ready( function () {
-    $('#myTable').DataTable(
-            {
-                "columns": [
-                    { "width": "20%"},
-                    { "width": "20%"},
-                    { "width": "20%"},
-                    { "width": "20%"},
-                    { "width": "20%"},
-               ]
-            }
-        );
+    $('#myTable').removeAttr('width').DataTable();
+
+    $(document).on('click', '#edit-link', function(event) {
+
+      var public_path = window.location.host+'/images/links/'+$(this).data('data')['image'];
+      $('#titleEdit').val($(this).data('data')['title']);
+      $('#descriptionEdit').val($(this).data('data')['description']);
+      $('#linkEdit').val($(this).data('data')['link']);
+      $('#id').val($(this).data('id'));
+      $('#imgSalida').removeAttr('src');
+      $('#imgSalida').attr("src", 'http://'+public_path);
+      $('#myModal').modal('show');
+    });
+
+    $(document).on('click', '#new_link', function(event) {
+      $('#titleEdit').val("");
+      $('#descriptionEdit').val("");
+      $('#linkEdit').val("");
+      $('#imgSalida').attr("src", 'http://'+window.location.host+'/images/not-found.png');
+      $('#myModal').modal('show');
+    });
+
+
 } );
 </script>
 @endsection
