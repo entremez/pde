@@ -82,4 +82,17 @@ class LoginController extends Controller
         ]);
     }
 
+
+    public function logout(Request $request)
+    {
+        
+        $redirect = auth()->user()->role_id == 4 ? route('imaxd-home'):'/';
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect($redirect);
+    }
+
 }

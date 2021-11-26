@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'verified.approval' => Middleware\CheckApproval::class,
         'verified' => Middleware\VerifyProviderMail::class,
         'counter' => Middleware\CounterMiddleware::class,
+        'imaxd' => Middleware\ImaxdMiddleware::class,
 
     ];
 }

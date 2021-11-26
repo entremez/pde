@@ -1,8 +1,15 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;800;900&display=swap');
+
+@import "normalize";
 
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+
+@import "site";
+@import "config";
+@import "dashboard";
+
+
+

@@ -110,10 +110,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $role = 3;
         if(isset($data['provider']))
             $role = 2;
+        if(isset($data['imaxd']))
+            $role = 4;    
 
         $user = User::create([
             'email' => $data['email-register'],

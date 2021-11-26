@@ -1,26 +1,56 @@
+:root {
+--pde-red: #E7004B;
+--pde-blue: #000033;
+--pde-gray: #D3D3D3;
+--pde-green: #80C560;
+--pde-yellow: #FDDA0D;
 
-// Body
-$body-bg: #fff;
+--bold: 600;
+--bolder: 900;
 
-// Borders
-$laravel-border-color: darken($body-bg, 10%);
-$list-group-border-color: $laravel-border-color;
+--header-height: 8rem;
 
-$card-border-color: $laravel-border-color;
+--wrapper: 80%;
 
-// Brands
-$primary: #3097D1;
-$info: #8eb4cb;
-$success: #2ab27b;
-$warning: #cbb956;
-$danger: #bf5329;
+font-family: Barlow;
 
-// Typography
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: .875rem; // 14px
-$line-height-base: 1.6;
-$text-color: #636b6f;
 
-// Inputs
-$input-border-color: lighten($text-color, 40%);
-$input-placeholder-color: lighten($text-color, 30%);
+}
+
+/*------------------------------------*\
+    $MIXINS
+\*------------------------------------*/
+
+//WRAPPERS: Center and max-width body.
+@mixin wrapper($width: 100%, $max-width: 100%) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $max-width;
+    width: $width;
+}
+
+@mixin section_title() {
+    font-size: 2.3rem;
+    font-weight: var(--bold);
+    color: var(--pde-blue);
+}
+
+/*------------------------------------*\
+    $FUNCTIONS
+\*------------------------------------*/
+
+/* Z-INDEX CONTROL */
+$elements: header, modal, loading;
+
+@function z($element) {
+    @return index($elements, $element);
+}
+
+/* REM */
+$base-fontsize: 16;
+// PIXEL TO REM: height: rem(50) -> 3.125rem;
+@function rem($px, $context: $base-fontsize) {
+    @return ($px / $context) * 1rem;
+}
+
+

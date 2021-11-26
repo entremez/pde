@@ -27,6 +27,9 @@ class HomeController extends Controller
                 case 3:
                     return redirect()->route('company.dashboard');
                     break;
+                case 4:
+                    return redirect()->route('imaxd-dashboard');
+                    break;
             }
         }
         return redirect()->route('welcome');

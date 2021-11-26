@@ -58,6 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
                 case 3:
                     return 'company/dashboard';
                     break;
+                case 4:
+                    return 'imaxd/dashboard';
+                    break;
         }
     }
 
@@ -115,4 +118,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         Mail::send(new ResetPassword($this->email, $token));
     }   
+
+    public function getImaxdUser(){
+        return $this->hasOne('App\ImaxdUser', 'user_id', 'id');
+    }
 }

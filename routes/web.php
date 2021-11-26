@@ -1,7 +1,5 @@
 <?php
 
-Route::middleware('counter')->group(function () {
-
     Route::get('/', 'HomeController@welcome' )->name('welcome');
     Route::get('/travel', 'Company\TravelController@travel' );
     Route::post('/travel', 'Company\TravelController@responses')->name('response.travel');
@@ -150,4 +148,23 @@ Route::middleware('counter')->group(function () {
 
     /*Route::get('/login/travel', 'Auth\LoginController@showLoginFormTrip')->name('travel.login');
     Route::get('/guest/travel','TravelController@guestTravel')->name('travel.guest');*/
-});
+
+
+
+    //IMAxD
+    Route::get('/imaxd', 'ImaxdControllers\HomeController@getHome')->name('imaxd-home');
+    Route::get('/imaxd/faq', 'ImaxdControllers\HomeController@getHome')->name('imaxd-faq');
+
+    Route::group([
+        'prefix' => 'imaxd',
+        'middleware' => ['imaxd'],
+        'namespace'  => 'ImaxdControllers'],
+        function()
+    {
+        Route::get('/dashboard','HomeController@getDashboard')->name('imaxd-dashboard');
+        Route::post('/dashboard','HomeController@config')->name('imaxd-config');
+        Route::get('/evaluate','HomeController@getEvaluation')->name('imaxd-evaluate');
+        Route::post('/evaluate','HomeController@evaluation')->name('imaxd-evaluation');
+        Route::post('/evaluate/design','HomeController@evaluationDesign')->name('imaxd-evaluation-design');
+        Route::get('/result','HomeController@getResult')->name('imaxd-result');
+    });

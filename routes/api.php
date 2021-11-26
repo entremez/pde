@@ -13,6 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('comunas/{id_region?}', 'ImaxdControllers\ComunaController@getComunas')->name('api-comunas');
+Route::get('fullypde/{imaxd_user_id}/{json_responses?}', 'ImaxdControllers\HomeController@isFull')->name('api-full');
