@@ -36,7 +36,9 @@
     </div>
 
     <form method="POST" action="{{ route('imaxd-evaluation') }}" id="company">
-        <input type="hidden" id="company" value="{{ json_encode($company) }}">
+        @if($company != null)
+            <input type="hidden" id="company" value="{{ json_encode($company) }}">
+        @endif
         <input type="hidden" id="evaluation" value="{{ json_encode($evaluation) }}">
         {{ csrf_field() }}
         <p class="section_title">Datos empresa</p>

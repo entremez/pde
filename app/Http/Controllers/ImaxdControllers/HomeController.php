@@ -91,13 +91,14 @@ class HomeController extends Controller
             $evaluation->status = 0;
             $evaluation->imaxd_options_id = $this->getActiveOption();
             $evaluation->save();
+            $company = ImaxdCompany::where('imaxd_evaluation_id', $status_evaluation->id)->get();
+            $company = $company == null ? null : $company->last();
             return view('imaxd.evaluation', [
                 'user' => ImaxdUser::where('user_id', Auth::user()->id)->first()->full_name,
                 'cities' => City::take(16)->get(),
                 'activities' => Activities::get(),
                 'evaluation' => ImaxdEvaluation::where('imaxd_user_id', $imaxd_user->id)->get()->last(),
-                'company' => ImaxdCompany::where('imaxd_evaluation_id', $status_evaluation->id)
-                                            ->get()->last(),
+                'company' => $company,
             ]);
         }
         if( $status_evaluation->status == 0){
